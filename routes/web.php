@@ -23,6 +23,10 @@ Route::get('login', function(){
     return view('login');
 });
 
-Route::get('dashboard', function (){
-    return view('dashboard');
+Route::get('master_user', function (){
+    return view('master_user');
+});
+
+Route::get('tambah_user', function (){
+    return view('tambah_user');
 });
