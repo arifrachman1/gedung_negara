@@ -18,3 +18,7 @@ use Spatie\Permission\Models\Permission;
 Route::get('/', function () {
     return view('dashboard');
 });
+
+Route::get('login', function(){
+    return view('login');
+});
