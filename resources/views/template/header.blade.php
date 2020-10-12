@@ -13,11 +13,7 @@
 
   <!-- {{ asset('style/') }} -->
   <!-- Custom fonts for this template-->
-<<<<<<< HEAD:resources/views/header.php
-  <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css"" rel="stylesheet" type="text/css">
-=======
   <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
->>>>>>> 0f7de331eaf0954d8ecc071fd1f7dace7efe8e62:resources/views/template/header.blade.php
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->

@@ -1,6 +1,7 @@
+<!doctype html>
+@include('template/header')
 
-@include('header');
-
+<body>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
@@ -8,3 +9,5 @@
         </div>
         <!-- /.container-fluid -->
 </body>
+@include('template/footer')
+</html>
