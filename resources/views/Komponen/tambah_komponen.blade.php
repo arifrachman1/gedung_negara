@@ -6,7 +6,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">TAMBAH KOMPONEN</h1>
-          <div class="card shadow mb-4">
+          <div class="card shadow mb-4 input-group">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Komponen</h6>
                 </div>
@@ -36,8 +36,6 @@
                         <input type="radio" class="form-check-input" name="satuan">Unit
                       </label>
                   </div>
-                  </div>
-                  
                     <hr>
                     <div class="col">
                     <button type="submit" class="btn btn-success">Simpan</button>
@@ -45,8 +43,13 @@
                     </div>
                   </div>
                 </div>
-          
-        <!-- /.container-fluid -->
+
+<!-- Copy Fields -->
+
         </body>
 @include('template/footer')
+
+
+</script>
+
 </html>

@@ -92,7 +92,7 @@ Route::get('masterkomponen', function (){
 });
 
 Route::get('tambah_komponen', function (){
-    return view('komponen/tambah_komponen');
+    return view('komponen/tambah_komponenkw');
 });
 
 Route::get('edit_komponen', function (){
@@ -109,4 +109,13 @@ Route::get('master_kerusakan', function (){
 
 Route::get('pengaturan', function (){
     return view('pengaturan');
+});
+
+//-------------KERUSAKAN GAES--------------
+Route::get('kerusakan', function (){
+    return view('kerusakan/master_kerusakan');
+});
+
+Route::get('coba', function (){
+    return view('coba');
 });
