@@ -13,7 +13,7 @@
         </div>
             <div class="card-body">
             <div class=" py-3">
-                <a class="btn btn-success btn-icon-split" href="{{url('/tambah_master_gedung')}}" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{url('tambah_master_gedung')}}" role="button">
                     <span class="icon text-white-100">
                         Tambah
                     </span> 
@@ -31,41 +31,27 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($gedung as $val)
                     <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td><a class="btn btn-primary" href="#"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                      <td>{{ $val->nama }}</td>
+                      @if ($val->legalitas == null)
+                      <td>-</td>
+                      @else
+                      <td>{{ $val->legalitas }}</td>
+                      @endif
+                      @if ($val->tipe_milik == null)
+                      <td>-</td>
+                      @else
+                      <td>{{ $val->tipe_milik }}</td>
+                      @endif
+                      @if ($val->alas_hak == null)
+                      <td>-</td>
+                      @else
+                      <td>{{ $val->alas_hak }}</td>
+                      @endif
+                      <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('delete_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
                     </tr>
-                    <tr>
-                      <td>Garrett Winters</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>63</td>
-                      <td><a class="btn btn-primary" href="#"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                    </tr>
-                    <tr>
-                      <td>Ashton Cox</td>
-                      <td>Junior Technical Author</td>
-                      <td>San Francisco</td>
-                      <td>66</td>
-                      <td><a class="btn btn-primary" href="#"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                    </tr>
-                    <tr>
-                      <td>Cedric Kelly</td>
-                      <td>Senior Javascript Developer</td>
-                      <td>Edinburgh</td>
-                      <td>22</td>
-                      <td><a class="btn btn-primary" href="#"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                    </tr>
-                    <tr>
-                      <td>Airi Satou</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>33</td>
-                      <td><a class="btn btn-primary" href="#"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                    </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

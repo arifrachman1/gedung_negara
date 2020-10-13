@@ -28,18 +28,12 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($kategori as $val)
                     <tr>
-                      <td>DPR</td>
-                      <td><a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                      <td>{{ $val->nama }}</td>
+                      <td><a class="btn btn-warning" href="{{ url('edit_master_jenisgedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_jenisgedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                     </tr>
-                    <tr>
-                      <td>Sekolah</td>
-                      <td><a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                    </tr>
-                    <tr>
-                      <td>Kantor</td>
-                      <td><a class="btn btn-warning" href="#"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                    </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

@@ -8,39 +8,40 @@ use App\Gedung;
 class GedungController extends Controller
 {
     public function index() {
-        return view('', compact(''));
+        $gedung = Gedung::get();
+        return view('gedung/master_gedung', compact('gedung'));
     }
 
     public function input() {
-
+        return view('gedung/tambah_master_gedung');
     }
 
-    public function input_action() {
+    public function input_post(Request $request) {
         $input = new Gedung;
-        $input->id_gedung_kategori = 1;
-        $input->nama = "SDN Guwo Terus 1";
-        $input->bujur_timur = 112.747082;
-        $input->lintang_selatan = -7.259171;
-        $input->legalitas = "Legal";
-        $input->tipe_milik = "Negara";
-        $input->alas_hak = "";
-        $input->luas_lahan = 2.22;
-        $input->jumlah_lantai = 2;
-        $input->luas = 1.012;
-        $input->tinggi = 4.12;
-        $input->kelas_tinggi = "Sedang";
-        $input->kompleks = "Khusus";
-        $input->kepadatan = "Lokasi Kepadatan Sedang";
-        $input->permanensi = "Permanen";
-        $input->risk_bakar = "Rendah";
-        $input->penangkal = "Pasif";
-        $input->struktur_bawah = ""; 
-        $input->struktur_bangunan = "";
-        $input->struktur_atap = "";
-        $input->kode_provinsi = "";
-        $input->kode_kabupaten = "";
-        $input->kode_kecamatan = "";
-        $input->kode_kelurahan = "";
+        $input->id_gedung_kategori = $request->kategori;
+        $input->nama = $request->nama;
+        $input->bujur_timur = $request->bujur;
+        $input->lintang_selatan = $request->lintang;
+        $input->legalitas = $request->legalitas;
+        $input->tipe_milik = $request->tipe_milik;
+        $input->alas_hak = $request->alas_hak;
+        $input->luas_lahan = $request->luas_lahan;
+        $input->jumlah_lantai = $request->jumlah_lantai;
+        $input->luas = $request->luas_bangunan;
+        $input->tinggi = $request->tinggi_bangunan;
+        $input->kelas_tinggi = $request->klas_tinggi;
+        $input->kompleks = $request->kompleks;
+        $input->kepadatan = $request->kepadatan;
+        $input->permanensi = $request->permanensi;
+        $input->risk_bakar = $request->risk_bakar;
+        $input->penangkal = $request->penangkal;
+        $input->struktur_bawah = ''; 
+        $input->struktur_bangunan = '';
+        $input->struktur_atap = '';
+        $input->kode_provinsi = '';
+        $input->kode_kabupaten = '';
+        $input->kode_kecamatan = '';
+        $input->kode_kelurahan = '';
         $input->save();
     }
 
