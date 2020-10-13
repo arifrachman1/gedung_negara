@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Masuk Gedung Negara</title>
+  <title>Login Gedung Negara</title>
 
   <!-- Custom fonts for this template-->
   <!-- {{ asset('style/') }} -->
@@ -37,40 +37,47 @@
               <div class="col">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" action="{{ route('login') }}" method="post">
+                  @csrf
+                  <div class="">
+                  @if(session('errors'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Something it's wrong:
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger">
+                            {{ Session::get('error') }}
+                        </div>
+                    @endif
                     <div class="form-group">
                     <label>Email</label>
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukkan email anda....">
+                      <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                     </div>
                     <div class="form-group">
-                    <label>Kata Sandi</label>
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Kata Sandi">
+                    <label>Password</label>
+                      <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                      <!-- <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div> -->
-                    </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Masuk
-                    </a>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Log In</button>    
                     <hr>
-                    <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a> -->
-                    </hr>
                   </form>
                   <div class="text-center">
                     <!-- <a class="small" href="forgot-password.html">Forgot Password?</a> -->
-                  </div>
-                  <div class="text-center">
-                    <!-- <a class="small" href="register.html">Create an Account!</a> -->
                   </div>
                 </div>
               </div>
