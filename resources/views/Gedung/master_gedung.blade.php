@@ -13,7 +13,7 @@
         </div>
             <div class="card-body">
             <div class=" py-3">
-                <a href="#" data-toggle="modal" data-target="#tambahbarang" class="btn btn-success btn-icon-split">
+                <a class="btn btn-success btn-icon-split" href="{{url('/tambah_master_gedung')}}" role="button">
                     <span class="icon text-white-100">
                         Tambah
                     </span> 

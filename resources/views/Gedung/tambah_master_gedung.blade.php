@@ -20,8 +20,13 @@
                 <input type="file" name="#" class="form-control">
               </div>
               <div class="form-group">
-                <label>Lokasi Gedung:</label>
-                <input type="text" class="form-control" placeholder="Lokasi Gedung"  name="">
+                <label >Lokasi Gedung:</label>
+                  <select id="select" class="form-control" name="">
+                  <option value="0">Lokasi Gedung</option>
+                  <option value="1">Option #1</option>
+                  <option value="2">Option #2</option>
+                  <option value="3">Option #3</option>
+                  </select>
               </div>
               <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
           </table>
@@ -47,8 +52,23 @@
     </div>
 
     <div class="form-group">
-      <label>Lokasi Gedung:</label>
-      <input type="text" class="form-control" placeholder="Lokasi Gedung"  name="">
+      <label >Lokasi Gedung:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Lokasi Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
+    </div>
+
+    <div class="form-group">
+      <label >Jenis Gedung:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Jenis Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
     </div>
     
     <div class="form-group">

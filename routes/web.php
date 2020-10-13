@@ -61,6 +61,18 @@ Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
+Route::get('master_jenisgedung', function (){
+    return view('jenisgedung/master_jenisgedung');
+});
+
+Route::get('tambah_master_jenisgedung', function (){
+    return view('jenisgedung/tambah_master_jenisgedung');
+});
+
+Route::get('edit_master_jenisgedung', function (){
+    return view('jenisgedung/edit_master_jenisgedung');
+});
+
 //--------------MASTER USER--------------------------
 Route::get('masteruser', function (){
     return view('user/master_user');
