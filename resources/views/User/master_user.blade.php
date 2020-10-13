@@ -11,7 +11,7 @@
           <div class="card shadow mb-4">
           <div class="card-header bg-primary py-3">
             <h6 class="m-0 font-weight-bold text-white">DATA ANGGOTA</h6>
-        </div>
+          </div>
             <div class="card-body">
             <div class=" py-3">
                 <a href="{{url('tambahuser')}}" class="btn btn-success btn-icon-split">

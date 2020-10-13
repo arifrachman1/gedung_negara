@@ -86,3 +86,10 @@ Route::get('tambah_komponen', function (){
 Route::get('edit_komponen', function (){
     return view('komponen/edit_komponen');
 });
+
+
+//---------------PENGATURAN------------------
+
+Route::get('pengaturan', function (){
+    return view('pengaturan');
+});

@@ -84,7 +84,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan.blade.php">
+        <a class="nav-link" href="pengaturan">
           <i class=""></i>
           <span>Pengaturan</span></a>
       </li>
