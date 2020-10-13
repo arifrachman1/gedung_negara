@@ -36,13 +36,13 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard">
+        <a class="nav-link" href="/">
           <i class=""></i>
           <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_user">
+        <a class="nav-link" href="masteruser">
           <i class=""></i>
           <span>Master User</span></a>
       </li>
@@ -64,19 +64,19 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="master_satuan">
+        <a class="nav-link" href="mastersatuan">
           <i class=""></i>
           <span>Master Satuan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_komponen">
+        <a class="nav-link" href="masterkomponen">
           <i class=""></i>
           <span>Master Komponen</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_kerusakan.php">
+        <a class="nav-link" href="masterkerusakan">
           <i class=""></i>
           <span>Master Kerusakan</span></a>
       </li>

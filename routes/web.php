@@ -16,17 +16,23 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
-
+//LOGIN
 Route::get('login', function(){
     return view('login');
 });
 
-Route::get('master_user', function (){
+
+// MASTER USER
+Route::get('masteruser', function (){
     return view('master_user');
 });
 
-Route::get('tambah_user', function (){
+Route::get('tambahuser', function (){
     return view('tambah_user');
+});
+
+Route::get('edituser', function (){
+    return view('edit_user');
 });

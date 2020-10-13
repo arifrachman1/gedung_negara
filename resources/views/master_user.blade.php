@@ -6,7 +6,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Master Anggota</h1>
-          <a href="tambah_user" class='btn btn-success'>Tambah</a>
+          <a href="tambahuser" class='btn btn-success'>Tambah</a>
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
@@ -24,16 +24,6 @@
                       <th>Opsi</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nama</th>
-                      <th>Role</th>
-                      <th>No. Telp</th>
-                      <th>Alamat</th>
-                      <th>Opsi</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
                     <tr>
                       <td>1</td>
