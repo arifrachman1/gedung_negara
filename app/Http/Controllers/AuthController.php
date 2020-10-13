@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         }
         return view('login');
     }
@@ -31,7 +31,7 @@ class AuthController extends Controller
         $messages = [
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',
-            'password.required'     => 'Password wajib diisi',
+            'password.required'     => 'kata sandi wajib diisi',
             'password.string'       => 'Password harus berupa string'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -49,10 +49,10 @@ class AuthController extends Controller
  
         if (Auth::check()) {
             //Login Success
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } else {
             //Login Fail
-            Session::flash('error', 'Email atau password salah');
+            Session::flash('error', 'Email atau kata sandi salah');
             return redirect()->route('login');
         }
     }

@@ -37,14 +37,14 @@
               <div class="col">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                   </div>
                   <form class="user" action="{{ route('login') }}" method="post">
                   @csrf
                   <div class="">
                   @if(session('errors'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Something it's wrong:
+                            Terjadi Kesalahan:
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -67,13 +67,13 @@
                     @endif
                     <div class="form-group">
                     <label>Email</label>
-                      <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="email" name="email" class="form-control form-control-user"   placeholder="Masukkan Alamat email....">
                     </div>
                     <div class="form-group">
-                    <label>Password</label>
-                      <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                    <label>Kata Sandi</label>
+                      <input type="password" name="password" class="form-control form-control-user"  placeholder="Kata Sandi">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">Log In</button>    
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Masuk</button>    
                     <hr>
                   </form>
                   <div class="text-center">
