@@ -39,3 +39,11 @@ Route::get('detail_master_gedung', function (){
 Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
+
+Route::get('master_user', function (){
+    return view('master_user');
+});
+
+Route::get('tambah_user', function (){
+    return view('tambah_user');
+});

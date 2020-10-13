@@ -38,13 +38,13 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.blade.php">
+        <a class="nav-link" href="dashboard">
           <i class=""></i>
-          <span>Dashboard</span></a>
+          <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_user.blade.php">
+        <a class="nav-link" href="master_user">
           <i class=""></i>
           <span>Master User</span></a>
       </li>
@@ -58,21 +58,21 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Master Gedung:</h6>
-            <a class="collapse-item" href="master_gedung.blade.php">Gedung</a>
-            <a class="collapse-item" href="master_jenisgedung.blade.php">Jenis Gedung</a>
+            <a class="collapse-item" href="master_gedung">Gedung</a>
+            <a class="collapse-item" href="master_jenisgedung">Jenis Gedung</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="master_satuan.blade.php">
+        <a class="nav-link" href="master_satuan">
           <i class=""></i>
           <span>Master Satuan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_komponen.blade.php">
+        <a class="nav-link" href="master_komponen">
           <i class=""></i>
           <span>Master Komponen</span></a>
       </li>

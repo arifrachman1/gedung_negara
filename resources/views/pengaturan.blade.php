@@ -1,12 +1,13 @@
-<?php
-include('header.php');
-?>
+<!doctype html>
+@include('template/header')
+
+<body>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Pengaturan</h1>
         </div>
         <!-- /.container-fluid -->
-<?php
-include('footer.php');
-?>
+        </body>
+@include('template/footer')
+</html>
