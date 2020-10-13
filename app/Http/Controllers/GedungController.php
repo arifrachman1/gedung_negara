@@ -52,7 +52,8 @@ class GedungController extends Controller
 
     }
 
-    public function delete() {
-
+    public function delete($id) {
+        $delete = Gedung::find($id);
+        $delete->delete();
     }
 }

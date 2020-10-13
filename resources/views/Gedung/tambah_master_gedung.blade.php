@@ -43,7 +43,7 @@
 
     <div class="form-group">
       <label hidden>Nama Gedung:</label>
-      <input type="text" class="form-control" placeholder="Nama Gedung"  name="">
+      <input type="text" class="form-control" placeholder="Nama Gedung"  name="" required>
     </div>
 
     <div class="form-group">
@@ -127,7 +127,7 @@
     </div>
 
     <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
-    <a class="btn btn-warning float-left mt-2" href="" role="button">Kembali</a>
+    <a class="btn btn-warning float-left mt-2" href="{{url('master_gedung')}}" role="button">Kembali</a>
    
         </form>
         <tbody>

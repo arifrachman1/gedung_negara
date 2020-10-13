@@ -16,7 +16,7 @@ class KategoriGedungController extends Controller
     }
 
     public function input_action() {
-        $input = new Gedung;
+        $input = new KategoriGedung;
         $input->nama = "Gedung Sekolah";
         $input->save();
     }

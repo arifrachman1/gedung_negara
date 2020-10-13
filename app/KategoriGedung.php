@@ -13,5 +13,5 @@ class KategoriGedung extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
     // protected $fillable = [''];
-    protected $timestamps = false;
+    public $timestamps = false;
 }

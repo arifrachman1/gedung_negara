@@ -13,7 +13,7 @@ class Gedung extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
     // protected $fillable = [''];
-    protected $timestamps = 'U';
+    public $timestamps = 'U';
     
     // soft delete
     protected $dates = ['deleted_at'];

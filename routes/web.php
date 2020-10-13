@@ -54,3 +54,9 @@ Route::get('tambahuser', function (){
 Route::get('edituser', function (){
     return view('edit_user');
 });
+
+Route::get('tambah_master_gedung_input', 'GedungController@input_action');
+
+Route::get('tambah_kategori_gedung_input', 'KategoriGedungController@input_action');
+
+Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
