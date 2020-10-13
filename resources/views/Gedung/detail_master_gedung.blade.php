@@ -12,13 +12,19 @@
 
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <div class="container p-3 my-3 row">
+                    <div class="container p-3 my-3 row">
                         <div class="card">
                             <div class="card-header">
                                 Nama Gedung : SDN Guwo Terus 01 
                             </div>
                             <div class="card-body">
                             <div class="row">
+                            <div class="col-sm-4">
+                                    Lokasi Gedung   
+                                </div>
+                                <div class="col-sm-8">
+                                    : Surabaya
+                                </div>
                                 <div class="col-sm-4">
                                     BT   
                                 </div>

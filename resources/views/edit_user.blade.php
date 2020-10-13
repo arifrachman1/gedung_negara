@@ -40,8 +40,9 @@
                     <label for="pwd">Ulangi Kata Sandi:</label>
                       <input type="password" class="form-control form-control" id="nama" placeholder="Ulangi Password">
                     </div>
+                    <hr>
                     <div class="col">
-                    <button type="button" class="btn btn-success">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                     </div>
                   </div>

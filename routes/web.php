@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-//LOGIN
-Route::get('login', function(){
-    return view('login');
+
+
+Route::get('/', 'AuthController@showFormLogin')->name('login');
+Route::get('login', 'AuthController@showFormLogin')->name('login');
+Route::post('login', 'AuthController@login');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('logout', 'AuthController@logout')->name('logout');
 });
 
-Route::get('dashboard', function (){
-    return view('dashboard');
-});
 
 Route::get('master_gedung', function (){
     return view('gedung/master_gedung');
