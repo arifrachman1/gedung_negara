@@ -64,9 +64,9 @@ Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
-// Route::get('tambah_master_gedung_input', 'GedungController@input_action');
+Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
-// Route::get('tambah_kategori_gedung_input', 'KategoriGedungController@input_action');
+// Route::get('tambah_master_gedung_input', 'GedungController@input_action');
 
 // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
@@ -93,7 +93,7 @@ Route::get('tambahuser', function (){
     return view('user/tambah_user');
 });
 Route::get('edituser', function (){
-    return view('edit_user');
+    return view('user/edit_user');
 });
 
 //-------------MASTER KOMPONEN----------------------

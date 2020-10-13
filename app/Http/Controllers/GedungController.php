@@ -56,5 +56,6 @@ class GedungController extends Controller
     public function delete($id) {
         $delete = Gedung::find($id);
         $delete->delete();
+        return redirect('master_gedung');
     }
 }
