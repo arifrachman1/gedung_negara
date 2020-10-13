@@ -24,56 +24,53 @@
               <thead>
                 <tr>
                   <th>Nama Komponen</th>
-                  <th>Sub Komponen</th>
-                  <th>Satuan</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Pondasi</td>
-                  <td>Pondasi</td>
-                  <td>Estimasi</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button> | <a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
                 <tr>
                   <td>Struktur</td>
-                  <td>Kolom</td>
-                  <td>Unit</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                </tr>
-                <tr>
-                  <td>Struktur</td>
-                  <td>Balok</td>
-                  <td>Unit</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button> | <a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
                 <tr>
                   <td>Atap</td>
-                  <td>-</td>
-                  <td>Persen(%)</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button> | <a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
                 <tr>
                   <td>Dinding</td>
-                  <td>Batubata/Partisi</td>
-                  <td>Persen(%)</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                </tr>
-                <tr>
-                  <td>Dinding</td>
-                  <td>Kaca</td>
-                  <td>Unit</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
-                </tr>
-                <tr>
-                  <td>Dinding</td>
-                  <td>Pintu</td>
-                  <td>Unit</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button> | <a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
               </tbody>
             </table>
+            <!-- ================================ ============================ -->
+            <!-- The Modal -->
+              <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Detail Komponen</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      DISINI BERISI DETAIL
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
