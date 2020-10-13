@@ -4,55 +4,75 @@
 <body>
         <!-- Begin Page Content -->
         <div class="container-fluid">
+
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Master Anggota</h1>
-          <a href="tambahuser" class='btn btn-success'>Tambah</a>
+
+          <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-            </div>
+          <div class="card-header bg-primary py-3">
+            <h6 class="m-0 font-weight-bold text-white">DATA ANGGOTA</h6>
+        </div>
             <div class="card-body">
+            <div class=" py-3">
+                <a href="{{url('tambahuser')}}" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-100">
+                        Tambah
+                    </span> 
+                </a>
+            </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>Nama</th>
                       <th>Role</th>
                       <th>No. Telp</th>
                       <th>Alamat</th>
-                      <th>Opsi</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1</td>
-                      <td>System Architect</td>
+                      <td>Tiger Nixon</td>
+                      <td>Super Admin</td>
                       <td>Edinburgh</td>
                       <td>61</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
+                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a></td>
                     </tr>
                     <tr>
-                      <td>2</td>
-                      <td>Accountant</td>
+                      <td>Garrett Winters</td>
+                      <td>Super Admin</td>
                       <td>Tokyo</td>
                       <td>63</td>
-                      <td>2011/07/25</td>
-                      <td>$170,750</td>
+                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a></td>
                     </tr>
                     <tr>
-                      <td>3</td>
-                      <td>Junior Technical Author</td>
+                      <td>Ashton Cox</td>
+                      <td>Admin</td>
                       <td>San Francisco</td>
                       <td>66</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
+                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                    </tr>
+                    <tr>
+                      <td>Cedric Kelly</td>
+                      <td>Admin</td>
+                      <td>Edinburgh</td>
+                      <td>22</td>
+                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                    </tr>
+                    <tr>
+                      <td>Airi Satou</td>
+                      <td>Admin</td>
+                      <td>Tokyo</td>
+                      <td>33</td>
+                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+          </div>
+
         </div>
         <!-- /.container-fluid -->
         </body>

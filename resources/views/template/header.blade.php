@@ -44,7 +44,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masteruser">
+        <a class="nav-link" href="master_user">
           <i class=""></i>
           <span>Master User</span></a>
       </li>
