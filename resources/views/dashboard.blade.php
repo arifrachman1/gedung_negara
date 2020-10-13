@@ -67,9 +67,5 @@
     </div>
         <!-- /.container-fluid -->
 </body>
-<<<<<<< HEAD
-@include('template/footer')
-=======
 @include('template/footer')
 </html>
->>>>>>> 6b16dfc89f72176d8d2a4914aa1c47bda77bed87
