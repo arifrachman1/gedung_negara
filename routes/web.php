@@ -22,9 +22,8 @@ Route::get('login', 'AuthController@showFormLogin')->name('login');
 Route::post('login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('home', 'DashboardController@index')->name('home');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('logout', 'AuthController@logout')->name('logout');
-});
 
 
 Route::get('master_gedung', function (){
@@ -50,4 +49,7 @@ Route::get('tambahuser', function (){
 
 Route::get('edituser', function (){
     return view('edit_user');
+});
+
+
 });
