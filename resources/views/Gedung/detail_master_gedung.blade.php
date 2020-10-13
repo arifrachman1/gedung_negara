@@ -19,6 +19,12 @@
                             </div>
                             <div class="card-body">
                             <div class="row">
+                            <div class="col-sm-4">
+                                    Lokasi Gedung   
+                                </div>
+                                <div class="col-sm-8">
+                                    : Surabaya
+                                </div>
                                 <div class="col-sm-4">
                                     BT   
                                 </div>

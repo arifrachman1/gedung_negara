@@ -38,13 +38,13 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard">
+        <a class="nav-link" href="/">
           <i class=""></i>
           <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_user">
+        <a class="nav-link" href="masteruser">
           <i class=""></i>
           <span>Master User</span></a>
       </li>
@@ -66,13 +66,13 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="master_satuan">
+        <a class="nav-link" href="mastersatuan">
           <i class=""></i>
           <span>Master Satuan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_komponen">
+        <a class="nav-link" href="masterkomponen">
           <i class=""></i>
           <span>Master Komponen</span></a>
       </li>
@@ -141,7 +141,7 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+            <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Keluar
                 </a>

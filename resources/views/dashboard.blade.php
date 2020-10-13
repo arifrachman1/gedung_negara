@@ -68,3 +68,4 @@
         <!-- /.container-fluid -->
 </body>
 @include('template/footer')
+</html>
