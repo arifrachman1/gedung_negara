@@ -81,17 +81,13 @@
       </li>
 
       <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="kerusakan">
-=======
         <a class="nav-link" href="master_kerusakan">
->>>>>>> 013349420c7c04f38f3ccb816710ac50b1633309
           <i class=""></i>
           <span>Master Kerusakan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan">
+        <a class="nav-link" href="profil">
           <i class=""></i>
           <span>Pengaturan</span></a>
       </li>
