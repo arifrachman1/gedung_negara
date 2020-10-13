@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', 'AuthController@logout')->name('logout');
 });
 
-
+//-------------MASTER GEDUNG-----------------------
 Route::get('master_gedung', function (){
     return view('gedung/master_gedung');
 });
@@ -40,14 +40,28 @@ Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
-Route::get('master_user', function (){
-    return view('master_user');
+//--------------MASTER USER--------------------------
+Route::get('masteruser', function (){
+    return view('user/master_user');
 });
 
 Route::get('tambahuser', function (){
-    return view('tambah_user');
+    return view('user/tambah_user');
+});
+Route::get('edituser', function (){
+    return view('user/edit_user');
 });
 
-Route::get('edituser', function (){
-    return view('edit_user');
+//-------------MASTER KOMPONEN----------------------
+
+Route::get('masterkomponen', function (){
+    return view('komponen/master_komponen');
+});
+
+Route::get('tambah_komponen', function (){
+    return view('komponen/tambah_komponen');
+});
+
+Route::get('edit_komponen', function (){
+    return view('komponen/edit_komponen');
 });
