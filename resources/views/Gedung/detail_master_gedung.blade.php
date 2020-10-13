@@ -19,20 +19,14 @@
                             </div>
                             <div class="card-body">
                             <div class="row">
-                            <div class="col-sm-4">
-                                    Lokasi Gedung   
-                                </div>
-                                <div class="col-sm-8">
-                                    : Surabaya
-                                </div>
                                 <div class="col-sm-4">
-                                    BT   
+                                    Bujur Timur   
                                 </div>
                                 <div class="col-sm-8">
                                     : 111,83907935
                                 </div>
                                 <div class="col-sm-4">
-                                    LS   
+                                    Lintang Selatan   
                                 </div>
                                 <div class="col-sm-8">
                                     : -6,95413723
@@ -80,7 +74,7 @@
                                     : 6
                                 </div>
                                 <div class="col-sm-4">
-                                    Klas Tinggi   
+                                    Kelas Tinggi   
                                 </div>
                                 <div class="col-sm-8">
                                     : Sedang
@@ -98,7 +92,7 @@
                                     : Sedang
                                 </div>
                                 <div class="col-sm-4">
-                                    Pemanensi   
+                                    Permanensi   
                                 </div>
                                 <div class="col-sm-8">
                                     : Permanen
@@ -115,8 +109,52 @@
                                 <div class="col-sm-8">
                                     : Pasif
                                 </div>
+                                <div class="col-sm-4">
+                                    Struktur Bawah   
+                                </div>
+                                <div class="col-sm-8">
+                                    : Aman
+                                </div>
+                                <div class="col-sm-4">
+                                    Struktur Bangunaan   
+                                </div>
+                                <div class="col-sm-8">
+                                    : Bagus
+                                </div>
+                                <div class="col-sm-4">
+                                    Struktur Atap   
+                                </div>
+                                <div class="col-sm-8">
+                                    : Bagus
+                                </div>
+                                <div class="col-sm-4">
+                                    Kode Provinsi   
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
+                                <div class="col-sm-4">
+                                    Kode Kabupaten   
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
+                                <div class="col-sm-4">
+                                    Kode Kecamatan   
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
+                                <div class="col-sm-4">
+                                    Kode Kelurahan   
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
 
                             </div>
+                            <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                            
         </table>
       </div>
     </div>
