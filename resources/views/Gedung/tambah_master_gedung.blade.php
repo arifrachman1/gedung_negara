@@ -45,39 +45,24 @@
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <form  enctype="multipart/form-data" method='post'>
+    
+    <div class="form-group">
+      <label hidden>ID Gedung:</label>
+      <input type="text" class="form-control" placeholder="Nama Gedung"  name="" hidden>
+    </div>
 
     <div class="form-group">
-      <label hidden>Nama Gedung:</label>
+      <label>Nama Gedung:</label>
       <input type="text" class="form-control" placeholder="Nama Gedung"  name="">
     </div>
 
     <div class="form-group">
-      <label >Lokasi Gedung:</label>
-            <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
-              <option value="1">Option #1</option>
-              <option value="2">Option #2</option>
-              <option value="3">Option #3</option>
-            </select>
-    </div>
-
-    <div class="form-group">
-      <label >Jenis Gedung:</label>
-            <select id="select" class="form-control" name="">
-              <option value="0">Jenis Gedung</option>
-              <option value="1">Option #1</option>
-              <option value="2">Option #2</option>
-              <option value="3">Option #3</option>
-            </select>
-    </div>
-    
-    <div class="form-group">
-      <label>BT:</label>
+      <label>Bujur Timur:</label>
       <input type="number" class="form-control" placeholder="0"  name="">
     </div>
 
     <div class="form-group">
-      <label >LS:</label>
+      <label >Lintang Selatan:</label>
       <input type="number" class="form-control" placeholder="0" name="">
     </div>  
     
@@ -117,7 +102,7 @@
     </div>
 
     <div class="form-group">
-      <label>Klas Tinggi:</label>
+      <label>Kelas Tinggi:</label>
       <input type="text" class="form-control" placeholder="Klas Tinggi"  name="">
     </div>
 
@@ -132,13 +117,13 @@
     </div>
 
     <div class="form-group">
-      <label>Pemanensi:</label>
-      <input type="text" class="form-control" placeholder="Pemanensi"  name="">
+      <label>Permanensi:</label>
+      <input type="text" class="form-control" placeholder="Permanensi"  name="">
     </div>
 
     <div class="form-group">
-      <label>Risk Bakar:</label>
-      <input type="text" class="form-control" placeholder="Risk Bakar"  name="">
+      <label>Resiko Kebakar:</label>
+      <input type="text" class="form-control" placeholder="Resiko Kebakar"  name="">
     </div>
 
     <div class="form-group">
@@ -146,8 +131,50 @@
       <input type="text" class="form-control" placeholder="Penangkal"  name="">
     </div>
 
+    <div class="form-group">
+      <label>Struktur Bawah:</label>
+      <input type="text" class="form-control" placeholder="Struktur Bawah"  name="">
+    </div>
+
+    <div class="form-group">
+      <label>Struktur Bangunan:</label>
+      <input type="text" class="form-control" placeholder="Struktur Bangunan"  name="">
+    </div>
+
+    <div class="form-group">
+      <label>Struktur Atap:</label>
+      <input type="text" class="form-control" placeholder="Struktur Atap"  name="">
+    </div>
+
+    <div class="form-group">
+      <label>Kode Provinsi:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Lokasi Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
+    </div>
+
+    <div class="form-group">
+      <label>Kode Provinsi:</label>
+      <select id="provinsi" name="provinsi">
+        <option ></option>
+        <option value="ACEH">ACEH</option>
+        <option value="RIAU">RIAU</option>
+        <option value="JAMBI">JAMBI</option>
+        <option value="SUMATERA UTARA">SUMATERA UTARA</option>
+        <option value="BENGKULU">BENGKULU</option>
+        <option value="LAMPUNG">LAMPUNG</option>
+        <option value="DKI JAKARTA">DKI JAKARTA</option>
+        <option value="JAWA BARAT">JAWA BARAT</option>
+        <option value="JAWA TENGAH">JAWA TENGAH</option>
+        <option value="JAWA TIMUR">JAWA TIMUR</option>
+      </select>
+    </div>
+
     <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
-    <a class="btn btn-warning float-left mt-2" href="" role="button">Kembali</a>
+    <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
    
         </form>
         <tbody>
@@ -158,6 +185,11 @@
   </div>
 </div>
 
+<script type="text/javascript">
+ $(document).ready(function() {
+     $('#provinsi').select2();
+ });
+</script>
 
 <!-- @include('template/footer') -->
 </body>

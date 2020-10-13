@@ -98,3 +98,9 @@ Route::get('tambah_komponen', function (){
 Route::get('edit_komponen', function (){
     return view('komponen/edit_komponen');
 });
+
+//-------------MASTER KERUSAKAN----------------------
+
+Route::get('master_kerusakan', function (){
+    return view('kerusakan/master_kerusakan');
+});
