@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-Route::get('/', function () {
-    return view('dashboard');
+
+
+Route::get('/', 'AuthController@showFormLogin')->name('login');
+Route::get('login', 'AuthController@showFormLogin')->name('login');
+Route::post('login', 'AuthController@login');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('home', 'DashboardController@index')->name('home');
+    Route::get('logout', 'AuthController@logout')->name('logout');
+ 
 });
