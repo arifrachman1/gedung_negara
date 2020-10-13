@@ -13,11 +13,11 @@
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="komponen">Nama Komponen :</label>
-                      <input type="text" class="form-control form-control-user" id="komponen" placeholder="Komponen">
+                      <input type="text" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3 " id="komponen" placeholder="Komponen">
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="subkomkonen">Nama Subkomponen :</label>
-                      <input type="text" class="form-control form-control-user" id="subkomponen" placeholder="Subkomponen">
+                      <input type="text" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="subkomponen" placeholder="Subkomponen">
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                   <label for="satuan">Satuan :</label>
