@@ -46,3 +46,43 @@ Route::group(['middleware' => 'auth'], function () {
         return view('edit_user');
     });
 });
+
+//-------------MASTER GEDUNG-----------------------
+Route::get('master_gedung', function (){
+    return view('gedung/master_gedung');
+});
+Route::get('tambah_master_gedung', function (){
+    return view('gedung/tambah_master_gedung');
+});
+Route::get('detail_master_gedung', function (){
+    return view('gedung/detail_master_gedung');
+});
+Route::get('edit_master_gedung', function (){
+    return view('gedung/edit_master_gedung');
+});
+
+//--------------MASTER USER--------------------------
+Route::get('masteruser', function (){
+    return view('user/master_user');
+});
+
+Route::get('tambahuser', function (){
+    return view('user/tambah_user');
+});
+Route::get('edituser', function (){
+    return view('user/edit_user');
+});
+
+//-------------MASTER KOMPONEN----------------------
+
+Route::get('masterkomponen', function (){
+    return view('komponen/master_komponen');
+});
+
+Route::get('tambah_komponen', function (){
+    return view('komponen/tambah_komponen');
+});
+
+Route::get('edit_komponen', function (){
+    return view('komponen/edit_komponen');
+});
