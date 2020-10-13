@@ -19,6 +19,8 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+  <link href="{{ asset('style/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -76,13 +78,13 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masterkerusakan">
+        <a class="nav-link" href="master_kerusakan.blade.php">
           <i class=""></i>
           <span>Master Kerusakan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan.php">
+        <a class="nav-link" href="pengaturan.blade.php">
           <i class=""></i>
           <span>Pengaturan</span></a>
       </li>
