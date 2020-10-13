@@ -71,7 +71,7 @@
                     </div>
                     <div class="form-group">
                     <label>Kata Sandi</label>
-                      <input type="password" name="password" class="form-control form-control-user"  placeholder="Kata Sandi">
+                      <input type="password" name="password" class="form-control form-control-user"  placeholder="Masukkan Kata Sandi....">
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Masuk</button>    
                     <hr>
