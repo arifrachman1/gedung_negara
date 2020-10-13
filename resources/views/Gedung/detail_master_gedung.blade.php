@@ -12,7 +12,7 @@
 
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <div class="container p-3 my-3 row">
+                    <div class="container p-3 my-3 row">
                         <div class="card">
                             <div class="card-header">
                                 Nama Gedung : SDN Guwo Terus 01 
