@@ -19,6 +19,8 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+  <link href="{{ asset('style/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -36,13 +38,13 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.php">
+        <a class="nav-link" href="/">
           <i class=""></i>
-          <span>Dashboard</span></a>
+          <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_user.php">
+        <a class="nav-link" href="masteruser">
           <i class=""></i>
           <span>Master User</span></a>
       </li>
@@ -56,33 +58,33 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Master Gedung:</h6>
-            <a class="collapse-item" href="master_gedung.php">Gedung</a>
-            <a class="collapse-item" href="master_jenisgedung.php">Jenis Gedung</a>
+            <a class="collapse-item" href="master_gedung">Gedung</a>
+            <a class="collapse-item" href="master_jenisgedung">Jenis Gedung</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="master_satuan.php">
+        <a class="nav-link" href="mastersatuan">
           <i class=""></i>
           <span>Master Satuan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_komponen.php">
+        <a class="nav-link" href="masterkomponen">
           <i class=""></i>
           <span>Master Komponen</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_kerusakan.php">
+        <a class="nav-link" href="master_kerusakan.blade.php">
           <i class=""></i>
           <span>Master Kerusakan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan.php">
+        <a class="nav-link" href="pengaturan.blade.php">
           <i class=""></i>
           <span>Pengaturan</span></a>
       </li>

@@ -24,5 +24,30 @@ Route::post('login', 'AuthController@login');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'DashboardController@index')->name('home');
     Route::get('logout', 'AuthController@logout')->name('logout');
- 
+});
+
+
+Route::get('master_gedung', function (){
+    return view('gedung/master_gedung');
+});
+Route::get('tambah_master_gedung', function (){
+    return view('gedung/tambah_master_gedung');
+});
+Route::get('detail_master_gedung', function (){
+    return view('gedung/detail_master_gedung');
+});
+Route::get('edit_master_gedung', function (){
+    return view('gedung/edit_master_gedung');
+});
+
+Route::get('master_user', function (){
+    return view('master_user');
+});
+
+Route::get('tambahuser', function (){
+    return view('tambah_user');
+});
+
+Route::get('edituser', function (){
+    return view('edit_user');
 });
