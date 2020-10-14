@@ -63,6 +63,18 @@ Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
+Route::get('master_jenisgedung', function (){
+    return view('jenisgedung/master_jenisgedung');
+});
+
+Route::get('tambah_master_jenisgedung', function (){
+    return view('jenisgedung/tambah_master_jenisgedung');
+});
+
+Route::get('edit_master_jenisgedung', function (){
+    return view('jenisgedung/edit_master_jenisgedung');
+});
+
 //--------------MASTER USER--------------------------
 Route::get('masteruser', function (){
     return view('user/master_user');
@@ -80,9 +92,49 @@ Route::get('edituser', function (){
 Route::get('masterkomponen','KomponenController@komponen'); // View data buku
 
 Route::get('tambah_komponen', function (){
-    return view('komponen/tambah_komponen');
+    return view('komponen/tambah_komponenkw');
 });
 
 Route::get('edit_komponen', function (){
     return view('komponen/edit_komponen');
+});
+
+//-------------MASTER KERUSAKAN----------------------
+
+Route::get('master_kerusakan', function (){
+    return view('kerusakan/master_kerusakan');
+});
+
+//---------------PENGATURAN------------------
+
+Route::get('pengaturan', function (){
+    return view('pengaturan/pengaturan');
+});
+
+Route::get('profil', function (){
+    return view('pengaturan/profil');
+});
+
+//-------------KERUSAKAN GAES--------------
+
+Route::get('kerusakan', function (){
+    return view('kerusakan/master_kerusakan');
+});
+
+Route::get('coba', function (){
+    return view('coba');
+});
+
+//----------------SATUAN-------------------
+
+Route::get('mastersatuan', function (){
+    return view('satuan/master_satuan');
+});
+
+Route::get('tambahsatuan', function (){
+    return view('satuan/tambah_satuan');
+});
+
+Route::get('editsatuan', function (){
+    return view('satuan/edit_satuan');
 });

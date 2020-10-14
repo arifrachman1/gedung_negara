@@ -9,7 +9,8 @@ class Komponen extends Model
     protected $table = 'komponen';
     protected $primaryKey = 'id';
     protected $guarded = [];
-    // protected $fillable = [''] //nama kolom yang ingin di masukkan
+//    / protected $fillable = ['id_parent']; //nama kolom yang ingin di masukkan
     public $timestamps = false;
+
 }
 

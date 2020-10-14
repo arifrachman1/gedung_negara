@@ -15,6 +15,9 @@
   <!-- Custom fonts for this template-->
   <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -38,21 +41,21 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/">
-          <i class=""></i>
+        <a class="nav-link" href="dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="masteruser">
-          <i class=""></i>
+          <i class="fas fa-fw fa-users"></i>
           <span>Master User</span></a>
       </li>
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class=""></i>
+          <i class="fas fa-fw fa-building"></i>
           <span>Master Gedung</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -67,24 +70,24 @@
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="mastersatuan">
-          <i class=""></i>
+          <i class="fas fa-fw fa-unity"></i>
           <span>Master Satuan</span></a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="masterkomponen">
-          <i class=""></i>
+          <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_kerusakan.blade.php">
-          <i class=""></i>
+        <a class="nav-link" href="master_kerusakan">
+          <i class="fas fa-fw fa-house-damage"></i>
           <span>Master Kerusakan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan.blade.php">
+        <a class="nav-link" href="profil">
           <i class=""></i>
           <span>Pengaturan</span></a>
       </li>

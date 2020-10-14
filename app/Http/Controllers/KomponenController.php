@@ -9,7 +9,7 @@ class KomponenController extends Controller
 {
     public function komponen(){
 
-        $komponen = Komponen::get();
+        $komponen = Komponen::distinct()->whereNotNull('id_parent')->get('id_parent');
         return view('Komponen/master_komponen',compact('komponen'));
     }
 }
