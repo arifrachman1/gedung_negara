@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gedung;
+use App\Provinsi;
+use App\KabupatenKota;
+use App\Kecamatan;
+use App\DesaKelurahan;
 
 class GedungController extends Controller
 {
@@ -12,8 +16,15 @@ class GedungController extends Controller
         return view('gedung/master_gedung', compact('gedung'));
     }
 
-    public function input() {
-        return view('gedung/tambah_master_gedung');
+    public function input(Request $request) {
+        $provinsi = Provinsi::where('id_prov', 0)->get();
+        return view('gedung/tambah_master_gedung', compact('provinsi'));
+    }
+
+    public function kabKota(Request $request) {
+        $idProv = $request->id_prov;
+        $kabKota = Provinsi::where('id_prov', $idProv)->with('kabupatenKota')->get();
+        return response()->json([ 'kabKota' => $kabKota ]);
     }
 
     public function input_post(Request $request) {
@@ -35,14 +46,15 @@ class GedungController extends Controller
         $input->permanensi = $request->permanensi;
         $input->risk_bakar = $request->risk_bakar;
         $input->penangkal = $request->penangkal;
-        $input->struktur_bawah = ''; 
-        $input->struktur_bangunan = '';
-        $input->struktur_atap = '';
-        $input->kode_provinsi = '';
-        $input->kode_kabupaten = '';
-        $input->kode_kecamatan = '';
-        $input->kode_kelurahan = '';
+        $input->struktur_bawah = $request->struktur_bawah; 
+        $input->struktur_bangunan = $request->struktur_bangunan;
+        $input->struktur_atap = $request->struktur_atap;
+        $input->kode_provinsi = $request->kode_provinsi;
+        $input->kode_kabupaten = $request->kode_kota;
+        $input->kode_kecamatan = $request->kode_kecamatan;
+        $input->kode_kelurahan = $request->kode_kelurahan;
         $input->save();
+        return redirect('master_gedung');
     }
 
     public function edit() {

@@ -52,9 +52,7 @@ Route::get('master_gedung', 'GedungController@index');
 
 Route::get('tambah_master_gedung', 'GedungController@input');
 
-Route::get('tambah_master_gedung', function (){
-    return view('gedung/tambah_master_gedung');
-});
+Route::post('lokasi_kota', 'GedungController@kabKota');
 
 Route::get('detail_master_gedung', function (){
     return view('gedung/detail_master_gedung');

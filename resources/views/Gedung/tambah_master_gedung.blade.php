@@ -83,25 +83,26 @@
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <form  enctype="multipart/form-data" method='post'>
+      @csrf
     
     <div class="form-group">
       <label hidden>ID Gedung:</label>
-      <input type="text" class="form-control" placeholder="Nama Gedung"  name="" hidden>
+      <input type="text" class="form-control" placeholder="ID Gedung"  name="id_gd" hidden>
     </div>
 
     <div class="form-group">
       <label>Nama Gedung:</label>
-      <input type="text" class="form-control" placeholder="Nama Gedung"  name="">
+      <input type="text" class="form-control" placeholder="Nama Gedung"  name="nama_gd">
     </div>
 
     <div class="form-group">
       <label>Bujur Timur:</label>
-      <input type="number" class="form-control" placeholder="0"  name="">
+      <input type="number" class="form-control" placeholder="0"  name="bt">
     </div>
 
     <div class="form-group">
       <label >Lintang Selatan:</label>
-      <input type="number" class="form-control" placeholder="0" name="">
+      <input type="number" class="form-control" placeholder="0" name="ls">
     </div>  
     
     <div class="form-group">
@@ -141,7 +142,7 @@
 
     <div class="form-group">
       <label>Kelas Tinggi:</label>
-      <input type="text" class="form-control" placeholder="Klas Tinggi"  name="">
+      <input type="text" class="form-control" placeholder="Klas Tinggi"  name="kls_tinggi">
     </div>
 
     <div class="form-group">
@@ -156,12 +157,12 @@
 
     <div class="form-group">
       <label>Permanensi:</label>
-      <input type="text" class="form-control" placeholder="Permanensi"  name="">
+      <input type="text" class="form-control" placeholder="Permanensi"  name="permanensi">
     </div>
 
     <div class="form-group">
       <label>Resiko Kebakar:</label>
-      <input type="text" class="form-control" placeholder="Resiko Kebakar"  name="">
+      <input type="text" class="form-control" placeholder="Resiko Kebakar"  name="risk_bakar">
     </div>
 
     <div class="form-group">
@@ -171,38 +172,35 @@
 
     <div class="form-group">
       <label>Struktur Bawah:</label>
-      <input type="text" class="form-control" placeholder="Struktur Bawah"  name="">
+      <input type="text" class="form-control" placeholder="Struktur Bawah"  name="struktur_bawah">
     </div>
 
     <div class="form-group">
       <label>Struktur Bangunan:</label>
-      <input type="text" class="form-control" placeholder="Struktur Bangunan"  name="">
+      <input type="text" class="form-control" placeholder="Struktur Bangunan"  name="struktur_bangunan">
     </div>
 
     <div class="form-group">
       <label>Struktur Atap:</label>
-      <input type="text" class="form-control" placeholder="Struktur Atap"  name="">
+      <input type="text" class="form-control" placeholder="Struktur Atap"  name="struktur_atap">
     </div>
 
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
           <label>Kode Provinsi:</label>
-            <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
-              <option value="1">Option #1</option>
-              <option value="2">Option #2</option>
-              <option value="3">Option #3</option>
+            <select id="select" class="form-control" id="provinsi" name="kode_provinsi">
+              <option value="">Pilih Provinsi</option>
+              @foreach($provinsi as $val)
+              <option value="{{ $val->id_prov }}">{{ $val->id_prov }} - {{ $val->nama }}</option>
+              @endforeach
             </select>
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kabupaten:</label>
-            <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
-              <option value="1">Option #1</option>
-              <option value="2">Option #2</option>
-              <option value="3">Option #3</option>
+          <label>Kode Kabupaten/Kota:</label>
+            <select id="select" class="form-control" id="kab_kota" name="kode_kota">
+              <option value="0">Pilih Kabupaten/Kota</option>
             </select>
         </div>
       </div>
@@ -212,21 +210,15 @@
       <div class="row">
         <div class="col-lg-6">
           <label>Kode Kecamatan:</label>
-            <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
-              <option value="1">Option #1</option>
-              <option value="2">Option #2</option>
-              <option value="3">Option #3</option>
+            <select id="select" class="form-control" name="kode_kecamatan">
+              <option value="0">Pilih Kecamatan</option>
             </select>
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kelurahan:</label>
-            <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
-              <option value="1">Option #1</option>
-              <option value="2">Option #2</option>
-              <option value="3">Option #3</option>
+          <label>Kode Desa/Kelurahan:</label>
+            <select id="select" class="form-control" name="kode_kelurahan">
+              <option value="0">Pilih Desa/Kelurahan</option>
             </select>
         </div>
       </div>
@@ -243,6 +235,33 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $(document).ready(function () {
+    $('#provinsi').on('change', function(e) {
+      var id_prov = e.target.value;
+      $.ajax({
+        url: "{{ route('lokasi_kota') }}",
+        type: "POST",
+        data: {
+          id_prov: id_prov
+        },
+        success: function (data) {
+          $('#kab_kota').empty();
+          $.each(data.kab_kota[0].kab_kota, function(index, kab_kota){
+            $('#kab_kota').append('<option value="'+kota.id_kota+'">'+kota.nama+'</option>');
+          })
+        }
+      })
+    });
+  });
+</script>
 
 
 
