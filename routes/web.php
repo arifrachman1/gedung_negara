@@ -119,14 +119,33 @@ Route::get('master_kerusakan', function (){
 //---------------PENGATURAN------------------
 
 Route::get('pengaturan', function (){
-    return view('pengaturan');
+    return view('pengaturan/pengaturan');
+});
+
+Route::get('profil', function (){
+    return view('pengaturan/profil');
 });
 
 //-------------KERUSAKAN GAES--------------
+
 Route::get('kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });
 
 Route::get('coba', function (){
     return view('coba');
+});
+
+//----------------SATUAN-------------------
+
+Route::get('mastersatuan', function (){
+    return view('satuan/master_satuan');
+});
+
+Route::get('tambahsatuan', function (){
+    return view('satuan/tambah_satuan');
+});
+
+Route::get('editsatuan', function (){
+    return view('satuan/edit_satuan');
 });

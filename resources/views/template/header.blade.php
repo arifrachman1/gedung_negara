@@ -41,21 +41,21 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/">
-          <i class=""></i>
+        <a class="nav-link" href="dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="masteruser">
-          <i class=""></i>
+          <i class="fas fa-fw fa-users"></i>
           <span>Master User</span></a>
       </li>
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class=""></i>
+          <i class="fas fa-fw fa-building"></i>
           <span>Master Gedung</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -70,24 +70,28 @@
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="mastersatuan">
-          <i class=""></i>
+          <i class="fas fa-fw fa-unity"></i>
           <span>Master Satuan</span></a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="masterkomponen">
-          <i class=""></i>
+          <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="master_kerusakan">
+<<<<<<< HEAD
           <i class=""></i>
+=======
+          <i class="fas fa-fw fa-house-damage"></i>
+>>>>>>> 4c0747ca28bfe06b170be28d4132a171521d83b3
           <span>Master Kerusakan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan">
+        <a class="nav-link" href="profil">
           <i class=""></i>
           <span>Pengaturan</span></a>
       </li>

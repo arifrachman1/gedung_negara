@@ -1,6 +1,6 @@
 <!doctype html>
 @include('template/header')
-<body>
+
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -185,11 +185,6 @@
   </div>
 </div>
 
-<script type="text/javascript">
- $(document).ready(function() {
-     $('#provinsi').select2();
- });
-</script>
+
 
 <!-- @include('template/footer') -->
-</body>
