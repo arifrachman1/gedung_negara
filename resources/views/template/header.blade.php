@@ -82,11 +82,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="master_kerusakan">
-<<<<<<< HEAD
-          <i class=""></i>
-=======
           <i class="fas fa-fw fa-house-damage"></i>
->>>>>>> 4c0747ca28bfe06b170be28d4132a171521d83b3
           <span>Master Kerusakan</span></a>
       </li>
 
