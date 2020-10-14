@@ -46,9 +46,6 @@
 
         </div>
         <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
-
-<!-- @include('template/footer') -->
 </body>
+@include('template/footer')
+</html>
