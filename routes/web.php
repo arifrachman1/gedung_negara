@@ -138,3 +138,17 @@ Route::get('tambahsatuan', function (){
 Route::get('editsatuan', function (){
     return view('satuan/edit_satuan');
 });
+
+//---------------ROLE---------------------
+
+Route::get('masterrole', function (){
+    return view('role/master_role');
+});
+
+Route::get('editrole', function (){
+    return view('role/edit_role');
+});
+
+Route::get('tambahrole', function (){
+    return view('role/tambah_role');
+});

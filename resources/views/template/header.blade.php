@@ -75,6 +75,12 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="masterrole">
+          <i class="fas fa-fw fa-key"></i>
+          <span>Master Role</span></a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="masterkomponen">
           <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
