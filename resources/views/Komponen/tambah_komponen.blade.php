@@ -37,7 +37,6 @@
                       </label>
                   </div>
                   </div>
-                  
                     <hr>
                     <div class="col">
                     <button type="submit" class="btn btn-success">Simpan</button>

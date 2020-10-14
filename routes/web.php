@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('master_gedung', function (){
     return view('gedung/master_gedung');
 });
+
+
 Route::get('tambah_master_gedung', function (){
     return view('gedung/tambah_master_gedung');
 });
@@ -75,9 +77,7 @@ Route::get('edituser', function (){
 
 //-------------MASTER KOMPONEN----------------------
 
-Route::get('masterkomponen', function (){
-    return view('komponen/master_komponen');
-});
+Route::get('masterkomponen','KomponenController@komponen'); // View data buku
 
 Route::get('tambah_komponen', function (){
     return view('komponen/tambah_komponen');
