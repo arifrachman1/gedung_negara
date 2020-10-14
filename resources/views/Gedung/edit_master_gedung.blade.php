@@ -20,9 +20,52 @@
                 <input type="file" name="#" class="form-control">
               </div>
               <div class="form-group">
-                <label>Lokasi Gedung:</label>
-                <input type="text" class="form-control" placeholder="Lokasi Gedung"  name="">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label>Kode Provinsi:</label>
+                      <select id="select" class="form-control" name="">
+                      <option value="0">Lokasi Gedung</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
+                      </select>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <label>Kode Kabupaten:</label>
+                      <select id="select" class="form-control" name="">
+                      <option value="0">Lokasi Gedung</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
+                      </select>
+                  </div>
+                </div>
               </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label>Kode Kecamatan:</label>
+                      <select id="select" class="form-control" name="">
+                      <option value="0">Lokasi Gedung</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
+                      </select>
+                    </div>
+
+                  <div class="col-lg-6">
+                    <label>Kode Kelurahan:</label>
+                      <select id="select" class="form-control" name="">
+                      <option value="0">Lokasi Gedung</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
           </table>
         </div>
@@ -42,22 +85,17 @@
       <form  enctype="multipart/form-data" method='post'>
 
     <div class="form-group">
-      <label hidden>Nama Gedung:</label>
+      <label>Nama Gedung:</label>
       <input type="text" class="form-control" placeholder="Nama Gedung"  name="">
-    </div>
-
-    <div class="form-group">
-      <label>Lokasi Gedung:</label>
-      <input type="text" class="form-control" placeholder="Lokasi Gedung"  name="">
     </div>
     
     <div class="form-group">
-      <label>BT:</label>
+      <label>Bujur Timur:</label>
       <input type="number" class="form-control" placeholder="0"  name="">
     </div>
 
     <div class="form-group">
-      <label >LS:</label>
+      <label >Lintang Selatan:</label>
       <input type="number" class="form-control" placeholder="0" name="">
     </div>  
     
@@ -126,8 +164,71 @@
       <input type="text" class="form-control" placeholder="Penangkal"  name="">
     </div>
 
+    <div class="form-group">
+      <label>Struktur Bawah:</label>
+      <input type="text" class="form-control" placeholder="Struktur Bawah"  name="">
+    </div>
+
+    <div class="form-group">
+      <label>Struktur Bangunan:</label>
+      <input type="text" class="form-control" placeholder="Struktur Bangunan"  name="">
+    </div>
+
+    <div class="form-group">
+      <label>Struktur Atap:</label>
+      <input type="text" class="form-control" placeholder="Struktur Atap"  name="">
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Kode Provinsi:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Lokasi Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
+        </div>
+
+        <div class="col-lg-6">
+          <label>Kode Kabupaten:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Lokasi Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Kode Kecamatan:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Lokasi Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
+        </div>
+
+        <div class="col-lg-6">
+          <label>Kode Kelurahan:</label>
+            <select id="select" class="form-control" name="">
+              <option value="0">Lokasi Gedung</option>
+              <option value="1">Option #1</option>
+              <option value="2">Option #2</option>
+              <option value="3">Option #3</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
     <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
-    <a class="btn btn-warning float-left mt-2" href="" role="button">Kembali</a>
+    <a class="btn btn-warning float-left mt-2" href="master_gedung" role="button">Kembali</a>
    
         </form>
         <tbody>
