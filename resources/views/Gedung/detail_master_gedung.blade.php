@@ -9,7 +9,6 @@
       <h6 class="m-0 font-weight-bold text-white">DETAIL DATA GEDUNG</h6>
     </div>
     <div class="card-body">
-
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <div class="container p-3 my-3 row">

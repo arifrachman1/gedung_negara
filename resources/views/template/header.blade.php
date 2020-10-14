@@ -87,8 +87,8 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="pengaturan.blade.php">
-          <i class="fas fa-fw fa-horse-head"></i>
+        <a class="nav-link" href="profil">
+          <i class=""></i>
           <span>Pengaturan</span></a>
       </li>
 
