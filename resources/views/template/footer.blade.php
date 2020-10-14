@@ -59,11 +59,11 @@
   <!-- Page level custom scripts -->
   <script src="{{ asset('style/js/demo/datatables-demo.js') }}"></script>
 
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     $(document).ready(function() {
      $('#provinsi').select2();
     });
-  </script>
+  </script> -->
 
 </body>
 
