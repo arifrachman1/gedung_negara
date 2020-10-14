@@ -13,9 +13,9 @@
                 <div class="card-body">
                       <!--==========================-->
                       <div class="control-group after-add-more">
-                    <label>Nama Komponen</label>
+                    <label class="font-weight-bold">Nama Komponen</label>
                     <input type="text" name="nama[]" class="form-control">
-                    <label>Satuan</label>
+                    <label class="font-weight-bold">Satuan</label>
                     <div class="form-group">
                         <select class="form-control" id="satuan">
                           <option>Unit</option>
@@ -24,7 +24,7 @@
                         </select>
                       </div> 
                     <br>
-                    <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>
+                    <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
             </div>
             <div class="copy invisible">
             <div class="control-group"><br>
@@ -47,7 +47,7 @@
           </div>
           
         </div>
-        <button class="btn btn-success" type="submit">Simpan</button>
+        
             <script type="text/javascript">
                 $(document).ready(function() {
                 $(".add-more").click(function(){ 
