@@ -17,7 +17,7 @@ class GedungController extends Controller
     }
 
     public function input(Request $request) {
-        $provinsi = Provinsi::where('id_prov', 0)->get();
+        $provinsi = Provinsi::get();
         return view('gedung/tambah_master_gedung', compact('provinsi'));
     }
 
