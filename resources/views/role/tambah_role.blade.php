@@ -5,25 +5,21 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Tambah Satuan</h1>
+          <h1 class="h3 mb-4 text-gray-800">Tambah Role</h1>
           <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Form Tambah Satuan</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Form Tambah Role</h6>
                 </div>
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                     <label for="nama">ID :</label>
-                      <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama">
-                  </div>
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                     <label for="nama">Nama :</label>
+                     <label for="nama">Nama Role :</label>
                       <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama">
                   </div>
                     <hr>
                     <div class="col">
                     <button type="submit" class="btn btn-success">Simpan</button>
-                     ||  
-                    <a class="btn btn-warning" href="{{url('mastersatuan')}}" >Kembali</a>
+                    ||  
+                    <a class="btn btn-warning" href="{{url('masterrole')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>
