@@ -88,7 +88,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="profil">
-          <i class=""></i>
+        <i class="fa fa-cog" aria-hidden="true"></i>
           <span>Pengaturan</span></a>
       </li>
 
