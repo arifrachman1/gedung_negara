@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gedung;
+use App\KategoriGedung;
 use App\Provinsi;
 use App\KabupatenKota;
 use App\Kecamatan;
 use App\DesaKelurahan;
+use Log;
 
 class GedungController extends Controller
 {
@@ -16,21 +18,40 @@ class GedungController extends Controller
         return view('gedung/master_gedung', compact('gedung'));
     }
 
-    public function input(Request $request) {
-        $provinsi = Provinsi::get();
-        return view('gedung/tambah_master_gedung', compact('provinsi'));
+    public function detail($id) {
+        $detail_gedung = Gedung::find($id);
+        return view('gedung/detail_master_gedung', compact('detail_gedung'));
     }
 
-    public function kabKota(Request $request) {
-        $idProv = $request->id_prov;
-        $kabKota = Provinsi::where('id_prov', $idProv)->with('kabupatenKota')->get();
+    public function input(Request $request) {
+        $provinsi = Provinsi::get();
+        $jenis_gedung = KategoriGedung::with('Gedung')->get();
+        //dd($jenis_gedung);
+        return view('gedung/tambah_master_gedung', compact('provinsi', 'jenis_gedung'));
+    }
+
+    public function getKabKota($id) {
+        $kabKota = Provinsi::where('id_prov', $id)->with('kabupatenKota')->get();
+        Log::info($kabKota);
         return response()->json([ 'kabKota' => $kabKota ]);
     }
 
-    public function input_post(Request $request) {
+    public function getKecamatan($id) {
+        $kecamatan = KabupatenKota::where('id_kota', $id)->with('Kecamatan')->get();
+        //Log::info($kecamatan);
+        return response()->json([ 'Kecamatan' => $kecamatan ]);
+    }
+
+    public function getDesaKelurahan($id) {
+        $desaKelurahan = Kecamatan::where('id_kec', $id)->with('DesaKelurahan')->get();
+        //Log::info($desaKelurahan);
+        return response()->json([ 'desaKelurahan' => $desaKelurahan ]);
+    }
+
+    public function inputPost(Request $request) {
         $input = new Gedung;
-        $input->id_gedung_kategori = $request->kategori;
-        $input->nama = $request->nama;
+        $input->id_gedung_kategori = $request->kategori_gd;
+        $input->nama = $request->nama_gd;
         $input->bujur_timur = $request->bujur;
         $input->lintang_selatan = $request->lintang;
         $input->legalitas = $request->legalitas;
