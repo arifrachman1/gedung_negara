@@ -118,6 +118,14 @@ Route::get('master_kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });
 
+Route::get('tambah_master_kerusakan', function (){
+    return view('kerusakan/tambah_master_kerusakan');
+});
+
+Route::get('view_master_kerusakan', function (){
+    return view('kerusakan/view_master_kerusakan');
+});
+
 //---------------PENGATURAN------------------
 
 Route::get('pengaturan', function (){

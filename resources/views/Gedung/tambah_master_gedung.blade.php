@@ -16,7 +16,7 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <div class="form-group">
-                <label >Input dari Excel:</label>
+                <label >Tambahkan dari Excel:</label>
                 <input type="file" name="#" class="form-control">
               </div>
               
