@@ -26,7 +26,7 @@
                     <br>
                     <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  
                     <button class="btn btn-success" type="submit">Simpan</button>  ||  
-                    <button class="btn btn-warning float-left mt-2" href="{{url('/masterkomponen')}}" >Kembali</button>
+                    <a class="btn btn-warning" href="{{url('masterkomponen')}}" >Kembali</a>
             </div>
             <div class="copy invisible">
             <div class="control-group"><br>

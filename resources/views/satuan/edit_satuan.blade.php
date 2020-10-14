@@ -22,6 +22,8 @@
                     <hr>
                     <div class="col">
                     <button type="submit" class="btn btn-success">Simpan</button>
+                     ||  
+                    <a class="btn btn-warning" href="{{url('mastersatuan')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>

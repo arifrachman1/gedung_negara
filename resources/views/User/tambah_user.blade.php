@@ -43,6 +43,8 @@
                     <hr>
                     <div class="col">
                     <button type="submit" class="btn btn-success">Simpan</button>
+                    ||  
+                    <a class="btn btn-warning" href="{{url('masteruser')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>
