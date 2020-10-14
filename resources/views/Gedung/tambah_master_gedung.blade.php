@@ -265,4 +265,4 @@
 
 
 
-<!-- @include('template/footer') -->
+@include('template/footer')
