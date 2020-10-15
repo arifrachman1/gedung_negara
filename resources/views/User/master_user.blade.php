@@ -51,21 +51,21 @@
                       <td>Admin</td>
                       <td>San Francisco</td>
                       <td>66</td>
-                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                      <td><a class="btn btn-warning mr-1" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                     </tr>
                     <tr>
                       <td>Cedric Kelly</td>
                       <td>Admin</td>
                       <td>Edinburgh</td>
                       <td>22</td>
-                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                      <td><a class="btn btn-warning mr-1" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                     </tr>
                     <tr>
                       <td>Airi Satou</td>
                       <td>Admin</td>
                       <td>Tokyo</td>
                       <td>33</td>
-                      <td><a class="btn btn-warning" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                      <td><a class="btn btn-warning mr-1" href="{{url('edituser')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                     </tr>
                   </tbody>
                 </table>

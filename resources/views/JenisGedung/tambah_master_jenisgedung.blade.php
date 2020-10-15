@@ -24,7 +24,7 @@
                 <label >Nama Jenis Gedung:</label>
                 <input type="text" class="form-control" placeholder="Masukkan Nama jenis Gedung"  name="nama_jenis_gedung">
               </div>
-              <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
+              <button type="submit"  class="btn btn-primary float-left mt-2 mr-2">Submit</button>
               <a class="btn btn-warning float-left mt-2" href="{{ url('/master_jenisgedung') }}" role="button">Kembali</a>
             </form>
           </table>
