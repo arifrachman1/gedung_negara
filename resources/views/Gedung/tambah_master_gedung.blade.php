@@ -16,9 +16,10 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <div class="form-group">
-                <label >Input dari Excel:</label>
+                <label >Tambahkan dari Excel:</label>
                 <input type="file" name="#" class="form-control">
               </div>
+              
               <div class="form-group">
                 <div class="row">
                   <div class="col-lg-6">
@@ -82,7 +83,7 @@
 
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-      <form  enctype="multipart/form-data" method='post'>
+      <form  enctype="multipart/form-data" action="{{ url('input_master_gedung') }}" method='post'>
       @csrf
     
     <div class="form-group">
@@ -93,6 +94,16 @@
     <div class="form-group">
       <label>Nama Gedung:</label>
       <input type="text" class="form-control" placeholder="Nama Gedung"  name="nama_gd">
+    </div>
+
+    <div class="form-group">
+      <label>Jenis Gedung:</label>
+      <select class="form-control" name="kategori_gd">
+        <option value="">Pilih Jenis Gedung</option>
+        @foreach($jenis_gedung as $val)
+        <option value="{{ $val->id }}">{{ $val->nama }}</option>
+        @endforeach
+        </select>
     </div>
 
     <div class="form-group">
@@ -188,18 +199,18 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label>Kode Provinsi:</label>
-            <select id="select" class="form-control" id="provinsi" name="kode_provinsi">
+          <label>Provinsi:</label>
+            <select class="form-control" id="provinsi" name="kode_provinsi">
               <option value="">Pilih Provinsi</option>
               @foreach($provinsi as $val)
-              <option value="{{ $val->id_prov }}">{{ $val->id_prov }} - {{ $val->nama }}</option>
+              <option value="{{ $val->id_prov }}">{{ $val->nama }}</option>
               @endforeach
             </select>
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kabupaten/Kota:</label>
-            <select id="select" class="form-control" id="kab_kota" name="kode_kota">
+          <label>Kabupaten/Kota:</label>
+            <select class="form-control" id="kab_kota" name="kode_kota">
               <option value="0">Pilih Kabupaten/Kota</option>
             </select>
         </div>
@@ -209,15 +220,15 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label>Kode Kecamatan:</label>
-            <select id="select" class="form-control" name="kode_kecamatan">
+          <label>Kecamatan:</label>
+            <select class="form-control" id="kecamatan" name="kode_kecamatan">
               <option value="0">Pilih Kecamatan</option>
             </select>
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Desa/Kelurahan:</label>
-            <select id="select" class="form-control" name="kode_kelurahan">
+          <label>Desa/Kelurahan:</label>
+            <select class="form-control" id="desa_kelurahan" name="kode_kelurahan">
               <option value="0">Pilih Desa/Kelurahan</option>
             </select>
         </div>
@@ -244,18 +255,58 @@
   });
 
   $(document).ready(function () {
-    $('#provinsi').on('change', function(e) {
+    $('#provinsi').change(function(e) {
+      $('#kab_kota').find('option').not(':first').remove();
       var id_prov = e.target.value;
+      //console.log(id_prov);
       $.ajax({
-        url: "{{ route('lokasi_kota') }}",
-        type: "POST",
+        url: "{{ url('lokasi_kota') }}/"+id_prov,
+        type: "GET",
         data: {
           id_prov: id_prov
         },
         success: function (data) {
-          $('#kab_kota').empty();
-          $.each(data.kab_kota[0].kab_kota, function(index, kab_kota){
-            $('#kab_kota').append('<option value="'+kota.id_kota+'">'+kota.nama+'</option>');
+          //console.log(data);
+          $.each(data.kabKota[0].kabupaten_kota, function(index, kab_kota){
+            $('#kab_kota').append('<option value="'+kab_kota.id_kota+'">'+kab_kota.nama+'</option>');
+          })
+        }
+      })
+    });
+
+    $('#kab_kota').change(function(e) {
+      $('#kecamatan').find('option').not(':first').remove();
+      var id_kota = e.target.value;
+      //console.log(id_kota);
+      $.ajax({
+        url: "{{ url('lokasi_kec') }}/"+id_kota,
+        type: "GET",
+        data: {
+          id_kota: id_kota
+        },
+        success: function (data) {
+          //console.log(data);
+          $.each(data.Kecamatan[0].kecamatan, function(index, kecamatan){
+            $('#kecamatan').append('<option value="'+kecamatan.id_kec+'">'+kecamatan.nama+'</option>');
+          })
+        }
+      })
+    });
+
+    $('#kecamatan').change(function(e) {
+      $('#desa_kelurahan').find('option').not(':first').remove();
+      var id_kec = e.target.value;
+      //console.log(id_kec);
+      $.ajax({
+        url: "{{ url('lokasi_desa') }}/"+id_kec,
+        type: "GET",
+        data: {
+          id_kec: id_kec
+        },
+        success: function (data) {
+          //console.log(data);
+          $.each(data.desaKelurahan[0].desa_kelurahan, function(index, desa_kelurahan){
+            $('#desa_kelurahan').append('<option value="'+desa_kelurahan.id_kel+'">'+desa_kelurahan.nama+'</option>');
           })
         }
       })

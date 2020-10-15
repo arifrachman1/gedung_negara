@@ -17,4 +17,8 @@ class Gedung extends Model
     
     // soft delete
     protected $dates = ['deleted_at'];
+
+    public function kategoriGedung() {
+        return $this->belongsTo('App\KategoriGedung', 'id_gedung_kategori', 'id_gedung_kategori');
+    }
 }

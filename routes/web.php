@@ -52,11 +52,15 @@ Route::get('master_gedung', 'GedungController@index');
 
 Route::get('tambah_master_gedung', 'GedungController@input');
 
-Route::post('lokasi_kota', 'GedungController@kabKota');
+Route::get('lokasi_kota/{id}', 'GedungController@getKabKota');
 
-Route::get('detail_master_gedung', function (){
-    return view('gedung/detail_master_gedung');
-});
+Route::get('lokasi_kec/{id}', 'GedungController@getKecamatan');
+
+Route::get('lokasi_desa/{id}', 'GedungController@getDesaKelurahan');
+
+Route::post('input_master_gedung', 'GedungController@inputPost');
+
+Route::get('detail_master_gedung', 'GedungController@detail');
 
 Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
@@ -112,6 +116,14 @@ Route::get('edit_komponen', function (){
 
 Route::get('master_kerusakan', function (){
     return view('kerusakan/master_kerusakan');
+});
+
+Route::get('tambah_master_kerusakan', function (){
+    return view('kerusakan/tambah_master_kerusakan');
+});
+
+Route::get('view_master_kerusakan', function (){
+    return view('kerusakan/view_master_kerusakan');
 });
 
 //---------------PENGATURAN------------------

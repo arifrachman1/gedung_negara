@@ -42,8 +42,7 @@
                     </div>
                     <hr>
                     <div class="col">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    ||  
+                    <button type="submit" class="btn btn-success mr-1">Simpan</button>  
                     <a class="btn btn-warning" href="{{url('masteruser')}}" >Kembali</a>
                     </div>
                     </div>
