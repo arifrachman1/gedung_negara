@@ -100,17 +100,13 @@ Route::get('edituser', function (){
 
 //-------------MASTER KOMPONEN----------------------
 
-Route::get('masterkomponen', function (){
-    return view('komponen/master_komponen');
-});
+Route::get('masterkomponen','KomponenController@komponen'); // View data buku
+Route::get('tambah_komponen','KomponenController@addKomponen'); 
+Route::post('tambahAksi','KomponenController@add'); 
 
-Route::get('tambah_komponen', function (){
-    return view('komponen/tambah_komponenkw');
-});
+Route::get('edit/{id}', 'KomponenController@edit');
+Route::post('editAksi','KomponenController@update'); 
 
-Route::get('edit_komponen', function (){
-    return view('komponen/edit_komponen');
-});
 
 Route::get('detail_komponen', function (){
     return view('komponen/detail_komponen');
@@ -152,9 +148,8 @@ Route::get('coba', function (){
 
 //----------------SATUAN-------------------
 
-Route::get('mastersatuan', function (){
-    return view('satuan/master_satuan');
-});
+Route::get('mastersatuan','SatuanController@satuan'); 
+
 
 Route::get('tambahsatuan', function (){
     return view('satuan/tambah_satuan');
