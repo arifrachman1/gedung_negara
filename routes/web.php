@@ -133,7 +133,7 @@ Route::get('view_master_kerusakan', function (){
 //---------------PENGATURAN------------------
 
 Route::get('pengaturan', function (){
-    return view('pengaturan/pengaturan');
+    return view('pengaturan/pengaturankw');
 });
 
 Route::get('profil', function (){
