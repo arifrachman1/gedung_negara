@@ -11,6 +11,7 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <form>
             @csrf
                     <div class="container p-3 my-3 row">
                         <div class="card">
@@ -71,13 +72,13 @@
                                     Luas Bangunan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->luas }}
+                                    : {{ $detail_gedung->luas_bangunan }}
                                 </div>
                                 <div class="col-sm-4">
                                     Tinggi Bangunan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->tinggi }}
+                                    : {{ $detail_gedung->tinggi_bangunan }}
                                 </div>
                                 <div class="col-sm-4">
                                     Kelas Tinggi   
@@ -122,7 +123,7 @@
                                     : {{ $detail_gedung->struktur_bawah }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Struktur Bangunaan   
+                                    Struktur Bangunan   
                                 </div>
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->struktur_bangunan }}
@@ -133,34 +134,62 @@
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->struktur_atap }}
                                 </div>
-                                <!-- <div class="col-sm-4">
-                                    Kode Provinsi   
+                                <div class="col-sm-4">
+                                    Provinsi   
                                 </div>
+                                @if ($provinsi == null)
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->nama_prov }}
+                                    : -
                                 </div>
+                                @else
+                                <div class="col-sm-8">
+                                    : {{ $provinsi->nama }}
+                                </div>
+                                @endif
                                 <div class="col-sm-4">
                                     Kabupaten   
                                 </div>
+                                @if ($kab_kota == null)
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->nama_kota }}
+                                    : -
                                 </div>
+                                @else
+                                <div class="col-sm-8">
+                                    : {{ $kab_kota->nama }}
+                                </div>
+                                @endif
                                 <div class="col-sm-4">
                                     Kecamatan   
                                 </div>
+                                @if ($kecamatan == null)
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->nama_kec }}
+                                    : -
                                 </div>
+                                @else
+                                <div class="col-sm-8">
+                                    : {{ $kecamatan->nama }}
+                                </div>
+                                @endif
                                 <div class="col-sm-4">
                                     Kelurahan   
                                 </div>
+                                @if ($desa_kelurahan == null)
                                 <div class="col-sm-8">
-                                    : 
-                                </div> -->
+                                    : -
+                                </div>
+                                @else
+                                <div class="col-sm-8">
+                                    : {{ $desa_kelurahan->nama }}
+                                </div>
+                                @endif
 
                             </div>
-                        <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
-                        
+                            <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                        </div>
+                    </div>
+                </div>
+            </form>    
+            </div>           
         </table>
       </div>
     </div>

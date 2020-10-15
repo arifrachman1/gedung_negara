@@ -77,7 +77,7 @@
 
     <div class="form-group">
       <label>Tinggi Bangunan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" placeholder="0"  name="tinggi_bangunan">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="tinggi_bangunan">
     </div>
 
     <div class="form-group">
@@ -131,9 +131,8 @@
           <label>Provinsi:</label>
             <select class="form-control" id="provinsi" name="kode_provinsi">
               <option value="">Pilih Provinsi</option>
-              @foreach($provinsi as $val)
-              <option value="{{ $val->id_prov }}">{{ $val->nama }}</option>
-              @endforeach
+              <option value=""></option>
+              endforeach
             </select>
         </div>
 
