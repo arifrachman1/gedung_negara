@@ -33,8 +33,12 @@
               @foreach($komponen as $val)
                 <tr>
                   <td>{{ $no++ }}</td>
-                  <td>{{ $val->id_parent }}</td>
-                  <td><a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>             
+                  <td>{{ $val->nama }}</td>
+                  <td>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button>
+                    <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
+                    <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
+                  </td>             
                 </tr> 
               @endforeach          
               </tbody>
@@ -48,12 +52,26 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                       <h4 class="modal-title">Detail Komponen</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                      DISINI BERISI DETAIL
+                    
+                    <table style="width:100%">
+                      <tr>
+                        <th>Komponen:</th>
+                        <td>DINDING</td>
+                      </tr>
+                      <tr>
+                        <th>Sub Komponen:</th>
+                        <th>Satuan:</th>
+                      </tr>
+                      <tr>
+                        <td>Kaca</td>
+                        <td>%</td>
+                      </tr>
+                    </table>
                     </div>
 
                     <!-- Modal footer -->

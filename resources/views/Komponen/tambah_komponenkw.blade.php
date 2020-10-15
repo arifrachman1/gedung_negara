@@ -6,6 +6,8 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">TAMBAH KOMPONEN</h1>
+          <form  enctype="multipart/form-data" action="{{url('tambahAksi')}}" method='post'>
+          @csrf
           <div class="card shadow mb-4 input-group">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Komponen</h6>
@@ -14,29 +16,29 @@
                       <!--==========================-->
                       <div class="control-group after-add-more">
                     <label class="font-weight-bold">Nama Komponen</label>
-                    <input type="text" name="nama[]" class="form-control">
+                    <input onkeyup="this.value = this.value.toUpperCase()" type="text" name="nama" class="form-control" required> 
                     <label class="font-weight-bold">Satuan</label>
                     <div class="form-group">
-                        <select class="form-control" id="satuan">
-                          <option>Unit</option>
-                          <option>Persen</option>
-                          <option>Estimasi</option>
-                        </select>
+                    <select name="id_satuan" class="form-control">
+                        @foreach($satuan as $val)
+                         <option value="{{ $val->id }}">{{ $val->nama }}</option>
+                        @endforeach
+                    </select>
                       </div> 
                     <br>
                     <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  
                     <button class="btn btn-success" type="submit">Simpan</button>
             </div>
-            <div class="copy invisible">
+            <div id="copy">
             <div class="control-group"><br>
               <label>Subkomponen</label>
-              <input type="text" name="nama[]" class="form-control">
+              <input type="text" name="nama2[]" class="form-control">
               <label>Satuan</label>
                     <div class="form-group">
-                        <select class="form-control" id="satuan">
-                          <option>Unit</option>
-                          <option>Persen</option>
-                          <option>Estimasi</option>
+                        <select class="form-control" name="satuan2[]" id="satuan">
+                        @foreach($satuan as $val)
+                         <option value="{{ $val->id }}">{{ $val->nama }}</option>
+                        @endforeach
                         </select>
                       </div> 
               <br>
@@ -48,27 +50,22 @@
           </div>
           
         </div>
-        
             <script type="text/javascript">
                 $(document).ready(function() {
+                $("#copy").hide();
                 $(".add-more").click(function(){ 
-                    var html = $(".copy").html();
+                    var html = $("#copy").html();
                     $(".after-add-more").after(html);
                 });
-
                 // saat tombol remove dklik control group akan dihapus 
                 $("body").on("click",".remove",function(){ 
                     $(this).parents(".control-group").remove();
                 });
                 });
             </script>
-            
         </form>
                       <!--==========================-->
                 </div>
-
-<!-- Copy Fields -->
-
         </body>
 @include('template/footer')
 
