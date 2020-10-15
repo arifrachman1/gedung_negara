@@ -66,6 +66,10 @@ Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
+Route::get('tambah_excel_master_gedung', function (){
+    return view ('gedung/tambah_excel_master_gedung');
+});
+
 Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
 // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
@@ -100,16 +104,16 @@ Route::get('edituser', function (){
 
 //-------------MASTER KOMPONEN----------------------
 
-Route::get('masterkomponen', function (){
-    return view('komponen/master_komponen');
-});
+Route::get('masterkomponen','KomponenController@komponen'); // View data buku
+Route::get('tambah_komponen','KomponenController@addKomponen'); 
+Route::post('tambahAksi','KomponenController@add'); 
 
-Route::get('tambah_komponen', function (){
-    return view('komponen/tambah_komponenkw');
-});
+Route::get('edit/{id}', 'KomponenController@edit');
+Route::post('editAksi','KomponenController@update'); 
 
-Route::get('edit_komponen', function (){
-    return view('komponen/edit_komponen');
+
+Route::get('detail_komponen', function (){
+    return view('komponen/detail_komponen');
 });
 
 //-------------MASTER KERUSAKAN----------------------
@@ -129,7 +133,7 @@ Route::get('view_master_kerusakan', function (){
 //---------------PENGATURAN------------------
 
 Route::get('pengaturan', function (){
-    return view('pengaturan/pengaturan');
+    return view('pengaturan/pengaturankw');
 });
 
 Route::get('profil', function (){
@@ -148,9 +152,8 @@ Route::get('coba', function (){
 
 //----------------SATUAN-------------------
 
-Route::get('mastersatuan', function (){
-    return view('satuan/master_satuan');
-});
+Route::get('mastersatuan','SatuanController@satuan'); 
+
 
 Route::get('tambahsatuan', function (){
     return view('satuan/tambah_satuan');

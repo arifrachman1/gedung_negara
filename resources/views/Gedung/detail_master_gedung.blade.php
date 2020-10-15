@@ -133,8 +133,8 @@
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->struktur_atap }}
                                 </div>
-                                <div class="col-sm-4">
-                                    Provinsi   
+                                <!-- <div class="col-sm-4">
+                                    Kode Provinsi   
                                 </div>
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->nama_prov }}
@@ -155,8 +155,8 @@
                                     Kelurahan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->nama_kel }}
-                                </div>
+                                    : 
+                                </div> -->
 
                             </div>
                         <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>

@@ -18,6 +18,11 @@
                         Tambah
                     </span> 
                 </a>
+                <a class="btn btn-success btn-icon-split" href="{{url('tambah_excel_master_gedung')}}" role="button">
+                    <span class="icon text-white-100">
+                        Tambah dengan Excel
+                    </span> 
+                </a>
             </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -27,6 +32,7 @@
                       <th>Legalitas</th>
                       <th>Tipe Milik</th>
                       <th>Alas Hak</th>
+                      <th>Luas lahan</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -48,6 +54,7 @@
                       <td>-</td>
                       @else
                       <td>{{ $val->alas_hak }}</td>
+                      <td>Luas Lahan</td>
                       @endif
                       <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/') }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
                     </tr>
