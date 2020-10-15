@@ -64,15 +64,15 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Master Gedung:</h6>
-            <a class="collapse-item" href="master_gedung">Gedung</a>
-            <a class="collapse-item" href="master_jenisgedung">Jenis Gedung</a>
+            <a class="collapse-item" href="{{url('master_gedung')}}">Gedung</a>
+            <a class="collapse-item" href="{{url('master_jenisgedung')}}">Jenis Gedung</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="mastersatuan">
+        <a class="nav-link" href="{{url('mastersatuan')}}">
           <i class="fas fa-fw fa-unity"></i>
           <span>Master Satuan</span></a>
       </li>
@@ -90,13 +90,13 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="master_kerusakan">
+        <a class="nav-link" href="{{url('master_kerusakan')}}">
           <i class="fas fa-fw fa-house-damage"></i>
           <span>Master Kerusakan</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="profil">
+        <a class="nav-link" href="{{url('profil')}}">
         <i class="fa fa-cog" aria-hidden="true"></i>
           <span>Pengaturan</span></a>
       </li>
