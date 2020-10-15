@@ -19,6 +19,6 @@ class Gedung extends Model
     protected $dates = ['deleted_at'];
 
     public function kategoriGedung() {
-        return $this->belongsTo('App\KategoriGedung', 'id_gedung_kategori', 'id_gedung_kategori');
+        return $this->belongsTo('App\KategoriGedung', 'id', 'id_gedung_kategori');
     }
 }

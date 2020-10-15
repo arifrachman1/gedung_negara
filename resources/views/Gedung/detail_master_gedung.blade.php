@@ -11,13 +11,20 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            @csrf
                     <div class="container p-3 my-3 row">
                         <div class="card">
                             <div class="card-header">
-                                Nama Gedung : SDN Guwo Terus 01 
+                                Nama Gedung : {{ $detail_gedung->nama }}
                             </div>
                             <div class="card-body">
                             <div class="row">
+                                <div class="col-sm-4">
+                                    Jenis Gedung   
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
                                 <div class="col-sm-4">
                                     Bujur Timur   
                                 </div>
@@ -79,7 +86,7 @@
                                     : Sedang
                                 </div>
                                 <div class="col-sm-4">
-                                    kompleks   
+                                    Kompleks   
                                 </div>
                                 <div class="col-sm-8">
                                     : Khusus
@@ -152,8 +159,8 @@
                                 </div>
 
                             </div>
-                            <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
-                            
+                        <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                        
         </table>
       </div>
     </div>

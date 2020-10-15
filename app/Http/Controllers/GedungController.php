@@ -19,13 +19,14 @@ class GedungController extends Controller
     }
 
     public function detail($id) {
-        $detail_gedung = Gedung::find($id);
+        $detail_gedung = Gedung::with('kategoriGedung')->find($id);
         return view('gedung/detail_master_gedung', compact('detail_gedung'));
     }
 
     public function input(Request $request) {
-        $provinsi = Provinsi::get();
+        $provinsi = Provinsi::orderBy('nama', 'asc')->get();
         $jenis_gedung = KategoriGedung::with('Gedung')->get();
+        //dd($jenis_gedung);
         //dd($jenis_gedung);
         return view('gedung/tambah_master_gedung', compact('provinsi', 'jenis_gedung'));
     }
@@ -52,8 +53,8 @@ class GedungController extends Controller
         $input = new Gedung;
         $input->id_gedung_kategori = $request->kategori_gd;
         $input->nama = $request->nama_gd;
-        $input->bujur_timur = $request->bujur;
-        $input->lintang_selatan = $request->lintang;
+        $input->bujur_timur = $request->bt;
+        $input->lintang_selatan = $request->ls;
         $input->legalitas = $request->legalitas;
         $input->tipe_milik = $request->tipe_milik;
         $input->alas_hak = $request->alas_hak;
@@ -61,7 +62,7 @@ class GedungController extends Controller
         $input->jumlah_lantai = $request->jumlah_lantai;
         $input->luas = $request->luas_bangunan;
         $input->tinggi = $request->tinggi_bangunan;
-        $input->kelas_tinggi = $request->klas_tinggi;
+        $input->kelas_tinggi = $request->kls_tinggi;
         $input->kompleks = $request->kompleks;
         $input->kepadatan = $request->kepadatan;
         $input->permanensi = $request->permanensi;

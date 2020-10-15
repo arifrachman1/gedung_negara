@@ -163,7 +163,7 @@
 
     <div class="form-group">
       <label>Kepadatan:</label>
-      <input type="text" class="form-control" placeholder="kepadatan"  name="kepadatan">
+      <input type="text" class="form-control" placeholder="Kepadatan"  name="kepadatan">
     </div>
 
     <div class="form-group">

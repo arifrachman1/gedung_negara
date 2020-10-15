@@ -60,7 +60,7 @@ Route::get('lokasi_desa/{id}', 'GedungController@getDesaKelurahan');
 
 Route::post('input_master_gedung', 'GedungController@inputPost');
 
-Route::get('detail_master_gedung', 'GedungController@detail');
+Route::get('detail_master_gedung/{id}', 'GedungController@detail');
 
 Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
