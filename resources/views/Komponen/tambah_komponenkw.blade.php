@@ -23,6 +23,8 @@
                           <option>Estimasi</option>
                         </select>
                       </div> 
+                    <label class="font-weight-bold">Bobot</label>
+                    <input type="text" name="nama[]" class="form-control">
                     <br>
                     <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  
                     <button class="btn btn-success" type="submit">Simpan</button>  ||  
@@ -40,6 +42,8 @@
                           <option>Estimasi</option>
                         </select>
                       </div> 
+              <label class="font-weight-bold">Bobot</label>
+              <input type="text" name="nama[]" class="form-control">
               <br>
               <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
               <hr>

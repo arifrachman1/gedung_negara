@@ -31,7 +31,7 @@
               <tbody>
                 <tr>
                   <td>Pondasi</td>
-                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button>  |  <a class="btn btn-warning" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#myModal">Detail</button>    <a class="btn btn-warning mr-1" href="{{url('edit_komponen')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
                
               </tbody>

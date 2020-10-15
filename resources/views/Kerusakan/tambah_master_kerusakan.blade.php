@@ -11,7 +11,7 @@
       </div>
       <div class="card-body">
 
-        <div class="table-responsive">
+        <div class="">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <div class="form-group">
@@ -65,7 +65,7 @@
                     </div>
                   </div>
                 </div>
-              <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
+              <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
           </table>
         </div>
       </div>

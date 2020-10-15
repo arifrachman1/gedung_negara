@@ -33,17 +33,17 @@
                 <tr>
                   <td>1</td>
                   <td>Estimasi</td>
-                  <td><a class="btn btn-warning" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><a class="btn btn-warning mr-1" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>%</td>
-                  <td><a class="btn btn-warning" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><a class="btn btn-warning mr-1" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>Unit</td>
-                  <td><a class="btn btn-warning" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                  <td><a class="btn btn-warning mr-1" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
                 </tr>
               </tbody>
             </table>
