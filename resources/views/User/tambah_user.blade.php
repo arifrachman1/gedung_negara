@@ -1,14 +1,13 @@
 <!doctype html>
 @include('template/header')
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multilpe Select</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <body>
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -24,49 +23,48 @@
                       <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama">
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                  <label for="role">Role :</label>
-                  <div class="col form-group">
-                    <select class="mul-select" multiple="true">
-                        <option value="Cambodia">Cambodia</option>
-                        <option value="Khmer">Khmer</option>
-                        <option value="Thiland">Thiland</option>
-                        <option value="Koren">Koren</option>
-                        <option value="China">China</option>
-                        <option value="English">English</option>
-                        <option value="USA">USA</option>
+                    <label for="role" class="">Role :</label><br>
+                    <select class="col selectpicker" multiple data-live-search="true">
+                      <option>Admin</option>
+                      <option>Superadmin</option>
+                      <option>Bukan Admin</option>
                     </select>
-                </div> 
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                  <label for="telepon">No. Telp:</label>
-                      <input type="text" class="form-control form-control" id="nama" placeholder="No. Telp">
+                    <label for="telepon">No. Telp:</label>
+                    <input type="number" class="form-control form-control" id="nama" placeholder="No. Telp">
                   </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Kata Sandi:</label>
-                      <input type="password" class="form-control form-control" id="nama" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" id="txtPassword" placeholder="katasandi lama">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Ulangi Kata Sandi:</label>
-                      <input type="password" class="form-control form-control" id="nama" placeholder="Ulangi Password">
+                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="katasandi lama">
                     </div>
                     <hr>
                     <div class="col">
-                    <button type="submit" class="btn btn-success mr-1">Simpan</button>  
+                    <input class="btn btn-success mr-1" type="button" id="btnSubmit" value="Submit" />  
                     <a class="btn btn-warning" href="{{url('masteruser')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>
-                </div>
-          
-                <script>
-        $(document).ready(function(){
-            $(".mul-select").select2({
-                    placeholder: "select country", //placeholder
-                    tags: true,
-                    tokenSeparators: ['/',',',';'," "] 
-                });
-            })
-    </script>
+                  <!--==========================================-->
+                  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                      <script type="text/javascript">
+                          $(function () {
+                              $("#btnSubmit").click(function () {
+                                  var password = $("#txtPassword").val();
+                                  var confirmPassword = $("#txtConfirmPassword").val();
+                                  if (password != confirmPassword) {
+                                      alert("Kata Sandi dan konfirmasi Kata Sandi harus sama!");
+                                      return false;
+                                  }
+                                  return true;
+                              });
+                          });
+                      </script>
+<!--==========================================-->
         <!-- /.container-fluid -->
         </body>
 @include('template/footer')

@@ -12,9 +12,185 @@
                 </div>
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                     <label for="nama">Nama Role :</label>
-                      <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama">
+                    <label for="nama">Nama Role :</label>
+                    <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama">
                   </div>
+                  </br>
+                  <div class="co-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid">
+                        Master User
+                      </div>
+                        <div class="body-card container-fluid">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Create
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Read
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Update
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Delete
+                            </label>
+                          </div>
+                      </div>
+                    </div></br>
+                    <div class="co-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid ">
+                        Master Role
+                      </div>
+                        <div class="body-card container-fluid">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Create
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Read
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Update
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Delete
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                  </div></br>
+                  <div class="co-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid ">
+                        Master Gedung
+                      </div>
+                        <div class="body-card container-fluid ">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Create
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Read
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Update
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Delete
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                  </div></br>
+                  <div class="co-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid ">
+                        Master Satuan
+                      </div>
+                        <div class="body-card container-fluid">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Create
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Read
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Update
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Delete
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                  </div></br>
+                  <div class="co-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid ">
+                        Master Komponen
+                      </div>
+                        <div class="body-card container-fluid">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Create
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Read
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Update
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Delete
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div></br>
+                  <div class="co-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid ">
+                        Master Kerusakan
+                      </div>
+                        <div class="body-card container-fluid">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Create
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Read
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Update
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="crud">Delete
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  
                     <hr>
                     <div class="col">
                     <button type="submit" class="btn btn-success">Simpan</button>

@@ -38,23 +38,29 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/dashboard')}}">
         <div class="sidebar-brand-text mx-3">GEDUNG NEGARA</div>
       </a>
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard">
+        <a class="nav-link" href="{{url('/dashboard')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masteruser">
+        <a class="nav-link" href="{{url('/masteruser')}}">
           <i class="fas fa-fw fa-users"></i>
           <span>Master User</span></a>
       </li>
-      
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('/masterrole')}}">
+          <i class="fas fa-fw fa-key"></i>
+          <span>Master Role</span></a>
+      </li>
+
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -78,13 +84,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masterrole">
-          <i class="fas fa-fw fa-key"></i>
-          <span>Master Role</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="masterkomponen">
+        <a class="nav-link" href="{{url('/masterkomponen')}}">
           <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
       </li>
