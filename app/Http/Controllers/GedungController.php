@@ -56,8 +56,8 @@ class GedungController extends Controller
 
     public function inputPost(Request $request) {
         $input = new Gedung;
-        $input->id_gedung_kategori = $request->kategori_gd;
         $input->nama = $request->nama_gd;
+        $input->id_gedung_kategori = $request->kategori_gd;
         $input->bujur_timur = $request->bt;
         $input->lintang_selatan = $request->ls;
         $input->legalitas = $request->legalitas;
