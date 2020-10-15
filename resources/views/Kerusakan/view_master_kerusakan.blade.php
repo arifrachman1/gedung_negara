@@ -12,7 +12,7 @@
       </div>
       <div class="card-body">
 
-        <div class="table-responsive">
+        <div class="">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <div class="form-group">

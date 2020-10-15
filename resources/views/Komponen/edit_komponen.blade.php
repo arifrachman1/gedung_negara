@@ -24,7 +24,8 @@
                         </select>
                       </div> 
                     <br>
-                    <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>  ||  
+                    <button class="btn btn-success add-more mr-1" type="button">Tambah Subkomponen</button>
+                    <button class="btn btn-primary mr-1" type="submit">Simpan</button>   
                     <a class="btn btn-warning" href="{{url('masterkomponen')}}" >Kembali</a>
             </div>
             <div class="copy invisible">
