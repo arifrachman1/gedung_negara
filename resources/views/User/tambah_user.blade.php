@@ -1,6 +1,14 @@
 <!doctype html>
 @include('template/header')
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilpe Select</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <body>
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -17,16 +25,17 @@
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                   <label for="role">Role :</label>
-                  <div class="col form-check-inline">
-                      <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="role">Admin
-                      </label>
-                  </div>
-                  <div class="form-check-inline">
-                      <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="role">Super Admin
-                      </label>
-                  </div>
+                  <div class="col form-group">
+                    <select class="mul-select" multiple="true">
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="Khmer">Khmer</option>
+                        <option value="Thiland">Thiland</option>
+                        <option value="Koren">Koren</option>
+                        <option value="China">China</option>
+                        <option value="English">English</option>
+                        <option value="USA">USA</option>
+                    </select>
+                </div> 
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                   <label for="telepon">No. Telp:</label>
@@ -49,6 +58,15 @@
                   </div>
                 </div>
           
+                <script>
+        $(document).ready(function(){
+            $(".mul-select").select2({
+                    placeholder: "select country", //placeholder
+                    tags: true,
+                    tokenSeparators: ['/',',',';'," "] 
+                });
+            })
+    </script>
         <!-- /.container-fluid -->
         </body>
 @include('template/footer')
