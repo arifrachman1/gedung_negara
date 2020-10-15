@@ -57,7 +57,7 @@
                                   var password = $("#txtPassword").val();
                                   var confirmPassword = $("#txtConfirmPassword").val();
                                   if (password != confirmPassword) {
-                                      alert("Katasandi dan konfirmasi katasandi harus sama!");
+                                      alert("Kata Sandi dan konfirmasi Kata Sandi harus sama!");
                                       return false;
                                   }
                                   return true;
