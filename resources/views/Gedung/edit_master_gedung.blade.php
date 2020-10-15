@@ -189,12 +189,12 @@
       <input type="text" class="form-control" placeholder="Struktur Atap"  name="">
     </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label>Kode Provinsi:</label>
+          <label>Provinsi:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Provinsi Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
@@ -202,9 +202,9 @@
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kabupaten:</label>
+          <label>Kabupaten:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Kabupaten Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
@@ -216,9 +216,9 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label>Kode Kecamatan:</label>
+          <label>Kecamatan:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Kecamatan Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
@@ -226,16 +226,16 @@
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kelurahan:</label>
+          <label>Kelurahan:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Kelurahan Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
             </select>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
     <a class="btn btn-warning float-left mt-2" href="master_gedung" role="button">Kembali</a>
