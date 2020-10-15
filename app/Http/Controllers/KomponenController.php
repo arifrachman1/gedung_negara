@@ -36,7 +36,7 @@ class KomponenController extends Controller
                 $data2->nama = $value;
                 $data2->id_parent = $data->id;
                 $data2->id_satuan = $input['satuan2'][$key];
-                
+                $data2->bobot = $input['bobot'];
                 $data2->save();
              }
                          
