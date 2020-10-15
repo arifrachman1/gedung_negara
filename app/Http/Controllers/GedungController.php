@@ -19,15 +19,20 @@ class GedungController extends Controller
     }
 
     public function detail($id) {
-        $detail_gedung = Gedung::with('kategoriGedung')->find($id);
+        $detail_gedung = Gedung::join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
+            ->join('provinsi', 'gedung.kode_provinsi', '=', 'provinsi.id_prov')
+            ->join('kota', 'gedung.kode_kabupaten', '=', 'kota.id_kota')
+            ->join('kecamatan', 'gedung.kode_kecamatan', '=', 'kecamatan.id_kec')
+            ->join('kelurahan', 'gedung.kode_kelurahan', '=', 'kelurahan.id_kel')
+            ->select('gedung.*', 'gedung_ketegori.nama as nama_kat', 'provinsi.nama as nama_prov', 
+                'kota.nama as nama_kota', 'kecamatan.nama as nama_kec', 'kelurahan.nama as nama_kel')->find($id);
         return view('gedung/detail_master_gedung', compact('detail_gedung'));
     }
 
     public function input(Request $request) {
         $provinsi = Provinsi::orderBy('nama', 'asc')->get();
-        $jenis_gedung = KategoriGedung::with('Gedung')->get();
-        //dd($jenis_gedung);
-        //dd($jenis_gedung);
+        $jenis_gedung = KategoriGedung::get();
+
         return view('gedung/tambah_master_gedung', compact('provinsi', 'jenis_gedung'));
     }
 
@@ -79,8 +84,17 @@ class GedungController extends Controller
         return redirect('master_gedung');
     }
 
-    public function edit() {
-
+    public function edit($id) {
+        $edit = Gedung::join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
+            ->join('provinsi', 'gedung.kode_provinsi', '=', 'provinsi.id_prov')
+            ->join('kota', 'gedung.kode_kabupaten', '=', 'kota.id_kota')
+            ->join('kecamatan', 'gedung.kode_kecamatan', '=', 'kecamatan.id_kec')
+            ->join('kelurahan', 'gedung.kode_kelurahan', '=', 'kelurahan.id_kel')
+            ->select('gedung.*', 'gedung_ketegori.id as id_kat', 'gedung_ketegori.nama as nama_kat',
+                'provinsi.id_prov as idprov', 'provinsi.nama as nama_prov', 'kota.id_kota as idkota',
+                'kota.nama as nama_kota', 'kecamatan.id_kec as idkec', 'kecamatan.nama as nama_kec', 
+                'kelurahan.id_kel as idkel', 'kelurahan.nama as nama_kel')->find($id);
+        return view('gedung/edit_master_gedung', compact('edit'));
     }
 
     public function edit_post() {

@@ -108,12 +108,12 @@
 
     <div class="form-group">
       <label>Bujur Timur:</label>
-      <input type="number" max="180" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="bt">
+      <input type="number" max="180" step="0.000001" min="0.000001" class="form-control" placeholder="0"  name="bt">
     </div>
 
     <div class="form-group">
       <label >Lintang Selatan:</label>
-      <input type="number" max="90" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0" name="ls">
+      <input type="number" max="90" step="0.000001" min="0.000001" class="form-control" placeholder="0" name="ls">
     </div>  
     
     <div class="form-group">
@@ -133,7 +133,7 @@
 
     <div class="form-group">
       <label>Luas Lahan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" value="0.0000000001" class="form-control" placeholder="0"  name="luas_lahan">
+      <input type="number" max="10000" step="0.000001" min="0.000001" class="form-control" placeholder="0"  name="luas_lahan">
     </div>
 
     <div class="form-group">
@@ -143,17 +143,17 @@
 
     <div class="form-group">
       <label>Luas Bangunan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" value="0.0000000001" class="form-control" placeholder="0"  name="luas_bangunan">
+      <input type="number" max="10000" step="0.000001" min="0.000001" class="form-control" placeholder="0"  name="luas_bangunan">
     </div>
 
     <div class="form-group">
       <label>Tinggi Bangunan:</label>
-      <input type="number" class="form-control" placeholder="0"  name="tinggi_bangunan">
+      <input type="number" max="10000" step="0.000001" min="0.000001" class="form-control" placeholder="0"  name="tinggi_bangunan">
     </div>
 
     <div class="form-group">
       <label>Kelas Tinggi:</label>
-      <input type="text" class="form-control" placeholder="Klas Tinggi"  name="kls_tinggi">
+      <input type="text" class="form-control" placeholder="Kelas Tinggi"  name="kls_tinggi">
     </div>
 
     <div class="form-group">
@@ -172,8 +172,8 @@
     </div>
 
     <div class="form-group">
-      <label>Resiko Kebakar:</label>
-      <input type="text" class="form-control" placeholder="Resiko Kebakar"  name="risk_bakar">
+      <label>Resiko Kebakaran:</label>
+      <input type="text" class="form-control" placeholder="Resiko Kebakaran"  name="risk_bakar">
     </div>
 
     <div class="form-group">
@@ -196,6 +196,7 @@
       <input type="text" class="form-control" placeholder="Struktur Atap"  name="struktur_atap">
     </div>
 
+    <!--
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
@@ -234,6 +235,7 @@
         </div>
       </div>
     </div>
+    -->
 
     <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
     <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>

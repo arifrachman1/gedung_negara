@@ -23,139 +23,139 @@
                                     Jenis Gedung   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 
+                                    : {{ $detail_gedung->nama_kat }}
                                 </div>
                                 <div class="col-sm-4">
                                     Bujur Timur   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 111,83907935
+                                    : {{ $detail_gedung->bujur_timur }}
                                 </div>
                                 <div class="col-sm-4">
                                     Lintang Selatan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : -6,95413723
+                                    : {{ $detail_gedung->lintang_selatan }}
                                 </div>
                                 <div class="col-sm-4">
                                     Legalitas  
                                 </div>
                                 <div class="col-sm-8">
-                                    : Legal
+                                    : {{ $detail_gedung->legalitas }}
                                 </div>
                                 <div class="col-sm-4">
                                     Tipe Milik  
                                 </div>
                                 <div class="col-sm-8">
-                                    : Negara
+                                    : {{ $detail_gedung->tipe_milik }}
                                 </div>
                                 <div class="col-sm-4">
                                     Alas Hak   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 
+                                    : {{ $detail_gedung->alas_hak }}
                                 </div>
                                 <div class="col-sm-4">
                                     Luas lahan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 1905
+                                    : {{ $detail_gedung->luas_lahan }}
                                 </div>
                                 <div class="col-sm-4">
                                     Jumlah Lantai   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 1
+                                    : {{ $detail_gedung->jumlah_lantai }}
                                 </div>
                                 <div class="col-sm-4">
                                     Luas Bangunan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 606,38
+                                    : {{ $detail_gedung->luas }}
                                 </div>
                                 <div class="col-sm-4">
                                     Tinggi Bangunan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 6
+                                    : {{ $detail_gedung->tinggi }}
                                 </div>
                                 <div class="col-sm-4">
                                     Kelas Tinggi   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Sedang
+                                    : {{ $detail_gedung->kelas_tinggi }}
                                 </div>
                                 <div class="col-sm-4">
                                     Kompleks   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Khusus
+                                    : {{ $detail_gedung->kompleks }}
                                 </div>
                                 <div class="col-sm-4">
                                     Kepadatan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Sedang
+                                    : {{ $detail_gedung->kepadatan }}
                                 </div>
                                 <div class="col-sm-4">
                                     Permanensi   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Permanen
+                                    : {{ $detail_gedung->permanensi }}
                                 </div>
                                 <div class="col-sm-4">
                                     Resiko Kebakaran   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Rendah
+                                    : {{ $detail_gedung->risk_bakar }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Penagkal   
+                                    Penangkal   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Pasif
+                                    : {{ $detail_gedung->penangkal }}
                                 </div>
                                 <div class="col-sm-4">
                                     Struktur Bawah   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Aman
+                                    : {{ $detail_gedung->struktur_bawah }}
                                 </div>
                                 <div class="col-sm-4">
                                     Struktur Bangunaan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Bagus
+                                    : {{ $detail_gedung->struktur_bangunan }}
                                 </div>
                                 <div class="col-sm-4">
                                     Struktur Atap   
                                 </div>
                                 <div class="col-sm-8">
-                                    : Bagus
+                                    : {{ $detail_gedung->struktur_atap }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Provinsi   
+                                    Provinsi   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 
+                                    : {{ $detail_gedung->nama_prov }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Kabupaten   
+                                    Kabupaten   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 
+                                    : {{ $detail_gedung->nama_kota }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Kecamatan   
+                                    Kecamatan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 
+                                    : {{ $detail_gedung->nama_kec }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Kelurahan   
+                                    Kelurahan   
                                 </div>
                                 <div class="col-sm-8">
-                                    : 
+                                    : {{ $detail_gedung->nama_kel }}
                                 </div>
 
                             </div>
