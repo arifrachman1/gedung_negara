@@ -292,7 +292,7 @@
                     <input type="file" name="#" class="form-control">
               </div>
             </thead>
-            <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
+            <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
           </table>
         </div>
       </div>

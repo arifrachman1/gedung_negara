@@ -65,7 +65,7 @@
                     </div>
                   </div>
                 </div>
-              <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
+              <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
           </table>
         </div>
       </div>
