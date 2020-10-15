@@ -31,7 +31,7 @@ class AuthController extends Controller
         $messages = [
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',
-            'password.required'     => 'kata sandi wajib diisi',
+            'password.required'     => 'Kata Sandi wajib diisi',
             'password.string'       => 'Password harus berupa string'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
