@@ -9,7 +9,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
           <div class="card-header bg-primary py-3">
-            <h6 class="m-0 font-weight-bold text-white">DATA GEDUNG</h6>
+            <h6 class="m-0 font-weight-bold text-white">DATA KERUSAKAN</h6>
         </div>
             <div class="card-body">
             <div class=" py-3">

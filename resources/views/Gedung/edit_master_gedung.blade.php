@@ -4,7 +4,7 @@
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
-<div class="row">
+<!-- <div class="row">
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header bg-primary py-3">
@@ -72,7 +72,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="card shadow mb-4">
   <div class="card-header bg-primary py-3">
@@ -88,15 +88,25 @@
       <label>Nama Gedung:</label>
       <input type="text" class="form-control" placeholder="Nama Gedung"  name="">
     </div>
+
+    <div class="form-group">
+      <label>Jenis Gedung:</label>
+      <select class="form-control" name="kategori_gd">
+        <option value="">Pilih Jenis Gedung</option>
+        @foreach($jenis_gedung as $val)
+        <option value="{{ $val->id }}">{{ $val->nama }}</option>
+        @endforeach
+        </select>
+    </div>
     
     <div class="form-group">
       <label>Bujur Timur:</label>
-      <input type="number" class="form-control" placeholder="0"  name="">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="">
     </div>
 
     <div class="form-group">
       <label >Lintang Selatan:</label>
-      <input type="number" class="form-control" placeholder="0" name="">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0" name="">
     </div>  
     
     <div class="form-group">
@@ -116,7 +126,7 @@
 
     <div class="form-group">
       <label>Luas Lahan:</label>
-      <input type="number" class="form-control" placeholder="0"  name="">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="">
     </div>
 
     <div class="form-group">
@@ -126,12 +136,12 @@
 
     <div class="form-group">
       <label>Luas Bangunan:</label>
-      <input type="number" class="form-control" placeholder="0"  name="">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="">
     </div>
 
     <div class="form-group">
       <label>Tinggi Bangunan:</label>
-      <input type="number" class="form-control" placeholder="0"  name="">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="">
     </div>
 
     <div class="form-group">
@@ -182,9 +192,9 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label>Kode Provinsi:</label>
+          <label>Provinsi:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Provinsi Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
@@ -192,9 +202,9 @@
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kabupaten:</label>
+          <label>Kabupaten:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Kabupaten Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
@@ -206,9 +216,9 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label>Kode Kecamatan:</label>
+          <label>Kecamatan:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Kecamatan Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>
@@ -216,9 +226,9 @@
         </div>
 
         <div class="col-lg-6">
-          <label>Kode Kelurahan:</label>
+          <label>Kelurahan:</label>
             <select id="select" class="form-control" name="">
-              <option value="0">Lokasi Gedung</option>
+              <option value="0">Kelurahan Gedung</option>
               <option value="1">Option #1</option>
               <option value="2">Option #2</option>
               <option value="3">Option #3</option>

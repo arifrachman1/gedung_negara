@@ -11,13 +11,19 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <div class="container p-3 my-3 row">
-                        <div class="card">
-                            <div class="card-header">
-                                Nama Gedung : SDN Guwo Terus 01 
-                            </div>
-                            <div class="card-body">
+            <div class="container p-3 my-3 row">
+                <div class="card">
+                    <div class="card-header">
+                        Nama Gedung : SDN Guwo Terus 01 
+                    </div>
+                        <div class="card-body">
                             <div class="row">
+                                <div class="col-sm-4">
+                                    Jenis Gedung  
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
                                 <div class="col-sm-4">
                                     Bujur Timur   
                                 </div>
@@ -127,25 +133,25 @@
                                     : Bagus
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Provinsi   
+                                    Provinsi   
                                 </div>
                                 <div class="col-sm-8">
                                     : 
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Kabupaten   
+                                    Kabupaten   
                                 </div>
                                 <div class="col-sm-8">
                                     : 
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Kecamatan   
+                                    Kecamatan   
                                 </div>
                                 <div class="col-sm-8">
                                     : 
                                 </div>
                                 <div class="col-sm-4">
-                                    Kode Kelurahan   
+                                    Kelurahan   
                                 </div>
                                 <div class="col-sm-8">
                                     : 
@@ -153,7 +159,10 @@
 
                             </div>
                             <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
-                            
+                        </div>
+                    </div>
+                </div>
+            </div>           
         </table>
       </div>
     </div>
