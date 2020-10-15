@@ -19,6 +19,12 @@
                             <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-4">
+                                    Jenis Gedung  
+                                </div>
+                                <div class="col-sm-8">
+                                    : 
+                                </div>
+                                <div class="col-sm-4">
                                     Bujur Timur   
                                 </div>
                                 <div class="col-sm-8">
@@ -126,7 +132,7 @@
                                 <div class="col-sm-8">
                                     : Bagus
                                 </div>
-                                <div class="col-sm-4">
+                                <!-- <div class="col-sm-4">
                                     Kode Provinsi   
                                 </div>
                                 <div class="col-sm-8">
@@ -149,7 +155,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     : 
-                                </div>
+                                </div> -->
 
                             </div>
                             <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>

@@ -66,6 +66,10 @@ Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
+Route::get('tambah_excel_master_gedung', function (){
+    return view ('gedung/tambah_excel_master_gedung');
+});
+
 Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
 // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
