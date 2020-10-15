@@ -24,7 +24,7 @@
                         </select>
                       </div> 
                     <label class="font-weight-bold">Bobot</label>
-                    <input type="text" name="nama[]" class="form-control">
+                    <input type="text" name="bobot" class="form-control">
                     <br>
                     <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  
                     <button class="btn btn-success" type="submit">Simpan</button>  ||  
