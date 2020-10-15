@@ -112,6 +112,10 @@ Route::get('edit_komponen', function (){
     return view('komponen/edit_komponen');
 });
 
+Route::get('detail_komponen', function (){
+    return view('komponen/detail_komponen');
+});
+
 //-------------MASTER KERUSAKAN----------------------
 
 Route::get('master_kerusakan', function (){
