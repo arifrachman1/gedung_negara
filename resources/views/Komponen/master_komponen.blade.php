@@ -35,7 +35,7 @@
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
                   <td>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detail</button>
+                    <a href="{{url('detail_komponen')}}" class="btn btn-primary mr-1">Detail</a>
                     <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
                     <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
                   </td>             
@@ -43,41 +43,6 @@
               @endforeach          
               </tbody>
             </table>
-            <!-- ================================ ============================ -->
-            <!-- The Modal -->
-              <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h4 class="modal-title">Detail Komponen</h4>
-                      
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                    
-                    <table style="width:100%">
-                      <tr>
-                        <th>Komponen:</th>
-                        <td>DINDING</td>
-                      </tr>
-                      <tr>
-                        <th>Sub Komponen:</th>
-                        <th>Satuan:</th>
-                      </tr>
-                      <tr>
-                        <td>Kaca</td>
-                        <td>%</td>
-                      </tr>
-                    </table>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
 
                   </div>
                 </div>

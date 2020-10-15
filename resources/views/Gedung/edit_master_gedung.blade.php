@@ -239,5 +239,6 @@
   </div>
 </div>
 
-<!-- @include('template/footer') -->
+
 </body>
+@include('template/footer')

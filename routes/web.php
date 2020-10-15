@@ -48,32 +48,43 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //-------------MASTER GEDUNG-----------------------
-Route::get('master_gedung', function (){
-    return view('gedung/master_gedung');
-});
+Route::get('master_gedung', 'GedungController@index');
 
+Route::get('tambah_master_gedung', 'GedungController@input');
 
-Route::get('tambah_master_gedung', function (){
-    return view('gedung/tambah_master_gedung');
-});
-Route::get('detail_master_gedung', function (){
-    return view('gedung/detail_master_gedung');
-});
+Route::get('lokasi_kota/{id}', 'GedungController@getKabKota');
+
+Route::get('lokasi_kec/{id}', 'GedungController@getKecamatan');
+
+Route::get('lokasi_desa/{id}', 'GedungController@getDesaKelurahan');
+
+Route::post('input_master_gedung', 'GedungController@inputPost');
+
+Route::get('detail_master_gedung', 'GedungController@detail');
+
 Route::get('edit_master_gedung', function (){
     return view('gedung/edit_master_gedung');
 });
 
-Route::get('master_jenisgedung', function (){
-    return view('jenisgedung/master_jenisgedung');
-});
+Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
-Route::get('tambah_master_jenisgedung', function (){
-    return view('jenisgedung/tambah_master_jenisgedung');
-});
+// Route::get('tambah_master_gedung_input', 'GedungController@input_action');
 
-Route::get('edit_master_jenisgedung', function (){
-    return view('jenisgedung/edit_master_jenisgedung');
-});
+// Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
+
+//--------------MASTER JENIS GEDUNG--------------------------
+
+Route::get('master_jenisgedung', 'KategoriGedungController@index');
+
+Route::get('tambah_master_jenisgedung', 'KategoriGedungController@input');
+
+Route::post('tambah_master_jenisgedung_post', 'KategoriGedungController@input_post');
+
+Route::get('edit_master_jenisgedung/{id}', 'KategoriGedungController@edit');
+
+Route::post('edit_master_jenisgedung_post', 'KategoriGedungController@edit_post');
+
+Route::get('hapus_master_jenisgedung/{id}', 'KategoriGedungController@delete');
 
 //--------------MASTER USER--------------------------
 Route::get('masteruser', function (){
@@ -97,10 +108,22 @@ Route::get('edit/{id}', 'KomponenController@edit');
 Route::post('editAksi','KomponenController@update'); 
 
 
+Route::get('detail_komponen', function (){
+    return view('komponen/detail_komponen');
+});
+
 //-------------MASTER KERUSAKAN----------------------
 
 Route::get('master_kerusakan', function (){
     return view('kerusakan/master_kerusakan');
+});
+
+Route::get('tambah_master_kerusakan', function (){
+    return view('kerusakan/tambah_master_kerusakan');
+});
+
+Route::get('view_master_kerusakan', function (){
+    return view('kerusakan/view_master_kerusakan');
 });
 
 //---------------PENGATURAN------------------
@@ -134,4 +157,18 @@ Route::get('tambahsatuan', function (){
 
 Route::get('editsatuan', function (){
     return view('satuan/edit_satuan');
+});
+
+//---------------ROLE---------------------
+
+Route::get('masterrole', function (){
+    return view('role/master_role');
+});
+
+Route::get('editrole', function (){
+    return view('role/edit_role');
+});
+
+Route::get('tambahrole', function (){
+    return view('role/tambah_role');
 });

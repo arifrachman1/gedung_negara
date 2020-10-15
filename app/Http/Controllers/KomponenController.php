@@ -27,6 +27,7 @@ class KomponenController extends Controller
          $data->nama = $request->nama;
          $data->id_parent = $data->id;
          $data->id_satuan = $request->id_satuan;
+         $data->bobot = $request->bobot;
          $data->save();
          
          foreach ($input['nama2'] as $key => $value) {
@@ -35,6 +36,7 @@ class KomponenController extends Controller
                 $data2->nama = $value;
                 $data2->id_parent = $data->id;
                 $data2->id_satuan = $input['satuan2'][$key];
+                
                 $data2->save();
              }
                          
