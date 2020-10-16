@@ -12,8 +12,8 @@
       </div>
       <div class="card-body">
 
-        <div class="">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="kerusakan" width="100%" cellspacing="0">
             <thead>
                 <div class="form-group">
                     <div class="row">
@@ -95,10 +95,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2">
-                    <?php $now = date("Y-m-d") ?>
-                    <input class="form-control" value="<?=$now?>" readonly>
-                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-3"> 
+                            Tanggal Hari Ini
+                        </div>
+                        <div class="col-lg-2">
+                            <?php $now = date("Y-m-d") ?>
+                            <input class="form-control" value="<?=$now?>" readonly>
+                        </div>
+                    </div>
+                </div>    
                 <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -108,7 +115,7 @@
                       <th>Subkomponen</th>
                       <th>Satuan</th>
                       <th>Opsi</th>
-                      <th>Tingkat Kerusakan</th>
+                      <th colspan="3">Tingkat Kerusakan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -120,36 +127,36 @@
                       <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                      <td></td>
+                      <td>100%</td>
+                      <td colspan="2" > Rusak Berat</td>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>Struktur</td>
+                        <td rowspan="3">2</td>
+                        <td rowspan="3">Struktur</td>
                         <td>Kolom</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
+                        <td>100%</td>
+                        <td rowspan="3" >300%</td>
+                        <td rowspan="3">Rusak Berat</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Balok</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Pelat</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -159,7 +166,8 @@
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                        <td  colspan="2" >Rusak Berat</td>
                     </tr>
                     <tr>
                         <td>4</td>
@@ -169,47 +177,44 @@
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                        <td  colspan="2" > Rusak berat</td>
                     </tr>
                     <tr>
-                        <td>5</td>
-                        <td>Dinding</td>
+                        <td rowspan="4">5</td>
+                        <td rowspan="4">Dinding</td>
                         <td>batu Bata</td>
                         <td>%</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                        <td rowspan="4" >400%</td>
+                        <td rowspan="4">Rusak Berat</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Kaca</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Pintu</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Kusen</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
                         <td>6</td>
@@ -219,87 +224,105 @@
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                        <td  colspan="2" >Rusak Berat</td>
                     </tr>
                     <tr>
-                        <td>7</td>
-                        <td>Utilitas</td>
+                        <td rowspan="3">7</td>
+                        <td rowspan="3">Utilitas</td>
                         <td>Instalasi Listrik</td>
                         <td>Estimasi</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                        <td rowspan="3" >300%</td>
+                        <td rowspan="3">Rusak Berat</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Instalasi Air</td>
                         <td>Estimasi</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Drainase Limbah</td>
                         <td>m1</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
-                        <td>8</td>
-                        <td>Finishing</td>
+                        <td rowspan="3">8</td>
+                        <td rowspan="3">Finishing</td>
                         <td>Finishing Langit-Langit</td>
                         <td>%</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                        <td rowspan="3" >300%</td>
+                        <td rowspan="3">Rusak Berat</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Finishing Dinding</td>
                         <td>%</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td>Finishing Kusen/Pintu</td>
                         <td>Unit</td>
                         <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                         </a></td>
-                        <td></td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"> </td>
+                        <td>1700%</td>
+                        <td colspan="2" >Rusak Berat</td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="form-group">
-                    <label >Masukkan Sketsa:</label>
-                    <input type="file" name="#" class="form-control">
+                    <label >Sketsa Denah Rumah:</label>
+                    <input type="file" name="#" class="form-control-file">
                 </div>
                 <div class="form-group">
-                    <label >Masukkan Bukti Kerusakan:</label>
-                    <input type="file" name="#" class="form-control">
-              </div>
+                    <label>Gambar Bukti Kerusakan</label>
+                    <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
+                </div>
             </thead>
-            <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
+            <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
+            <a class="btn btn-warning float-left mt-2" href="{{url('/tambah_master_kerusakan')}}" role="button">Kembali</a>
           </table>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
 <!-- @include('template/footer') -->
+
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"> </script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"> </script>
+
+
+<script> 
+    $(document).ready(function() {
+    $('#kerusakan').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script> -->
