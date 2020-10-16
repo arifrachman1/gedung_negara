@@ -25,6 +25,8 @@
                 <tr>
                 <th>No</th>
                   <th>Nama Komponen</th>
+                  <th>Satuan</th>
+                  <th>Bobot</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -34,18 +36,20 @@
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
+                  <td>{{ $val->id_satuan }}</td>
+                  <td>{{ $val->bobot }}</td>
                   <td>
-                    <a href="{{url('detail_komponen')}}" class="btn btn-primary mr-1">Detail</a>
+                    <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>
                     <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                    <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
+                    <a class="btn btn-danger"  href="{{url('delete/'.$val->id)}}"><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
                   </td>             
                 </tr> 
+
               @endforeach          
               </tbody>
             </table>
-
-                  </div>
-                </div>
+          </div>
+          </div>
               </div>
           </div>
         </div>
@@ -53,6 +57,11 @@
 
       </div>
 <!-- /.container-fluid -->
+
+
 </body>
+
+ 
+
 @include('template/footer')
 </html>

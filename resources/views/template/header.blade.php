@@ -78,13 +78,13 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masterrole">
+        <a class="nav-link" href="{{url('masterrole')}}">
           <i class="fas fa-fw fa-key"></i>
           <span>Master Role</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masterkomponen">
+        <a class="nav-link" href="{{url('masterkomponen')}}">
           <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
       </li>

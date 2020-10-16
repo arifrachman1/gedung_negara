@@ -24,13 +24,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'email'                 => 'required|email',
+            'name'                 => 'required|string',
             'password'              => 'required|string'
         ];
  
         $messages = [
-            'email.required'        => 'Email wajib diisi',
-            'email.email'           => 'Email tidak valid',
+            'name.required'        => 'Username wajib diisi',
+            'name.name'           => 'Username tidak valid',
             'password.required'     => 'kata sandi wajib diisi',
             'password.string'       => 'Password harus berupa string'
         ];
@@ -41,7 +41,7 @@ class AuthController extends Controller
         }
 
         $data = [
-            'email'     => $request->input('email'),
+            'name'     => $request->input('name'),
             'password'  => $request->input('password'),
         ];
  
@@ -52,7 +52,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         } else {
             //Login Fail
-            Session::flash('error', 'Email atau kata sandi salah');
+            Session::flash('error', 'Username atau kata sandi salah');
             return redirect()->route('login');
         }
     }
