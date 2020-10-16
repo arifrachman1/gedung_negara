@@ -76,6 +76,8 @@ Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
 Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
 
+Route::post('import_excel_master_gedung', 'GedungController@importExcel');
+
 // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
 
 // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
