@@ -20,7 +20,12 @@
                 </a>
                 <a class="btn btn-success btn-icon-split" href="{{url('tambah_excel_master_gedung')}}" role="button">
                     <span class="icon text-white-100">
-                        Tambah dengan Excel
+                        Import Excel
+                    </span> 
+                </a>
+                <a class="btn btn-success btn-icon-split" href="" role="button">
+                    <span class="icon text-white-100">
+                        Export Excel
                     </span> 
                 </a>
             </div>
@@ -60,7 +65,7 @@
                       @else
                       <td>{{ $val->luas_lahan }}</td>
                       @endif
-                      <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/') }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
+                      <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
                     </tr>
                   @endforeach
                   </tbody>

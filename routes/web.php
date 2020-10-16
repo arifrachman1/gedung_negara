@@ -62,9 +62,9 @@ Route::post('input_master_gedung', 'GedungController@inputPost');
 
 Route::get('detail_master_gedung/{id}', 'GedungController@detail');
 
-Route::get('edit_master_gedung', function (){
-    return view('gedung/edit_master_gedung');
-});
+Route::get('edit_master_gedung/{id}', 'GedungController@edit');
+
+Route::post('edit_master_gedung_post', 'GedungController@edit_post');
 
 Route::get('tambah_excel_master_gedung', function (){
     return view ('gedung/tambah_excel_master_gedung');

@@ -88,7 +88,7 @@ class GedungController extends Controller
         $input->jumlah_lantai = $request->jumlah_lantai;
         $input->luas = $request->luas_bangunan;
         $input->tinggi = $request->tinggi_bangunan;
-        $input->kelas_tinggi = $request->kls_tinggi;
+        $input->kelas_tinggi = $request->klas_tinggi;
         $input->kompleks = $request->kompleks;
         $input->kepadatan = $request->kepadatan;
         $input->permanensi = $request->permanensi;
@@ -102,21 +102,40 @@ class GedungController extends Controller
     }
 
     public function edit($id) {
-        $jenis_gedung = KategoriGedung::get();
-        $edit = Gedung::join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
-            ->join('provinsi', 'gedung.kode_provinsi', '=', 'provinsi.id_prov')
-            ->join('kota', 'gedung.kode_kabupaten', '=', 'kota.id_kota')
-            ->join('kecamatan', 'gedung.kode_kecamatan', '=', 'kecamatan.id_kec')
-            ->join('kelurahan', 'gedung.kode_kelurahan', '=', 'kelurahan.id_kel')
-            ->select('gedung.*', 'gedung_ketegori.id as id_kat', 'gedung_ketegori.nama as nama_kat',
-                'provinsi.id_prov as idprov', 'provinsi.nama as nama_prov', 'kota.id_kota as idkota',
-                'kota.nama as nama_kota', 'kecamatan.id_kec as idkec', 'kecamatan.nama as nama_kec', 
-                'kelurahan.id_kel as idkel', 'kelurahan.nama as nama_kel')->find($id);
-        return view('gedung/edit_master_gedung', compact('edit', 'jenis_gedung'));
+        $daerah = Provinsi::get();
+        $kategori = KategoriGedung::get();
+        $edit = Gedung::find($id);
+        return view('gedung/edit_master_gedung', compact('edit', 'kategori', 'daerah'));
     }
 
-    public function edit_post() {
-
+    public function edit_post(Request $request) {
+        $edit = new Gedung;
+        $edit->nama = $request->nama_gd;
+        $edit->id_gedung_kategori = $request->kategori_gd;
+        $edit->bujur_timur = $request->bt;
+        $edit->lintang_selatan = $request->ls;
+        $edit->legalitas = $request->legalitas;
+        $edit->tipe_milik = $request->tipe_milik;
+        $edit->alas_hak = $request->alas_hak;
+        $edit->luas_lahan = $request->luas_lahan;
+        $edit->jumlah_lantai = $request->jumlah_lantai;
+        $edit->luas = $request->luas_bangunan;
+        $edit->tinggi = $request->tinggi_bangunan;
+        $edit->kelas_tinggi = $request->klas_tinggi;
+        $edit->kompleks = $request->kompleks;
+        $edit->kepadatan = $request->kepadatan;
+        $edit->permanensi = $request->permanensi;
+        $edit->risk_bakar = $request->risk_bakar;
+        $edit->penangkal = $request->penangkal;
+        $edit->struktur_bawah = $request->struktur_bawah; 
+        $edit->struktur_bangunan = $request->struktur_bangunan;
+        $edit->struktur_atap = $request->struktur_atap;
+        $edit->kode_provinsi = $request->kode_provinsi;
+        $edit->kode_kabupaten = $request->kode_kabupaten;
+        $edit->kode_kecamatan = $request->kode_kecamatan;
+        $edit->kode_kelurahan = $request->kode_kelurahan;
+        $edit->update();
+        return redirect('master_gedung');
     }
 
     public function delete($id) {
