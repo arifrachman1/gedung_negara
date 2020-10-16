@@ -9,6 +9,8 @@ use App\Provinsi;
 use App\KabupatenKota;
 use App\Kecamatan;
 use App\DesaKelurahan;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Log;
 
 class GedungController extends Controller
@@ -143,4 +145,43 @@ class GedungController extends Controller
         $delete->delete();
         return redirect('master_gedung');
     }
+
+    public function exportExcel() {
+        $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
+
+        /** Load $inputFileName to a Spreadsheet object **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = Gedung::get();
+        //dd($data);
+        $i = 1;
+        foreach($data as $d){
+            $i++;
+            $sheet->setCellValue('A'.$i, ($i-1));
+            $sheet->setCellValue('B'.$i, $d->nama);
+            $sheet->setCellValue('C'.$i, $d->bujur_timur);
+            $sheet->setCellValue('D'.$i, $d->lintang_selatan);
+            $sheet->setCellValue('E'.$i, $d->legalitas);
+            $sheet->setCellValue('F'.$i, $d->tipe_milik);
+            $sheet->setCellValue('G'.$i, $d->alas_hak);
+            $sheet->setCellValue('H'.$i, $d->luas_lahan);
+            $sheet->setCellValue('I'.$i, $d->jumlah_lantai);
+            $sheet->setCellValue('J'.$i, $d->luas);
+            $sheet->setCellValue('K'.$i, $d->tinggi);
+            $sheet->setCellValue('L'.$i, $d->kelas_tinggi);
+            $sheet->setCellValue('M'.$i, $d->kompleks);
+            $sheet->setCellValue('N'.$i, $d->kepadatan);
+            $sheet->setCellValue('O'.$i, $d->permanensi);
+            $sheet->setCellValue('P'.$i, $d->risk_bakar);
+            $sheet->setCellValue('Q'.$i, $d->penangkal);
+            $sheet->setCellValue('R'.$i, $d->struktur_bawah);
+            $sheet->setCellValue('S'.$i, $d->struktur_bangunan);
+            $sheet->setCellValue('T'.$i, $d->struktur_atap);
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('master_gedung.xlsx');
+        return redirect('master_gedung.xlsx');
+    }
+
 }

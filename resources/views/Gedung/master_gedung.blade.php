@@ -13,17 +13,17 @@
         </div>
             <div class="card-body">
             <div class=" py-3">
-                <a class="btn btn-success btn-icon-split" href="{{url('tambah_master_gedung')}}" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{ url('tambah_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Tambah
                     </span> 
                 </a>
-                <a class="btn btn-success btn-icon-split" href="{{url('tambah_excel_master_gedung')}}" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Import Excel
                     </span> 
                 </a>
-                <a class="btn btn-success btn-icon-split" href="" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Export Excel
                     </span> 
