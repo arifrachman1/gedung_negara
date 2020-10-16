@@ -34,7 +34,7 @@
                       <td>SMAN 19 Surabaya</td>
                       <td>Sekolah</td>
                       <td>Jl.Kedungan Cowek NO.390, Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
-                      <td><a class="btn btn-primary" href="#"><i class="button"><span class="icon text-white-100">View</span> </i></a>
+                      <td><a class="btn btn-primary" href="{{url('/view_kerusakan')}}"><i class="button"><span class="icon text-white-100">View</span></i></a>
                     </tr>
                   </tbody>
                 </table>
