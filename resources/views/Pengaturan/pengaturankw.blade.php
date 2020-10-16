@@ -14,16 +14,16 @@
       <div class="card-body">
         <div class=" py-3">
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <label for="nama">Katasandi lama :</label>
-            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="pass" placeholder="katasandi lama">
+            <label for="nama">Kata Sandi lama :</label>
+            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="pass" placeholder="Kata Sandi lama">
           </div>
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <label for="nama">Katasandi baru :</label>
-            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtPassword" placeholder="katasandi lama">
+            <label for="nama">Kata Sandi baru :</label>
+            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtPassword" placeholder="Kata Sandi lama">
           </div>
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <label for="nama">Konfirmasi Katasandi baru :</label>
-            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtConfirmPassword" placeholder="katasandi lama">
+            <label for="nama">Ketik ulang Kata Sandi baru :</label>
+            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtConfirmPassword" placeholder="Kata Sandi lama">
           </div>
           <div class="col-sm-6 mb-3 mb-sm-0">
             <input class="btn btn-success mr-1" type="button" id="btnSubmit" value="Submit" />
@@ -41,7 +41,7 @@
                 var password = $("#txtPassword").val();
                 var confirmPassword = $("#txtConfirmPassword").val();
                 if (password != confirmPassword) {
-                    alert("Katasandi baru dan konfirmasi katasandi harus sama!");
+                    alert("Kata Sandi baru dan ketik ulang Kata Sandi harus sama!");
                     return false;
                 }
                 return true;

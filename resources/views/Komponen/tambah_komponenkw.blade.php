@@ -28,10 +28,6 @@
                         <label class="font-weight-bold">Bobot</label>
                           <input type="text" name="bobot" class="form-control"> 
                     </div> 
-                    
-                    <br>
-                    <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  
-                    <button class="btn btn-success" type="submit">Simpan</button>
                   </div>
                   <div id="copy">
                     <div class="control-group"><br>
@@ -53,6 +49,10 @@
                     </div>
                   </div>
                 </div>
+                <div class="card-footer">
+                     <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  
+                    <button class="btn btn-success" type="submit">Simpan</button>
+                  </div>
             <script type="text/javascript">
                 $(document).ready(function() {
                 $("#copy").hide();
@@ -67,7 +67,6 @@
                 });
             </script>
         </form>
-                      <!--==========================-->
                 </div>
         </body>
 @include('template/footer')

@@ -31,7 +31,7 @@ class KategoriGedungController extends Controller
     public function edit_post(Request $request) {
         $edit_post = KategoriGedung::find($request->id_jenis_gedung);
         $edit_post->nama = $request->nama_jenis_gedung;
-        $edit_post->save();
+        $edit_post->update();
         return redirect('master_jenisgedung');
     }
 

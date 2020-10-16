@@ -13,9 +13,19 @@
         </div>
             <div class="card-body">
             <div class=" py-3">
-                <a class="btn btn-success btn-icon-split" href="{{url('tambah_master_gedung')}}" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{ url('tambah_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Tambah
+                    </span> 
+                </a>
+                <a class="btn btn-success btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
+                    <span class="icon text-white-100">
+                        Import Excel
+                    </span> 
+                </a>
+                <a class="btn btn-success btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
+                    <span class="icon text-white-100">
+                        Export Excel
                     </span> 
                 </a>
             </div>
@@ -27,6 +37,7 @@
                       <th>Legalitas</th>
                       <th>Tipe Milik</th>
                       <th>Alas Hak</th>
+                      <th>Luas lahan</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -49,6 +60,11 @@
                       @else
                       <td>{{ $val->alas_hak }}</td>
                       @endif
+                      @if ($val->luas_lahan == null)
+                      <td>-</td>
+                      @else
+                      <td>{{ $val->luas_lahan }}</td>
+                      @endif
                       <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
                     </tr>
                   @endforeach
@@ -63,3 +79,4 @@
 </body>
 @include('template/footer')
 </html>
+

@@ -1,6 +1,6 @@
 <!doctype html>
 @include('template/header')
-<body>
+
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -22,7 +22,9 @@
               </div>
               <div class="form-group">
                 <label >Nama Jenis Gedung:</label>
-                <input type="text" class="form-control" placeholder="Masukkan Nama jenis Gedung"  name="nama_jenis_gedung">
+                <input type="text" class="form-control" placeholder="Masukkan Nama jenis Gedung"  name="nama_jenis_gedung" required>
+                <!-- <div class="valid-feedback">Sudah Terisi.</div>
+                <div class="invalid-feedback">Harap Di Isi.</div> -->
               </div>
               <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
               <a class="btn btn-warning float-left mt-2" href="{{ url('/master_jenisgedung') }}" role="button">Kembali</a>
@@ -36,6 +38,25 @@
 </div>
 
 
+<!-- <script>
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script> -->
 
-</body>
 @include('template/footer')

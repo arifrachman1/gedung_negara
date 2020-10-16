@@ -66,8 +66,13 @@
                         </div>
                     @endif
                     <div class="form-group">
+<<<<<<< HEAD
                     <label>Username</label>
                       <input type="text" name="name" class="form-control form-control-user"   placeholder="Masukkan Alamat email....">
+=======
+                    <label>Email</label>
+                      <input type="email" name="email" class="form-control form-control-user"   placeholder="Masukkan Email....">
+>>>>>>> 28e82af50acde155645c0323070ad01ee4707585
                     </div>
                     <div class="form-group">
                     <label>Kata Sandi</label>

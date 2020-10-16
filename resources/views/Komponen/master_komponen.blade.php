@@ -8,9 +8,9 @@
 
 <!-- DataTales Example -->
       <div class="card shadow mb-4">
-      <div class="card-header bg-primary py-3">
-        <h6 class="m-0 font-weight-bold text-white">DATA KOMPONEN</h6>
-      </div>
+        <div class="card-header bg-primary py-3">
+          <h6 class="m-0 font-weight-bold text-white">DATA KOMPONEN</h6>
+        </div>
         <div class="card-body">
         <div class=" py-3">
             <a href="{{url('tambah_komponen')}}" class="btn btn-success btn-icon-split">
@@ -49,13 +49,9 @@
               </tbody>
             </table>
           </div>
-          </div>
-              </div>
-          </div>
         </div>
       </div>
-
-      </div>
+</div>
 <!-- /.container-fluid -->
 
 

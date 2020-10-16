@@ -41,7 +41,7 @@
                                     : Super Admin
                                 </div>
                             </div>
-                            <a class="btn btn-warning float-left mt-2" href="{{url('pengaturan')}}" role="button">Ganti Password</a>
+                            <a class="btn btn-warning float-left mt-2" href="{{url('pengaturan')}}" role="button">Ganti Kata Sandi</a>
                             
         </table>
       </div>

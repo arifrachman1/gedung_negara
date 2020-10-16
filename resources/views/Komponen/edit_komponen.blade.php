@@ -32,7 +32,7 @@
                     <input type="text" name="bobot" value="{{$komponen->bobot}}" class="form-control"> 
                   </div> 
                 <br>
-              <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
+              <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
             </div>
             <div id="copy">
             <div class="control-group"><br>

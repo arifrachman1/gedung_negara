@@ -18,9 +18,13 @@
   <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -38,23 +42,29 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/dashboard')}}">
         <div class="sidebar-brand-text mx-3">GEDUNG NEGARA</div>
       </a>
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard">
+        <a class="nav-link" href="{{url('/dashboard')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Beranda</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="masteruser">
+        <a class="nav-link" href="{{url('/masteruser')}}">
           <i class="fas fa-fw fa-users"></i>
           <span>Master User</span></a>
       </li>
-      
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('/masterrole')}}">
+          <i class="fas fa-fw fa-key"></i>
+          <span>Master Role</span></a>
+      </li>
+
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -78,13 +88,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{url('masterrole')}}">
-          <i class="fas fa-fw fa-key"></i>
-          <span>Master Role</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{url('masterkomponen')}}">
+        <a class="nav-link" href="{{url('/masterkomponen')}}">
           <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
       </li>
