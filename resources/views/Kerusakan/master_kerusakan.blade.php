@@ -15,7 +15,7 @@
             <div class=" py-3">
                 <a class="btn btn-success btn-icon-split" href="{{url('/tambah_master_kerusakan')}}" role="button">
                     <span class="icon text-white-100">
-                        Tambah
+                        Tambah Kerusakan
                     </span> 
                 </a>
             </div>
@@ -34,7 +34,7 @@
                       <td>SMAN 19 Surabaya</td>
                       <td>Sekolah</td>
                       <td>Jl.Kedungan Cowek NO.390, Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
-                      <td><a class="btn btn-primary" href="{{url('/view_master_kerusakan')}}"><i class="button"><span class="icon text-white-100">View</span> </i></a>
+                      <td><a class="btn btn-primary" href="{{url('/view_kerusakan')}}"><i class="button"><span class="icon text-white-100">View</span></i></a>
                     </tr>
                   </tbody>
                 </table>
