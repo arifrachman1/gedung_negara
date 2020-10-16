@@ -146,9 +146,6 @@ Route::get('kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });
 
-Route::get('coba', function (){
-    return view('coba');
-});
 
 //----------------SATUAN-------------------
 
