@@ -126,6 +126,10 @@ Route::get('tambah_master_kerusakan', function (){
     return view('kerusakan/tambah_master_kerusakan');
 });
 
+Route::get('formulir_penilaian_kerusakan', function (){
+    return view('kerusakan/formulir_penilaian_kerusakan');
+});
+
 Route::get('view_master_kerusakan', function (){
     return view('kerusakan/view_master_kerusakan');
 });
