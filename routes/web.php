@@ -130,6 +130,10 @@ Route::get('view_master_kerusakan', function (){
     return view('kerusakan/view_master_kerusakan');
 });
 
+Route::get('view_kerusakan', function (){
+    return view('kerusakan/view_kerusakan');
+});
+
 //---------------PENGATURAN------------------
 
 Route::get('pengaturan', function (){

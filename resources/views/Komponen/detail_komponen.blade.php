@@ -11,40 +11,31 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <div class="container p-3 my-3 row">
-                        <div class="card">
-                            <div class="card-header">
-                                Nama Komponen : PONDASI 
-                            </div>
-                            <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    Subkomponen  
-                                </div>
-                                <div class="col-sm-8">
-                                    : Meja
-                                </div>
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8">
-                                    : Kursi
-                                </div>
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8">
-                                    : Pintu
-                                </div>
-                                <div class="col-sm-4">
-                                    Bobot 
-                                </div>
-                                <div class="col-sm-8">
-                                    : 16
-                                </div>
-                            </div>
-                            <a class="btn btn-warning float-left mt-2" href="{{url('/masterkomponen')}}" role="button">Kembali</a>
-                            
+          <thead>
+            <th>Sub Komponen</th>
+            <th>Satuan</th>
+            <th>Bobot</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kolom</td>
+              <td>Unit</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Balok</td>
+              <td>Unit</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Pelat</td>
+              <td>Unit</td>
+              <td></td>
+            </tr>
+          </tbody>
         </table>
       </div>
+      <a class="btn btn-warning float-left mt-2" href="{{url('/masterkomponen')}}" role="button">Kembali</a>
     </div>
   </div>
 
