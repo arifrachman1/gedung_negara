@@ -14,11 +14,6 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <form  enctype="multipart/form-data" action="{{ url('input_master_gedung') }}" method='post'>
       @csrf
-    
-    <div class="form-group">
-      <label hidden>ID Gedung:</label>
-      <input type="text" class="form-control" placeholder="ID Gedung"  name="id_gd" hidden>
-    </div>
 
     <div class="form-group">
       <label>Nama Gedung:</label>
@@ -37,12 +32,12 @@
 
     <div class="form-group">
       <label>Bujur Timur:</label>
-      <input type="number" max="180" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="bt">
+      <input type="number" max="180" step="0.000001" min="0.000001" class="form-control" placeholder="0"  name="bt">
     </div>
 
     <div class="form-group">
       <label >Lintang Selatan:</label>
-      <input type="number" max="90" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0" name="ls">
+      <input type="number" max="90" step="0.000001" min="0.000001" class="form-control" placeholder="0" name="ls">
     </div>  
     
     <div class="form-group">
@@ -77,12 +72,12 @@
 
     <div class="form-group">
       <label>Tinggi Bangunan:</label>
-      <input type="number" class="form-control" placeholder="0"  name="tinggi_bangunan">
+      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="tinggi_bangunan">
     </div>
 
     <div class="form-group">
       <label>Kelas Tinggi:</label>
-      <input type="text" class="form-control" placeholder="Klas Tinggi"  name="kls_tinggi">
+      <input type="text" class="form-control" placeholder="Kelas Tinggi"  name="klas_tinggi">
     </div>
 
     <div class="form-group">
@@ -92,7 +87,7 @@
 
     <div class="form-group">
       <label>Kepadatan:</label>
-      <input type="text" class="form-control" placeholder="kepadatan"  name="kepadatan">
+      <input type="text" class="form-control" placeholder="Kepadatan"  name="kepadatan">
     </div>
 
     <div class="form-group">
@@ -101,8 +96,8 @@
     </div>
 
     <div class="form-group">
-      <label>Resiko Kebakar:</label>
-      <input type="text" class="form-control" placeholder="Resiko Kebakar"  name="risk_bakar">
+      <label>Resiko Kebakaran:</label>
+      <input type="text" class="form-control" placeholder="Resiko Kebakaran"  name="risk_bakar">
     </div>
 
     <div class="form-group">
@@ -131,9 +126,8 @@
           <label>Provinsi:</label>
             <select class="form-control" id="provinsi" name="kode_provinsi">
               <option value="">Pilih Provinsi</option>
-              @foreach($provinsi as $val)
-              <option value="{{ $val->id_prov }}">{{ $val->nama }}</option>
-              @endforeach
+              <option value=""></option>
+              endforeach
             </select>
         </div>
 
