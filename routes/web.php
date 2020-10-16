@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 
@@ -62,15 +64,17 @@ Route::post('input_master_gedung', 'GedungController@inputPost');
 
 Route::get('detail_master_gedung/{id}', 'GedungController@detail');
 
-Route::get('edit_master_gedung', function (){
-    return view('gedung/edit_master_gedung');
-});
+Route::get('edit_master_gedung/{id}', 'GedungController@edit');
+
+Route::post('edit_master_gedung_post', 'GedungController@edit_post');
 
 Route::get('tambah_excel_master_gedung', function (){
     return view ('gedung/tambah_excel_master_gedung');
 });
 
 Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
+
+Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
 
 // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
 
@@ -176,4 +180,28 @@ Route::get('editrole', function (){
 
 Route::get('tambahrole', function (){
     return view('role/tambah_role');
+});
+
+Route::get('test', function (){
+    $inputFileName = '../storage/excel_template/temp_1.xlsx';
+
+    /** Load $inputFileName to a Spreadsheet object **/
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+    $sheet = $spreadsheet->getActiveSheet();
+    $data = [
+        ["nama" => "ghufron", "umur" => 11],
+        ["nama" => "fahmi", "umur" => 12],
+        ["nama" => "arif", "umur" => 9],
+    ];
+    $i = 1;
+    foreach($data as $d){
+        $i++;
+        $sheet->setCellValue('A'.$i, ($i-1));
+        $sheet->setCellValue('B'.$i, $d['nama']);
+        $sheet->setCellValue('C'.$i, $d['umur']);
+    }
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('hello_world.xlsx');
+    return redirect('hello_world.xlsx');
 });
