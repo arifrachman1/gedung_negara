@@ -111,8 +111,8 @@ class GedungController extends Controller
         return view('gedung/edit_master_gedung', compact('edit', 'kategori', 'daerah'));
     }
 
-    public function edit_post(Request $request) {
-        $edit = new Gedung;
+    public function edit_post($id, Request $request) {
+        $edit = Gedung::find($id);
         $edit->nama = $request->nama_gd;
         $edit->id_gedung_kategori = $request->kategori_gd;
         $edit->bujur_timur = $request->bt;
@@ -137,7 +137,7 @@ class GedungController extends Controller
         $edit->kode_kabupaten = $request->kode_kabupaten;
         $edit->kode_kecamatan = $request->kode_kecamatan;
         $edit->kode_kelurahan = $request->kode_kelurahan;
-        $edit->update();
+        $edit->save();
         return redirect('master_gedung');
     }
 
