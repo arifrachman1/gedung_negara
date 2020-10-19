@@ -9,34 +9,36 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
           <div class="card-header bg-primary py-3">
-            <h6 class="m-0 font-weight-bold text-white">DATA KERUSAKAN</h6>
+            <h6 class="m-0 font-weight-bold text-white">DATA GEDUNG</h6>
         </div>
             <div class="card-body">
-            <div class=" py-3">
-                <a class="btn btn-success btn-icon-split" href="{{url('/tambah_master_kerusakan')}}" role="button">
+            <!-- <div class=" py-3">
+                <a class="btn btn-warning btn-icon-split" href="{{url('/master_kerusakan')}}" role="button">
                     <span class="icon text-white-100">
-                        Tambah Kerusakan
+                        Kembali
                     </span> 
                 </a>
-            </div>
+            </div> -->
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Nama Gedung</th>
-                      <th>Jenis Gedung</th>
-                      <th>Lokasi Gedung</th>
+                      <th>Legalitas</th>
+                      <th>Tipe Milik</th>
+                      <th>Alas Hak</th>
+                      <th>Luas Lahan</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>SMAN 19 Surabaya</td>
-                      <td>Sekolah</td>
-                      <td>Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
-                      <td><a class="btn btn-primary float-left mr-2" href="{{url('/view_kerusakan')}}"><i class="button"><span class="icon text-white-100">View</span></i></a>
-                          <a class="btn btn-warning mr-2" href="{{url('/edit_master_kerusakan')}}"><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
-                          <a class="btn btn-danger float-right mr-2" href=""><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                      <td>Legal</td>
+                      <td>Negara</td>
+                      <td></td>
+                      <td>1905</td>
+                      <td><a class="btn btn-success" href="{{url('/edit_formulir_penilaian_kerusakan')}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a>
                     </tr>
                   </tbody>
                 </table>

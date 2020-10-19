@@ -8,7 +8,7 @@
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header bg-primary py-3">
-        <h6 class="m-0 font-weight-bold text-white">FORMULIR NILAI KERUSAKAN</h6>
+        <h6 class="m-0 font-weight-bold text-white">EDIT FORMULIR NILAI KERUSAKAN</h6>
       </div>
 
     <div class="container">
@@ -106,11 +106,6 @@
                     </div>
                 </div>    
                 <div class="table-responsive">
-                    <a class="btn btn-success btn-icon-split" href="{{ url('') }}" role="button">
-                        <span class="icon text-white-100">
-                            Import Excel
-                        </span> 
-                    </a>
                     <a class="btn btn-success btn-icon-split" href="{{ url('') }}" role="button">
                         <span class="icon text-white-100">
                             Export Excel
@@ -316,29 +311,3 @@
   </div>
 </div>
 <!-- @include('template/footer') -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"> </script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"> </script>
-<!-- <script src=""> </script> -->
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"> </script>
-
-
-<script> 
-    $(document).ready(function() {
-    $('#kerusakan').DataTable( {
-        "processing" : true,
-        "serverSide" : true,
-        scrollY : '250px',
-        dom: 'Bfrtip'
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-} );
-</script>
