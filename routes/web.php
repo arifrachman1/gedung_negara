@@ -66,7 +66,7 @@ Route::get('detail_master_gedung/{id}', 'GedungController@detail');
 
 Route::get('edit_master_gedung/{id}', 'GedungController@edit');
 
-Route::post('edit_master_gedung_post', 'GedungController@edit_post');
+Route::post('edit_master_gedung_post/{id}', 'GedungController@edit_post');
 
 Route::get('tambah_excel_master_gedung', function (){
     return view ('gedung/tambah_excel_master_gedung');
@@ -97,16 +97,17 @@ Route::post('edit_master_jenisgedung_post', 'KategoriGedungController@edit_post'
 Route::get('hapus_master_jenisgedung/{id}', 'KategoriGedungController@delete');
 
 //--------------MASTER USER--------------------------
-Route::get('masteruser', function (){
-    return view('user/master_user');
-});
+Route::get('masteruser', 'UsersController@index');
 
-Route::get('tambahuser', function (){
-    return view('user/tambah_user');
-});
-Route::get('edituser', function (){
-    return view('user/edit_user');
-});
+Route::get('tambahuser', 'UsersController@inputUser');
+
+Route::post('inputuserpost', 'UsersController@inputUserPost');
+
+Route::get('edituser/{id}', 'UsersController@editUser');
+
+Route::post('edituserpost/{id}', 'UsersController@editUserPost');
+
+Route::get('hapususer/{id}', 'UsersController@deleteUser');
 
 //-------------MASTER KOMPONEN----------------------
 
@@ -116,7 +117,7 @@ Route::post('tambahAksi','KomponenController@add');
 
 Route::get('edit/{id}', 'KomponenController@edit');
 Route::post('editAksi/{id}','KomponenController@update'); 
-Route::get('delete/{id}','KomponenController@delete'); 
+Route::get('delete/{id}','KomponenController@delete')->name('hapuskomponen'); 
 Route::get('detail/{id}','KomponenController@detail'); 
 
 //-------------MASTER KERUSAKAN----------------------
@@ -141,17 +142,27 @@ Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');
 });
 
+Route::get('edit_master_kerusakan', function (){
+    return view('kerusakan/edit_master_kerusakan');
+});
+
+Route::get('edit_formulir_penilaian_kerusakan', function (){
+    return view('kerusakan/edit_formulir_penilaian_kerusakan');
+});
+
+Route::get('edit_view_master_kerusakan', function (){
+    return view('kerusakan/edit_view_master_kerusakan');
+});
+
 //---------------PENGATURAN------------------
 
 Route::get('pengaturan', function (){
     return view('pengaturan/pengaturankw');
 });
 
-Route::get('profil', function (){
-    return view('pengaturan/profil');
-});
+Route::get('profil', 'PengaturanController@profil');
 
-//-------------KERUSAKAN GAES--------------
+//-------------KERUSAKAN--------------
 
 Route::get('kerusakan', function (){
     return view('kerusakan/master_kerusakan');

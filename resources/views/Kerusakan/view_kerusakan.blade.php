@@ -1,6 +1,5 @@
 <!doctype html>
 @include('template/header')
-
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -13,7 +12,7 @@
       <div class="card-body">
 
         <div class="">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class="table table-bordered">
             <thead>
                 <div class="form-group">
                     <div class="row">
@@ -96,7 +95,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-
+                    <button class="btn btn-success">Export</button>
                 </div>
                 <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -235,6 +234,7 @@
               </div>
             </thead>
             <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a>
+        
           </table>
         </div>
       </div>
