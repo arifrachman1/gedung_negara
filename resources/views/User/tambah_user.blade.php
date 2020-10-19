@@ -14,44 +14,51 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Tambah Anggota</h1>
           <div class="card shadow mb-4">
+              <form action="{{url('inputuserpost')}}" method="post">
+              @csrf
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Anggota</h6>
                 </div>
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="nama">Nama :</label>
-                      <input type="text" class="form-control form-control-user" id="nama" placeholder="Nama">
+                      <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Nama">
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
                     <select class="col selectpicker" multiple data-live-search="true">
-                      <option>Admin</option>
-                      <option>Superadmin</option>
-                      <option>Bukan Admin</option>
+                      <option value="1">Admin</option>
+                      <option value="2">Superadmin</option>
+                      <option value="3">Bukan Admin</option>
                     </select>
                   </div>
-                  <div class="col-sm-6 mb-3 mb-sm-0">
+                  <!--<div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="telepon">No. Telp:</label>
-                    <input type="number" class="form-control form-control" id="nama" placeholder="No. Telp">
-                  </div>
+                    <input type="number" class="form-control form-control" placeholder="No. Telp">
+                  </div>-->
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label for="email">Email:</label>
+                      <input name="email" type="email" class="form-control form-control" placeholder="Email">
+                    </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Kata Sandi:</label>
-                      <input type="password" class="form-control form-control-user" id="txtPassword" placeholder="katasandi lama">
+                      <input type="password" name="password" class="form-control form-control-user" id="txtPassword" placeholder="Kata Sandi">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Ulangi Kata Sandi:</label>
-                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="katasandi lama">
+                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="Kata Sandi">
                     </div>
                     <hr>
                     <div class="col">
-                    <input class="btn btn-success mr-1" type="button" id="btnSubmit" value="Submit" />  
+                    <input class="btn btn-success mr-1" type="submit" id="btnSubmit" value="Submit" />  
                     <a class="btn btn-warning" href="{{url('masteruser')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>
+                </form>
                   <!--==========================================-->
-                  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-                      <script type="text/javascript">
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                <script type="text/javascript">
                           $(function () {
                               $("#btnSubmit").click(function () {
                                   var password = $("#txtPassword").val();
@@ -63,7 +70,7 @@
                                   return true;
                               });
                           });
-                      </script>
+                </script>
 <!--==========================================-->
         <!-- /.container-fluid -->
         </body>
