@@ -35,8 +35,8 @@
                       <td>Sekolah</td>
                       <td>Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
                       <td><a class="btn btn-primary float-left mr-2" href="{{url('/view_kerusakan')}}"><i class="button"><span class="icon text-white-100">View</span></i></a>
-                          <a class="btn btn-warning mr-2" href="{{url('/edit_master_kerusakan')}}"><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
-                          <a class="btn btn-danger float-right mr-2" href=""><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                          <a class="btn btn-warning float-left mr-2" href="{{url('/edit_master_kerusakan')}}"><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
+                          <a class="btn btn-danger float-left mr-2" href=""><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
                     </tr>
                   </tbody>
                 </table>
