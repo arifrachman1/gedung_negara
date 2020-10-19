@@ -33,6 +33,23 @@ class UsersController extends Controller
         $input->name = $request->name;
         $input->email = $request->email;
         $input->password = $request->password;
+        $input->save();
+        return redirect('masteruser');
+    }
+
+    public function editUser($id) {
+        // $role =
+        $edit = User::find($id);
+        return view('User/edit_user', compact('edit'));
+    }
+
+    public function editUserPost($id, Request $request) {
+        $update = User::find($id);
+        $update->name = $request->name;
+        $update->email = $request->email;
+        $update->password = $request->password;
+        $update->save();
+        return redirect('masteruser');
     }
 
     public function deleteUser($id) {

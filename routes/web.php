@@ -105,6 +105,8 @@ Route::post('inputuserpost', 'UsersController@inputUserPost');
 
 Route::get('edituser/{id}', 'UsersController@editUser');
 
+Route::post('edituserpost/{id}', 'UsersController@editUserPost');
+
 Route::get('hapususer/{id}', 'UsersController@deleteUser');
 
 //-------------MASTER KOMPONEN----------------------

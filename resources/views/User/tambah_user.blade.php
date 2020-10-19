@@ -22,11 +22,12 @@
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="nama">Nama :</label>
-                      <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Nama">
+                      <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Nama" required>
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
-                    <select class="col selectpicker" multiple data-live-search="true">
+                    <select class="form-control">
+                      <option>Pilih Role</option>
                       <option value="1">Admin</option>
                       <option value="2">Superadmin</option>
                       <option value="3">Bukan Admin</option>
@@ -38,15 +39,15 @@
                   </div>-->
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <label for="email">Email:</label>
-                      <input name="email" type="email" class="form-control form-control" placeholder="Email">
+                      <input name="email" type="email" class="form-control form-control" placeholder="Email" required>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Kata Sandi:</label>
-                      <input type="password" name="password" class="form-control form-control-user" id="txtPassword" placeholder="Kata Sandi">
+                      <input type="password" name="password" class="form-control form-control-user" id="txtPassword" placeholder="Kata Sandi" required>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Ulangi Kata Sandi:</label>
-                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="Kata Sandi">
+                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="Kata Sandi" required>
                     </div>
                     <hr>
                     <div class="col">
