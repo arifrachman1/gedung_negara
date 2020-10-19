@@ -32,7 +32,8 @@
               </thead>
               <tbody>
               @php $no = 1; @endphp
-              @foreach($komponen as $val)
+              @forelse($komponen as $val)
+              
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
@@ -44,8 +45,11 @@
                     <a class="btn btn-danger"  href="{{url('delete/'.$val->id)}}"><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
                   </td>             
                 </tr> 
-
-              @endforeach          
+                @empty
+                <tr>
+                  <td colspan="5" class="text-center">Tidak ada data</td>
+                </tr>
+              @endforelse
               </tbody>
             </table>
           </div>

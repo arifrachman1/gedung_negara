@@ -49,6 +49,18 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+//---------------ROLE---------------------
+Route::get('masterrole', 'RoleController@index');
+
+
+Route::get('editrole', function (){
+    return view('role/edit_role');
+});
+
+Route::get('tambahrole', function (){
+    return view('role/tambah_role');
+});
+
 //-------------MASTER GEDUNG-----------------------
 Route::get('master_gedung', 'GedungController@index');
 
@@ -171,19 +183,7 @@ Route::get('editsatuan', function (){
     return view('satuan/edit_satuan');
 });
 
-//---------------ROLE---------------------
 
-Route::get('masterrole', function (){
-    return view('role/master_role');
-});
-
-Route::get('editrole', function (){
-    return view('role/edit_role');
-});
-
-Route::get('tambahrole', function (){
-    return view('role/tambah_role');
-});
 
 Route::get('test', function (){
     $inputFileName = '../storage/excel_template/temp_1.xlsx';
