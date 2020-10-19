@@ -24,8 +24,9 @@
                               <option value="{{ $val->id }}">{{ $val->nama }}</option>
                               @endforeach
                           </select>
-                      <label class="font-weight-bold">Bobot</label>
-                        <input type="text" name="bobot" class="form-control"> 
+                        </div>
+                        <label class="font-weight-bold">Bobot</label>
+                          <input type="text" name="bobot" class="form-control"> 
                     </div> 
                   </div>
                   <div id="copy">
@@ -69,8 +70,6 @@
                 </div>
         </body>
 @include('template/footer')
-
-
 </script>
 
 </html>

@@ -109,17 +109,14 @@ Route::get('hapususer/{id}', 'UsersController@deleteUser');
 
 //-------------MASTER KOMPONEN----------------------
 
-Route::get('masterkomponen','KomponenController@komponen'); // View data buku
+Route::get('masterkomponen','KomponenController@komponen'); 
 Route::get('tambah_komponen','KomponenController@addKomponen'); 
 Route::post('tambahAksi','KomponenController@add'); 
 
 Route::get('edit/{id}', 'KomponenController@edit');
-Route::post('editAksi','KomponenController@update'); 
-
-
-Route::get('detail_komponen', function (){
-    return view('komponen/detail_komponen');
-});
+Route::post('editAksi/{id}','KomponenController@update'); 
+Route::get('delete/{id}','KomponenController@delete'); 
+Route::get('detail/{id}','KomponenController@detail'); 
 
 //-------------MASTER KERUSAKAN----------------------
 

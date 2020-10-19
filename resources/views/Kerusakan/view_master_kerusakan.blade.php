@@ -12,8 +12,8 @@
       </div>
       <div class="card-body">
 
-        <div class="table-responsive">
-          <table class="table table-bordered" id="kerusakan" width="100%" cellspacing="0">
+        <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+          <table class="table table-bordered table-striped" id="kerusakan" width="100%" cellspacing="0">
             <thead>
                 <div class="form-group">
                     <div class="row">
@@ -107,7 +107,7 @@
                     </div>
                 </div>    
                 <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>No.</th>
@@ -315,14 +315,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"> </script>
 
-
-<script> 
-    $(document).ready(function() {
-    $('#kerusakan').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-} );
-</script> -->
+-->
