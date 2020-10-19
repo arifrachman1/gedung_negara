@@ -82,7 +82,7 @@
 
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-      <form action="{{ url('edit_master_gedung_post') }}" method='post'>
+      <form action="{{ url('edit_master_gedung_post/'.$edit->id) }}" method='post'>
       @csrf
 
     <div class="form-group">
