@@ -61,7 +61,7 @@
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Anda yankin ingein menghapus ?</h5>
+          <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
         </div>
        <div class="modal-footer">
         <button type=button data-dismiss="modal" class="btn btn-danger">Tidak</button>
