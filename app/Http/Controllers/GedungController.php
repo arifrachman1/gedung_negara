@@ -11,6 +11,7 @@ use App\Kecamatan;
 use App\DesaKelurahan;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Log;
 
 class GedungController extends Controller
@@ -182,6 +183,51 @@ class GedungController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('master_gedung.xlsx');
         return redirect('master_gedung.xlsx');
+    }
+
+    public function importExcel(Request $request) {
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $inputFileType = 'Xlsx';
+        $inputFileName = $request->file_excel;
+        $reader = IOFactory::createReader($inputFileType);
+        $spreadsheet = $reader->load($inputFileName);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+
+        $lines = $highestRow - 1;
+
+        if ($lines <= 0) {
+            echo "<script>alert('Tidak ada data di dalam tabel Excel')</script>";
+        }
+
+        for ( $row = 2; $row <= $highestRow; ++$row ) {
+            $sql = new Gedung;
+
+            $sql->nama = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $sql->bujur_timur = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+            $sql->lintang_selatan = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+            $sql->legalitas = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+            $sql->tipe_milik = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+            $sql->alas_hak = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+            $sql->luas_lahan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+            $sql->jumlah_lantai = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+            $sql->luas = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+            $sql->tinggi = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+            $sql->kelas_tinggi = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+            $sql->kompleks = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+            $sql->kepadatan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+            $sql->permanensi = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+            $sql->risk_bakar = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+            $sql->penangkal = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+            $sql->struktur_bawah = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+            $sql->struktur_bangunan = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
+            $sql->struktur_atap = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
+            $sql->save();
+        }
+
+        return redirect('master_gedung');
     }
 
 }

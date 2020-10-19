@@ -76,6 +76,8 @@ Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
 Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
 
+Route::post('import_excel_master_gedung', 'GedungController@importExcel');
+
 // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
 
 // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
@@ -108,17 +110,14 @@ Route::get('edituser', function (){
 
 //-------------MASTER KOMPONEN----------------------
 
-Route::get('masterkomponen','KomponenController@komponen'); // View data buku
+Route::get('masterkomponen','KomponenController@komponen'); 
 Route::get('tambah_komponen','KomponenController@addKomponen'); 
 Route::post('tambahAksi','KomponenController@add'); 
 
 Route::get('edit/{id}', 'KomponenController@edit');
-Route::post('editAksi','KomponenController@update'); 
-
-
-Route::get('detail_komponen', function (){
-    return view('komponen/detail_komponen');
-});
+Route::post('editAksi/{id}','KomponenController@update'); 
+Route::get('delete/{id}','KomponenController@delete'); 
+Route::get('detail/{id}','KomponenController@detail'); 
 
 //-------------MASTER KERUSAKAN----------------------
 
@@ -130,8 +129,16 @@ Route::get('tambah_master_kerusakan', function (){
     return view('kerusakan/tambah_master_kerusakan');
 });
 
+Route::get('formulir_penilaian_kerusakan', function (){
+    return view('kerusakan/formulir_penilaian_kerusakan');
+});
+
 Route::get('view_master_kerusakan', function (){
     return view('kerusakan/view_master_kerusakan');
+});
+
+Route::get('view_kerusakan', function (){
+    return view('kerusakan/view_kerusakan');
 });
 
 //---------------PENGATURAN------------------

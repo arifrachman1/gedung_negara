@@ -78,7 +78,7 @@
                             <div class="h1 mb-0 font-weight-bold text-gray-800">20</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                            <i class="fas fa-house-damage fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
                 <label >Edit Nama Jenis Gedung:</label>
                 <input type="text" class="form-control" value="{{ $edit->nama }}" name="nama_jenis_gedung">
               </div>
-              <button type="submit"  class="btn btn-primary float-left mt-2">Submit</button>
+              <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
               <a class="btn btn-warning float-left mt-2" href="{{ url('/master_jenisgedung') }}" role="button">Kembali</a>
             </form>
           </table>
