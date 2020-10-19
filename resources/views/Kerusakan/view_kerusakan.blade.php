@@ -1,6 +1,5 @@
 <!doctype html>
 @include('template/header')
-
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -96,7 +95,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-
+                
                 </div>
                 <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -235,6 +234,7 @@
               </div>
             </thead>
             <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a>
+        
           </table>
         </div>
       </div>
