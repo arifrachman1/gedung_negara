@@ -29,7 +29,7 @@
                             @endforeach
                           </select>
                           <label class="font-weight-bold">Bobot</label>
-                    <input type="text" name="bobot" value="{{$komponen->bobot}}" class="form-control"> 
+                    <input type="number" name="bobot" value="{{$komponen->bobot}}" class="form-control"> 
                   </div> 
                 <br>
               <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
@@ -52,7 +52,7 @@
                           @endforeach
                     </select>
                     <label class="font-weight-bold">Bobot</label>
-                      <input type="text" name="bobots[]" value="{{$value->bobot}}" class="form-control"> 
+                      <input type="number" name="bobots[]" value="{{$value->bobot}}" class="form-control"> 
                   </div><br>
                   <button class="btn btn-danger remove" value="delet" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                 <hr>
@@ -80,7 +80,7 @@
                           @endforeach
                         </select>
                         <label class="font-weight-bold">Bobot</label>
-                        <input type="text" name="bobots[]"  class="form-control"> 
+                        <input type="number" name="bobots[]"  class="form-control"> 
                       </div><br>
                     <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button><hr>
                 </div> 
