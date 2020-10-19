@@ -116,7 +116,7 @@ Route::post('tambahAksi','KomponenController@add');
 
 Route::get('edit/{id}', 'KomponenController@edit');
 Route::post('editAksi/{id}','KomponenController@update'); 
-Route::get('delete/{id}','KomponenController@delete'); 
+Route::get('delete/{id}','KomponenController@delete')->name('hapuskomponen'); 
 Route::get('detail/{id}','KomponenController@detail'); 
 
 //-------------MASTER KERUSAKAN----------------------

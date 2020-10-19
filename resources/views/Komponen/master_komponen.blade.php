@@ -41,7 +41,7 @@
                   <td>
                     <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>
                     <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                    <a class="btn btn-danger"  href="{{url('delete/'.$val->id)}}" data-toggle="modal" data-target="#Hapus" ><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
+                    <a href="" data-toggle="modal" data-id='{{$val->id}}' data-target="#exampleModalCenter" class="btn btn-danger">Remove</a>
                   </td>             
                 </tr> 
 
@@ -53,26 +53,23 @@
       </div>
 </div>
 <!-- /.container-fluid -->
-      <div class="modal fade" id="Hapus">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-            
-              <div class="modal-header">
-                <h4 class="modal-title">Hapus</h4>
-                
-              </div>
-              <div class="modal-body">
-                Anda yakin ingin menghapus ?
-              </div>
-            
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Hapus</button>
-              </div>
-              
-            </div>
-          </div>
+
+<!-- Modal -->
+<div class="modal" id="exampleModalCenter">
+   <form action="{{url('delete/'.$val->id)}}" method="get">
+      {{ csrf_field() }}
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Anda yankin ingein menghapus ?</h5>
         </div>
+       <div class="modal-footer">
+        <button type=button data-dismiss="modal" class="btn btn-danger">Tidak</button>
+        <button type=submit class="btn btn-primary">Ya, hapus</button>
+      </div>
+    </div>
+  </form>
+ </div>
 </html>
 </body>
 @include('template/footer')
