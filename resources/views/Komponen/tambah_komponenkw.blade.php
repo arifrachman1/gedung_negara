@@ -26,7 +26,7 @@
                           </select>
                         </div>
                         <label class="font-weight-bold">Bobot</label>
-                          <input type="text" name="bobot" class="form-control"> 
+                          <input type="number" name="bobot" class="form-control"> 
                     </div> 
                   </div>
                   <div id="copy">
