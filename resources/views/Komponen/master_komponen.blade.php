@@ -41,7 +41,7 @@
                   <td>
                     <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>
                     <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                    <a class="btn btn-danger"  href="{{url('delete/'.$val->id)}}"><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
+                    <a class="btn btn-danger"  href="{{url('delete/'.$val->id)}}" data-toggle="modal" data-target="#Hapus" ><i class="button"><span class="icon text-white-100 ">Hapus</span> </i></a>
                   </td>             
                 </tr> 
 
@@ -53,11 +53,27 @@
       </div>
 </div>
 <!-- /.container-fluid -->
-
-
-</body>
-
- 
-
-@include('template/footer')
+      <div class="modal fade" id="Hapus">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            
+              <div class="modal-header">
+                <h4 class="modal-title">Hapus</h4>
+                
+              </div>
+              <div class="modal-body">
+                Anda yakin ingin menghapus ?
+              </div>
+            
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Hapus</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
 </html>
+</body>
+@include('template/footer')
+

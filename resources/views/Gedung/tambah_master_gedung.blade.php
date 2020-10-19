@@ -72,7 +72,7 @@
 
     <div class="form-group">
       <label>Tinggi Bangunan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="tinggi_bangunan">
+      <input type="number" max="10000" step="0.0000000001" min="-99" class="form-control" placeholder="0"  name="tinggi_bangunan">
     </div>
 
     <div class="form-group">
