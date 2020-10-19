@@ -117,7 +117,7 @@ Route::post('tambahAksi','KomponenController@add');
 
 Route::get('edit/{id}', 'KomponenController@edit');
 Route::post('editAksi/{id}','KomponenController@update'); 
-Route::get('delete/{id}','KomponenController@delete'); 
+Route::get('delete/{id}','KomponenController@delete')->name('hapuskomponen'); 
 Route::get('detail/{id}','KomponenController@detail'); 
 
 //-------------MASTER KERUSAKAN----------------------
@@ -140,6 +140,18 @@ Route::get('view_master_kerusakan', function (){
 
 Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');
+});
+
+Route::get('edit_master_kerusakan', function (){
+    return view('kerusakan/edit_master_kerusakan');
+});
+
+Route::get('edit_formulir_penilaian_kerusakan', function (){
+    return view('kerusakan/edit_formulir_penilaian_kerusakan');
+});
+
+Route::get('edit_view_master_kerusakan', function (){
+    return view('kerusakan/edit_view_master_kerusakan');
 });
 
 //---------------PENGATURAN------------------
