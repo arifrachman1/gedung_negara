@@ -17,12 +17,12 @@
 
     <div class="form-group">
       <label>Nama Gedung:</label>
-      <input type="text" class="form-control" placeholder="Nama Gedung"  name="nama_gd">
+      <input type="text" class="form-control" placeholder="Nama Gedung"  name="nama_gd" required>
     </div>
 
     <div class="form-group">
       <label>Jenis Gedung:</label>
-      <select class="form-control" name="kategori_gd">
+      <select class="form-control" name="kategori_gd" required>
         <option value="">Pilih Jenis Gedung</option>
         @foreach($jenis_gedung as $val)
         <option value="{{ $val->id }}">{{ $val->nama }}</option>
@@ -32,92 +32,92 @@
 
     <div class="form-group">
       <label>Bujur Timur:</label>
-      <input type="number" max="180" step="0.000001" min="0.000001" class="form-control" placeholder="0"  name="bt">
+      <input type="number" max="any"step="any" min="any" class="form-control" placeholder="0"  name="bt" required>
     </div>
 
     <div class="form-group">
       <label >Lintang Selatan:</label>
-      <input type="number" max="90" step="0.000001" min="0.000001" class="form-control" placeholder="0" name="ls">
+      <input type="number" max="any"step="any" min="any" class="form-control" placeholder="0" name="ls" required>
     </div>  
     
     <div class="form-group">
       <label>Legalitas:</label>
-      <input type="text" class="form-control" placeholder="Legalitas"  name="legalitas">
+      <input type="text" class="form-control" placeholder="Legalitas"  name="legalitas" required>
     </div>
 
     <div class="form-group">
       <label>Tipe Milik:</label>
-      <input type="text" class="form-control" placeholder="Tipe Milik"  name="tipe_milik">
+      <input type="text" class="form-control" placeholder="Tipe Milik"  name="tipe_milik" required>
     </div>
 
     <div class="form-group">
       <label>Alas Hak:</label>
-      <input type="text" class="form-control" placeholder="Alas Hak"  name="alas_hak">
+      <input type="text" class="form-control" placeholder="Alas Hak"  name="alas_hak" required>
     </div>
 
     <div class="form-group">
       <label>Luas Lahan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="0.0000000001"  class="form-control" placeholder="0"  name="luas_lahan">
+      <input type="number" max="any"step="any" min="any"  class="form-control" placeholder="0"  name="luas_lahan" required>
     </div>
 
     <div class="form-group">
       <label>Jumlah Lantai:</label>
-      <input type="number" class="form-control" placeholder="0"  name="jumlah_lantai">
+      <input type="number" class="form-control" placeholder="0"  name="jumlah_lantai" required>
     </div>
 
     <div class="form-group">
       <label>Luas Bangunan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="luas_bangunan">
+      <input type="number" max="any"step="any" min="any" class="form-control" placeholder="0"  name="luas_bangunan" required>
     </div>
 
     <div class="form-group">
       <label>Tinggi Bangunan:</label>
-      <input type="number" max="10000" step="0.0000000001" min="-99" class="form-control" placeholder="0"  name="tinggi_bangunan">
+      <input type="number" max="1000"step="any" min="any" class="form-control" placeholder="0"  name="tinggi_bangunan" required>
     </div>
 
     <div class="form-group">
-      <label>Kelas Tinggi:</label>
-      <input type="text" class="form-control" placeholder="Kelas Tinggi"  name="klas_tinggi">
+      <label>Kelas Tinggi:</label> 
+      <input type="text" class="form-control" placeholder="Kelas Tinggi"  name="klas_tinggi" required>
     </div>
 
     <div class="form-group">
       <label>Kompleks:</label>
-      <input type="text" class="form-control" placeholder="Kompleks"  name="kompleks">
+      <input type="text" class="form-control" placeholder="Kompleks"  name="kompleks" required>
     </div>
 
     <div class="form-group">
       <label>Kepadatan:</label>
-      <input type="text" class="form-control" placeholder="Kepadatan"  name="kepadatan">
+      <input type="text" class="form-control" placeholder="Kepadatan"  name="kepadatan" required>
     </div>
 
     <div class="form-group">
       <label>Permanensi:</label>
-      <input type="text" class="form-control" placeholder="Permanensi"  name="permanensi">
+      <input type="text" class="form-control" placeholder="Permanensi"  name="permanensi" required>
     </div>
 
     <div class="form-group">
       <label>Resiko Kebakaran:</label>
-      <input type="text" class="form-control" placeholder="Resiko Kebakaran"  name="risk_bakar">
+      <input type="text" class="form-control" placeholder="Resiko Kebakaran"  name="risk_bakar" required>
     </div>
 
     <div class="form-group">
       <label>Penangkal:</label>
-      <input type="text" class="form-control" placeholder="Penangkal"  name="penangkal">
+      <input type="text" class="form-control" placeholder="Penangkal"  name="penangkal" required>
     </div>
 
     <div class="form-group">
       <label>Struktur Bawah:</label>
-      <input type="text" class="form-control" placeholder="Struktur Bawah"  name="struktur_bawah">
+      <input type="text" class="form-control" placeholder="Struktur Bawah"  name="struktur_bawah" required>
     </div>
 
     <div class="form-group">
       <label>Struktur Bangunan:</label>
-      <input type="text" class="form-control" placeholder="Struktur Bangunan"  name="struktur_bangunan">
+      <input type="text" class="form-control" placeholder="Struktur Bangunan"  name="struktur_bangunan" required>
     </div>
 
     <div class="form-group">
       <label>Struktur Atap:</label>
-      <input type="text" class="form-control" placeholder="Struktur Atap"  name="struktur_atap">
+      <input type="text" class="form-control" placeholder="Struktur Atap"  name="struktur_atap" required>
     </div>
 
     <!-- <div class="form-group">
@@ -158,8 +158,8 @@
       </div>
     </div> -->
 
-    <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
-    <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+    <button type="submit"  class="btn btn-success float-left mr-2 mt-2">Submit</button>
+    <a class="btn btn-warning float-left mr-2 mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
    
         </form>
         <tbody>

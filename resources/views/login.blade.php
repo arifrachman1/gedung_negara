@@ -67,7 +67,7 @@
                     @endif
                     <div class="form-group">
                     <label>Username</label>
-                      <input type="text" name="name" class="form-control form-control-user"   placeholder="Masukkan Alamat email....">
+                      <input type="text" name="name" class="form-control form-control-user"   placeholder="Masukkan Username....">
                     </div>
                     <div class="form-group">
                     <label>Kata Sandi</label>
