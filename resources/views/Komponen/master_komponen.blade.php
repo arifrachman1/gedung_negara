@@ -41,7 +41,7 @@
                   <td>
                     <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>
                     <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                    <a href="" data-toggle="modal" data-id='{{$val->id}}' data-target="#exampleModalCenter" class="btn btn-danger">Remove</a>
+                    <a href="" data-toggle="modal" data-id='{{$val->id}}' data-target="#exampleModalCenter" class="btn btn-danger">Hapus</a>
                   </td>             
                 </tr> 
 
@@ -55,14 +55,16 @@
 <!-- /.container-fluid -->
 
 <!-- Modal -->
-<div class="modal" id="exampleModalCenter">
+<div class="modal" id="exampleModalCenter" aria-hidden="true" aria-labelledby="exampleModalCenterTitle" >
+<div role="document">
+
    <form action="{{url('delete/'.$val->id)}}" method="get">
-      {{ csrf_field() }}
+     {{ csrf_field() }}
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
-        </div>
+        </div> 
        <div class="modal-footer">
         <button type=button data-dismiss="modal" class="btn btn-danger">Tidak</button>
         <button type=submit class="btn btn-primary">Ya, hapus</button>
@@ -70,6 +72,7 @@
     </div>
   </form>
  </div>
+</div>
 </html>
 </body>
 @include('template/footer')
