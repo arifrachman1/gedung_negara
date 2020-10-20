@@ -47,8 +47,8 @@ class UsersController extends Controller
         $update = User::find($id);
         $update->name = $request->name;
         $update->email = $request->email;
-        $update->password = $request->password;
-        $update->save();
+        //$update->password = $request->password;
+        $update->update();
         return redirect('masteruser');
     }
 
