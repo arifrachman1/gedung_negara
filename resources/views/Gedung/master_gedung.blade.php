@@ -13,21 +13,27 @@
         </div>
             <div class="card-body">
             <div class=" py-3">
+            @can('gedung.create')
                 <a class="btn btn-success btn-icon-split" href="{{ url('tambah_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Tambah
                     </span> 
                 </a>
+                @endcan
+            @can('import.excel')
                 <a class="btn btn-success btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Import Excel
                     </span> 
                 </a>
+                @endcan
+                @can('export.excel')
                 <a class="btn btn-success btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Export Excel
                     </span> 
                 </a>
+                @endcan
             </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -65,7 +71,14 @@
                       @else
                       <td>{{ $val->luas_lahan }}</td>
                       @endif
-                      <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
+                      <td>
+                      <a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |
+                    @can('gedung.update')
+                      <a class="btn btn-warning" href="{{ url('edit_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
+                    @endcan
+                    @can('gedung.delete')  
+                      <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
+                    @endcan
                     </tr>
                   @endforeach
                   </tbody>
