@@ -13,11 +13,13 @@
         </div>
         <div class="card-body">
         <div class=" py-3">
+        @can('komponen.create')
             <a href="{{url('tambah_komponen')}}" class="btn btn-success btn-icon-split">
                 <span class="icon text-white-100">
                     Tambah
                 </span> 
             </a>
+        @endcan
         </div>
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -32,7 +34,8 @@
               </thead>
               <tbody>
               @php $no = 1; @endphp
-              @foreach($komponen as $val)
+              @forelse($komponen as $val)
+              
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
@@ -40,12 +43,19 @@
                   <td>{{ $val->bobot }}</td>
                   <td>
                     <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>
+                @can('komponen.update')
                     <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                    <a href="" data-toggle="modal" data-id='{{$val->id}}' data-target="#exampleModalCenter" class="btn btn-danger">Hapus</a>
+                @endcan
+                @can('komponen.delete')
+                    <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
+                @endcan
                   </td>             
                 </tr> 
-
-              @endforeach          
+                @empty
+                <tr>
+                  <td colspan="5" class="text-center">Tidak ada data</td>
+                </tr>
+              @endforelse
               </tbody>
             </table>
           </div>
@@ -55,11 +65,11 @@
 <!-- /.container-fluid -->
 
 <!-- Modal -->
-<div class="modal" id="exampleModalCenter" aria-hidden="true" aria-labelledby="exampleModalCenterTitle" >
-<div role="document">
-
-   <form action="{{url('delete/'.$val->id)}}" method="get">
-     {{ csrf_field() }}
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+    <form action="{{url('delete')}}" method="post">
+      {{ csrf_field() }}
+      @method('POST')
+      <input type="hidden" id="id_komponen" name="id">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -76,4 +86,15 @@
 </html>
 </body>
 @include('template/footer')
+
+ <script>
+ 
+  $(document).on('click','#delete',function(){
+         let id = $(this).attr('data-id');
+         console.log(id);
+         $('#id_komponen').val(id);
+    });
+        
+    </script>
+
 

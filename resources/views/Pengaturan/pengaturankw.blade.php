@@ -12,24 +12,27 @@
           <h6 class="m-0 font-weight-bold text-white">PENGATURAN</h6>
       </div>
       <div class="card-body">
-        <div class=" py-3">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <label for="nama">Kata Sandi lama :</label>
-            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="pass" placeholder="Kata Sandi lama">
+        <form action="{{ url('update_pwd/'.$user->id) }}" method="post">
+          @csrf
+          <div class=" py-3">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <label for="nama">Kata Sandi Lama :</label>
+              <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="pass" placeholder="Kata Sandi Lama" name="old_pwd" required>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <label for="nama">Kata Sandi Baru :</label>
+              <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtPassword" placeholder="Kata Sandi Baru" name="new_pwd" required>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <label for="nama">Konfirmasi Kata Sandi Baru :</label>
+              <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtConfirmPassword" placeholder="Ulangi Kata Sandi" required>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <input class="btn btn-success mr-1" type="submit" id="btnSubmit" value="Submit" />
+                      <a class="btn btn-warning" href="{{url('profil')}}">Kembali</a>
+            </div>
           </div>
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <label for="nama">Kata Sandi baru :</label>
-            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtPassword" placeholder="Kata Sandi lama">
-          </div>
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <label for="nama">Ketik ulang Kata Sandi baru :</label>
-            <input type="password" class="form-control form-control-user col-sm-6 mb-3 mb-sm-3" id="txtConfirmPassword" placeholder="Kata Sandi lama">
-          </div>
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <input class="btn btn-success mr-1" type="button" id="btnSubmit" value="Submit" />
-                    <a class="btn btn-warning" href="{{url('profil')}}">Kembali</a>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -41,7 +44,7 @@
                 var password = $("#txtPassword").val();
                 var confirmPassword = $("#txtConfirmPassword").val();
                 if (password != confirmPassword) {
-                    alert("Kata Sandi baru dan ketik ulang Kata Sandi harus sama!");
+                    alert("Kata Sandi Baru dan Konfirmasi Kata Sandi Baru harus sama!");
                     return false;
                 }
                 return true;

@@ -69,8 +69,8 @@
                     </div>
                   </div>
               </div> -->
-                <button type="submit"  class="btn btn-success float-left mt-2">Submit</button>
-                <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                <button type="submit"  class="btn btn-success float-left mr-2 mt-2">Submit</button>
+                <a class="btn btn-warning float-left mr-2 mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
             </table>
           </div>
         </form>

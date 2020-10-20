@@ -15,34 +15,48 @@
       
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <form>
+            @csrf
                     <div class="container p-3 my-3 row">
                         <div class="card">
-                            <div class="card-header">
-                                Nama : Hasbi Maulana 
+                            <div class="row">
+                                
                             </div>
                             <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 mb-2">
+                                    Username
+                                </div>
+                                <div class="col-sm-8 mb-2">
+                                   : {{ $profile->name }}
+                                </div>
+                                <div class="col-sm-4 mb-2">
                                     Email 
                                 </div>
-                                <div class="col-sm-8">
-                                    : maulanahasbi09@gmail.com
+                                <div class="col-sm-8 mb-2">
+                                    : {{ $profile->email }}
                                 </div>
-                                <div class="col-sm-4">
-                                    Alamat  
+                                <div class="col-sm-4 mb-2">
+                                    Tanggal Akun Dibuat 
                                 </div>
-                                <div class="col-sm-8">
-                                    : Indonesia
+                                <div class="col-sm-8 mb-2">
+                                    : {{ $profile->created_at }}
                                 </div>
-                                <div class="col-sm-4">
-                                    Role  
+                                <div class="col-sm-4 mb-2">
+                                    Tanggal Akun Di-Update
                                 </div>
-                                <div class="col-sm-8">
-                                    : Super Admin
+                                @if ($profile->updated_at == null)
+                                <div class="col-sm-8 mb-2">
+                                    : -
                                 </div>
+                                @else
+                                <div class="col-sm-8 mb-2">
+                                    : {{ $profile->updated_at }}
+                                </div>
+                                @endif
                             </div>
                             <a class="btn btn-warning float-left mt-2" href="{{url('pengaturan')}}" role="button">Ganti Kata Sandi</a>
-                            
+            </form>        
         </table>
       </div>
     </div>

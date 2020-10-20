@@ -79,9 +79,9 @@ class KomponenController extends Controller
         return redirect('masterkomponen');
     }
 
-    function delete($id) {
-        $delete = Komponen::find($id);
-        $delete->delete($id);
+    function delete(Request $request) {
+        $delete = Komponen::find($request->id);
+        $delete->delete();
         return redirect('masterkomponen');
     }
 

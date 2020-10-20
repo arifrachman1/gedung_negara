@@ -30,7 +30,7 @@
                     </div> 
                   </div>
                   <div id="copy">
-                    <div class="control-group"><br>
+                    <div class="control-group before-add-more"><br>
                       <label>Subkomponen</label>
                         <input type="text" name="nama2[]" class="form-control">
                       <label>Satuan</label>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2020 at 06:21 AM
+-- Generation Time: Oct 20, 2020 at 04:03 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -44,7 +44,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `gedung` (
   `id` int(11) NOT NULL,
-  `id_gedung_kategori` int(11) NOT NULL,
+  `id_gedung_kategori` int(11) DEFAULT NULL,
   `nama` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `bujur_timur` double DEFAULT NULL,
   `lintang_selatan` double DEFAULT NULL,
@@ -78,7 +78,44 @@ CREATE TABLE `gedung` (
 --
 
 INSERT INTO `gedung` (`id`, `id_gedung_kategori`, `nama`, `bujur_timur`, `lintang_selatan`, `legalitas`, `tipe_milik`, `alas_hak`, `luas_lahan`, `jumlah_lantai`, `luas`, `tinggi`, `kelas_tinggi`, `kompleks`, `kepadatan`, `permanensi`, `risk_bakar`, `penangkal`, `struktur_bawah`, `struktur_bangunan`, `struktur_atap`, `kode_provinsi`, `kode_kabupaten`, `kode_kecamatan`, `kode_kelurahan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 1, 'SDN Guwo Terus 1', 112.747082, -7.259171, 'Legal', 'Negara', '', 2.22, 2, 1.012, 4.12, 'Sedang', 'Khusus', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', '', '', '', '', '', '', '', '2020-10-13 07:32:10', '2020-10-13 10:07:10', '2020-10-13 10:07:10');
+(1, 1, 'SDN Rejoagung 1', 121.2, 12.33, 'Legal', 'Negara', 'Letter C', 123.12, 2, 112.314, 11, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-15 10:32:06', '2020-10-15 10:32:06', NULL),
+(5, 1, 'SDN Semboro 4', 113, 8, 'Legal', 'Negara', 'Letter C', 50, 2, 45, 10, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', '35', '3509', '3509150', '3509150002', '2020-10-15 00:20:48', '2020-10-15 00:20:48', NULL),
+(8, 1, 'SDN Sidomulyo 1', 113.567, 8.768, 'Legal', 'Negara', 'Letter C', 129.2, 2, 110.2, 10.66, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', '35', '3509', '3509150', '3509150004', '2020-10-15 03:33:33', '2020-10-15 03:33:33', NULL),
+(11, 1, 'SDN Sidomekar 2', 121.13, 11.2, 'Legal', 'Negara', 'Letter C', 312.1, 1, 12.3, 12, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-15 10:41:55', '2020-10-15 10:41:55', NULL),
+(12, 1, 'SDN Sidomulyo 1', 1, 1, NULL, 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-15 10:50:04', '2020-10-15 10:50:21', '2020-10-15 10:50:21'),
+(13, 1, 'SDN Semboro 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-15 10:51:04', '2020-10-15 10:51:04', NULL),
+(14, 1, 'SDN Pondok Dalem 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-15 11:00:11', '2020-10-19 07:04:52', '2020-10-19 07:04:52'),
+(15, 1, 'SDN Semboro 21', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-15 11:01:52', '2020-10-15 11:01:52', NULL),
+(16, 6, 'Universitas Jember', 113.22, 8.11, 'Legal', 'Negara', 'Letter C', 300.2, 4, 297.3, 10, 'Tinggi', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', NULL, NULL, NULL, NULL, '2020-10-16 01:33:54', '2020-10-16 01:33:54', NULL),
+(17, 1, 'SDN Semboro 4', 113, 8, 'Legal', 'Negara', 'Letter C', 50, 2, 45, 10, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', '35', '3509', '3509150', '3509150002', '2020-10-16 03:45:32', '2020-10-16 03:51:00', '2020-10-16 03:51:00'),
+(74, 1, 'Gedung Lab Biologi', 67.8, 89.8, 'Legalitas', 'Negara', 'Hak A', 1714.98, 7, 9000, 899, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'i', 'j', 'k', '35', '3508', '3508020', '3508020003', '2020-10-19 06:43:06', '2020-10-19 08:54:03', NULL),
+(75, NULL, 'SDN Rejoagung 1', 121.2, 12.33, 'Legal', 'Negara', 'Letter C', 123.12, 2, 112.314, 11, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:27', '2020-10-19 10:31:27', NULL),
+(76, NULL, 'SDN Semboro 4', 113, 8, 'Legal', 'Negara', 'Letter C', 50, 2, 45, 10, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:28', '2020-10-19 10:31:28', NULL),
+(77, NULL, 'SDN Sidomulyo 1', 113.567, 8.768, 'Legal', 'Negara', 'Letter C', 129.2, 2, 110.2, 10.66, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:28', '2020-10-19 10:31:28', NULL),
+(78, NULL, 'SDN Sidomekar 2', 121.13, 11.2, 'Legal', 'Negara', 'Letter C', 312.1, 1, 12.3, 12, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:28', '2020-10-19 10:31:28', NULL),
+(79, NULL, 'SDN Semboro 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:28', '2020-10-19 10:31:28', NULL),
+(80, NULL, 'SDN Pondok Dalem 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:29', '2020-10-19 10:31:29', NULL),
+(81, NULL, 'SDN Semboro 21', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:31:29', '2020-10-19 10:31:29', NULL),
+(82, NULL, 'Universitas Jember', 113.22, 8.11, 'Legal', 'Negara', 'Letter C', 300.2, 4, 297.3, 10, 'Tinggi', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', NULL, NULL, NULL, NULL, '2020-10-19 10:31:29', '2020-10-19 10:31:29', NULL),
+(83, NULL, 'Gedung Lab Fisika', 67.8, 89.8, 'Legalitas', 'Negara', 'Hak A', 1714.98, 7, 9000, 899, 'Sedang', 'Khusus', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'i', 'j', 'k', NULL, NULL, NULL, NULL, '2020-10-19 10:31:29', '2020-10-19 10:31:41', '2020-10-19 10:31:41'),
+(84, NULL, 'SDN Rejoagung 1', 121.2, 12.33, 'Legal', 'Negara', 'Letter C', 123.12, 2, 112.314, 11, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:54', '2020-10-19 10:48:54', NULL),
+(85, NULL, 'SDN Semboro 4', 113, 8, 'Legal', 'Negara', 'Letter C', 50, 2, 45, 10, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(86, NULL, 'SDN Sidomulyo 1', 113.567, 8.768, 'Legal', 'Negara', 'Letter C', 129.2, 2, 110.2, 10.66, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(87, NULL, 'SDN Sidomekar 2', 121.13, 11.2, 'Legal', 'Negara', 'Letter C', 312.1, 1, 12.3, 12, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(88, NULL, 'SDN Semboro 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(89, NULL, 'SDN Pondok Dalem 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(90, NULL, 'SDN Semboro 21', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(91, NULL, 'Universitas Jember', 113.22, 8.11, 'Legal', 'Negara', 'Letter C', 300.2, 4, 297.3, 10, 'Tinggi', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', NULL, NULL, NULL, NULL, '2020-10-19 10:48:55', '2020-10-19 10:48:55', NULL),
+(92, NULL, 'Gedung Lab Fisika', 67.8, 89.8, 'Legalitas', 'Negara', 'Hak A', 1714.98, 7, 9000, 899, 'Sedang', 'Khusus', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'i', 'j', 'k', NULL, NULL, NULL, NULL, '2020-10-19 10:48:56', '2020-10-19 10:55:11', '2020-10-19 10:55:11'),
+(93, NULL, 'SDN Rejoagung 1', 121.2, 12.33, 'Legal', 'Negara', 'Letter C', 123.12, 2, 112.314, 11, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:22', '2020-10-19 11:06:22', NULL),
+(94, NULL, 'SDN Semboro 4', 113, 8, 'Legal', 'Negara', 'Letter C', 50, 2, 45, 10, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:22', '2020-10-19 11:06:22', NULL),
+(95, NULL, 'SDN Sidomulyo 1', 113.567, 8.768, 'Legal', 'Negara', 'Letter C', 129.2, 2, 110.2, 10.66, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:22', '2020-10-19 11:06:22', NULL),
+(96, NULL, 'SDN Sidomekar 2', 121.13, 11.2, 'Legal', 'Negara', 'Letter C', 312.1, 1, 12.3, 12, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:22', '2020-10-19 11:06:22', NULL),
+(97, NULL, 'SDN Semboro 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:22', '2020-10-19 11:06:22', NULL),
+(98, NULL, 'SDN Pondok Dalem 1', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:22', '2020-10-19 11:06:22', NULL),
+(99, NULL, 'SDN Semboro 21', 1, 1, 'Legal', 'Negara', 'Letter C', 1, 1, 1, 1, 'Sedang', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'B', 'B', 'B', NULL, NULL, NULL, NULL, '2020-10-19 11:06:23', '2020-10-19 11:06:23', NULL),
+(100, NULL, 'Universitas Jember', 113.22, 8.11, 'Legal', 'Negara', 'Letter C', 300.2, 4, 297.3, 10, 'Tinggi', 'Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', NULL, NULL, NULL, NULL, '2020-10-19 11:06:23', '2020-10-19 11:06:23', NULL),
+(101, NULL, 'Gedung Lab Fisika', 67.8, 89.8, 'Legalitas', 'Negara', 'Hak A', 1714.98, 7, 9000, 899, 'Sedang', 'Khusus', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'i', 'j', 'k', NULL, NULL, NULL, NULL, '2020-10-19 11:06:23', '2020-10-20 04:12:40', '2020-10-20 04:12:40');
 
 -- --------------------------------------------------------
 
@@ -88,16 +125,20 @@ INSERT INTO `gedung` (`id`, `id_gedung_kategori`, `nama`, `bujur_timur`, `lintan
 
 CREATE TABLE `gedung_ketegori` (
   `id` int(11) NOT NULL,
-  `nama` varchar(64) COLLATE utf8_unicode_ci NOT NULL
+  `nama` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `gedung_ketegori`
 --
 
-INSERT INTO `gedung_ketegori` (`id`, `nama`) VALUES
-(1, 'Sekolah'),
-(6, 'Universitas');
+INSERT INTO `gedung_ketegori` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Sekolah', NULL, '2020-10-20 08:09:00', NULL),
+(6, 'Universitas', NULL, NULL, NULL),
+(7, 'Kantor Dinas', '2020-10-20 08:08:54', '2020-10-20 08:08:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -82489,13 +82530,7 @@ CREATE TABLE `komponen` (
 --
 
 INSERT INTO `komponen` (`id`, `nama`, `bobot`, `id_satuan`, `id_parent`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'tes1', NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'tes2', NULL, 2, NULL, NULL, NULL, NULL),
-(8, 'tes3', NULL, 2, NULL, NULL, NULL, NULL),
-(9, 'tes4', NULL, 2, NULL, NULL, NULL, NULL),
-(10, 'tes11', NULL, 2, 1, NULL, NULL, NULL),
-(11, 'tes12', NULL, 2, 1, NULL, NULL, NULL),
-(12, 'tes13', NULL, 2, 1, NULL, NULL, NULL);
+(252, 'BUKU', 10, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83091,6 +83126,15 @@ CREATE TABLE `model_has_roles` (
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\User', 2),
+(1, 'App\\User', 4),
+(2, 'App\\User', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -83112,10 +83156,48 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` enum('default','role','gedung','satuan','komponen','kerusakan','users') COLLATE utf8mb4_unicode_ci DEFAULT 'default',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `name_alias`, `guard_name`, `category`, `created_at`, `updated_at`) VALUES
+(9, 'role.*', 'semua', 'web', 'role', NULL, NULL),
+(10, 'role.create', 'create role', 'web', 'role', '2020-10-19 17:51:52', '2020-10-19 17:51:52'),
+(11, 'role.read', 'read role', 'web', 'role', '2020-10-19 17:52:01', '2020-10-19 17:52:01'),
+(12, 'role.update', 'update role', 'web', 'role', '2020-10-19 17:52:08', '2020-10-19 17:52:08'),
+(13, 'role.delete', 'delete role', 'web', 'role', '2020-10-19 17:52:17', '2020-10-19 17:52:17'),
+(38, 'user.*', 'semua', 'web', 'users', '2020-10-19 23:43:40', '2020-10-19 23:43:40'),
+(39, 'user.create', 'create user', 'web', 'users', '2020-10-19 23:43:42', '2020-10-19 23:43:42'),
+(40, 'user.read', 'read user', 'web', 'users', '2020-10-19 23:43:43', '2020-10-19 23:43:43'),
+(41, 'user.update', 'update user', 'web', 'users', '2020-10-19 23:43:44', '2020-10-19 23:43:44'),
+(42, 'user.delete', 'delete user', 'web', 'users', '2020-10-19 23:43:45', '2020-10-19 23:43:45'),
+(43, 'gedung.*', 'semua', 'web', 'gedung', '2020-10-19 23:44:50', '2020-10-19 23:44:50'),
+(44, 'gedung.create', 'create gedung', 'web', 'gedung', '2020-10-19 23:44:50', '2020-10-19 23:44:50'),
+(45, 'gedung.read', ' read gedung', 'web', 'gedung', '2020-10-19 23:44:51', '2020-10-19 23:44:51'),
+(46, 'gedung.update', 'update  gedung', 'web', 'gedung', '2020-10-19 23:44:52', '2020-10-19 23:44:52'),
+(47, 'gedung.delete', 'delete  gedung', 'web', 'gedung', '2020-10-19 23:44:53', '2020-10-19 23:44:53'),
+(48, 'satuan.*', 'semua', 'web', 'satuan', '2020-10-20 01:07:51', '2020-10-20 01:07:51'),
+(49, 'satuan.create', 'create satuan', 'web', 'satuan', '2020-10-20 01:07:52', '2020-10-20 01:07:52'),
+(50, 'satuan.read', 'read satuan', 'web', 'satuan', '2020-10-20 01:07:53', '2020-10-20 01:07:53'),
+(51, 'satuan.update', 'update satuan', 'web', 'satuan', '2020-10-20 01:07:54', '2020-10-20 01:07:54'),
+(52, 'satuan.delete', 'delete satuan', 'web', 'satuan', '2020-10-20 01:07:55', '2020-10-20 01:07:55'),
+(53, 'komponen.*', 'semua', 'web', 'komponen', '2020-10-20 01:10:13', '2020-10-20 01:10:13'),
+(54, 'komponen.create', 'create komponen', 'web', 'komponen', '2020-10-20 01:10:15', '2020-10-20 01:10:15'),
+(55, 'komponen.read', 'read komponen', 'web', 'komponen', '2020-10-20 01:10:16', '2020-10-20 01:10:16'),
+(56, 'komponen.update', 'update komponen', 'web', 'komponen', '2020-10-20 01:10:17', '2020-10-20 01:10:17'),
+(57, 'komponen.delete', 'delete komponen', 'web', 'komponen', '2020-10-20 01:10:20', '2020-10-20 01:10:20'),
+(58, 'kerusakan.*', 'semua', 'web', 'kerusakan', '2020-10-20 01:13:03', '2020-10-20 01:13:03'),
+(59, 'kerusakan.create', 'create kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:04', '2020-10-20 01:13:04'),
+(60, 'kerusakan.read', 'read kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:06', '2020-10-20 01:13:06'),
+(61, 'kerusakan.update', 'update kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:08', '2020-10-20 01:13:08'),
+(62, 'kerusakan.delete', 'delete kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:09', '2020-10-20 01:13:09');
 
 -- --------------------------------------------------------
 
@@ -83182,6 +83264,16 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'web', '2020-10-12 02:53:13', '2020-10-12 02:53:13'),
+(2, 'user', 'web', '2020-10-12 02:53:13', '2020-10-12 02:53:13'),
+(25, 'PACK', 'web', '2020-10-20 02:40:39', '2020-10-20 02:40:39'),
+(31, 'PA', 'web', '2020-10-20 02:50:46', '2020-10-20 03:21:37');
+
 -- --------------------------------------------------------
 
 --
@@ -83192,6 +83284,54 @@ CREATE TABLE `role_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(9, 1),
+(10, 1),
+(10, 2),
+(11, 1),
+(11, 2),
+(12, 1),
+(13, 1),
+(38, 1),
+(39, 1),
+(39, 2),
+(40, 1),
+(40, 2),
+(41, 1),
+(42, 1),
+(43, 1),
+(44, 1),
+(44, 2),
+(45, 1),
+(45, 2),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(49, 2),
+(50, 1),
+(50, 2),
+(51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(54, 2),
+(55, 1),
+(55, 2),
+(56, 1),
+(57, 1),
+(58, 1),
+(59, 1),
+(59, 2),
+(60, 1),
+(60, 2),
+(61, 1),
+(62, 1);
 
 -- --------------------------------------------------------
 
@@ -83238,7 +83378,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$6USGzT2uRmv8FNUsq6CSQOk1XCG0i8IVSZ.xvLrMnraQD4WVq0r8i', NULL, NULL, NULL);
+(4, 'admin', 'admin@gmail.com', NULL, '$2y$10$pyFC1yvOSAWO5y0UJVO2xO.49KuI.1/HHXQvZ3Vk7Ox7tV2aoFImC', NULL, '2020-10-19 17:33:06', '2020-10-19 17:33:06'),
+(5, 'user', 'user@gmail.com', NULL, '$2y$10$B1DiIy/Zv8Hzci3IMu8eDuhuSGeY4z5utU4JRNXyThrw4q7iwRdWO', NULL, '2020-10-19 17:33:07', '2020-10-19 17:33:07');
 
 --
 -- Indexes for dumped tables
@@ -83407,13 +83548,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gedung`
 --
 ALTER TABLE `gedung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `gedung_ketegori`
 --
 ALTER TABLE `gedung_ketegori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kerusakan`
@@ -83443,7 +83584,7 @@ ALTER TABLE `kerusakan_surveyor`
 -- AUTO_INCREMENT for table `komponen`
 --
 ALTER TABLE `komponen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 
 --
 -- AUTO_INCREMENT for table `komponen_opsi`
@@ -83461,13 +83602,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `satuan`
@@ -83479,7 +83620,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
