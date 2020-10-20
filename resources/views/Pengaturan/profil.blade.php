@@ -15,10 +15,12 @@
       
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <form>
+            @csrf
                     <div class="container p-3 my-3 row">
                         <div class="card">
                             <div class="card-header">
-                                Nama : Hasbi Maulana 
+                                Nama : {{ $profile->name }}
                             </div>
                             <div class="card-body">
                             <div class="row">
@@ -26,23 +28,29 @@
                                     Email 
                                 </div>
                                 <div class="col-sm-8">
-                                    : maulanahasbi09@gmail.com
+                                    : {{ $profile->email }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Alamat  
+                                    Tanggal Akun Dibuat 
                                 </div>
                                 <div class="col-sm-8">
-                                    : Indonesia
+                                    : {{ $profile->created_at }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Role  
+                                    Tanggal Akun Di-Update
                                 </div>
+                                @if ($profile->updated_at == null)
                                 <div class="col-sm-8">
-                                    : Super Admin
+                                    : -
                                 </div>
+                                @else
+                                <div class="col-sm-8">
+                                    : {{ $profile->updated_at }}
+                                </div>
+                                @endif
                             </div>
                             <a class="btn btn-warning float-left mt-2" href="{{url('pengaturan')}}" role="button">Ganti Kata Sandi</a>
-                            
+            </form>        
         </table>
       </div>
     </div>

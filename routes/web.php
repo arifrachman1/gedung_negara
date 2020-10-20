@@ -156,11 +156,11 @@ Route::get('edit_view_master_kerusakan', function (){
 
 //---------------PENGATURAN------------------
 
-Route::get('pengaturan', function (){
-    return view('pengaturan/pengaturankw');
-});
+Route::get('pengaturan', 'PengaturanController@pengaturan');
 
 Route::get('profil', 'PengaturanController@profil');
+
+Route::post('update_pwd/{id}', 'PengaturanController@updatePwd');
 
 //-------------KERUSAKAN--------------
 

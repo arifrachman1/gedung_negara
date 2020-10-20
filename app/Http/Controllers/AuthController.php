@@ -49,6 +49,7 @@ class AuthController extends Controller
  
         if (Auth::check()) {
             //Login Success
+            Session::put('name',$data['name']);
             return redirect()->route('dashboard');
         } else {
             //Login Fail
