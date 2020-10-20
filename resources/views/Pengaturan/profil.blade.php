@@ -19,32 +19,38 @@
             @csrf
                     <div class="container p-3 my-3 row">
                         <div class="card">
-                            <div class="card-header">
-                                Nama : {{ $profile->name }}
+                            <div class="row">
+                                
                             </div>
                             <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 mb-2">
+                                    Username
+                                </div>
+                                <div class="col-sm-8 mb-2">
+                                   : {{ $profile->name }}
+                                </div>
+                                <div class="col-sm-4 mb-2">
                                     Email 
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 mb-2">
                                     : {{ $profile->email }}
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 mb-2">
                                     Tanggal Akun Dibuat 
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 mb-2">
                                     : {{ $profile->created_at }}
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 mb-2">
                                     Tanggal Akun Di-Update
                                 </div>
                                 @if ($profile->updated_at == null)
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 mb-2">
                                     : -
                                 </div>
                                 @else
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 mb-2">
                                     : {{ $profile->updated_at }}
                                 </div>
                                 @endif
