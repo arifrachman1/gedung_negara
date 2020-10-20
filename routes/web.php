@@ -196,26 +196,43 @@ Route::get('tambahrole', function (){
     return view('role/tambah_role');
 });
 
-Route::get('test', function (){
-    $inputFileName = '../storage/excel_template/temp_1.xlsx';
+Route::get('sample_excel', function (){
+    $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
 
     /** Load $inputFileName to a Spreadsheet object **/
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
     $sheet = $spreadsheet->getActiveSheet();
     $data = [
-        ["nama" => "ghufron", "umur" => 11],
-        ["nama" => "fahmi", "umur" => 12],
-        ["nama" => "arif", "umur" => 9],
+        ["Nama" => "SDN Ampelgading 1", "BT" => 121.2, "LS" => 12.33, "Legalitas" => "Legal", "Tipe_Milik" => "Negara", "Alas_Hak" => "Letter C", "Luas_Lahan" => 123.12, "Jml_Lantai" => 2, "Luas_BG" => 112.314, "Tinggi_BG" => 11, "Klas_Tggi" => "Sedang", "Kompleks" => "Sedang", "Kepadatan" => "Lokasi Kepadatan Sedang", "Permanensi" => "Permanen", "Risk_Bakar" => "Rendah", "Penangkal" => "Pasif", "Stktur_Bwh" => "A", "Stktur_BG" => "A", "Stktur_Atp" => "A"],
+        ["Nama" => "SDN Ranuyoso 1", "BT" => 121.2, "LS" => 12.33, "Legalitas" => "Legal", "Tipe_Milik" => "Negara", "Alas_Hak" => "Letter C", "Luas_Lahan" => 123.12, "Jml_Lantai" => 2, "Luas_BG" => 112.314, "Tinggi_BG" => 11, "Klas_Tggi" => "Sedang", "Kompleks" => "Sedang", "Kepadatan" => "Lokasi Kepadatan Sedang", "Permanensi" => "Permanen", "Risk_Bakar" => "Rendah", "Penangkal" => "Pasif", "Stktur_Bwh" => "A", "Stktur_BG" => "A", "Stktur_Atp" => "A"],
+        ["Nama" => "SDN Tempeh 1", "BT" => 121.2, "LS" => 12.33, "Legalitas" => "Legal", "Tipe_Milik" => "Negara", "Alas_Hak" => "Letter C", "Luas_Lahan" => 123.12, "Jml_Lantai" => 2, "Luas_BG" => 112.314, "Tinggi_BG" => 11, "Klas_Tggi" => "Sedang", "Kompleks" => "Sedang", "Kepadatan" => "Lokasi Kepadatan Sedang", "Permanensi" => "Permanen", "Risk_Bakar" => "Rendah", "Penangkal" => "Pasif", "Stktur_Bwh" => "A", "Stktur_BG" => "A", "Stktur_Atp" => "A"],
     ];
     $i = 1;
     foreach($data as $d){
         $i++;
         $sheet->setCellValue('A'.$i, ($i-1));
-        $sheet->setCellValue('B'.$i, $d['nama']);
-        $sheet->setCellValue('C'.$i, $d['umur']);
+        $sheet->setCellValue('B'.$i, $d['Nama']);
+        $sheet->setCellValue('C'.$i, $d['BT']);
+        $sheet->setCellValue('D'.$i, $d['LS']);
+        $sheet->setCellValue('E'.$i, $d['Legalitas']);
+        $sheet->setCellValue('F'.$i, $d['Tipe_Milik']);
+        $sheet->setCellValue('G'.$i, $d['Alas_Hak']);
+        $sheet->setCellValue('H'.$i, $d['Luas_Lahan']);
+        $sheet->setCellValue('I'.$i, $d['Jml_Lantai']);
+        $sheet->setCellValue('J'.$i, $d['Luas_BG']);
+        $sheet->setCellValue('K'.$i, $d['Tinggi_BG']);
+        $sheet->setCellValue('L'.$i, $d['Klas_Tggi']);
+        $sheet->setCellValue('M'.$i, $d['Kompleks']);
+        $sheet->setCellValue('N'.$i, $d['Kepadatan']);
+        $sheet->setCellValue('O'.$i, $d['Permanensi']);
+        $sheet->setCellValue('P'.$i, $d['Risk_Bakar']);
+        $sheet->setCellValue('Q'.$i, $d['Penangkal']);
+        $sheet->setCellValue('R'.$i, $d['Stktur_Bwh']);
+        $sheet->setCellValue('S'.$i, $d['Stktur_BG']);
+        $sheet->setCellValue('T'.$i, $d['Stktur_Atp']);
     }
 
     $writer = new Xlsx($spreadsheet);
-    $writer->save('hello_world.xlsx');
-    return redirect('hello_world.xlsx');
+    $writer->save('sample_excel.xlsx');
+    return redirect('sample_excel.xlsx');
 });

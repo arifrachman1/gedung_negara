@@ -28,6 +28,11 @@
                         Export Excel
                     </span> 
                 </a>
+                <a class="btn btn-grey btn-icon-split" href="{{ url('sample_excel') }}" role="button">
+                    <span class="icon text-white-100">
+                        Sampel Excel
+                    </span> 
+                </a>
             </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
