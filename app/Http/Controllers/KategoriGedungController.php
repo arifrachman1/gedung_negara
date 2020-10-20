@@ -17,7 +17,10 @@ class KategoriGedungController extends Controller
     }
 
     public function input_post(Request $request) {
+        $row = KategoriGedung::count(); 
+        $id = ++$row;
         $input = new KategoriGedung;
+        $input->id = $id;
         $input->nama = $request->nama_jenis_gedung;
         $input->save();
         return redirect('master_jenisgedung');

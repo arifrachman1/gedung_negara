@@ -41,7 +41,7 @@
                       <label for="email">Email:</label>
                       <input name="email" type="email" class="form-control form-control" placeholder="Email" value="{{ $edit->email }}" required>
                     </div>
-                    <input type="password" name="password" id="txtPassword" placeholder="Kata Sandi" value="{{ $edit->password }}" hidden>
+                    
                     <hr>
                     <div class="col">
                     <input class="btn btn-success mr-1" type="submit" id="btnSubmit" value="Submit" />  

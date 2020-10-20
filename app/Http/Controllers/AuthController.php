@@ -49,7 +49,8 @@ class AuthController extends Controller
  
         if (Auth::check()) {
             //Login Success
-            return redirect()->route('dashboard');
+            Session::put('name',$data['name']);
+            return "<script>alert('Anda telah berhasil login');</script>".redirect()->route('dashboard');
         } else {
             //Login Fail
             Session::flash('error', 'Username atau kata sandi salah');

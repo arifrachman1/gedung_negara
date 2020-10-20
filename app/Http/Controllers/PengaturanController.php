@@ -9,8 +9,27 @@ use App\User;
 class PengaturanController extends Controller
 {
     public function profil() {
-        $email = Session::get('email');
-        dd($email);
-        return view('Pengaturan/profil', compact('email'));
+        $name = Session::get('name');
+        $profile = User::where('name', $name)->first();
+        return view('Pengaturan/profil', compact('profile'));
     }
+
+    public function pengaturan() {
+        $name = Session::get('name');
+        $user = User::where('name', $name)->first();
+        return view('pengaturan/pengaturankw', compact('user'));
+    }
+
+    public function updatePwd($id, Request $request) {
+        $data = User::find($id);
+        $password = $data->password;
+        if(password_verify($request->old_pwd, $password)) {
+            $data->password = bcrypt($request->new_pwd);
+            $data->update();
+            return "<script>alert('Kata sandi telah diperbarui');</script>".redirect('profil');
+        } else {
+            return redirect('pengaturan')->with('alert', 'Kata sandi lama salah!');
+        }
+        
+    } 
 }
