@@ -26,11 +26,11 @@
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
-                    <select class="form-control">
+                    <select class="form-control" name="role" required>
                       <option>Pilih Role</option>
-                      <option value="1">Admin</option>
-                      <option value="2">Superadmin</option>
-                      <option value="3">Bukan Admin</option>
+                      @foreach($role as $val)
+                      <option value="{{ $val->name }}">{{ $val->name }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <!--<div class="col-sm-6 mb-3 mb-sm-0">
@@ -46,8 +46,8 @@
                       <input type="password" name="password" class="form-control form-control-user" id="txtPassword" placeholder="Kata Sandi" required>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label for="pwd">Ulangi Kata Sandi:</label>
-                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="Kata Sandi" required>
+                    <label for="pwd">Konfirmasi Kata Sandi:</label>
+                      <input type="password" class="form-control form-control-user" id="txtConfirmPassword" placeholder="Konfirmasi Kata Sandi" required>
                     </div>
                     <hr>
                     <div class="col">
@@ -65,7 +65,7 @@
                                   var password = $("#txtPassword").val();
                                   var confirmPassword = $("#txtConfirmPassword").val();
                                   if (password != confirmPassword) {
-                                      alert("Kata Sandi dan konfirmasi Kata Sandi harus sama!");
+                                      alert("Kata Sandi dan Konfirmasi Kata Sandi Harus Sama!");
                                       return false;
                                   }
                                   return true;

@@ -38,12 +38,9 @@
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
                   <td>
-                  @can('satuan.update')
-                    <a class="btn btn-warning" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
-                  @endcan
-                  @can('satuan.delete')
-                    <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
-                  @endcan
+                 
+                    <a class="btn btn-warning" @can('satuan.update') href="{{url('editsatuan')}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
+                    <a class="btn btn-danger" @can('satuan.delete') href="#"><i class="button" @endcan><span class="icon text-white-100">Hapus</span> </i></a>
                   </td>             
                 </tr> 
               @endforeach                      

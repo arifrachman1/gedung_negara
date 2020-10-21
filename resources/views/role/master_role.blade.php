@@ -13,19 +13,19 @@
         <h6 class="m-0 font-weight-bold text-white">MASTER ROLE</h6>
       </div>
         <div class="card-body">
-        <div class=" py-3">
-        @can('role.create')
+        <div class=" py-3">       
             <a href="{{url('tambahrole')}}" class="btn btn-success btn-icon-split">
+            @can('role.create')
                 <span class="icon text-white-100">
                     Tambah
                 </span> 
+                @endcan
                   @if (session('error'))
                     @alert(['type' => 'danger'])
                       {!! session('error') !!}
                     @endalert
                   @endif
-            </a> 
-          @endcan
+            </a>         
         </div>
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -46,17 +46,10 @@
                     <td>{{ $val->name }}</td>
                     <td>{{ $val->guard_name }}</td>
                     <td>{{ $val->created_at }}</td>                     
-                    <td>
-                    @can('role.read')
-                      <a class="btn btn-info mr-1" href="{{route('role.detail', ['id' => $val->id])}}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a>
-                    @endcan
-
-                    @can('role.update')
-                      <a class="btn btn-warning mr-1" href="{{route('role.update', ['id' => $val->id])}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>
-                    @endcan
-                    @can('role.delete')
-                      <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
-                    @endcan
+                    <td>                    
+                      <a class="btn btn-info mr-1" @can('role.read') href="{{route('role.detail', ['id' => $val->id])}}" @endcan><i class="button"><span class="icon text-white-100">Detail</span> </i></a>
+                      <a class="btn btn-warning mr-1" @can('role.update') href="{{route('role.update', ['id' => $val->id])}}"@endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a>                                      
+                      <button @can('role.delete') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                    
                     </td>                                       
                   <tr>
                   @empty

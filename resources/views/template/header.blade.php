@@ -68,21 +68,21 @@
       </li>
       @endcan
       <!-- Nav Item - Pages Collapse Menu -->
-      @can('gedung.read')
+     
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-building"></i>
           <span>Master Gedung</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Master Gedung:</h6>
-            <a class="collapse-item" href="{{url('master_gedung')}}">Gedung</a>
-            <a class="collapse-item" href="{{url('master_jenisgedung')}}">Jenis Gedung</a>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Master Gedung:</h6>
+              @can('gedung.read')<a class="collapse-item" href="{{url('master_gedung')}}">Gedung</a> @endcan
+              @can('jenisgedung.read')<a class="collapse-item" href="{{url('master_jenisgedung')}}">Jenis Gedung</a> @endcan
+            </div>
           </div>
-        </div>
       </li>
-      @endcan
+     
       <!-- Nav Item - Utilities Collapse Menu -->
       @can('satuan.read')
       <li class="nav-item">

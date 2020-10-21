@@ -34,7 +34,14 @@ class AuthController extends Controller
             'password.required'     => 'kata sandi wajib diisi',
             'password.string'       => 'Password harus berupa string'
         ];
-        $validator = Validator::make($request->all(), $rules, $messages);
+
+        $success = [
+
+            'success' => 'Pesan Berhasil'
+
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages, $success);
  
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput($request->all);
@@ -50,7 +57,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             //Login Success
             Session::put('name',$data['name']);
-            return "<script>alert('Anda telah berhasil login');</script>".redirect()->route('dashboard');
+            return redirect()->route('dashboard');
         } else {
             //Login Fail
             Session::flash('error', 'Username atau kata sandi salah');
