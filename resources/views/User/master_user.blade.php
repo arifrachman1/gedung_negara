@@ -28,7 +28,9 @@
                     <tr>
                       <th>Nama</th>
                       <th>Email</th>
+                      @can('user.delete')
                       <th>Action</th>
+                      @endcan
                     </tr>
                   </thead>
                   <tbody>
@@ -36,14 +38,16 @@
                     <tr>
                       <td>{{ $val->name }}</td>
                       <td>{{ $val->email }}</td>
-                      <td>
-                      @can('user.update')
-                      <a class="btn btn-warning mr-1" href="{{ url('edituser/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
-                      @endcan
                       @can('user.delete')
-                      <a class="btn btn-danger" href="{{ url('hapususer/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                        <td>
+                        @can('user.update')
+                        <a class="btn btn-warning mr-1" href="{{ url('edituser/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
+                        @endcan
+                        @can('user.delete')
+                        <a class="btn btn-danger" href="{{ url('hapususer/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                        @endcan
+                        </td>
                       @endcan
-                      </td>
                     </tr>
                   @endforeach
                   </tbody>
