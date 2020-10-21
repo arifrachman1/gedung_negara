@@ -105,19 +105,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('update_pwd/{id}', 'PengaturanController@updatePwd');
 
+    //--------------MASTER USER--------------------------
+    Route::get('masteruser', 'UsersController@index');
+    Route::get('tambahuser', 'UsersController@inputUser');
+    Route::post('inputuserpost', 'UsersController@inputUserPost');
+    Route::get('edituser/{id}', 'UsersController@editUser');
+    Route::post('edituserpost/{id}', 'UsersController@editUserPost');
+    Route::get('hapususer/{id}', 'UsersController@deleteUser');
+
+
 });
-
-
-
-
-//--------------MASTER USER--------------------------
-Route::get('masteruser', 'UsersController@index');
-Route::get('tambahuser', 'UsersController@inputUser');
-Route::post('inputuserpost', 'UsersController@inputUserPost');
-Route::get('edituser/{id}', 'UsersController@editUser');
-Route::post('edituserpost/{id}', 'UsersController@editUserPost');
-Route::get('hapususer/{id}', 'UsersController@deleteUser');
-
 
 //-------------MASTER KERUSAKAN----------------------
 
