@@ -13,11 +13,13 @@
             </div>
             <div class="card-body">
             <div class=" py-3">
+            @can('jenisgedung.create')
               <a class="btn btn-success btn-icon-split" href="{{url('/tambah_master_jenisgedung')}}" role="button">
                 <span class="icon text-white-100">
                   Tambah
                 </span> 
               </a>
+              @endcan
             </div>
             <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

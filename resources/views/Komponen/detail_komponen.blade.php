@@ -29,13 +29,17 @@
                                 </thead>
                                 <tbody>
                                 @php $no = 1; @endphp
-                                @foreach($detail as $val) 
+                                @forelse($detail as $val) 
                                   <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $val->nama }}</td>             
                                     <td>{{ $val->bobot }} </td>  
                                   </tr> 
-                                @endforeach  
+                                  @empty
+                                  <tr>
+                                    <td colspan="5" class="text-center">Tidak Ada SubKomponen</td>
+                                  </tr>
+                                @endforelse  
                                 </tbody>
                               </table>
                             </div>

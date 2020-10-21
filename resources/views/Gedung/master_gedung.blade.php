@@ -18,19 +18,14 @@
                         Tambah
                     </span> 
                 </a>
-                <a class="btn btn-info btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Import Excel
                     </span> 
                 </a>
-                <a class="btn btn-secondary btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
+                <a class="btn btn-success btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
                     <span class="icon text-white-100">
                         Export Excel
-                    </span> 
-                </a>
-                <a class="btn btn-grey btn-icon-split" href="{{ url('sample_excel') }}" role="button">
-                    <span class="icon text-white-100">
-                        Sampel Excel
                     </span> 
                 </a>
             </div>

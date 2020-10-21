@@ -14,11 +14,13 @@
           </div>
             <div class="card-body">
             <div class=" py-3">
+              @can('user.create')
                 <a href="{{url('tambahuser')}}" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-100">
                         Tambah
                     </span> 
                 </a>
+              @endcan
             </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -26,7 +28,9 @@
                     <tr>
                       <th>Nama</th>
                       <th>Email</th>
+                      @can('user.delete')
                       <th>Action</th>
+                      @endcan
                     </tr>
                   </thead>
                   <tbody>
@@ -34,7 +38,16 @@
                     <tr>
                       <td>{{ $val->name }}</td>
                       <td>{{ $val->email }}</td>
-                      <td><a class="btn btn-warning mr-1" href="{{ url('edituser/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a>  <a class="btn btn-danger" href="{{ url('hapususer/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a></td>
+                      @can('user.delete')
+                        <td>
+                        @can('user.update')
+                        <a class="btn btn-warning mr-1" href="{{ url('edituser/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
+                        @endcan
+                        @can('user.delete')
+                        <a class="btn btn-danger" href="{{ url('hapususer/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                        @endcan
+                        </td>
+                      @endcan
                     </tr>
                   @endforeach
                   </tbody>

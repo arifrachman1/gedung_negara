@@ -24,177 +24,132 @@ Route::get('login', 'AuthController@showFormLogin')->name('login');
 Route::post('login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');    
     Route::get('logout', 'AuthController@logout')->name('logout');
-    Route::get('master_gedung', function (){
-        return view('gedung/master_gedung');
+
+    // Route::get('dashboard', function (){
+    //     $role = Role::find(1);
+    //     $user = auth()->user();
+    //     // $role->revokePermissionTo('edit post');//delet permision
+    //     $user->can('edit post');
+    //     // $role->givePermissionTo('edit post','delete post','add post','view post');//manambah permissin\
+    //     // $user->syncPermissions(['add post','delete post']);
+// });
+    //---------------ROLE---------------------
+    Route::get('masterrole', 'RoleController@index');
+   
+
+    Route::get('/role/detail/{id}', 'RoleController@detail')->name('role.detail');
+    Route::post('/role/give-permission/{id}', 'RoleController@givePermission')->name('role.givePermission');
+    Route::get('/role/update/{id}', 'RoleController@update')->name('role.update');
+        
+    Route::get('tambahrole', 'RoleController@addRole');
+    Route::post('aksiAdd', 'RoleController@Add');
+    Route::post('destroy','RoleController@delete')->name('hapusrole'); 
+    
+    //----------------SATUAN-------------------
+    Route::get('mastersatuan','SatuanController@satuan'); 
+    Route::get('tambahsatuan', function (){
+        return view('satuan/tambah_satuan');
     });
-    Route::get('tambah_master_gedung', function (){
-        return view('gedung/tambah_master_gedung');
+    Route::get('editsatuan', function (){
+        return view('satuan/edit_satuan');
     });
-    Route::get('detail_master_gedung', function (){
-        return view('gedung/detail_master_gedung');
+
+    //-------------MASTER KOMPONEN----------------------
+
+    Route::get('masterkomponen','KomponenController@komponen'); 
+    Route::get('tambah_komponen','KomponenController@addKomponen'); 
+    Route::post('tambahAksi','KomponenController@add'); 
+
+    Route::get('edit/{id}', 'KomponenController@edit');
+    Route::post('editAksi/{id}','KomponenController@update'); 
+    Route::post('delete','KomponenController@delete')->name('hapuskomponen'); 
+    Route::get('detail/{id}','KomponenController@detail'); 
+    
+    //-------------MASTER GEDUNG-----------------------
+    Route::get('master_gedung', 'GedungController@index');
+    Route::get('tambah_master_gedung', 'GedungController@input');
+    Route::get('lokasi_kota/{id}', 'GedungController@getKabKota');
+    Route::get('lokasi_kec/{id}', 'GedungController@getKecamatan');
+    Route::get('lokasi_desa/{id}', 'GedungController@getDesaKelurahan');
+    Route::post('input_master_gedung', 'GedungController@inputPost');
+    Route::get('detail_master_gedung/{id}', 'GedungController@detail');
+    Route::get('edit_master_gedung/{id}', 'GedungController@edit');
+    Route::post('edit_master_gedung_post/{id}', 'GedungController@edit_post');
+    Route::get('tambah_excel_master_gedung', function (){
+        return view ('gedung/tambah_excel_master_gedung');
     });
-    Route::get('edit_master_gedung', function (){
-        return view('gedung/edit_master_gedung');
-    });
-    Route::get('master_user', function (){
-        return view('master_user');
-    });
-    Route::get('tambahuser', function (){
-        return view('tambah_user');
-    });
-    Route::get('edituser', function (){
-        return view('edit_user');
-    });
+
+    Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
+    Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
+    Route::post('import_excel_master_gedung', 'GedungController@importExcel');
+    // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
+    // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
+
+        
+    //--------------MASTER JENIS GEDUNG--------------------------
+
+    Route::get('master_jenisgedung', 'KategoriGedungController@index');
+    Route::get('tambah_master_jenisgedung', 'KategoriGedungController@input');
+    Route::post('tambah_master_jenisgedung_post', 'KategoriGedungController@input_post');
+    Route::get('edit_master_jenisgedung/{id}', 'KategoriGedungController@edit');
+    Route::post('edit_master_jenisgedung_post', 'KategoriGedungController@edit_post');
+    Route::get('hapus_master_jenisgedung/{id}', 'KategoriGedungController@delete');
+    
+  //---------------PENGATURAN------------------
+
+    Route::get('pengaturan', 'PengaturanController@pengaturan');
+
+    Route::get('profil', 'PengaturanController@profil');
+
+    Route::post('update_pwd/{id}', 'PengaturanController@updatePwd');
+
+    //--------------MASTER USER--------------------------
+    Route::get('masteruser', 'UsersController@index');
+    Route::get('tambahuser', 'UsersController@inputUser');
+    Route::post('inputuserpost', 'UsersController@inputUserPost');
+    Route::get('edituser/{id}', 'UsersController@editUser');
+    Route::post('edituserpost/{id}', 'UsersController@editUserPost');
+    Route::get('hapususer/{id}', 'UsersController@deleteUser');
+
+
 });
-
-//-------------MASTER GEDUNG-----------------------
-Route::get('master_gedung', 'GedungController@index');
-
-Route::get('tambah_master_gedung', 'GedungController@input');
-
-Route::get('lokasi_kota/{id}', 'GedungController@getKabKota');
-
-Route::get('lokasi_kec/{id}', 'GedungController@getKecamatan');
-
-Route::get('lokasi_desa/{id}', 'GedungController@getDesaKelurahan');
-
-Route::post('input_master_gedung', 'GedungController@inputPost');
-
-Route::get('detail_master_gedung/{id}', 'GedungController@detail');
-
-Route::get('edit_master_gedung/{id}', 'GedungController@edit');
-
-Route::post('edit_master_gedung_post/{id}', 'GedungController@edit_post');
-
-Route::get('tambah_excel_master_gedung', function (){
-    return view ('gedung/tambah_excel_master_gedung');
-});
-
-Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
-
-Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
-
-Route::post('import_excel_master_gedung', 'GedungController@importExcel');
-
-// Route::get('tambah_master_gedung_input', 'GedungController@input_action');
-
-// Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
-
-//--------------MASTER JENIS GEDUNG--------------------------
-
-Route::get('master_jenisgedung', 'KategoriGedungController@index');
-
-Route::get('tambah_master_jenisgedung', 'KategoriGedungController@input');
-
-Route::post('tambah_master_jenisgedung_post', 'KategoriGedungController@input_post');
-
-Route::get('edit_master_jenisgedung/{id}', 'KategoriGedungController@edit');
-
-Route::post('edit_master_jenisgedung_post', 'KategoriGedungController@edit_post');
-
-Route::get('hapus_master_jenisgedung/{id}', 'KategoriGedungController@delete');
-
-//--------------MASTER USER--------------------------
-Route::get('masteruser', 'UsersController@index');
-
-Route::get('tambahuser', 'UsersController@inputUser');
-
-Route::post('inputuserpost', 'UsersController@inputUserPost');
-
-Route::get('edituser/{id}', 'UsersController@editUser');
-
-Route::post('edituserpost/{id}', 'UsersController@editUserPost');
-
-Route::get('hapususer/{id}', 'UsersController@deleteUser');
-
-//-------------MASTER KOMPONEN----------------------
-
-Route::get('masterkomponen','KomponenController@komponen'); 
-Route::get('tambah_komponen','KomponenController@addKomponen'); 
-Route::post('tambahAksi','KomponenController@add'); 
-
-Route::get('edit/{id}', 'KomponenController@edit');
-Route::post('editAksi/{id}','KomponenController@update'); 
-Route::get('delete/{id}','KomponenController@delete')->name('hapuskomponen'); 
-Route::get('detail/{id}','KomponenController@detail'); 
 
 //-------------MASTER KERUSAKAN----------------------
 
 Route::get('master_kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });
-
 Route::get('tambah_master_kerusakan', function (){
     return view('kerusakan/tambah_master_kerusakan');
 });
-
 Route::get('formulir_penilaian_kerusakan', function (){
     return view('kerusakan/formulir_penilaian_kerusakan');
 });
-
 Route::get('view_master_kerusakan', function (){
     return view('kerusakan/view_master_kerusakan');
 });
-
 Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');
 });
-
 Route::get('edit_master_kerusakan', function (){
     return view('kerusakan/edit_master_kerusakan');
 });
-
 Route::get('edit_formulir_penilaian_kerusakan', function (){
     return view('kerusakan/edit_formulir_penilaian_kerusakan');
 });
-
 Route::get('edit_view_master_kerusakan', function (){
     return view('kerusakan/edit_view_master_kerusakan');
 });
 
-//---------------PENGATURAN------------------
-
-Route::get('pengaturan', 'PengaturanController@pengaturan');
-
-Route::get('profil', 'PengaturanController@profil');
-
-Route::post('update_pwd/{id}', 'PengaturanController@updatePwd');
 
 //-------------KERUSAKAN--------------
-
 Route::get('kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });
 
 
-//----------------SATUAN-------------------
-
-Route::get('mastersatuan','SatuanController@satuan'); 
-
-
-Route::get('tambahsatuan', function (){
-    return view('satuan/tambah_satuan');
-});
-
-Route::get('editsatuan', function (){
-    return view('satuan/edit_satuan');
-});
-
-//---------------ROLE---------------------
-
-Route::get('masterrole', function (){
-    return view('role/master_role');
-});
-
-Route::get('editrole', function (){
-    return view('role/edit_role');
-});
-
-Route::get('tambahrole', function (){
-    return view('role/tambah_role');
-});
 
 Route::get('sample_excel', function (){
     $inputFileName = '../storage/excel_template/temp_gedung.xlsx';

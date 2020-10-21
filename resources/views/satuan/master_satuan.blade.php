@@ -14,11 +14,13 @@
       </div>
         <div class="card-body">
         <div class=" py-3">
+        @can('satuan.create')
             <a href="{{url('tambahsatuan')}}" class="btn btn-success btn-icon-split">
                 <span class="icon text-white-100">
                     Tambah
                 </span> 
             </a>
+            @endcan
         </div>
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -36,7 +38,12 @@
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
                   <td>
-                  <a class="btn btn-warning" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                  @can('satuan.update')
+                    <a class="btn btn-warning" href="{{url('editsatuan')}}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
+                  @endcan
+                  @can('satuan.delete')
+                    <a class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                  @endcan
                   </td>             
                 </tr> 
               @endforeach                      

@@ -53,19 +53,22 @@
           <span>Beranda</span></a>
       </li>
 
+      @can('user.read')
       <li class="nav-item">
         <a class="nav-link" href="{{url('/masteruser')}}">
           <i class="fas fa-fw fa-users"></i>
           <span>Master User</span></a>
       </li>
-
+      @endcan
+      @can('role.read')
       <li class="nav-item">
         <a class="nav-link" href="{{url('/masterrole')}}">
           <i class="fas fa-fw fa-key"></i>
           <span>Master Role</span></a>
       </li>
-
+      @endcan
       <!-- Nav Item - Pages Collapse Menu -->
+      @can('gedung.read')
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-building"></i>
@@ -79,26 +82,29 @@
           </div>
         </div>
       </li>
-
+      @endcan
       <!-- Nav Item - Utilities Collapse Menu -->
+      @can('satuan.read')
       <li class="nav-item">
         <a class="nav-link" href="{{url('mastersatuan')}}">
           <i class="fas fa-fw fa-unity"></i>
           <span>Master Satuan</span></a>
       </li>
-
+      @endcan
+      @can('komponen.read')
       <li class="nav-item">
         <a class="nav-link" href="{{url('/masterkomponen')}}">
           <i class="fas fa-fw fa-boxes"></i>
           <span>Master Komponen</span></a>
       </li>
-
+      @endcan
+      @can('kerusakan.read')
       <li class="nav-item">
         <a class="nav-link" href="{{url('master_kerusakan')}}">
           <i class="fas fa-fw fa-house-damage"></i>
           <span>Master Kerusakan</span></a>
       </li>
-
+      @endcan
       <li class="nav-item">
         <a class="nav-link" href="{{url('profil')}}">
         <i class="fa fa-cog" aria-hidden="true"></i>
