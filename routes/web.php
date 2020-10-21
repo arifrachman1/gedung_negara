@@ -118,13 +118,6 @@ Route::get('edituser/{id}', 'UsersController@editUser');
 Route::post('edituserpost/{id}', 'UsersController@editUserPost');
 Route::get('hapususer/{id}', 'UsersController@deleteUser');
 
-<<<<<<< HEAD
-Route::get('edit/{id}', 'KomponenController@edit');
-Route::post('editAksi/{id}','KomponenController@update'); 
-Route::get('delete/{id}','KomponenController@delete'); 
-Route::get('detail/{id}','KomponenController@detail'); 
-=======
->>>>>>> 4b4edf7671c8c9e85f876ea2cef238f46d71b25a
 
 //-------------MASTER KERUSAKAN----------------------
 
