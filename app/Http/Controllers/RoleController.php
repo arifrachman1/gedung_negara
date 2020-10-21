@@ -33,7 +33,7 @@ class RoleController extends Controller
         $data->guard_name = $request->guard_name;
         $data->save();
         $user = Auth::user();
-        return redirect()->route('role.detail', ['id'=> $data->id]);
+        return redirect()->route('role.update', ['id'=> $data->id]);
     }
 
     public function detail(Request $request, $id)

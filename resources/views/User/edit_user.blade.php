@@ -26,11 +26,11 @@
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
-                    <select class="form-control" required>
+                    <select class="form-control" name="role" required>
                       <option>Pilih Role</option>
-                      <option value="1">Admin</option>
-                      <option value="2">Superadmin</option>
-                      <option value="3">Bukan Admin</option>
+                      @foreach($role as $val)
+                      <option value="{{ $val->name }}" {{ $val->id == $model->role_id ? 'selected' : ''}}>{{ $val->name }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <!--<div class="col-sm-6 mb-3 mb-sm-0">
@@ -41,7 +41,6 @@
                       <label for="email">Email:</label>
                       <input name="email" type="email" class="form-control form-control" placeholder="Email" value="{{ $edit->email }}" required>
                     </div>
-                    
                     <hr>
                     <div class="col">
                     <input class="btn btn-success mr-1" type="submit" id="btnSubmit" value="Submit" />  
