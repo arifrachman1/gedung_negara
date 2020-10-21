@@ -53,7 +53,7 @@
           <span>Beranda</span></a>
       </li>
 
-      @can('users.read')
+      @can('user.read')
       <li class="nav-item">
         <a class="nav-link" href="{{url('/masteruser')}}">
           <i class="fas fa-fw fa-users"></i>

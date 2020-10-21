@@ -83148,6 +83148,8 @@ CREATE TABLE `password_resets` (
 
 -- --------------------------------------------------------
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `permissions`
 --
@@ -83155,10 +83157,48 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` enum('default','role','gedung','satuan','komponen','kerusakan','users') COLLATE utf8mb4_unicode_ci DEFAULT 'default',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `name_alias`, `guard_name`, `category`, `created_at`, `updated_at`) VALUES
+(9, 'role.*', 'semua', 'web', 'role', NULL, NULL),
+(10, 'role.create', 'create role', 'web', 'role', '2020-10-19 17:51:52', '2020-10-19 17:51:52'),
+(11, 'role.read', 'read role', 'web', 'role', '2020-10-19 17:52:01', '2020-10-19 17:52:01'),
+(12, 'role.update', 'update role', 'web', 'role', '2020-10-19 17:52:08', '2020-10-19 17:52:08'),
+(13, 'role.delete', 'delete role', 'web', 'role', '2020-10-19 17:52:17', '2020-10-19 17:52:17'),
+(38, 'user.*', 'semua', 'web', 'users', '2020-10-19 23:43:40', '2020-10-19 23:43:40'),
+(39, 'user.create', 'create user', 'web', 'users', '2020-10-19 23:43:42', '2020-10-19 23:43:42'),
+(40, 'user.read', 'read user', 'web', 'users', '2020-10-19 23:43:43', '2020-10-19 23:43:43'),
+(41, 'user.update', 'update user', 'web', 'users', '2020-10-19 23:43:44', '2020-10-19 23:43:44'),
+(42, 'user.delete', 'delete user', 'web', 'users', '2020-10-19 23:43:45', '2020-10-19 23:43:45'),
+(43, 'gedung.*', 'semua', 'web', 'gedung', '2020-10-19 23:44:50', '2020-10-19 23:44:50'),
+(44, 'gedung.create', 'create gedung', 'web', 'gedung', '2020-10-19 23:44:50', '2020-10-19 23:44:50'),
+(45, 'gedung.read', ' read gedung', 'web', 'gedung', '2020-10-19 23:44:51', '2020-10-19 23:44:51'),
+(46, 'gedung.update', 'update  gedung', 'web', 'gedung', '2020-10-19 23:44:52', '2020-10-19 23:44:52'),
+(47, 'gedung.delete', 'delete  gedung', 'web', 'gedung', '2020-10-19 23:44:53', '2020-10-19 23:44:53'),
+(48, 'satuan.*', 'semua', 'web', 'satuan', '2020-10-20 01:07:51', '2020-10-20 01:07:51'),
+(49, 'satuan.create', 'create satuan', 'web', 'satuan', '2020-10-20 01:07:52', '2020-10-20 01:07:52'),
+(50, 'satuan.read', 'read satuan', 'web', 'satuan', '2020-10-20 01:07:53', '2020-10-20 01:07:53'),
+(51, 'satuan.update', 'update satuan', 'web', 'satuan', '2020-10-20 01:07:54', '2020-10-20 01:07:54'),
+(52, 'satuan.delete', 'delete satuan', 'web', 'satuan', '2020-10-20 01:07:55', '2020-10-20 01:07:55'),
+(53, 'komponen.*', 'semua', 'web', 'komponen', '2020-10-20 01:10:13', '2020-10-20 01:10:13'),
+(54, 'komponen.create', 'create komponen', 'web', 'komponen', '2020-10-20 01:10:15', '2020-10-20 01:10:15'),
+(55, 'komponen.read', 'read komponen', 'web', 'komponen', '2020-10-20 01:10:16', '2020-10-20 01:10:16'),
+(56, 'komponen.update', 'update komponen', 'web', 'komponen', '2020-10-20 01:10:17', '2020-10-20 01:10:17'),
+(57, 'komponen.delete', 'delete komponen', 'web', 'komponen', '2020-10-20 01:10:20', '2020-10-20 01:10:20'),
+(58, 'kerusakan.*', 'semua', 'web', 'kerusakan', '2020-10-20 01:13:03', '2020-10-20 01:13:03'),
+(59, 'kerusakan.create', 'create kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:04', '2020-10-20 01:13:04'),
+(60, 'kerusakan.read', 'read kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:06', '2020-10-20 01:13:06'),
+(61, 'kerusakan.update', 'update kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:08', '2020-10-20 01:13:08'),
+(62, 'kerusakan.delete', 'delete kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:09', '2020-10-20 01:13:09');
 
 -- --------------------------------------------------------
 
