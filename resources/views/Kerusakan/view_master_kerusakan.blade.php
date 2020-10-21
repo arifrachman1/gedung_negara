@@ -106,12 +106,12 @@
                     </div>
                 </div>    
                 <div class="table-responsive">
-                    <a class="btn btn-success btn-icon-split" href="{{ url('') }}" role="button">
+                    <a class="btn btn-info btn-icon-split" href="{{ url('') }}" role="button">
                         <span class="icon text-white-100">
                             Import Excel
                         </span> 
                     </a>
-                    <a class="btn btn-success btn-icon-split" href="{{ url('') }}" role="button">
+                    <a class="btn btn-secondary btn-icon-split" href="{{ url('') }}" role="button">
                         <span class="icon text-white-100">
                             Export Excel
                         </span> 
