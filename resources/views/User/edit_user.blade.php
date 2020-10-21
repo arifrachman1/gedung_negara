@@ -44,7 +44,7 @@
                     <hr>
                     <div class="col">
                     <input class="btn btn-success mr-1" type="submit" id="btnSubmit" value="Submit" />  
-                    <a class="btn btn-warning" href="{{url('masteruser')}}" ><span class="icon text-white-100">Kembali</span></a>
+                    <a class="btn btn-warning" href="{{url('masteruser')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>
