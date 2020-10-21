@@ -70,7 +70,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
-        </div>
+        </div> 
        <div class="modal-footer">
         <button type=button data-dismiss="modal" class="btn btn-danger">Tidak</button>
         <button type=submit class="btn btn-primary">Ya, hapus</button>
@@ -78,6 +78,7 @@
     </div>
   </form>
  </div>
+</div>
 </html>
 </body>
 @include('template/footer')

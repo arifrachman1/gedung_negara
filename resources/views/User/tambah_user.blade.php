@@ -21,8 +21,8 @@
                 </div>
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                     <label for="nama">Nama :</label>
-                      <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Nama" required>
+                     <label for="nama">Username :</label>
+                      <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Username" required>
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>

@@ -26,14 +26,17 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
+                      <th>No</th>
+                      <th>Username</th>
                       <th>Email</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                  @php $no = 1; @endphp
                   @foreach($user as $val)
                     <tr>
+                      <td>{{ $no++ }}</td>
                       <td>{{ $val->name }}</td>
                       <td>{{ $val->email }}</td>                      
                         <td>

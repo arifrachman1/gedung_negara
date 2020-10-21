@@ -79,8 +79,8 @@
           <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
         </div>
        <div class="modal-footer">
-        <button type=button data-dismiss="modal" class="btn btn-danger">Tidak</button>
-        <button type=submit class="btn btn-primary">Ya, hapus</button>
+        <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
+        <button type=submit class="btn btn-danger">Ya, hapus</button>
       </div>
     </div>
   </form>

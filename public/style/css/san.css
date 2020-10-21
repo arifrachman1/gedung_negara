@@ -1,3 +1,50 @@
 .san-bold{
     font-weight: bold;
 }
+
+.san-white{
+	color: white;
+}
+
+.san-no-border{
+	border: none;
+}
+
+.san-bg-1{
+	
+	width: 100%;
+	height: 300px;
+  	background-position: center; 
+  	background-repeat: no-repeat;
+}
+
+.san-bg-2{
+	width: 100%;
+	height: 200px;
+  	background-position: center; 
+  	background-repeat: no-repeat;
+}
+
+.san-bg-img-1{
+	background-image: url(" ../img/3.png");
+}
+
+.san-bg-img-2{
+	background-image: url(" ../img/2.png");
+}
+
+.san-bg-img-3{
+	background-image: url(" ../img/1.png");
+}
+
+.san-bg-img-4{
+	background-image: url(" ../img/4.png")
+}
+
+.san-bg-img-3:hover > .san-overlay {
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color:orange;
+	opacity:0.5;
+}

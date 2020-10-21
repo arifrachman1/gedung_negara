@@ -20,15 +20,14 @@
                   </div>
                 </div>
                 </br>
-                <hr>
-                    <div class="col">
+                    <div class="card-footer">
                     <button type="submit" class="btn btn-success">Simpan</button>
                     ||  
                     <a class="btn btn-warning" href="{{url('masterrole')}}" >Kembali</a>
                     </div>
                     </div>
                   </div>
-                </div>
+                
         <!-- /.container-fluid -->
         </form>
            
