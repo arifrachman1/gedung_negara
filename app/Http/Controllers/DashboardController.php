@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Gedung;
+use App\User;
+use App\KategoriGedung;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -10,6 +13,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard');
+        $user = User::count();
+        $jenis = KategoriGedung::count();
+        $gedung = Gedung::count();
+        return view('dashboard',compact('gedung','user','jenis'));
     }
 }
