@@ -15,7 +15,7 @@
               <div class="card-body">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                   <label for="nama">Nama :</label>
-                  <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama">
+                  <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama" required>
                 </div><hr>
                   <div class="col">
                     <button type="submit" class="btn btn-success mr-1">Simpan</button>                      
