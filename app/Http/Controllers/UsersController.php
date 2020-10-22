@@ -35,7 +35,7 @@ class UsersController extends Controller
 
     public function inputUserPost(Request $request) {
         $rule = [
-            'name' => 'required|unique:users',
+            'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required',
             'role' => 'required',

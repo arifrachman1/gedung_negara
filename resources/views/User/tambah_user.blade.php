@@ -28,7 +28,7 @@
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="nama">Username :</label>
                       <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Username" required>
-                      @foreach($errors->get('name') as $error)
+                      @foreach($errors->get('username') as $error)
                         <span class="help-block">{{ $error }}</span>
                       @endforeach
                   </div>
