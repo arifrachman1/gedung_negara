@@ -49,12 +49,10 @@ Route::group(['middleware' => 'auth'], function () {
     
     //----------------SATUAN-------------------
     Route::get('mastersatuan','SatuanController@satuan'); 
-    Route::get('tambahsatuan', function (){
-        return view('satuan/tambah_satuan');
-    });
-    Route::get('editsatuan', function (){
-        return view('satuan/edit_satuan');
-    });
+    Route::get('tambahsatuan','SatuanController@inputSatuan');
+    Route::get('editsatuan','SatuanController@editSatuanPost');
+    Route::post('inputsatuanpost','SatuanController@inputSatuanPost');
+    Route::post('deleteSatuan','SatuanController@delete')->name('hapussatuan'); 
 
     //-------------MASTER KOMPONEN----------------------
 

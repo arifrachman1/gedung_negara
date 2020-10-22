@@ -51,8 +51,6 @@ class KomponenController extends Controller
 
     public function edit($id) {
         $satuan = Satuan::get(); 
-
-
         $komponen = Komponen::find($id);
         $subkomponen = Komponen::where(['id_parent' => $id])->get();
         return view('Komponen/edit_komponen', compact('komponen','satuan', 'subkomponen'));

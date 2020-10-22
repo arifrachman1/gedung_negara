@@ -13,11 +13,13 @@
         </div>
             <div class="card-body">
             <div class=" py-3">
+              @can('kerusakan.create')
                 <a class="btn btn-success btn-icon-split" href="{{url('/tambah_master_kerusakan')}}" role="button">
                     <span class="icon text-white-100">
                         Tambah Kerusakan
                     </span> 
                 </a>
+              @endcan
             </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -34,9 +36,9 @@
                       <td>SMAN 19 Surabaya</td>
                       <td>Sekolah</td>
                       <td>Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
-                      <td><a class="btn btn-primary float-left mr-2" href="{{url('/view_kerusakan')}}"><i class="button"><span class="icon text-white-100">View</span></i></a>
-                          <a class="btn btn-warning float-left mr-2" href="{{url('/edit_master_kerusakan')}}"><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
-                          <a class="btn btn-danger float-left mr-2" href=""><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                      <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('/view_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
+                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('/edit_master_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
+                          <a class="btn btn-danger float-left mr-2" @can('kerusakan.create') href="" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
                     </tr>
                   </tbody>
                 </table>
