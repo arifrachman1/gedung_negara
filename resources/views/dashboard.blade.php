@@ -17,7 +17,7 @@
       <div class="card san-bg-1 san-bg-img-3">
         <div class="card-body">
           <h2 class="san-bold san-white">Gedung</h2>
-          <h1 class="san-bold san-white" style="font-size: 72px;">100</h1>
+          <h1 class="count san-bold san-white" style="font-size: 72px;">{{$gedung}}</h1>
           <div class="san-overlay">
           </div>
           </div>
@@ -29,7 +29,7 @@
           <div class="card san-bg-2 san-bg-img-1">
             <div class="card-body">
               <h4 class="san-bold san-white">Kerusakan</h4>
-              <h1 class="san-bold san-white" style="font-size: 32px;">23</h1>
+              <h1 class="count san-bold san-white" style="font-size: 32px;">0</h1>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
            <div class="card san-bg-2 san-bg-img-2">
             <div class="card-body">
               <h4 class="san-bold san-white">Jenis</h4>
-              <h1 class="san-bold san-white" style="font-size: 32px;">13</h1>
+              <h1 class="san-bold san-white" style="font-size: 32px;">{{$jenis}}</h1>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
            <div class="card san-bg-2 san-bg-img-4">
             <div class="card-body">
               <h4 class="san-bold san-white">User</h4>
-              <h1 class="san-bold san-white" style="font-size: 32px;">5</h1>
+              <h1 class="san-bold san-white" style="font-size: 32px;">{{$user}}</h1>
             </div>
           </div>
         </div>
