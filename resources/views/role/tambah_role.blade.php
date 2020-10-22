@@ -13,9 +13,12 @@
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Role</h6>
                 </div>
                 <div class="card-body">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="col-sm-6 mb-3 mb-sm-0   " >
                     <label for="nama">Nama Role :</label>
-                    <input type="text" class="form-control form-control-user" name="nama" placeholder="Nama" required>
+                    <input type="text" class="form-control form-control-user" name="name" placeholder="Nama" required>
+                      @foreach($errors->get('name') as $error)
+                        <span class="help-block">{{ $error }}</span>
+                      @endforeach
                     <input type="text" class="form-control form-control-user" name="guard_name" value="web" hidden>
                   </div>
                 </div>

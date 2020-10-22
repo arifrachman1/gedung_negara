@@ -26,10 +26,15 @@ class RoleController extends Controller
     }
 
     public function Add(Request $request){
+        
+        $this->validate($request, [
+            'name'=>'required|max:50|unique:roles,name',
+        ]);
+
         $input = $request->all();
         // dd($input); 
         $data = new Role;     
-        $data->name = $request->nama;
+        $data->name = $request->name;
         $data->guard_name = $request->guard_name;
         $data->save();
         $user = Auth::user();
