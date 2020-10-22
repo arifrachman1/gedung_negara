@@ -31,9 +31,11 @@
                           <label class="font-weight-bold">Bobot</label>
                     <input type="number" name="bobot" value="{{$komponen->bobot}}" class="form-control"> 
                   </div> 
-                <br>
-                <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||   <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
             </div>
+            <br>
+                    <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  
+                     <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  
+                     <button class="btn btn-success" type="submit">Simpan</button>
             <div id="copy">
             <div class="control-group"><br>
               @foreach($subkomponen as $key => $value)

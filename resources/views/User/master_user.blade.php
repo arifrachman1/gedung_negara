@@ -41,7 +41,7 @@
                       <td>{{ $val->email }}</td>                      
                         <td>
                          <a class="btn btn-warning mr-1" @can('user.update') href="{{ url('edituser/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
-                         <a class="btn btn-danger" @can('user.delete') href="{{ url('hapususer/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                         <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
                         </td>
                     </tr>
                   @endforeach
@@ -55,4 +55,22 @@
         <!-- /.container-fluid -->
         </body>
 @include('template/footer')
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+    <form action="{{url('')}}" method="post">
+      {{ csrf_field() }}
+      @method('POST')
+      <input type="hidden" id="" name="id">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
+        </div> 
+       <div class="modal-footer">
+        <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
+        <button type=submit class="btn btn-danger">Ya, hapus</button>
+      </div>
+    </div>
+  </form>
+ </div>
 </html>
+<script>
