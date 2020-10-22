@@ -12,19 +12,7 @@
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Anggota</h6>
                 </div>
-                @if(session('errors'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Terjadi Kesalahan:
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                  </div>
-                @endif
+                
                 @if (Session::has('success'))
                   <div class="alert alert-success">
                     {{ Session::get('success') }}
@@ -40,6 +28,9 @@
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="nama">Username :</label>
                       <input type="text" class="form-control form-control-user" name="name" id="nama" placeholder="Username" required>
+                      @foreach($errors->get('name') as $error)
+                        <span class="help-block">{{ $error }}</span>
+                      @endforeach
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
@@ -57,6 +48,9 @@
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <label for="email">Email:</label>
                       <input name="email" type="email" class="form-control form-control" placeholder="Email" required>
+                      @foreach($errors->get('email') as $error)
+                        <span class="help-block">{{ $error }}</span>
+                      @endforeach
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="pwd">Kata Sandi:</label>
