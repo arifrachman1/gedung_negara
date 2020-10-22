@@ -13,7 +13,7 @@
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Role</h6>
                 </div>
                 <div class="card-body">
-                  <div class="col-sm-6 mb-3 mb-sm-0   " >
+                  <div class="col-sm-6 mb-3 mb-sm-0  {{ $errors->get('name') ? 'has-error' : '' }} " >
                     <label for="nama">Nama Role :</label>
                     <input type="text" class="form-control form-control-user" name="name" placeholder="Nama" required>
                       @foreach($errors->get('name') as $error)
