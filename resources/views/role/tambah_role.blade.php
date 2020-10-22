@@ -30,7 +30,7 @@
                 
         <!-- /.container-fluid -->
         </form>
-           
+          
         </body>
 @include('template/footer')
 </html>

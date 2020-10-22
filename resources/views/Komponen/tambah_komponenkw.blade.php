@@ -50,8 +50,9 @@
                   </div>
                 </div>
                 <div class="card-footer">
+                     <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  
                      <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  
-                    <button class="btn btn-success" type="submit">Simpan</button>
+                     <button class="btn btn-success" type="submit">Simpan</button>
                   </div>
             <script type="text/javascript">
                 $(document).ready(function() {
