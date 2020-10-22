@@ -22,7 +22,7 @@
               </div>
               <div class="form-group">
                 <label >Nama Jenis Gedung:</label>
-                <input type="text" class="form-control" placeholder="Masukkan Nama jenis Gedung"  name="nama_jenis_gedung" required>
+                <input type="text" class="form-control" placeholder="Masukkan Nama Jenis Gedung"  name="nama_jenis_gedung" required>
                 <!-- <div class="valid-feedback">Sudah Terisi.</div>
                 <div class="invalid-feedback">Harap Di Isi.</div> -->
               </div>

@@ -22,7 +22,7 @@
               </div>
               <div class="form-group">
                 <label >Edit Nama Jenis Gedung:</label>
-                <input type="text" class="form-control" value="{{ $edit->nama }}" name="nama_jenis_gedung" required>
+                <input type="text" class="form-control" placeholder="Masukkan Nama Jenis Gedung" value="{{ $edit->nama }}" name="nama_jenis_gedung" required>
               </div>
               <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
               <a class="btn btn-warning float-left mt-2" href="{{ url('/master_jenisgedung') }}" role="button">Kembali</a>
