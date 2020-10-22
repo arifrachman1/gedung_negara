@@ -50,8 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     //----------------SATUAN-------------------
     Route::get('mastersatuan','SatuanController@satuan'); 
     Route::get('tambahsatuan','SatuanController@inputSatuan');
-    Route::get('editsatuan','SatuanController@editSatuanPost');
     Route::post('inputsatuanpost','SatuanController@inputSatuanPost');
+
+    Route::get('editsatuan/{id}','SatuanController@edit');
+    Route::post('postSatuan/{id}','SatuanController@editSatuanPost');
+
     Route::post('deleteSatuan','SatuanController@delete')->name('hapussatuan'); 
 
     //-------------MASTER KOMPONEN----------------------

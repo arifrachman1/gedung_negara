@@ -23,14 +23,15 @@ class SatuanController extends Controller
         return redirect('mastersatuan');
     }
 
-    public function editSatuan($id) {
-        $edit = Satuan::get();
+    public function edit($id) {
+        $edit = Satuan::find($id);
         return view('satuan/edit_satuan', compact('edit'));
     }
 
-    public function editSatuanPost($id, Request $request) {
+    public function editSatuanPost($id, Request $request) 
+    {
         $update = Satuan::find($id);
-        $update->nama = $request->name;
+        $update->nama = $request->nama;
         $update->update();
         
         return redirect('mastersatuan');

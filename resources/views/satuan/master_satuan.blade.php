@@ -38,9 +38,12 @@
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
                   <td>
-                 
-                    <a class="btn btn-warning" @can('satuan.update') href="{{url('editsatuan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
-                    <button @can('satuan.delete') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                    
+                    @if($no < "4" )
+                      -
+                    @else              
+                      <a class="btn btn-warning" @can('satuan.update') href="{{url('editsatuan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
+                      <button @can('satuan.delete') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                    
+                    @endif
                   </td>             
                 </tr> 
               @endforeach                      

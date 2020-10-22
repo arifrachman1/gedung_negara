@@ -7,7 +7,7 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Edit Anggota</h1>
           <div class="card shadow mb-4">
-              <form action="" method="post">
+              <form action="{{ url('edituserpost/'.$edit->id) }}" method="post">
               @csrf
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Form Edit Anggota</h6>
@@ -15,7 +15,7 @@
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                       <label for="nama">Username :</label>
-                      <input type="text" name="name" class="form-control form-control-user" id="nama" placeholder="Username"  required>
+                      <input type="text" name="name" class="form-control form-control-user" id="nama" placeholder="Username" value="{{ $edit->name }}" required>
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
