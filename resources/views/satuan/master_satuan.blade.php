@@ -26,7 +26,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>No</th>
                   <th>Nama Satuan</th>
                   <th>Action</th>
                 </tr>
@@ -38,9 +38,12 @@
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
                   <td>
-                 
-                    <a class="btn btn-warning" @can('satuan.update') href="{{url('editsatuan')}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
-                    <a class="btn btn-danger" @can('satuan.delete') href="#"><i class="button" @endcan><span class="icon text-white-100">Hapus</span> </i></a>
+                    @if($no < "4" )
+                      -
+                    @else              
+                      <a class="btn btn-warning" @can('satuan.update') href="{{url('editsatuan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | 
+                      <button @can('satuan.delete') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                    
+                    @endif
                   </td>             
                 </tr> 
               @endforeach                      
@@ -52,6 +55,35 @@
 
       </div>
         <!-- /.container-fluid -->
-        </body>
+
+<!-- Modal -->
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+    <form action="{{url('deleteSatuan')}}" method="post">
+      {{ csrf_field() }}
+      @method('POST')
+      <input type="hidden" id="id_satuan" name="id">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
+        </div> 
+       <div class="modal-footer">
+        <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
+        <button type=submit class="btn btn-danger">Ya, hapus</button>
+      </div>
+    </div>
+  </form>
+ </div>
+</div>
+</body>
 @include('template/footer')
 </html>
+<script>
+ 
+  $(document).on('click','#delete',function(){
+         let id = $(this).attr('data-id');
+         console.log(id);
+         $('#id_satuan').val(id);
+    });
+        
+    </script>
