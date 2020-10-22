@@ -26,28 +26,23 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
+                      <th>No</th>
+                      <th>Username</th>
                       <th>Email</th>
-                      @can('user.delete')
                       <th>Action</th>
-                      @endcan
                     </tr>
                   </thead>
                   <tbody>
+                  @php $no = 1; @endphp
                   @foreach($user as $val)
                     <tr>
+                      <td>{{ $no++ }}</td>
                       <td>{{ $val->name }}</td>
-                      <td>{{ $val->email }}</td>
-                      @can('user.delete')
+                      <td>{{ $val->email }}</td>                      
                         <td>
-                        @can('user.update')
-                        <a class="btn btn-warning mr-1" href="{{ url('edituser/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
-                        @endcan
-                        @can('user.delete')
-                        <a class="btn btn-danger" href="{{ url('hapususer/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
-                        @endcan
+                         <a class="btn btn-warning mr-1" @can('user.update') href="{{ url('edituser/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
+                         <a class="btn btn-danger" @can('user.delete') href="{{ url('hapususer/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
                         </td>
-                      @endcan
                     </tr>
                   @endforeach
                   </tbody>

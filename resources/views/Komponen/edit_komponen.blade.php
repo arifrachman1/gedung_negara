@@ -21,7 +21,7 @@
                         <div class="form-group">
                           <select name="id_satuan" class="form-control">
                             @foreach($satuan as $val)
-                              @if($komponen->id == $val->id)
+                              @if($komponen->id_satuan == $val->id)
                                 <option value="{{ $val->id }}" selected>{{ $val->nama }}</option>
                               @else
                                 <option value="{{ $val->id }}">{{ $val->nama }}</option>
@@ -32,7 +32,7 @@
                     <input type="number" name="bobot" value="{{$komponen->bobot}}" class="form-control"> 
                   </div> 
                 <br>
-              <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
+              <button class="btn btn-success add-more" type="button">Tambah Subkomponen</button>  ||  <button class="btn btn-success" type="submit">Simpan</button>
             </div>
             <div id="copy">
             <div class="control-group"><br>
@@ -44,7 +44,7 @@
                   <div class="form-group">
                     <select class="form-control" name="satuan2[]" id="satuan" >
                           @foreach($satuan as $val)
-                            @if($komponen->id == $val->id)
+                            @if($value->id_satuan == $val->id)
                               <option value="{{ $val->id }}" selected>{{ $val->nama }}</option>
                             @else
                               <option value="{{ $val->id }}">{{ $val->nama }}</option>

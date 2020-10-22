@@ -12,5 +12,10 @@ class Komponen extends Model
 //    / protected $fillable = ['id_parent']; //nama kolom yang ingin di masukkan
     public $timestamps = false;
 
+    public function satuan()
+    {
+        return $this->hasOne('App\Satuan', 'id', 'id_satuan');
+        
+    }
 }
 

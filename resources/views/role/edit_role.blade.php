@@ -154,13 +154,13 @@
                     </div></br>
                     <div class="card">
                       <div class="header-card bg-primary font-weight-bold text-white py-1 container-fluid">
-                        Master Pengaturan
+                        Other
                       </div>
                         <div class="body-card container-fluid">
                         @csrf
                           <div class="form-group">   
                              @php $no = 1; @endphp
-                             @foreach ($masterpengaturan as $key => $row)
+                             @foreach ($excel as $key => $row)
                              <input type="checkbox" 
                                 name="hasPermissions[]" 
                                 class="minimal-red" 

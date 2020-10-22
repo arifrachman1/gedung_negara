@@ -43,6 +43,7 @@
                   </tbody>
                 </table>
               </div>
+              <!-- <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a> -->
             </div>
           </div>
 

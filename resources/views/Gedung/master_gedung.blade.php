@@ -14,19 +14,25 @@
             <div class="card-body">
             <div class=" py-3">
                 <a class="btn btn-success btn-icon-split" href="{{ url('tambah_master_gedung') }}" role="button">
+                  @can('gedung.create')
                     <span class="icon text-white-100">
                         Tambah
                     </span> 
+                  @endcan
                 </a>
-                <a class="btn btn-success btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
+                <a class="btn btn-info btn-icon-split" href="{{ url('tambah_excel_master_gedung') }}" role="button">
+                @can('excel.import')
                     <span class="icon text-white-100">
                         Import Excel
                     </span> 
+                  @endcan
                 </a>
-                <a class="btn btn-success btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
+                <a class="btn btn-secondary btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
+                @can('excel.Export')
                     <span class="icon text-white-100">
                         Export Excel
                     </span> 
+                  @endcan
                 </a>
             </div>
               <div class="table-responsive">
@@ -65,7 +71,10 @@
                       @else
                       <td>{{ $val->luas_lahan }}</td>
                       @endif
-                      <td><a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a> |<a class="btn btn-warning" href="{{ url('edit_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a class="btn btn-danger" href="{{ url('hapus_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
+                      <td>
+                        <a class="btn btn-primary" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a>
+                       |<a class="btn btn-warning" @can('gedung.update') href="{{ url('edit_master_gedung/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
+                       |<a class="btn btn-danger" @can('gedung.delete') href="{{ url('hapus_master_gedung/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span></i></a></td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -79,4 +88,3 @@
 </body>
 @include('template/footer')
 </html>
-

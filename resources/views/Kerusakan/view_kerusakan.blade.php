@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-success">Export</button>
+                    <button class="btn btn-success">Export to Excel</button>
                 </div>
                 <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
