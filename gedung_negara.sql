@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2020 at 04:03 PM
+-- Generation Time: Oct 22, 2020 at 05:11 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -82530,7 +82530,9 @@ CREATE TABLE `komponen` (
 --
 
 INSERT INTO `komponen` (`id`, `nama`, `bobot`, `id_satuan`, `id_parent`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(252, 'BUKU', 10, 1, NULL, NULL, NULL, NULL);
+(280, 'PACK', NULL, 3, NULL, NULL, NULL, NULL),
+(357, 'kaca', 800, 2, 280, NULL, NULL, NULL),
+(358, 'PONDASI', 12, 2, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83133,7 +83135,8 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\User', 2),
 (1, 'App\\User', 4),
-(2, 'App\\User', 5);
+(2, 'App\\User', 5),
+(34, 'App\\User', 7);
 
 -- --------------------------------------------------------
 
@@ -83149,8 +83152,6 @@ CREATE TABLE `password_resets` (
 
 -- --------------------------------------------------------
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `permissions`
 --
@@ -83160,7 +83161,7 @@ CREATE TABLE `permissions` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name_alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` enum('default','role','gedung','satuan','komponen','kerusakan','users') COLLATE utf8mb4_unicode_ci DEFAULT 'default',
+  `category` enum('default','role','gedung','satuan','komponen','kerusakan','users','other') COLLATE utf8mb4_unicode_ci DEFAULT 'default',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -83199,7 +83200,14 @@ INSERT INTO `permissions` (`id`, `name`, `name_alias`, `guard_name`, `category`,
 (59, 'kerusakan.create', 'create kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:04', '2020-10-20 01:13:04'),
 (60, 'kerusakan.read', 'read kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:06', '2020-10-20 01:13:06'),
 (61, 'kerusakan.update', 'update kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:08', '2020-10-20 01:13:08'),
-(62, 'kerusakan.delete', 'delete kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:09', '2020-10-20 01:13:09');
+(62, 'kerusakan.delete', 'delete kerusakan', 'web', 'kerusakan', '2020-10-20 01:13:09', '2020-10-20 01:13:09'),
+(63, 'excel.*', 'semua', 'web', 'other', '2020-10-21 01:01:46', '2020-10-21 01:01:46'),
+(64, 'excel.import', 'import excel', 'web', 'other', '2020-10-21 01:01:48', '2020-10-21 01:01:48'),
+(65, 'excel.export', 'export excel', 'web', 'other', '2020-10-21 01:01:52', '2020-10-21 01:01:52'),
+(66, 'jenisgedung.update', 'update jenis gedung', 'web', 'gedung', '2020-10-21 01:26:16', '2020-10-21 01:26:16'),
+(67, 'jenisgedung.delete', 'delete jenis gedung', 'web', 'gedung', '2020-10-21 01:26:26', '2020-10-21 01:26:26'),
+(68, 'jenisgedung.create', 'create jenis gedung', 'web', 'gedung', NULL, NULL),
+(69, 'jenisgedung.read', 'read jenis gedung', 'web', 'gedung', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83273,8 +83281,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'web', '2020-10-12 02:53:13', '2020-10-12 02:53:13'),
 (2, 'user', 'web', '2020-10-12 02:53:13', '2020-10-12 02:53:13'),
-(25, 'PACK', 'web', '2020-10-20 02:40:39', '2020-10-20 02:40:39'),
-(31, 'PA', 'web', '2020-10-20 02:50:46', '2020-10-20 03:21:37');
+(34, 'rolea', 'web', '2020-10-21 00:49:43', '2020-10-21 00:49:43');
 
 -- --------------------------------------------------------
 
@@ -83295,15 +83302,18 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (9, 1),
 (10, 1),
 (10, 2),
+(10, 34),
 (11, 1),
 (11, 2),
+(11, 34),
 (12, 1),
 (13, 1),
 (38, 1),
-(39, 1),
 (39, 2),
+(39, 34),
 (40, 1),
 (40, 2),
+(40, 34),
 (41, 1),
 (42, 1),
 (43, 1),
@@ -83311,20 +83321,27 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (44, 2),
 (45, 1),
 (45, 2),
+(45, 34),
 (46, 1),
 (47, 1),
 (48, 1),
+(48, 34),
 (49, 1),
 (49, 2),
+(49, 34),
 (50, 1),
 (50, 2),
+(50, 34),
 (51, 1),
+(51, 34),
 (52, 1),
+(52, 34),
 (53, 1),
 (54, 1),
 (54, 2),
 (55, 1),
 (55, 2),
+(55, 34),
 (56, 1),
 (57, 1),
 (58, 1),
@@ -83332,8 +83349,17 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (59, 2),
 (60, 1),
 (60, 2),
+(60, 34),
 (61, 1),
-(62, 1);
+(62, 1),
+(63, 1),
+(64, 1),
+(65, 1),
+(66, 1),
+(67, 1),
+(68, 1),
+(69, 1),
+(69, 34);
 
 -- --------------------------------------------------------
 
@@ -83356,7 +83382,9 @@ CREATE TABLE `satuan` (
 INSERT INTO `satuan` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'estimasi', NULL, NULL, NULL),
 (2, '%', NULL, NULL, NULL),
-(3, 'unit', NULL, NULL, NULL);
+(3, 'unit', NULL, NULL, NULL),
+(11, 'Buku', '2020-10-22 02:27:22', '2020-10-22 02:27:30', '2020-10-22 02:27:30'),
+(12, 'gedung', '2020-10-22 02:56:31', '2020-10-22 03:09:22', '2020-10-22 03:09:22');
 
 -- --------------------------------------------------------
 
@@ -83381,7 +83409,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (4, 'admin', 'admin@gmail.com', NULL, '$2y$10$pyFC1yvOSAWO5y0UJVO2xO.49KuI.1/HHXQvZ3Vk7Ox7tV2aoFImC', NULL, '2020-10-19 17:33:06', '2020-10-19 17:33:06'),
-(5, 'user', 'user@gmail.com', NULL, '$2y$10$B1DiIy/Zv8Hzci3IMu8eDuhuSGeY4z5utU4JRNXyThrw4q7iwRdWO', NULL, '2020-10-19 17:33:07', '2020-10-19 17:33:07');
+(5, 'user', 'user@gmail.com', NULL, '$2y$10$B1DiIy/Zv8Hzci3IMu8eDuhuSGeY4z5utU4JRNXyThrw4q7iwRdWO', NULL, '2020-10-19 17:33:07', '2020-10-19 17:33:07'),
+(7, 'TatikR', 'tatikr@gmail.com', NULL, '$2y$10$0okH0ecD1wxiGNSgKrI95eab7GIkxrLwjX/DNjZV44gHHZ6kEE5xW', NULL, '2020-10-21 00:50:38', '2020-10-21 00:50:38');
 
 --
 -- Indexes for dumped tables
@@ -83586,7 +83615,7 @@ ALTER TABLE `kerusakan_surveyor`
 -- AUTO_INCREMENT for table `komponen`
 --
 ALTER TABLE `komponen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=359;
 
 --
 -- AUTO_INCREMENT for table `komponen_opsi`
@@ -83604,25 +83633,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

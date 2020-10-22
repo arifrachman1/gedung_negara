@@ -42,7 +42,7 @@
                   <form class="user" action="{{ route('login') }}" method="post">
                   @csrf
                   <div class="">
-                  @if(session('errors'))
+                    @if(session('errors'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             Terjadi Kesalahan:
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

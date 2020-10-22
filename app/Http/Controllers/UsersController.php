@@ -34,13 +34,28 @@ class UsersController extends Controller
     }
 
     public function inputUserPost(Request $request) {
+        $rule = [
+            'name' => 'required|unique:users',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+        ];
+
+        $this->validate($request, $rule);
+
         $input = new User;
         $input->name = $request->name;
         $input->email = $request->email;
         $input->password = bcrypt($request->password);
         $input->assignRole($request->role);
-        $input->save();
-        return redirect('masteruser');
+        $status = $input->save();
+
+        if ($status) {
+            return redirect('masteruser')->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect('tambahuser')->with('error', 'Data Gagal Ditambahkan');
+        }
+
     }
 
     public function editUser($id) {

@@ -56,9 +56,9 @@
         </body>
 @include('template/footer')
 <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
-    <form action="{{url('')}}" method="post">
+    <form action="{{url('hapususer/'.$val->id)}}" method="post">
       {{ csrf_field() }}
-      @method('POST')
+      @method('GET')
       <input type="hidden" id="" name="id">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
