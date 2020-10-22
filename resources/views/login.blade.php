@@ -65,6 +65,7 @@
                             {{ Session::get('error') }}
                         </div>
                     @endif
+                    
                     <div class="form-group">
                     <label>Username</label>
                       <input type="text" name="name" class="form-control form-control-user"   placeholder="Masukkan Username....">

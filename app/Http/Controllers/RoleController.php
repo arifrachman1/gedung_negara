@@ -48,10 +48,11 @@ class RoleController extends Controller
         $mastersatuan = Permission::select('*')->where('category','=', 'satuan')->get();
         $masterkomponen = Permission::select('*')->where('category','=', 'komponen')->get();
         $masterkerusakan = Permission::select('*')->where('category','=', 'kerusakan')->get();
-        $masterpengaturan = Permission::select('*')->where('category','=', 'pengaturan')->get();;
-        return view('role/detail', compact('role','permissions','masteruser','mastergedung','mastersatuan','masterkomponen','masterkerusakan','masterpengaturan'));
-
+        $masterpengaturan = Permission::select('*')->where('category','=', 'pengaturan')->get();
+        $excel = Permission::select('*')->where('category','=', 'other')->get();
+        return view('role/detail', compact('role','permissions','masteruser','mastergedung','mastersatuan','masterkomponen','masterkerusakan','masterpengaturan','excel'));
     }
+    
     public function givePermission(Request $request, $id)
     {
         // dd($request->hasPermissions);
@@ -76,7 +77,8 @@ class RoleController extends Controller
         $masterkomponen = Permission::select('*')->where('category','=', 'komponen')->get();
         $masterkerusakan = Permission::select('*')->where('category','=', 'kerusakan')->get();
         $masterpengaturan = Permission::select('*')->where('category','=', 'pengaturan')->get();;
-        return view('role/edit_role', compact('role','permissions','masteruser','mastergedung','mastersatuan','masterkomponen','masterkerusakan','masterpengaturan'));
+        $excel = Permission::select('*')->where('category','=', 'other')->get();
+        return view('role/edit_role', compact('role','permissions','masteruser','mastergedung','mastersatuan','masterkomponen','masterkerusakan','masterpengaturan','excel'));
     }
 
     public function delete(Request $request)

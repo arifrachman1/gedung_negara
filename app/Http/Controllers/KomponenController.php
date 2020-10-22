@@ -10,7 +10,10 @@ class KomponenController extends Controller
 {
     public function komponen(){
 
-        $komponen = Komponen::select('*')->where('id_parent')->get();
+        $komponen = Komponen::with('satuan')->where('id_parent')->get();
+        // foreach($komponen as $val){
+        //     dd($val->satuan->nama);
+        // }
         $satuan = Satuan::get();
         return view('Komponen/master_komponen', compact('satuan','komponen'));
     }
@@ -65,16 +68,19 @@ class KomponenController extends Controller
         $update->id_satuan = $request->id_satuan;
         $update->bobot = $request->bobot;
         $update->save();
-        $komp = Komponen::where('id_parent',$id)->delete();        
-        foreach ($input['nama2'] as $key => $value) {
-            if ($value){
-               $data2 = new Komponen;
-               $data2->nama = $value;
-               $data2->id_parent = $update->id;
-               $data2->id_satuan = $input['satuan2'][$key];
-               $data2->bobot = $input['bobots'][$key];
-               $data2->save();
-            }
+        $komp = Komponen::where('id_parent',$id)->delete(); 
+        if(isset($input['nama2'])){
+            foreach ($input['nama2'] as $key => $value) {
+                if ($value){
+                    $data2 = new Komponen;
+                    $data2->nama = $value;
+                    $data2->id_parent = $update->id;
+                    $data2->id_satuan = $input['satuan2'][$key];
+                    $data2->bobot = $input['bobots'][$key];
+                    $data2->save();
+                }
+        }       
+        
         }
         return redirect('masterkomponen');
     }
@@ -87,7 +93,7 @@ class KomponenController extends Controller
 
     public function detail($id){
 
-        $detail = Komponen::select('*')->where('id_parent','=', $id)->get();
+        $detail = Komponen::with('satuan')->where('id_parent','=', $id)->get();
         $detail1 = Komponen::find($id);
         return view('Komponen/detail_komponen',compact('detail','detail1'));
     }

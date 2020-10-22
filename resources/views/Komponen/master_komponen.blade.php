@@ -39,16 +39,12 @@
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
-                  <td>{{ $val->id_satuan }}</td>
+                  <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif</td>
                   <td>{{ $val->bobot }}</td>
                   <td>
-                    <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>
-                @can('komponen.update')
-                    <a class="btn btn-warning" href="{{url('edit/'.$val->id)}}"><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                @endcan
-                @can('komponen.delete')
-                    <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
-                @endcan
+                    <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>                
+                    <a class="btn btn-warning" @can('komponen.update') href="{{url('edit/'.$val->id)}}" @endcan   ><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
+                    <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                
                   </td>             
                 </tr> 
                 @empty

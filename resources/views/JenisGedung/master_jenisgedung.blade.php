@@ -33,7 +33,9 @@
                   @foreach($kategori as $val)
                     <tr>
                       <td>{{ $val->nama }}</td>
-                      <td><a class="btn btn-warning" href="{{ url('edit_master_jenisgedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Edit</span> </i></a> | <a data-toggle="modal" data-target="#delete" class="btn btn-danger" href="#"><i class="button"><span class="icon text-white-100">Hapus</span> </a></span> </i></a></td>
+                      <td>
+                        <a class="btn btn-warning" @can('jenisgedung.update') href="{{ url('edit_master_jenisgedung/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> |
+                        <a @can('jenisgedung.delete') data-toggle="modal" data-target="#delete" class="btn btn-danger" href="#" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </a></span> </i></a></td>
                     </tr>
                             <div class="modal fade" id="delete" role="dialog">
                                 <div class="modal-dialog">

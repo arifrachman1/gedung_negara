@@ -24,6 +24,7 @@
                                   <tr>
                                   <th>No</th>
                                     <th>Sub Komponen</th>
+                                    <th>satuan</th>
                                     <th>Bobot</th>
                                   </tr>
                                 </thead>
@@ -32,7 +33,8 @@
                                 @forelse($detail as $val) 
                                   <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $val->nama }}</td>             
+                                    <td>{{ $val->nama }}</td> 
+                                    <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif </td>
                                     <td>{{ $val->bobot }} </td>  
                                   </tr> 
                                   @empty
