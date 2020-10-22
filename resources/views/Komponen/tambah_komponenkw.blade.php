@@ -27,7 +27,10 @@
                         </div>
                         <label class="font-weight-bold">Bobot</label>
                           <input type="number" name="bobot" class="form-control"> 
-                    </div> 
+                    </div> <br>
+                    <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  
+                     <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  
+                     <button class="btn btn-success" type="submit">Simpan</button>
                   </div>
                   <div id="copy">
                     <div class="control-group before-add-more"><br>
@@ -46,14 +49,12 @@
                         <br>
                           <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                         <hr>
+                        
                     </div>
                   </div>
                 </div>
                 <div class="card-footer">
-                     <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  
-                     <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  
-                     <button class="btn btn-success" type="submit">Simpan</button>
-                  </div>
+                </div>
             <script type="text/javascript">
                 $(document).ready(function() {
                 $("#copy").hide();
