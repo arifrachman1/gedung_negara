@@ -12,6 +12,30 @@
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Form Tambah Anggota</h6>
                 </div>
+                @if(session('errors'))
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Terjadi Kesalahan:
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul>
+                    @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                  </div>
+                @endif
+                @if (Session::has('success'))
+                  <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                  </div>
+                @endif
+                @if (Session::has('error'))
+                  <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                  </div>
+                @endif
+
                 <div class="card-body">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                      <label for="nama">Username :</label>
