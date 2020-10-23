@@ -44,7 +44,7 @@
                             @endforeach
                           </select>
                           <label>Bobot</label>
-                            <input type="number" name="bobot2" class="form-control"> 
+                            <input type="number" name="bobot2[]" class="form-control"> 
                           </div> 
                         <br>
                           <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
