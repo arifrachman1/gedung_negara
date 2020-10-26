@@ -77,8 +77,8 @@
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Master Gedung:</h6>
-              @can('gedung.read')<a class="collapse-item" href="{{url('master_gedung')}}">Gedung</a> @endcan
               @can('jenisgedung.read')<a class="collapse-item" href="{{url('master_jenisgedung')}}">Jenis Gedung</a> @endcan
+              @can('gedung.read')<a class="collapse-item" href="{{url('master_gedung')}}">Gedung</a> @endcan
             </div>
           </div>
       </li>
