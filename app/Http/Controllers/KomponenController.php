@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Komponen;
 use App\Satuan;
+use App\KomponenOpsi;
+use Log;
 
 class KomponenController extends Controller
 {
@@ -26,27 +28,39 @@ class KomponenController extends Controller
 
     public function Add(Request $request){
         $input = $request->all();
-        // dd($input); 
+        // Log::info($request); 
         
-         $data = new Komponen;     
-         $data->nama = $request->nama;
-         $data->id_parent = $data->id;
-         $data->id_satuan = $request->id_satuan;
-         $data->bobot = $request->bobot;
-         $data->save();
-         
-         foreach ($input['nama2'] as $key => $value) {
-             if ($value){
+        $data = new Komponen;     
+        $data->nama = $request->nama;
+        $data->id_parent = $data->id;
+        $data->id_satuan = $request->id_satuan;
+        $data->bobot = $request->bobot;
+        $data->save();
+
+        $nilai = 0;
+
+        foreach ($input['opsi_komp'] as $key => $value) {
+            $opsi = new KomponenOpsi;
+            $opsi->opsi = $value;
+            $opsi->nilai = $nilai;
+            $opsi->id_komponen = $data->id;
+            $opsi->save();
+
+            $nilai += 20;
+        }
+
+        foreach ($input['nama2'] as $key => $value) {
+            if ($value){
                 $data2 = new Komponen;
                 $data2->nama = $value;
                 $data2->id_parent = $data->id;
                 $data2->id_satuan = $input['satuan2'][$key];
                 $data2->bobot = $input['bobot2'][$key];
                 $data2->save();
-             }
-                         
-         }
-    return redirect('masterkomponen');
+            }                 
+        }
+
+        return redirect('masterkomponen');
     }
 
     public function edit($id) {
@@ -77,7 +91,7 @@ class KomponenController extends Controller
                     $data2->bobot = $input['bobots'][$key];
                     $data2->save();
                 }
-        }       
+            }       
         
         }
         return redirect('masterkomponen');

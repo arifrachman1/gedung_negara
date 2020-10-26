@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('masterkomponen','KomponenController@komponen'); 
     Route::get('tambah_komponen','KomponenController@addKomponen'); 
-    Route::post('tambahAksi','KomponenController@add'); 
+    Route::post('tambah_komponen_aksi','KomponenController@Add'); 
 
     Route::get('edit/{id}', 'KomponenController@edit');
     Route::post('editAksi/{id}','KomponenController@update'); 
