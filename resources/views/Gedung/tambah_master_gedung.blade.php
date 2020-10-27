@@ -21,11 +21,6 @@
     </div>
 
     <div class="form-group">
-      <label>Alamat:</label>
-      <textarea name="alamat" cols="30" rows="3" class="form-control" placeholder="Masukkan Alamat Di Sini" required></textarea>
-    </div>
-
-    <div class="form-group">
       <label>Jenis Gedung:</label>
       <select class="form-control" name="kategori_gd" required>
         <option value="">Pilih Jenis Gedung</option>
@@ -33,6 +28,11 @@
         <option value="{{ $val->id }}">{{ $val->nama }}</option>
         @endforeach
         </select>
+    </div>
+
+    <div class="form-group">
+      <label>Alamat:</label>
+      <textarea name="alamat" cols="30" rows="3" class="form-control" placeholder="Masukkan Alamat Di Sini" required></textarea>
     </div>
 
     <div class="form-group">
@@ -52,7 +52,7 @@
 
     <div class="form-group">
       <label>Tipe Pemilik:</label>
-      <input type="text" class="form-control" placeholder="Tipe Milik"  name="tipe_pemilik" required>
+      <input type="text" class="form-control" placeholder="Tipe Pemilik"  name="tipe_pemilik" required>
     </div>
 
     <div class="form-group">
@@ -81,8 +81,8 @@
     </div>
 
     <div class="form-group">
-      <label>Kompleks:</label>
-      <input type="text" class="form-control" placeholder="Kompleks"  name="kompleks" required>
+      <label>Kompleksitas:</label>
+      <input type="text" class="form-control" placeholder="Kompleksitas"  name="kompleks" required>
     </div>
 
     <div class="form-group">

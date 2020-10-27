@@ -78,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('detail_master_gedung/{id}', 'GedungController@detail');
     Route::get('edit_master_gedung/{id}', 'GedungController@edit');
     Route::post('edit_master_gedung_post/{id}', 'GedungController@edit_post');
+    Route::get('export_pdf_master_gedung/', 'GedungController@exportPDF');
     Route::get('tambah_excel_master_gedung', function (){
         return view ('gedung/tambah_excel_master_gedung');
     });
