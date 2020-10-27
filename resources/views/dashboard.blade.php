@@ -6,8 +6,9 @@
 <div class="container-fluid">
 
           <!-- Page Heading -->
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800 san-bold">Selamat Datang Admin</h1>
+  <div class="d-sm-flex align-items-center mb-4">
+  <img style="widht:100%; height:100px;" class="mr-5 ml-5" src="{{ asset('style/img/5.png') }}">
+    <h1 class="h3 mb-0 text-gray-800 san-bold">SIBG <br> Dinas Pekerjaan Umum & Ruang</h1>
   </div>
 
 <div class="container-fluid">  
