@@ -131,9 +131,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('master_kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });
-Route::get('tambah_master_kerusakan', function (){
-    return view('kerusakan/tambah_master_kerusakan');
-});
+
+// Route::get('tambah_master_kerusakan', function () { return view('kerusakan/tambah_master_kerusakan'); });
+
+Route::get('tambah_master_kerusakan', 'KerusakanController@pilihanGedung');
+
 Route::get('formulir_penilaian_kerusakan', function (){
     return view('kerusakan/formulir_penilaian_kerusakan');
 });
