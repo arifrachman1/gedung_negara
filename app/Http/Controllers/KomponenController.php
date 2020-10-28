@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Komponen;
-use App\Satuan;
+use Illuminate\Support\Facades\DB;
 use App\KomponenOpsi;
+use App\Satuan;
 use Log;
+
 
 class KomponenController extends Controller
 {
@@ -25,42 +27,60 @@ class KomponenController extends Controller
         $komponen = Komponen::get();
         return view('Komponen/tambah_komponenkw', compact('satuan','komponen'));
     }
-
+    
     public function Add(Request $request){
         $input = $request->all();
         // Log::info($request); 
         
-        $data = new Komponen;     
-        $data->nama = $request->nama;
-        $data->id_parent = $data->id;
-        $data->id_satuan = $request->id_satuan;
-        $data->bobot = $request->bobot;
-        $data->save();
-
-        $nilai = 0;
-
-        foreach ($input['opsi_komp'] as $key => $value) {
-            $opsi = new KomponenOpsi;
-            $opsi->opsi = $value;
-            $opsi->nilai = $nilai;
-            $opsi->id_komponen = $data->id;
-            $opsi->save();
-
-            $nilai += 20;
+        DB::beginTransaction();
+         $data = new Komponen;     
+         $data->nama = $request->nama;
+         $data->id_parent = $data->id;
+         $data->id_satuan = $request->id_satuan;
+         $data->bobot = $request->bobot;
+         $data->save();
+         
+        if(isset($input['ops'])){
+            foreach ($input['ops'] as $key => $value) {
+                $opsi = new KomponenOpsi;
+                $opsi->opsi = $value;                    
+                $opsi->id_komponen = $data->id;
+                $opsi->nilai = $input['nilai'][$key];
+                $opsi->save();    
+            }
         }
 
+        array_pop($input['nama2']);
+        $i_opsikop = 0;
         foreach ($input['nama2'] as $key => $value) {
-            if ($value){
-                $data2 = new Komponen;
-                $data2->nama = $value;
-                $data2->id_parent = $data->id;
-                $data2->id_satuan = $input['satuan2'][$key];
-                $data2->bobot = $input['bobot2'][$key];
-                $data2->save();
-            }                 
-        }
+            if ($value){               
+               $data2 = new Komponen;
+               $data2->nama = $value;
+               $data2->id_parent = $data->id;
+               $data2->id_satuan = $input['satuan2'][$key];
+               $data2->bobot = $input['bobot2'][$key];
+               $data2->save();
 
-        return redirect('masterkomponen');
+                if(isset($input['opsikomp'])){
+                    $itungan = 1;
+                    for($i_opsikop; count($input['opsikomp']) > $i_opsikop ; $i_opsikop++){
+                        if($itungan <= 6){
+                            $opsi = new KomponenOpsi;
+                            $opsi->opsi = $input['opsikomp'][$i_opsikop][0];                    
+                            $opsi->id_komponen = $data2->id;
+                            $opsi->nilai = $input['nilai'][$i_opsikop][0];                           
+                            $opsi->save();  
+                            $itungan++;  
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+                        
+        }
+        DB::commit();
+    return redirect('masterkomponen');
     }
 
     public function edit($id) {
