@@ -12,6 +12,7 @@ use App\DesaKelurahan;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PDF;
 use Log;
 
 class GedungController extends Controller
@@ -82,24 +83,29 @@ class GedungController extends Controller
         $input = new Gedung;
         $input->nama = $request->nama_gd;
         $input->id_gedung_kategori = $request->kategori_gd;
+        $input->alamat = $request->alamat;
         $input->bujur_timur = $request->bt;
         $input->lintang_selatan = $request->ls;
         $input->legalitas = $request->legalitas;
-        $input->tipe_milik = $request->tipe_milik;
+        $input->tipe_pemilik = $request->tipe_pemilik;
         $input->alas_hak = $request->alas_hak;
         $input->luas_lahan = $request->luas_lahan;
         $input->jumlah_lantai = $request->jumlah_lantai;
         $input->luas = $request->luas_bangunan;
         $input->tinggi = $request->tinggi_bangunan;
-        $input->kelas_tinggi = $request->klas_tinggi;
         $input->kompleks = $request->kompleks;
         $input->kepadatan = $request->kepadatan;
         $input->permanensi = $request->permanensi;
-        $input->risk_bakar = $request->risk_bakar;
-        $input->penangkal = $request->penangkal;
+        $input->tkt_resiko_kebakaran = $request->rsk_kebakaran;
+        $input->penangkal_petir = $request->penangkal_petir;
         $input->struktur_bawah = $request->struktur_bawah; 
         $input->struktur_bangunan = $request->struktur_bangunan;
         $input->struktur_atap = $request->struktur_atap;
+        $input->kdb = $request->kdb;
+        $input->klb = $request->klb;
+        $input->kdh = $request->kdh;
+        $input->gsb = $request->gsb;
+        $input->rth = $request->rth;
         $input->save();
         return redirect('master_gedung');
     }
@@ -115,21 +121,21 @@ class GedungController extends Controller
         $edit = Gedung::find($id);
         $edit->nama = $request->nama_gd;
         $edit->id_gedung_kategori = $request->kategori_gd;
+        $edit->alamat = $request->alamat;
         $edit->bujur_timur = $request->bt;
         $edit->lintang_selatan = $request->ls;
         $edit->legalitas = $request->legalitas;
-        $edit->tipe_milik = $request->tipe_milik;
+        $edit->tipe_pemilik = $request->tipe_pemilik;
         $edit->alas_hak = $request->alas_hak;
         $edit->luas_lahan = $request->luas_lahan;
         $edit->jumlah_lantai = $request->jumlah_lantai;
         $edit->luas = $request->luas_bangunan;
         $edit->tinggi = $request->tinggi_bangunan;
-        $edit->kelas_tinggi = $request->klas_tinggi;
         $edit->kompleks = $request->kompleks;
         $edit->kepadatan = $request->kepadatan;
         $edit->permanensi = $request->permanensi;
-        $edit->risk_bakar = $request->risk_bakar;
-        $edit->penangkal = $request->penangkal;
+        $edit->tkt_resiko_kebakaran = $request->rsk_kebakaran;
+        $edit->penangkal_petir = $request->penangkal_petir;
         $edit->struktur_bawah = $request->struktur_bawah; 
         $edit->struktur_bangunan = $request->struktur_bangunan;
         $edit->struktur_atap = $request->struktur_atap;
@@ -137,6 +143,11 @@ class GedungController extends Controller
         $edit->kode_kabupaten = $request->kode_kabupaten;
         $edit->kode_kecamatan = $request->kode_kecamatan;
         $edit->kode_kelurahan = $request->kode_kelurahan;
+        $edit->kdb = $request->kdb;
+        $edit->klb = $request->klb;
+        $edit->kdh = $request->kdh;
+        $edit->gsb = $request->gsb;
+        $edit->rth = $request->rth;
         $edit->save();
         return redirect('master_gedung');
     }
@@ -160,24 +171,29 @@ class GedungController extends Controller
             $i++;
             $sheet->setCellValue('A'.$i, ($i-1));
             $sheet->setCellValue('B'.$i, $d->nama);
-            $sheet->setCellValue('C'.$i, $d->bujur_timur);
-            $sheet->setCellValue('D'.$i, $d->lintang_selatan);
-            $sheet->setCellValue('E'.$i, $d->legalitas);
-            $sheet->setCellValue('F'.$i, $d->tipe_milik);
-            $sheet->setCellValue('G'.$i, $d->alas_hak);
-            $sheet->setCellValue('H'.$i, $d->luas_lahan);
-            $sheet->setCellValue('I'.$i, $d->jumlah_lantai);
-            $sheet->setCellValue('J'.$i, $d->luas);
-            $sheet->setCellValue('K'.$i, $d->tinggi);
-            $sheet->setCellValue('L'.$i, $d->kelas_tinggi);
+            $sheet->setCellValue('C'.$i, $d->alamat);
+            $sheet->setCellValue('D'.$i, $d->bujur_timur);
+            $sheet->setCellValue('E'.$i, $d->lintang_selatan);
+            $sheet->setCellValue('F'.$i, $d->legalitas);
+            $sheet->setCellValue('G'.$i, $d->tipe_pemilik);
+            $sheet->setCellValue('H'.$i, $d->alas_hak);
+            $sheet->setCellValue('I'.$i, $d->luas_lahan);
+            $sheet->setCellValue('J'.$i, $d->jumlah_lantai);
+            $sheet->setCellValue('K'.$i, $d->luas);
+            $sheet->setCellValue('L'.$i, $d->tinggi);
             $sheet->setCellValue('M'.$i, $d->kompleks);
             $sheet->setCellValue('N'.$i, $d->kepadatan);
             $sheet->setCellValue('O'.$i, $d->permanensi);
-            $sheet->setCellValue('P'.$i, $d->risk_bakar);
-            $sheet->setCellValue('Q'.$i, $d->penangkal);
+            $sheet->setCellValue('P'.$i, $d->tkt_resiko_kebakaran);
+            $sheet->setCellValue('Q'.$i, $d->penangkal_petir);
             $sheet->setCellValue('R'.$i, $d->struktur_bawah);
             $sheet->setCellValue('S'.$i, $d->struktur_bangunan);
             $sheet->setCellValue('T'.$i, $d->struktur_atap);
+            $sheet->setCellValue('U'.$i, $d->kdb);
+            $sheet->setCellValue('V'.$i, $d->klb);
+            $sheet->setCellValue('W'.$i, $d->kdh);
+            $sheet->setCellValue('X'.$i, $d->gsb);
+            $sheet->setCellValue('Y'.$i, $d->rth);
         }
 
         $writer = new Xlsx($spreadsheet);
@@ -206,28 +222,41 @@ class GedungController extends Controller
             $sql = new Gedung;
 
             $sql->nama = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-            $sql->bujur_timur = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $sql->lintang_selatan = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-            $sql->legalitas = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-            $sql->tipe_milik = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-            $sql->alas_hak = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-            $sql->luas_lahan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-            $sql->jumlah_lantai = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-            $sql->luas = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-            $sql->tinggi = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-            $sql->kelas_tinggi = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+            $sql->alamat = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+            $sql->bujur_timur = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+            $sql->lintang_selatan = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+            $sql->legalitas = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+            $sql->tipe_pemilik = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+            $sql->alas_hak = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+            $sql->luas_lahan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+            $sql->jumlah_lantai = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+            $sql->luas = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+            $sql->tinggi = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
             $sql->kompleks = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
             $sql->kepadatan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
             $sql->permanensi = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
-            $sql->risk_bakar = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-            $sql->penangkal = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+            $sql->tkt_resiko_kebakaran = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+            $sql->penangkal_petir = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
             $sql->struktur_bawah = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
             $sql->struktur_bangunan = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
             $sql->struktur_atap = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
+            $sql->kdb = $worksheet->getCellByColumnAndRow(21, $row)->getValue();
+            $sql->klb = $worksheet->getCellByColumnAndRow(22, $row)->getValue();
+            $sql->kdh = $worksheet->getCellByColumnAndRow(23, $row)->getValue();
+            $sql->gsb = $worksheet->getCellByColumnAndRow(24, $row)->getValue();
+            $sql->rth = $worksheet->getCellByColumnAndRow(25, $row)->getValue();
             $sql->save();
         }
 
         return redirect('master_gedung');
+    }
+
+    public function exportPDF() {
+        $gedung = Gedung::all();
+
+        $pdf = PDF::loadView('Gedung/gedung_pdf', compact('gedung'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
 
 }

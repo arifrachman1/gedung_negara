@@ -31,6 +31,11 @@
     </div>
 
     <div class="form-group">
+      <label>Alamat:</label>
+      <textarea name="alamat" cols="30" rows="3" class="form-control" placeholder="Masukkan Alamat Di Sini" required></textarea>
+    </div>
+
+    <div class="form-group">
       <label>Bujur Timur:</label>
       <input type="number" max="any"step="any" min="any" class="form-control" placeholder="0"  name="bt" required>
     </div>
@@ -46,8 +51,8 @@
     </div>
 
     <div class="form-group">
-      <label>Tipe Milik:</label>
-      <input type="text" class="form-control" placeholder="Tipe Milik"  name="tipe_milik" required>
+      <label>Tipe Pemilik:</label>
+      <input type="text" class="form-control" placeholder="Tipe Pemilik"  name="tipe_pemilik" required>
     </div>
 
     <div class="form-group">
@@ -76,13 +81,8 @@
     </div>
 
     <div class="form-group">
-      <label>Kelas Tinggi:</label> 
-      <input type="text" class="form-control" placeholder="Kelas Tinggi"  name="klas_tinggi" required>
-    </div>
-
-    <div class="form-group">
-      <label>Kompleks:</label>
-      <input type="text" class="form-control" placeholder="Kompleks"  name="kompleks" required>
+      <label>Kompleksitas:</label>
+      <input type="text" class="form-control" placeholder="Kompleksitas"  name="kompleks" required>
     </div>
 
     <div class="form-group">
@@ -96,13 +96,13 @@
     </div>
 
     <div class="form-group">
-      <label>Resiko Kebakaran:</label>
-      <input type="text" class="form-control" placeholder="Resiko Kebakaran"  name="risk_bakar" required>
+      <label>Tingkat Resiko Kebakaran:</label>
+      <input type="text" class="form-control" placeholder="Tingkat Resiko Kebakaran"  name="rsk_kebakaran" required>
     </div>
 
     <div class="form-group">
-      <label>Penangkal:</label>
-      <input type="text" class="form-control" placeholder="Penangkal"  name="penangkal" required>
+      <label>Penangkal Petir:</label>
+      <input type="text" class="form-control" placeholder="Penangkal Petir"  name="penangkal_petir" required>
     </div>
 
     <div class="form-group">
@@ -118,6 +118,31 @@
     <div class="form-group">
       <label>Struktur Atap:</label>
       <input type="text" class="form-control" placeholder="Struktur Atap"  name="struktur_atap" required>
+    </div>
+
+    <div class="form-group">
+      <label>KDB:</label>
+      <input type="text" class="form-control" placeholder="KDB"  name="kdb" required>
+    </div>
+
+    <div class="form-group">
+      <label>KLB:</label>
+      <input type="text" class="form-control" placeholder="KLB"  name="klb" required>
+    </div>
+
+    <div class="form-group">
+      <label>KDH:</label>
+      <input type="text" class="form-control" placeholder="KDH"  name="kdh" required>
+    </div>
+
+    <div class="form-group">
+      <label>GSB:</label>
+      <input type="text" class="form-control" placeholder="GSB"  name="gsb" required>
+    </div>
+
+    <div class="form-group">
+      <label>RTH:</label>
+      <input type="text" class="form-control" placeholder="RTH"  name="rth" required>
     </div>
 
     <!-- <div class="form-group">

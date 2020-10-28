@@ -7,8 +7,8 @@ use App\Komponen;
 use Illuminate\Support\Facades\DB;
 use App\KomponenOpsi;
 use App\Satuan;
-
 use Log;
+
 
 class KomponenController extends Controller
 {
@@ -30,7 +30,7 @@ class KomponenController extends Controller
     
     public function Add(Request $request){
         $input = $request->all();
-        // dd($input); 
+        // Log::info($request); 
         
         DB::beginTransaction();
          $data = new Komponen;     

@@ -34,6 +34,11 @@
                     </span> 
                   @endcan
                 </a>
+                <a class="btn btn-secondary btn-icon-split" href="{{ url('export_pdf_master_gedung') }}" role="button">
+                    <span class="icon text-white-100">
+                        Export PDF
+                    </span> 
+                </a>
             </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -41,7 +46,7 @@
                     <tr>
                       <th>Nama Gedung</th>
                       <th>Legalitas</th>
-                      <th>Tipe Milik</th>
+                      <th>Tipe Pemilik</th>
                       <th>Alas Hak</th>
                       <th>Luas lahan</th>
                       <th>Action</th>
@@ -56,10 +61,10 @@
                       @else
                       <td>{{ $val->legalitas }}</td>
                       @endif
-                      @if ($val->tipe_milik == null)
+                      @if ($val->tipe_pemilik == null)
                       <td>-</td>
                       @else
-                      <td>{{ $val->tipe_milik }}</td>
+                      <td>{{ $val->tipe_pemilik }}</td>
                       @endif
                       @if ($val->alas_hak == null)
                       <td>-</td>

@@ -11,14 +11,14 @@
         <h6 class="m-0 font-weight-bold text-white">TAMBAH DATA GEDUNG DENGAN EXCEL</h6>
       </div>
       <div class="card-body">
-        <form action="{{ url('import_excel_master_gedung') }}" method="post">
+        <form action="{{ url('import_excel_master_gedung') }}" method="post" enctype="multipart/form-data">
         @csrf
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <div class="form-group">
                   <label >Tambahkan dari Excel:</label>
-                  <input type="file" name="file_excel" class="form-control">
+                  <input type="file" name="file_excel" class="form-control" required>
                 </div>
                 
                 <!-- <div class="form-group">

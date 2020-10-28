@@ -20,7 +20,7 @@
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="role" class="">Role :</label><br>
                     <select class="form-control" name="role" required>
-                      <option>Pilih Role</option>
+                      <option value="" required>Pilih Role</option>
                       @foreach($role as $val)
                       <option value="{{ $val->name }}" {{ $val->id == $model->role_id ? 'selected' : ''}}>{{ $val->name }}</option>
                       @endforeach
