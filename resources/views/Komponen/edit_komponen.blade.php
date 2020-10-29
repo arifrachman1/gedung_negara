@@ -17,21 +17,6 @@
                   <div class="control-group after-add-more">
                     <label class="font-weight-bold">Nama Komponen</label>
                       <input  onkeyup="this.value = this.value.toUpperCase()" type="text" name="nama" class="form-control" value="{{$komponen->nama}}">
-                          <label class="font-weight-bold">Satuan</label>
-                        <div class="form-group">
-                          <select name="id_satuan" class="form-control">
-                            @foreach($satuan as $val)
-                              @if($komponen->id_satuan == $val->id)
-                                <option value="{{ $val->id }}" selected>{{ $val->nama }}</option>
-                              @else
-                                <option value="{{ $val->id }}">{{ $val->nama }}</option>
-                              @endif
-                            @endforeach
-                          </select>
-                          <div id="placholders"></div>
-                          <label class="font-weight-bold">Bobot</label>
-                    <input type="number" name="bobot" value="{{$komponen->bobot}}" class="form-control"> 
-                  </div> 
             </div>
             <br>
               <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  

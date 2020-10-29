@@ -16,19 +16,7 @@
                       <!--==========================-->
                     <div class="control-group after-add-more">
                       <label class="font-weight-bold">Nama Komponen</label>
-                        <input onkeyup="this.value = this.value.toUpperCase()" type="text" name="nama" class="form-control" required> 
-                      <label class="font-weight-bold">Satuan</label>
-                        <div class="form-group">
-                          <select name="id_satuan" class="form-control" id="opsi">
-                            <option value="" required>Pilih Satuan</option>
-                            @foreach($satuan as $val)
-                              <option value="{{ $val->id }}">{{ $val->nama }}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div id="placholder"></div>
-                        <label class="font-weight-bold">Bobot</label>
-                          <input type="number" name="bobot" class="form-control"> 
+                        <input onkeyup="this.value = this.value.toUpperCase()" type="text" name="nama" class="form-control" required>  
                     </div> <br>
                     <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  
                      <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  

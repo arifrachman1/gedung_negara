@@ -114,7 +114,7 @@ class KomponenController extends Controller
                 }
             }    
             
-        // $opsi = KomponenOpsi::find($id);
+        // $opsi = KomponenOpsi::find($id);        
         
         }
         return redirect('masterkomponen');
