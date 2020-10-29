@@ -27,8 +27,6 @@
                 <tr>
                 <th>No</th>
                   <th>Nama Komponen</th>
-                  <th>Satuan</th>
-                  <th>Bobot</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -39,8 +37,6 @@
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $val->nama }}</td>
-                  <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif</td>
-                  <td>{{ $val->bobot }}</td>
                   <td>
                     <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>                
                     <a class="btn btn-warning" @can('komponen.update') href="{{url('edit/'.$val->id)}}" @endcan   ><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
