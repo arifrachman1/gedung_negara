@@ -17,5 +17,15 @@ class Komponen extends Model
         return $this->hasOne('App\Satuan', 'id', 'id_satuan');
         
     }
+
+    public function komponen()
+    {
+        return $this->belongsTo(self::class, 'id_parent');
+    }
+
+    public function subKomponen()
+    {
+        return $this->hasMany(self::class, 'id_parent');
+    }
 }
 

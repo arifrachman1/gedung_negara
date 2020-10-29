@@ -132,8 +132,12 @@
                             @foreach($komponen as $val)
                             <tr>
                              <td>{{ $no++ }}</td>
-                             <td>{{ $val->nama }}</td>
+                             <td>{{ $val->nama_komponen }}</td>
+                             @if($val->sub_komponen == null)
+                             <td>-</td>
+                             @else
                              <td>{{ $val->sub_komponen }}</td>
+                             @endif
                              <td>{{ $val->nama_satuan }}</td>
                              @if($val->id_satuan == 1)
                              <td>
