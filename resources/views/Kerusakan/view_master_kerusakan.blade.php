@@ -127,171 +127,31 @@
                              <th colspan="3">Tingkat Kerusakan</th>
                             </tr>
                         </thead>
+                        @php $no = 1; @endphp
                         <tbody>
+                            @foreach($komponen as $val)
                             <tr>
-                             <td>1</td>
-                             <td>Pondasi</td>
-                             <td>Pondasi</td>
-                             <td>Estimasi</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                </a></td>
+                             <td>{{ $no++ }}</td>
+                             <td>{{ $val->nama }}</td>
+                             <td>{{ $val->sub_komponen }}</td>
+                             <td>{{ $val->nama_satuan }}</td>
+                             @if($val->id_satuan == 1)
+                             <td>
+                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
+                                    <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </a>
+                             </td>
+                             @else
+                             <td>
+                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
+                                    <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </a>
+                             </td>
+                             @endif
                              <td>100%</td>
                              <td colspan="2" > Rusak Berat</td>
                             </tr>
-                            <tr>
-                             <td rowspan="3">2</td>
-                             <td rowspan="3">Struktur</td>
-                             <td>Kolom</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                 </a></td>
-                             <td>100%</td>
-                             <td rowspan="3" >300%</td>
-                             <td rowspan="3">Rusak Berat</td>
-                            </tr>
-                            <tr>
-                             <td>Balok</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                            <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>>
-                            </tr>
-                            <tr>
-                             <td>Pelat</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td>3</td>
-                             <td>Atap</td>
-                             <td></td>
-                             <td>%</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                             <td colspan="2" >Rusak Berat</td>
-                            </tr>
-                            <tr>
-                             <td>4</td>
-                             <td>Plafond</td>
-                             <td></td>
-                             <td>%</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                             <td  colspan="2" > Rusak berat</td>
-                            </tr>
-                            <tr>
-                             <td rowspan="4">5</td>
-                             <td rowspan="4">Dinding</td>
-                             <td>batu Bata</td>
-                             <td>%</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                             <td rowspan="4" >400%</td>
-                             <td rowspan="4">Rusak Berat</td>
-                            </tr>
-                            <tr>
-                             <td>Kaca</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td>Pintu</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td>Kusen</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td>6</td>
-                             <td>Lantai</td>
-                             <td>Penutup lantai</td>
-                             <td>%</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                             <td  colspan="2" >Rusak Berat</td>
-                            </tr>
-                            <tr>
-                             <td rowspan="3">7</td>
-                             <td rowspan="3">Utilitas</td>
-                             <td>Instalasi Listrik</td>
-                             <td>Estimasi</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                             <td rowspan="3" >300%</td>
-                             <td rowspan="3">Rusak Berat</td>
-                            </tr>
-                            <tr>
-                             <td>Instalasi Air</td>
-                             <td>Estimasi</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Estimasi">
-                                 <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td>Drainase Limbah</td>
-                             <td>m1</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td rowspan="3">8</td>
-                             <td rowspan="3">Finishing</td>
-                             <td>Finishing Langit-Langit</td>
-                             <td>%</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                             <td rowspan="3" >300%</td>
-                             <td rowspan="3">Rusak Berat</td>
-                            </tr>
-                            <tr>
-                             <td>Finishing Dinding</td>
-                             <td>%</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Persen">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
-                            <tr>
-                             <td>Finishing Kusen/Pintu</td>
-                             <td>Unit</td>
-                             <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
-                                 <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                             </a></td>
-                             <td>100%</td>
-                            </tr>
+                            @endforeach
                             <tr>
                              <td colspan="5">Jumlah Kerusakan</td>
                              <td>1700%</td>
