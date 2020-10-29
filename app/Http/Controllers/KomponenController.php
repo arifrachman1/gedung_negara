@@ -87,7 +87,8 @@ class KomponenController extends Controller
         $satuan = Satuan::get(); 
         $komponen = Komponen::find($id);
         $subkomponen = Komponen::where(['id_parent' => $id])->get();
-        return view('Komponen/edit_komponen', compact('komponen','satuan', 'subkomponen'));
+        $komponenopsi = KomponenOpsi::where(['id_komponen' => $id])->get();
+        return view('Komponen/edit_komponen', compact('komponen','satuan', 'subkomponen','komponenopsi'));
     }    
      
     public function update(Request $request, $id)
@@ -111,7 +112,9 @@ class KomponenController extends Controller
                     $data2->bobot = $input['bobots'][$key];
                     $data2->save();
                 }
-            }       
+            }    
+            
+        // $opsi = KomponenOpsi::find($id);
         
         }
         return redirect('masterkomponen');

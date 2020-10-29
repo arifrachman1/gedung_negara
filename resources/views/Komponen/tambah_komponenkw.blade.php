@@ -6,7 +6,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">TAMBAH KOMPONEN</h1>
-          <form  enctype="multipart/form-data" action="{{url('tambahAksi')}}" method='post'>
+          <form  enctype="multipart/form-data" action="{{url('tambah_komponen_aksi')}}" method='post'>
           @csrf
           <div class="card shadow mb-4 input-group">
                 <div class="card-header py-3">
