@@ -26,6 +26,7 @@
                                     <th>Sub Komponen</th>
                                     <th>satuan</th>
                                     <th>Bobot</th>
+                                    <th>Estimasi</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +36,8 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $val->nama }}</td> 
                                     <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif </td>
-                                    <td>{{ $val->bobot }} </td>  
+                                    <td>{{ $val->bobot }} </td> 
+                                    <td></td> 
                                   </tr> 
                                   @empty
                                   <tr>
