@@ -95,7 +95,7 @@
                 </div>
             </div>
             <a href="{{url('/edit_view_master_kerusakan')}}" class="btn btn-success float-left mt-2 mr-2">Submit</a>
-              <a class="btn btn-warning float-left mt-2" href="{{url('/tambah_master_kerusakan')}}" role="button">Kembali</a>
+              <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
         </form>
       </table>
     </div>
