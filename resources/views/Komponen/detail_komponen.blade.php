@@ -37,7 +37,21 @@
                                     <td>{{ $val->nama }}</td> 
                                     <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif </td>
                                     <td>{{ $val->bobot }} </td> 
-                                    <td></td> 
+                                    <td>
+                                      <div class="btn-group">
+                                        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Estimasi
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item">0%</a>
+                                          <a class="dropdown-item">20%</a>
+                                          <a class="dropdown-item">40%</a>
+                                          <a class="dropdown-item">60%</a>
+                                          <a class="dropdown-item">80%</a>
+                                          <a class="dropdown-item">100%</a>
+                                        </div>
+                                      </div>
+                                    </td> 
                                   </tr> 
                                   @empty
                                   <tr>
