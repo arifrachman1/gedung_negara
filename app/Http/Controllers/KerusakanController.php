@@ -10,6 +10,7 @@ use App\KabupatenKota;
 use App\Kecamatan;
 use App\DesaKelurahan;
 use App\Kerusakan;
+use App\KerusakanSurveyor;
 use App\Gedung;
 use App\Komponen;
 use App\User;
@@ -29,14 +30,36 @@ class KerusakanController extends Controller
         return view('Kerusakan/tambah_master_kerusakan', compact('gedung'));
     }
 
-    public function formPenilaianKerusakan($id) {
+    public function formKerusakanSurveyor($id) {
+        $row = Kerusakan::count(); 
+        $id_kerusakan = ++$row;
         $input = Gedung::find($id);
         $session_name = Session::get('name');
         $surveyor = User::where('name', '=', $session_name)->first();
-        return view('Kerusakan/formulir_penilaian_kerusakan', compact('input', 'surveyor'));
+        return view('Kerusakan/formulir_kerusakan_surveyor', compact('input', 'surveyor', 'id_kerusakan'));
     }
 
-    public function formKlsfKerusakan($id) {
+    public function inputFormSurveyor(Request $request) {
+        $tbl_kerusakan = new Kerusakan;
+        $tbl_kerusakan->id = $request->id_kerusakan;
+        $tbl_kerusakan->id_gedung = $request->id_gedung;
+        $id_gedung = $request->id_gedung;
+
+        $tanggal = $request->tanggal;
+        $jam = $request->jam;
+        $tbl_kerusakan->tanggal = $tanggal." ".$jam;
+        //dd($input);
+        $tbl_kerusakan->save();
+
+        $tbl_kerusakan_surveyor = new KerusakanSurveyor;
+        $tbl_kerusakan_surveyor->id_kerusakan = $request->id_kerusakan;
+        $tbl_kerusakan_surveyor->id_user = $request->id_user;
+        $tbl_kerusakan_surveyor->save();
+
+        return redirect()->to('create_formulir_klasifikasi_kerusakan/'.$id_gedung);
+    }
+
+    public function formIdentifikasiKerusakan($id) {
 
         $komponen = DB::table('komponen as t1')
             ->select('t1.nama as nama_komponen', 
@@ -56,16 +79,4 @@ class KerusakanController extends Controller
         return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
     }
 
-    public function inputFormSurveyor(Request $request) {
-        $input = new Kerusakan;
-        $input->id_gedung = $request->id_gedung;
-        $id_gedung = $request->id_gedung;
-
-        $tanggal = $request->tanggal;
-        $jam = $request->jam;
-        $input->tanggal = $tanggal." ".$jam;
-        //dd($input);
-        $input->save();
-        return redirect()->to('create_formulir_klasifikasi_kerusakan/'.$id_gedung);
-    }
 }

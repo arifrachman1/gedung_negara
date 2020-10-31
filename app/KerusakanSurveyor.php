@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kerusakan extends Model
+class KerusakanSurveyor extends Model
 {
-    protected $table = 'kerusakan';
+    protected $table = 'kerusakan_surveyor';
     protected $primaryKey = 'id';
     protected $guarded = [];
     // protected $fillable = [''];

@@ -215,6 +215,7 @@
 
 <script> 
     $(document).ready(function() {
+        // Mengatur rowspan ketika nama komponen sama
         var $rows = $('#kerusakan tbody tr');
         var items = [],
             itemtext = [],

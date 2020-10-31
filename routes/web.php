@@ -134,9 +134,9 @@ Route::get('master_kerusakan', 'KerusakanController@index');
 
 Route::get('tambah_master_kerusakan', 'KerusakanController@pilihanGedung');
 
-Route::get('formulir_penilaian_kerusakan/{id}', 'KerusakanController@formPenilaianKerusakan');
+Route::get('formulir_kerusakan_surveyor/{id}', 'KerusakanController@formKerusakanSurveyor');
 
-Route::get('create_formulir_klasifikasi_kerusakan/{id}', 'KerusakanController@formKlsfKerusakan');
+Route::get('create_formulir_klasifikasi_kerusakan/{id}', 'KerusakanController@formIdentifikasiKerusakan');
 
 Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 
