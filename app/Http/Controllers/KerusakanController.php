@@ -48,12 +48,12 @@ class KerusakanController extends Controller
             ->orderBy('t1.nama', 'asc')->get();
         $gedung = Gedung::where('id', $id)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id)->first();
-        $provinsi = Provinsi::select('provinsi.nama as nama')->where('id_prov', $daerah->kode_provinsi)->first();
-        $kab_kota = KabupatenKota::select('kota.nama as nama')->where('id_kota', $daerah->kode_kabupaten)->first();
-        $kecamatan = Kecamatan::select('kecamatan.nama as nama')->where('id_kec', $daerah->kode_kecamatan)->first();
-        $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama')->where('id_kel', $daerah->kode_kelurahan)->first();
+        $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
+        $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
+        $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
+        $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
-        return view('Kerusakan/view_master_kerusakan', compact('komponen', 'gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
     }
 
     public function inputFormSurveyor(Request $request) {
@@ -66,6 +66,6 @@ class KerusakanController extends Controller
         $input->tanggal = $tanggal." ".$jam;
         //dd($input);
         $input->save();
-        return redirect()->to('view_master_kerusakan/'.$id_gedung);
+        return redirect()->to('create_formulir_klasifikasi_kerusakan/'.$id_gedung);
     }
 }

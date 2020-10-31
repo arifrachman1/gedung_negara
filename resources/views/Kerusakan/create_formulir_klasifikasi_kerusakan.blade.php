@@ -51,15 +51,27 @@
                         <div class="col-lg-3">
                             Provinsi   
                         </div>
+                        @if($daerah->kode_provinsi == null)
                         <div class="col-lg-3">
-                            : {{ $provinsi->nama }}
+                            : -
                         </div>
+                        @else
+                        <div class="col-lg-3">
+                            : {{ $provinsi->nama_provinsi }}
+                        </div>
+                        @endif
                         <div class="col-lg-3">
                             Kabupaten / Kota   
                         </div>
+                        @if($daerah->kode_kabupaten == null)
                         <div class="col-lg-3">
-                            : {{ $kab_kota->nama }}
+                            : -
                         </div>
+                        @else
+                        <div class="col-lg-3">
+                            : {{ $kab_kota->nama_kota }}
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
@@ -67,15 +79,27 @@
                         <div class="col-lg-3">
                             Kecamatan   
                         </div>
+                        @if($daerah->kode_kecamatan == null)
                         <div class="col-lg-3">
-                            : {{ $kecamatan->nama }}
+                            : -
                         </div>
+                        @else
+                        <div class="col-lg-3">
+                            : {{ $kecamatan->nama_kecamatan }}
+                        </div>
+                        @endif
                         <div class="col-lg-3">
                             Kelurahan   
                         </div>
+                        @if($daerah->kode_kelurahan == null)
                         <div class="col-lg-3">
-                            : {{ $desa_kelurahan->nama }}
+                            : -
                         </div>
+                        @else
+                        <div class="col-lg-3">
+                            : {{ $desa_kelurahan->nama_kelurahan }}
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
@@ -177,7 +201,6 @@
   </div>
 </div>
 @include('template/footer')
-<script src="https://code.jquery.com/jquery-3.5.1.js"> </script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"> </script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"> </script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"> </script>
