@@ -128,19 +128,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 //-------------MASTER KERUSAKAN----------------------
 
-Route::get('master_kerusakan', function (){
-    return view('kerusakan/master_kerusakan');
-});
+Route::get('master_kerusakan', 'KerusakanController@index');
 
 // Route::get('tambah_master_kerusakan', function () { return view('kerusakan/tambah_master_kerusakan'); });
 
 Route::get('tambah_master_kerusakan', 'KerusakanController@pilihanGedung');
 
-Route::get('formulir_penilaian_kerusakan', function (){
-    return view('kerusakan/formulir_penilaian_kerusakan');
-});
+Route::get('formulir_penilaian_kerusakan/{id}', 'KerusakanController@formPenilaianKerusakan');
 
-Route::get('view_master_kerusakan', 'KerusakanController@formKlsfKerusakan');
+Route::get('view_master_kerusakan/{id}', 'KerusakanController@formKlsfKerusakan');
+
+Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 
 Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');

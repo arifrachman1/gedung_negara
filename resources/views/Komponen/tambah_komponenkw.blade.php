@@ -36,7 +36,7 @@
                           </select>
                           <div id="placholders"></div>
                           <label>Bobot</label>
-                            <input type="number" name="bobot2[]" class="form-control"> 
+                            <input type="number" step="0.001" name="bobot2[]" class="form-control"> 
                           </div> 
                         <br>
                           <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>

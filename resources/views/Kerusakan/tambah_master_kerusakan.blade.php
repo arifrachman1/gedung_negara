@@ -39,7 +39,7 @@
                       <td>{{ $val->tipe_pemilik }}</td>
                       <td>{{ $val->alas_hak }}</td>
                       <td>{{ $val->luas_lahan }}</td>
-                      <td><a class="btn btn-success" href="{{url('/formulir_penilaian_kerusakan')}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a>
+                      <td><a class="btn btn-success" href="{{url('/formulir_penilaian_kerusakan/'.$val->id)}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a>
                     </tr>
                     @endforeach
                   </tbody>

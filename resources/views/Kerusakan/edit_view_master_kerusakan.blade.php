@@ -152,7 +152,7 @@
                              <td><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Unit">
                             <i class="button"><span class="icon text-white-100">Hitung</span></i>
                              </a></td>
-                             <td>100%</td>>
+                             <td>100%</td>
                             </tr>
                             <tr>
                              <td>Pelat</td>

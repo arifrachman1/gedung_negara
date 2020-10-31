@@ -23,10 +23,10 @@
                             : Dinas Pendidikan
                         </div>
                         <div class="col-lg-3">
-                            Nama bangunan
+                            Nama Bangunan
                         </div>
                         <div class="col-lg-3">
-                            : SMAN 19 Surabaya
+                            : {{ $gedung->nama }}
                         </div>
                     </div>
                 </div>
@@ -36,13 +36,13 @@
                             Bujur Timur   
                         </div>
                         <div class="col-lg-3">
-                            : 299,100
+                            : {{ $gedung->bujur_timur }}
                         </div>
                         <div class="col-lg-3">
                             Lintang Selatan   
                         </div>
                         <div class="col-lg-3">
-                            : 393,01
+                            : {{ $gedung->lintang_selatan }}
                         </div>
                     </div>
                 </div>
@@ -52,13 +52,13 @@
                             Provinsi   
                         </div>
                         <div class="col-lg-3">
-                            : Jawa Timur
+                            : {{ $provinsi->nama }}
                         </div>
                         <div class="col-lg-3">
                             Kabupaten / Kota   
                         </div>
                         <div class="col-lg-3">
-                            : Surabaya
+                            : {{ $kab_kota->nama }}
                         </div>
                     </div>
                 </div>
@@ -68,13 +68,13 @@
                             Kecamatan   
                         </div>
                         <div class="col-lg-3">
-                            : Kenjeran
+                            : {{ $kecamatan->nama }}
                         </div>
                         <div class="col-lg-3">
                             Kelurahan   
                         </div>
                         <div class="col-lg-3">
-                            : Tanah kali Ke Dinding
+                            : {{ $desa_kelurahan->nama }}
                         </div>
                     </div>
                 </div>
@@ -84,13 +84,13 @@
                             Jumlah Lantai   
                         </div>
                         <div class="col-lg-3">
-                            : 2
+                            : {{ $gedung->jumlah_lantai }}
                         </div>
                         <div class="col-lg-3">
                             Luas Bangunan   
                         </div>
                         <div class="col-lg-3">
-                            : 100 m2
+                            : {{ $gedung->luas }} m<sup>2</sup>
                         </div>
                     </div>
                 </div>
@@ -127,10 +127,11 @@
                             @foreach($komponen as $val)
                             <tr>
                              <td>{{ $no++ }}</td>
-                             <td>{{ $val->nama_komponen }}</td>
-                             @if($val->sub_komponen == null)
+                             @if($val->nama_komponen == null)
+                             <td>{{ $val->sub_komponen }}</td>
                              <td>-</td>
-                             @else
+                             @else   
+                             <td>{{ $val->nama_komponen }}</td>
                              <td>{{ $val->sub_komponen }}</td>
                              @endif
                              <td>{{ $val->nama_satuan }}</td>
@@ -147,6 +148,7 @@
                                 </a>
                              </td>
                              @endif
+
                              <td>100%</td>
                              <td colspan="2" > Rusak Berat</td>
                             </tr>
@@ -167,7 +169,7 @@
                         <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
                     </div>
                 </div>
-            <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
+            <button type="submit" class="btn btn-success float-left mt-2 mr-2">Submit</button>
             <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
         </div>
       </div>
@@ -190,14 +192,42 @@
 
 <script> 
     $(document).ready(function() {
-    $('#kerusakan').DataTable( {
-        "processing" : true,
-        "serverSide" : true,
-        scrollY : '250px',
-        dom: 'Bfrtip'
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-} );
+        var $rows = $('#kerusakan tbody tr');
+        var items = [],
+            itemtext = [],
+            currGroupStartIdx = 0;
+        $rows.each(function(i) {
+            var $this = $(this);
+            var itemCell = $(this).find('td:eq(0)');
+            var item = itemCell.text();
+            itemCell.remove();
+            if ($.inArray(item, itemtext) === -1) {
+                itemtext.push(item);
+                items.push([i, item]);
+                groupRowSpan = 1;
+                currGroupStartIdx = i;
+                $this.data('rowspan', 1);
+            } else {
+                var rowspan = $rows.eq(currGroupStartIdx).data('rowspan') + 1;
+                $rows.eq(currGroupStartIdx).data('rowspan', rowspan);
+            }
+        });
+
+        $.each(items, function(i) {
+            var $row = $rows.eq(this[0]);
+            var rowspan = $row.data('rowspan');
+            $row.prepend('<td rowspan"' + rowspan + '">' + this[1] + '</td>');
+        });
+
+        $('#kerusakan').DataTable( {
+            "processing" : true,
+            "serverSide" : true,
+            scrollY : '250px',
+            dom: 'Bfrtip'
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+
+    });
 </script>
