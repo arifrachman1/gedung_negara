@@ -21,7 +21,7 @@ use Log;
 class KerusakanController extends Controller
 {
     public function index() {
-        $kerusakan = Kerusakan::select('gedung.nama as nama_gedung', 'gedung_ketegori.nama as jenis_gd', 'gedung.alamat as alamat')
+        $kerusakan = Kerusakan::select('kerusakan.id as id','gedung.nama as nama_gedung', 'gedung_ketegori.nama as jenis_gd', 'gedung.alamat as alamat')
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
                                 ->join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
                                 ->get();
@@ -102,6 +102,12 @@ class KerusakanController extends Controller
         $input->save();
 
         return response()->json(['success' => 'Simpan data sukses']);
+    }
+
+    public function hapusKerusakan($id) {
+        $data = Kerusakan::where('id', $id)->first();
+        $data->delete();
+        return redirect('master_kerusakan');
     }
 
 }

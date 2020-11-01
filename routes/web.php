@@ -135,6 +135,7 @@ Route::get('create_formulir_klasifikasi_kerusakan/{id_gedung}/{id_kerusakan}', '
 Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 Route::post('get_data_komponen/', 'KerusakanController@getDataKomponen')->name('get_data_komponen');
 Route::post('simpan_kerusakan_detail/', 'KerusakanController@simpanKerusakanDetail')->name('simpan_kerusakan_detail');
+Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
 
 Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');

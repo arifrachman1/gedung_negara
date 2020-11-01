@@ -175,7 +175,7 @@
                              @endif
 
                              <td id="td{{ $val->id_komponen }}"></td>
-                             <td colspan="2" > Rusak Berat</td>
+                             <td colspan="2" id="td_keterangan{{ $val->id_komponen }}"></td>
                             </tr>
                             @endforeach
                             <tr>
@@ -240,7 +240,7 @@
         <div class="modal-body"> 
             <div class="row">
               <div class="col-lg-2">
-                <label>Jumlah=</label>
+                <label>Jumlah =</label>
               </div>
               <div class="col-lg-2">
                 <input type="text" class="form-control" placeholder="0"  name="">
@@ -560,6 +560,11 @@
               var val_opsi = $('.btn-opsi').attr('data-val');
               var hiddenVal = '<input type="hidden" name="tkt_kerusakan[]" value="' + val_opsi + '" readonly>';
               $('#td'+idKomp).html(val_opsi + '%' + hiddenVal);
+              if (val_opsi > 0.3) {
+                $('#td_keterangan'+idKomp).html('Rusak Berat');
+              } else {
+                $('#td_keterangan'+idKomp).html('Hitung Komponen Lain');
+              }
               $('#modalEstimasi').modal('hide');
             },
           });
