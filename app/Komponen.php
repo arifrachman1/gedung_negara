@@ -9,7 +9,7 @@ class Komponen extends Model
     protected $table = 'komponen';
     protected $primaryKey = 'id';
     protected $guarded = [];
-//    / protected $fillable = ['id_parent']; //nama kolom yang ingin di masukkan
+    // protected $fillable = [''];
     public $timestamps = false;
 
     public function satuan()

@@ -161,14 +161,16 @@
                              <td>{{ $val->nama_satuan }}</td>
                              @if($val->id_satuan == 1)
                              <td class="estimasi">
-                                <a class="btn btn-primary" data-id="{{ $val->id_komponen }}" data-toggle="modal" data-target="#modalEstimasi">
-                                    <span class="text-white-100">Hitung</span>
-                                </a>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEstimasi">
+                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </button>
                              </td>
                              @else
                              <td class="numerik">
-                                <a class="btn btn-primary" data-id="{{ $val->id_komponen }}" data-toggle="modal" data-target="#modalUnit">
-                                  <span class="text-white-100">Hitung</span>
+                                <a href="#" data-id="{{ $val->id_komponen }}">
+                                  <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnit">
+                                    <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                  </button>
                                 </a>
                              </td>
                              @endif
@@ -214,12 +216,12 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Satuan : Estimasi</label>
-              <select id="select" class="form-control" name="">
-                <option value="0">Tidak Ada Kerusakan</option>
-                <option value="1">Penurunan tidak merata, namun perbedaan penurunan tidak melebihi 1/250 L</option>
+              <select id="select" class="form-control" name="" required>
+                <option value="">Tidak Ada Kerusakan</option>
+                <!-- <option value="1">Penurunan tidak merata, namun perbedaan penurunan tidak melebihi 1/250 L</option>
                 <option value="2">Penurunan > 1/250 L sehingga menimbulkan kerusakan  struktur atasnya. Tanah di sekeliling bangunan naik</option>
                 <option value="3">Bangunan miring secara kasat mata, Lantai dasar naik/menggelembung</option>
-                <option value="4">Pondasi patah, bergeser akibat longsor, struktur atas menjadi rusak</option>
+                <option value="4">Pondasi patah, bergeser akibat longsor, struktur atas menjadi rusak</option> -->
               </select>
           </div>
         </div>
@@ -504,6 +506,12 @@
 
 
 <script> 
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
     $(document).ready(function() {
 
         // Mengatur rowspan ketika nama komponen sama
@@ -545,16 +553,17 @@
         });
 
         // menampilkan modal berdasarkan id komponen
-        var idKomp;
-
-        $('.estimasi .btn').click(function(){
-            idKomp = $(this).attr('data-id');
-            console.log(idKomp);
-        });
-
-        $('#modalEstimasi').on('show.bs.modal', function(e){
-            $(this).find('h5').text('Klasifikasi Kerusakan ' + idKomp);
-        });
+        function showOpsi(id_komponen) {
+          $.ajax({
+            url: '{{ route("get_data_komponen") }}',
+            type: 'POST',
+            data: { id_komponen: id_komponen },
+            success: function(data) {
+              console.log(data); // test data
+              //$('.modal-body').html(data);
+            },
+          });
+        }
 
     });
 </script>

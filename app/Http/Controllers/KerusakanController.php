@@ -13,7 +13,9 @@ use App\Kerusakan;
 use App\KerusakanSurveyor;
 use App\Gedung;
 use App\Komponen;
+use App\KomponenOpsi;
 use App\User;
+use Log;
 
 class KerusakanController extends Controller
 {
@@ -78,6 +80,14 @@ class KerusakanController extends Controller
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
         return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
+    }
+
+    public function getDataKomponen(Request $request) {
+        $id_komponen = $request->id_komponen;
+        $data_opsi = KomponenOpsi::where('id_komponen', $id_komponen)->get();
+        $returnData = view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('data_opsi'))->render();
+        Log::info($returnData);
+        return response()->json( ['success' => true, 'html' => $returnData] );
     }
 
 }

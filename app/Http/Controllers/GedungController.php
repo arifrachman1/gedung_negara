@@ -63,7 +63,7 @@ class GedungController extends Controller
 
     public function getKabKota($id) {
         $kabKota = Provinsi::where('id_prov', $id)->with('kabupatenKota')->get();
-        Log::info($kabKota);
+        //Log::info($kabKota);
         return response()->json([ 'kabKota' => $kabKota ]);
     }
 
