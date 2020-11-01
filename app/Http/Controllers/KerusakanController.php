@@ -62,7 +62,8 @@ class KerusakanController extends Controller
     public function formIdentifikasiKerusakan($id) {
 
         $komponen = DB::table('komponen as t1')
-            ->select('t1.nama as nama_komponen', 
+            ->select('t2.id as id_komponen',
+                     't1.nama as nama_komponen', 
                      't2.nama as sub_komponen', 
                      'satuan.id as id_satuan', 
                      'satuan.nama as nama_satuan')
