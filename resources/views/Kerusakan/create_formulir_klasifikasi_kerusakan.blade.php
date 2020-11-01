@@ -128,6 +128,7 @@
                             <input class="form-control" value="<?=$now?>" readonly>
                         </div>
                     </div>
+                  <input type="hidden" id="idKerusakan" name="id_kerusakan" value="{{ $id_kerusakan }}">
                 </div>    
                 <div class="table-responsive">
                     <a class="btn btn-secondary btn-icon-split" href="{{ url('') }}" role="button">
@@ -161,21 +162,19 @@
                              <td>{{ $val->nama_satuan }}</td>
                              @if($val->id_satuan == 1)
                              <td class="estimasi">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEstimasi">
+                                <button class="btn btn-primary" onclick="showOpsi({{$val->id_komponen}})">
                                   <i class="button"><span class="icon text-white-100">Hitung</span></i>
                                 </button>
                              </td>
                              @else
                              <td class="numerik">
-                                <a href="#" data-id="{{ $val->id_komponen }}">
-                                  <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnit">
-                                    <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                  </button>
-                                </a>
+                                <button class="btn btn-primary" onclick="showNumerik({{$val->id_komponen}})">
+                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </button>
                              </td>
                              @endif
 
-                             <td>100%</td>
+                             <td id="td{{ $val->id_komponen }}"></td>
                              <td colspan="2" > Rusak Berat</td>
                             </tr>
                             @endforeach
@@ -209,24 +208,20 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Klasifikasi Kerusakan</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" onclick="closeOpsi()">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Satuan : Estimasi</label>
-              <select id="select" class="form-control" name="" required>
-                <option value="">Tidak Ada Kerusakan</option>
-                <!-- <option value="1">Penurunan tidak merata, namun perbedaan penurunan tidak melebihi 1/250 L</option>
-                <option value="2">Penurunan > 1/250 L sehingga menimbulkan kerusakan  struktur atasnya. Tanah di sekeliling bangunan naik</option>
-                <option value="3">Bangunan miring secara kasat mata, Lantai dasar naik/menggelembung</option>
-                <option value="4">Pondasi patah, bergeser akibat longsor, struktur atas menjadi rusak</option> -->
+              <select class="form-control isi-opsi" name="" required>
+                <option>Pilih Opsi</option>
               </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success" type="button">Simpan</button>
+          <button class="btn btn-success btn-opsi" type="button">Simpan</button>
         </div>
       </div>
     </div>
@@ -505,35 +500,69 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"> </script>
 
 
-<script> 
+<script>
+    var idKomp;
+    var valueOpsi;
+    var bobot;
+
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
 
+    // menampilkan modal estimasi berdasarkan id komponen
+    function showOpsi(id_komponen) {
+      idKomp = id_komponen;
+      $.ajax({
+        url: '{{ route("get_data_komponen") }}',
+        type: 'POST',
+        data: { id_komponen: id_komponen },
+        success: function(data) {
+          console.log(data);
+          $.each(data.dataOpsi, function(index, data){
+            $('.isi-opsi').append('<option class="dropdown" data-id="'+data.id+'" value="'+data.nilai+'">'+data.opsi+'</option>');
+          });
+          bobot = data.bobot;
+          $('#modalEstimasi').modal('show');
+        },
+      });
+    }
+
+    function closeOpsi() {
+      $('.isi-opsi .dropdown').remove();
+      $('#modalEstimasi').modal('hide');
+    }
+
     $(document).ready(function() {
 
-        // Mengatur rowspan ketika nama komponen sama
-        var $rows = $('#kerusakan tbody tr');
-        var items = [],
-            itemtext = [],
-            currGroupStartIdx = 0;
-        $rows.each(function(i) {
-            var $this = $(this);
-            var itemCell = $(this).find('td:eq(0)');
-            var item = itemCell.text();
-            itemCell.remove();
-            if ($.inArray(item, itemtext) === -1) {
-                itemtext.push(item);
-                items.push([i, item]);
-                groupRowSpan = 1;
-                currGroupStartIdx = i;
-                $this.data('rowspan', 1);
-            } else {
-                var rowspan = $rows.eq(currGroupStartIdx).data('rowspan') + 1;
-                $rows.eq(currGroupStartIdx).data('rowspan', rowspan);
-            }
+        $('.isi-opsi').change(function(){
+          var idOpsi = $(this).find(':selected').attr('data-id');
+          var val  = this.value;
+          valueOpsi = val * bobot / 100;
+          console.log(valueOpsi);
+          $('.btn-opsi').attr({'data-val': valueOpsi, 'data-id': idOpsi});
+        });
+
+        $('.btn-opsi').click(function(){
+          var id_kerusakan = $('#idKerusakan').val();
+          var id_komp_opsi = $('.btn-opsi').attr('data-id');
+          $.ajax({
+            url: '{{ route("simpan_kerusakan_detail") }}',
+            type: 'POST',
+            data: {
+              id_kerusakan: id_kerusakan,
+              id_komponen: idKomp,
+              id_komponen_opsi: id_komp_opsi,
+            },
+            success: function(data) {
+              console.log(data);
+              var val_opsi = $('.btn-opsi').attr('data-val');
+              var hiddenVal = '<input type="hidden" name="tkt_kerusakan[]" value="' + val_opsi + '" readonly>';
+              $('#td'+idKomp).html(val_opsi + '%' + hiddenVal);
+              $('#modalEstimasi').modal('hide');
+            },
+          });
         });
 
         $.each(items, function(i) {
@@ -546,24 +575,11 @@
             "processing" : true,
             "serverSide" : true,
             scrollY : '250px',
-            dom: 'Bfrtip'
+            dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
-
-        // menampilkan modal berdasarkan id komponen
-        function showOpsi(id_komponen) {
-          $.ajax({
-            url: '{{ route("get_data_komponen") }}',
-            type: 'POST',
-            data: { id_komponen: id_komponen },
-            success: function(data) {
-              console.log(data); // test data
-              //$('.modal-body').html(data);
-            },
-          });
-        }
 
     });
 </script>

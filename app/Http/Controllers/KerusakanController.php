@@ -10,6 +10,7 @@ use App\KabupatenKota;
 use App\Kecamatan;
 use App\DesaKelurahan;
 use App\Kerusakan;
+use App\KerusakanDetail;
 use App\KerusakanSurveyor;
 use App\Gedung;
 use App\Komponen;
@@ -58,11 +59,12 @@ class KerusakanController extends Controller
         $tbl_kerusakan_surveyor->id_user = $request->id_user;
         $tbl_kerusakan_surveyor->save();
 
-        return redirect()->to('create_formulir_klasifikasi_kerusakan/'.$id_gedung);
+        $id_kerusakan = $request->id_kerusakan;
+
+        return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_kerusakan' => $id_kerusakan]);
     }
 
-    public function formIdentifikasiKerusakan($id) {
-
+    public function formIdentifikasiKerusakan($id_gedung, $id_kerusakan) {
         $komponen = DB::table('komponen as t1')
             ->select('t2.id as id_komponen',
                      't1.nama as nama_komponen', 
@@ -72,22 +74,34 @@ class KerusakanController extends Controller
             ->rightjoin('komponen as t2', 't1.id', '=', 't2.id_parent')
             ->join('satuan', 't2.id_satuan' , '=', 'satuan.id')
             ->orderBy('t1.nama', 'asc')->get();
-        $gedung = Gedung::where('id', $id)->first();
-        $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id)->first();
+        $gedung = Gedung::where('id', $id_gedung)->first();
+        $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
         $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
         $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_kerusakan'));
     }
 
     public function getDataKomponen(Request $request) {
-        $id_komponen = $request->id_komponen;
-        $data_opsi = KomponenOpsi::where('id_komponen', $id_komponen)->get();
-        $returnData = view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('data_opsi'))->render();
-        Log::info($returnData);
-        return response()->json( ['success' => true, 'html' => $returnData] );
+        $data = $request->all();
+        $id_komponen = $data['id_komponen'];
+        $dataOpsi = KomponenOpsi::where('id_komponen', $id_komponen)->get();
+        $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
+        //Log::info($data_opsi);
+        return response()->json([ 'dataOpsi' => $dataOpsi, 'bobot' => $bobot['bobot'] ]);
+    }
+
+    public function simpanKerusakanDetail(Request $request) {
+        $data = $request->all();
+        $input = new KerusakanDetail;
+        $input->id_kerusakan = $data['id_kerusakan'];
+        $input->id_komponen = $data['id_komponen'];
+        $input->id_komponen_opsi = $data['id_komponen_opsi'];
+        $input->save();
+
+        return response()->json(['success' => 'Simpan data sukses']);
     }
 
 }
