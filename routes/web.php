@@ -143,14 +143,14 @@ Route::get('view_master_kerusakan', function (){
 Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');
 });
-Route::get('edit_master_kerusakan', function (){
-    return view('kerusakan/edit_master_kerusakan');
-});
 Route::get('edit_formulir_penilaian_kerusakan', function (){
     return view('kerusakan/edit_formulir_penilaian_kerusakan');
 });
 Route::get('edit_view_master_kerusakan', function (){
     return view('kerusakan/edit_view_master_kerusakan');
+});
+Route::get('import_master_kerusakan', function (){
+    return view('kerusakan/import_master_kerusakan');
 });
 
 
