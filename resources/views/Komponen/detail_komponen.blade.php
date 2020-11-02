@@ -25,7 +25,8 @@
                                   <th>No</th>
                                     <th>Sub Komponen</th>
                                     <th>satuan</th>
-                                    <th>Bobot</th>
+                                    <th>Opsi</th>
+                                    <th>Bobot</th>                                    
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +36,18 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $val->nama }}</td> 
                                     <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif </td>
-                                    <td>{{ $val->bobot }} </td>  
+                                    <td><?php 
+                                        $komponen_opsi = DB::table('komponen_opsi')->where( 'id_komponen','=', $val->id )->get();
+                                      ?>                                                                                    
+                                      <select class="form-control" name="test" id="opsi">                                                                          
+                                        @foreach($komponen_opsi as $u)                                          
+                                            <option value="{{ $u->nilai }}">{{ $u->opsi }}</option>                                                                                      
+                                        @endforeach
+                                      </select>  
+                                                                    
+                                    </td> 
+                                    <td>{{ $val->bobot }}</td>  
+                                                                          
                                   </tr> 
                                   @empty
                                   <tr>
@@ -47,7 +59,7 @@
                             </div>
                             <div class="card-body">
                             <div class="row">
-                            </div>
+                            </div>                            
                             <a class="btn btn-warning float-left mt-2" href="{{url('/masterkomponen')}}" role="button">Kembali</a>
                           </table>
                         </div>
@@ -56,3 +68,5 @@
                 </div>
 <!-- @include('template/footer') -->
 </body>
+<script>
+</script>

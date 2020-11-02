@@ -18,11 +18,32 @@
                       <label class="font-weight-bold">Nama Komponen</label>
                         <input onkeyup="this.value = this.value.toUpperCase()" type="text" name="nama" class="form-control" required>  
                     </div> <br>
+                    <div class="control-group before-add-more"><br>
+                      <label>Subkomponen</label>
+                        <input type="text" name="nama2[]" class="form-control">
+                      <label>Satuan</label>
+                        <div class="form-group">
+                          <select class="form-control" name="satuan2[]" id="satuan">
+                          <option value="" required>Pilih Satuan</option>
+                            @foreach($satuan as $val)
+                              <option value="{{ $val->id }}">{{ $val->nama }}</option>
+                            @endforeach
+                          </select>
+                          <div id="placholders"></div>
+                          <label>Bobot</label>
+                            <input type="number" name="bobot2[]" class="form-control"> 
+                          </div> 
+                        <br>
+
+                        
+                    </div>
                     <a href="{{url('masterkomponen')}}" class="btn btn-warning">Kembali</a>  ||  
                      <button class="btn btn-success add-more" type="button">Tambah Sub Komponen</button>  ||  
                      <button class="btn btn-success" type="submit">Simpan</button>
                   </div>
+                  <div class="card-body">
                   <div id="copy">
+                
                     <div class="control-group before-add-more"><br>
                       <label>Subkomponen</label>
                         <input type="text" name="nama2[]" class="form-control">

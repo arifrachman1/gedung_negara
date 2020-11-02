@@ -17,5 +17,10 @@ class Komponen extends Model
         return $this->hasOne('App\Satuan', 'id', 'id_satuan');
         
     }
+    public function opsi()
+    {
+        return $this->hasOne('App\KomponenOpsi', 'id', 'id_komponen');
+        
+    }
 }
 
