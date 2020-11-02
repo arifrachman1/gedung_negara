@@ -25,8 +25,8 @@
                                   <th>No</th>
                                     <th>Sub Komponen</th>
                                     <th>satuan</th>
-                                    <th>Opsi</th>
-                                    <th>Bobot</th>                                    
+                                    <th>Bobot</th>
+                                    <th>Opsi</th>                    
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -36,6 +36,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $val->nama }}</td> 
                                     <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif </td>
+                                    <td>{{ $val->bobot }}</td>  
                                     <td><?php 
                                         $komponen_opsi = DB::table('komponen_opsi')->where( 'id_komponen','=', $val->id )->get();
                                       ?>                                                                                    
@@ -46,7 +47,6 @@
                                       </select>  
                                                                     
                                     </td> 
-                                    <td>{{ $val->bobot }}</td>  
                                                                           
                                   </tr> 
                                   @empty
