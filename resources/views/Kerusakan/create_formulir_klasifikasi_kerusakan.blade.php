@@ -577,6 +577,7 @@
                 $('#td_keterangan'+idKomp).html('Hitung Komponen Lain');
               }
               $('#modalEstimasi').modal('hide');
+              $('.isi-opsi .dropdown').remove();
             },
           });
         });
