@@ -15,7 +15,6 @@ class Komponen extends Model
     public function satuan()
     {
         return $this->hasOne('App\Satuan', 'id', 'id_satuan');
-        
     }
 
     public function komponen()
@@ -26,6 +25,12 @@ class Komponen extends Model
     public function subKomponen()
     {
         return $this->hasMany(self::class, 'id_parent');
+    }
+    
+    public function opsi()
+    {
+        return $this->hasOne('App\KomponenOpsi', 'id', 'id_komponen');
+        
     }
 }
 

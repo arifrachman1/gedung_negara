@@ -10,4 +10,9 @@ class KomponenOpsi extends Model
     protected $primaryKey = 'id';
     // protected $fillable = [''];
     public $timestamps = false;
+
+    public function opsi()
+    {
+        return $this->BelongsTo(komponen::class,'id');
+    }
 }
