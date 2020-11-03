@@ -515,15 +515,14 @@
     function showOpsi(id_komponen) {
       idKomp = id_komponen;
       $.ajax({
-        url: '{{ route("get_data_komponen") }}',
+        url: '{{ route("get_data_komponen_opsi") }}',
         type: 'POST',
         data: { id_komponen: id_komponen },
         success: function(data) {
           console.log(data);
           $.each(data.dataOpsi, function(index, data){
-            $('.isi-opsi').append('<option class="dropdown" data-id="'+data.id+'" value="'+data.nilai+'">'+data.opsi+'</option>');
+            $('.isi-opsi').append('<option class="dropdown" data-id="'+data.id+'">'+data.opsi+'</option>');
           });
-          bobot = data.bobot;
           $('#modalEstimasi').modal('show');
         },
       });
@@ -538,8 +537,20 @@
 
         $('.isi-opsi').change(function(){
           var idOpsi = $(this).find(':selected').attr('data-id');
-          var val  = this.value;
-          valueOpsi = val * bobot / 100;
+          // mengirim id opsi ke controller via ajax untuk dilakukan proses perhitungan di dalam controller
+          // hal ini dilakukan untuk mencegah pengubahan data operasi perhitungan oleh user
+          $.ajax({
+            url: '{{ route("hitung_tkt_kerusakan_estimasi") }}',
+            type: 'POST',
+            data: {id_opsi: idOpsi},
+            success: function(data) {
+              console.log(data);
+              //! --------------------------------------------
+            },
+          });
+
+          // var val  = this.value;
+          // valueOpsi = val * bobot / 100;
           console.log(valueOpsi);
           $('.btn-opsi').attr({'data-val': valueOpsi, 'data-id': idOpsi});
         });

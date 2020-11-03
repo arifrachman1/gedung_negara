@@ -84,13 +84,18 @@ class KerusakanController extends Controller
         return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_kerusakan'));
     }
 
-    public function getDataKomponen(Request $request) {
+    public function getDataKomponenOpsi(Request $request) {
         $data = $request->all();
         $id_komponen = $data['id_komponen'];
         $dataOpsi = KomponenOpsi::where('id_komponen', $id_komponen)->get();
         $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
         //Log::info($data_opsi);
         return response()->json([ 'dataOpsi' => $dataOpsi, 'bobot' => $bobot['bobot'] ]);
+    }
+
+    public function hitungTktKerusakanEstimasi(Request $request) {
+        // where bobot, nilai,
+        // bobot * nilai / 100
     }
 
     public function simpanKerusakanDetail(Request $request) {
