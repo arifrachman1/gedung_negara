@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2020 at 02:39 AM
+-- Generation Time: Nov 03, 2020 at 04:11 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -78,6 +78,13 @@ CREATE TABLE `gedung` (
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `gedung`
+--
+
+INSERT INTO `gedung` (`id`, `id_gedung_kategori`, `nama`, `alamat`, `bujur_timur`, `lintang_selatan`, `legalitas`, `tipe_pemilik`, `alas_hak`, `luas_lahan`, `jumlah_lantai`, `luas`, `tinggi`, `kompleks`, `kepadatan`, `permanensi`, `tkt_resiko_kebakaran`, `penangkal_petir`, `struktur_bawah`, `struktur_bangunan`, `struktur_atap`, `kode_provinsi`, `kode_kabupaten`, `kode_kecamatan`, `kode_kelurahan`, `kdb`, `klb`, `kdh`, `gsb`, `rth`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(105, 8, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 6, 'Legal', 'Negara', 'Letter C', 100, 2, 90, 10, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', '35', '3523', '3523130', '3523130012', 'A', 'A', 'A', 'A', 'A', '2020-11-01 18:24:44', '2020-11-01 22:12:12', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -97,7 +104,10 @@ CREATE TABLE `gedung_ketegori` (
 --
 
 INSERT INTO `gedung_ketegori` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Sekolah', '2020-10-26 10:50:49', '2020-10-26 10:50:49', NULL);
+(1, 'Sekolah', '2020-10-26 10:50:49', '2020-11-01 18:03:14', '2020-11-01 18:03:14'),
+(2, 'Universitas', '2020-11-01 18:02:50', '2020-11-01 18:04:59', '2020-11-01 18:04:59'),
+(8, 'Sekolah', '2020-11-01 18:04:54', '2020-11-01 18:04:54', NULL),
+(9, 'Universitas', '2020-11-01 18:05:23', '2020-11-01 18:05:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -82433,7 +82443,7 @@ CREATE TABLE `kerusakan` (
 --
 
 INSERT INTO `kerusakan` (`id`, `id_gedung`, `tanggal`, `detail_json`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 74, '2020-10-22 10:45:38', NULL, NULL, NULL, NULL);
+(1, 105, '2020-11-03 03:06:17', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82448,6 +82458,13 @@ CREATE TABLE `kerusakan_detail` (
   `jumlah` int(11) DEFAULT NULL,
   `id_komponen_opsi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kerusakan_detail`
+--
+
+INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `id_komponen_opsi`) VALUES
+(11, 1, 382, NULL, 27);
 
 -- --------------------------------------------------------
 
@@ -82474,6 +82491,13 @@ CREATE TABLE `kerusakan_surveyor` (
   `id_user` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `kerusakan_surveyor`
+--
+
+INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
+(21, 1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -82491,6 +82515,19 @@ CREATE TABLE `komponen` (
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `komponen`
+--
+
+INSERT INTO `komponen` (`id`, `nama`, `bobot`, `id_satuan`, `id_parent`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(377, 'PONDASI', 9, NULL, NULL, NULL, NULL, NULL),
+(378, 'KERANGKA', 2, 2, 377, NULL, NULL, NULL),
+(379, 'ATAP', NULL, 2, NULL, NULL, NULL, NULL),
+(380, 'UTILITAS', NULL, NULL, NULL, NULL, NULL, NULL),
+(381, 'INSTALASI LISTRIK', 5, 1, 380, NULL, NULL, NULL),
+(382, 'INSTALASI AIR', 2, 1, 380, NULL, NULL, NULL),
+(383, 'DRAINASE LIMBAH', 2, 3, 380, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -82499,13 +82536,31 @@ CREATE TABLE `komponen` (
 
 CREATE TABLE `komponen_opsi` (
   `id` int(11) NOT NULL,
-  `opsi` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `opsi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nilai` int(11) NOT NULL DEFAULT 0 COMMENT 'persentase',
   `id_komponen` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `delete_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `komponen_opsi`
+--
+
+INSERT INTO `komponen_opsi` (`id`, `opsi`, `nilai`, `id_komponen`, `created_at`, `updated_at`, `delete_at`) VALUES
+(25, 'Tidak ada kerusakan', 0, 382, NULL, NULL, NULL),
+(26, 'Kebocoran pipa terbats ditempat yang terlihat atau mudah dicapai, keran-keran kecil rusak, sehingga biaya perbaikan kurang dari 1 % biaya instalasi baru', 20, 382, NULL, NULL, NULL),
+(27, 'Bagian-bagian kecil pemipaan bocor, motor pompa terbakar, keran-keran kecil rusak, sehingga biaya perbaikan antara 1-10% dari biaya instalasi baru', 40, 382, NULL, NULL, NULL),
+(28, 'Pompa, motor, pipa, dan keran rusak apabuila diganti atau diperbaiki memerlukan biaya antara 10-25 % dari biaya instalasi baru', 60, 382, NULL, NULL, NULL),
+(29, 'Sebagian besar pompa, sebagian besar motor terbakar, pipa utama bocor namun ditempat terbuka, beberapa keran tidak befungsi, sehingga biaya perbaikan 25- 50 % dari biaya instalasi baru', 80, 382, NULL, NULL, NULL),
+(30, 'Pompa –pompa rusak total, motor terbakar, dibanyak tempat terbuka dan tutup pipa-pipa bocor, keran-keran tidak berfungsi, sehingga perbaikan instalasi perlu menyeluruh, dengan perkiraan biaya lebih dari 50% dari biaya instalasi baru', 100, 382, NULL, NULL, NULL),
+(37, 'Tidak ada kerusakan', 0, 381, NULL, NULL, NULL),
+(38, 'Sebagian kecil komponen dari panel-panel LP rusak, ada sedkit jalur kabel instalasi shortage, sebagian kecil armature rusak ringan, sehingga biaya perbaikan kurang dari 5% dari biaya instalasi baru ', 20, 381, NULL, NULL, NULL),
+(39, 'Beberapa komponen dari panel-panel LP rusak, sebagian kecil jalur kabel instalasi shortage, sehingga armature rusak ringan, sehingga  biaya perbaikan 5-20% dari biaya instalasi baru', 40, 381, NULL, NULL, NULL),
+(40, 'Beberapa komponen dari panel-panel LP rusak, sebagian kecil jalur kabel instalasi shortage, sehingga armature rusak ringan hingga berat, sehingga  biaya perbaikan 20-50% dari biaya instalasi baru, ', 60, 381, NULL, NULL, NULL),
+(41, 'Sebagian besar komponen panel-panel LP rusak, sebagian besar kabel instalasi shortage, sebagian besar armature rusak berat, sehingga biaya perbaikan lebih  dari 50 % dari instalasi baru', 80, 381, NULL, NULL, NULL),
+(42, 'Sebagian besar komponen panel-panel LP rusak, sebagian besar kabel instalasi shortage, seluruh armature rusak berat, sehingga biaya perbaikan lebih dari 50 % dari instalasi baru', 100, 381, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83163,7 +83218,8 @@ INSERT INTO `permissions` (`id`, `name`, `name_alias`, `guard_name`, `category`,
 (66, 'jenisgedung.update', 'update jenis gedung', 'web', 'gedung', '2020-10-21 01:26:16', '2020-10-21 01:26:16'),
 (67, 'jenisgedung.delete', 'delete jenis gedung', 'web', 'gedung', '2020-10-21 01:26:26', '2020-10-21 01:26:26'),
 (68, 'jenisgedung.create', 'create jenis gedung', 'web', 'gedung', NULL, NULL),
-(69, 'jenisgedung.read', 'read jenis gedung', 'web', 'gedung', NULL, NULL);
+(69, 'jenisgedung.read', 'read jenis gedung', 'web', 'gedung', NULL, NULL),
+(70, 'pdf.export', 'php export', 'web', 'other', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83339,9 +83395,7 @@ CREATE TABLE `satuan` (
 INSERT INTO `satuan` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'estimasi', NULL, NULL, NULL),
 (2, '%', NULL, NULL, NULL),
-(3, 'unit', NULL, NULL, NULL),
-(11, 'm2', '2020-10-22 02:27:22', '2020-10-24 19:06:40', '2020-10-22 02:27:30'),
-(12, 'gedung', '2020-10-22 02:56:31', '2020-10-22 03:09:22', '2020-10-22 03:09:22');
+(3, 'unit', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83535,25 +83589,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gedung`
 --
 ALTER TABLE `gedung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `gedung_ketegori`
 --
 ALTER TABLE `gedung_ketegori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_detail`
 --
 ALTER TABLE `kerusakan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_klasifikasi`
@@ -83565,19 +83619,19 @@ ALTER TABLE `kerusakan_klasifikasi`
 -- AUTO_INCREMENT for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `komponen`
 --
 ALTER TABLE `komponen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
 
 --
 -- AUTO_INCREMENT for table `komponen_opsi`
 --
 ALTER TABLE `komponen_opsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -83589,7 +83643,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `roles`
