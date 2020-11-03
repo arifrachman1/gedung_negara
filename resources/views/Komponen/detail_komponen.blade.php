@@ -26,7 +26,7 @@
                                     <th>Sub Komponen</th>
                                     <th>satuan</th>
                                     <th>Bobot</th>
-                                    <th>Estimasi</th>
+                                    <th>Opsi</th>                    
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -36,22 +36,18 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $val->nama }}</td> 
                                     <td>@if(isset($val->satuan)){{ $val->satuan->nama }} @else - @endif </td>
-                                    <td>{{ $val->bobot }} </td> 
-                                    <td>
-                                      <div class="btn-group">
-                                        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Estimasi
-                                        </button>
-                                        <div class="dropdown-menu">
-                                          <a class="dropdown-item">0%</a>
-                                          <a class="dropdown-item">20%</a>
-                                          <a class="dropdown-item">40%</a>
-                                          <a class="dropdown-item">60%</a>
-                                          <a class="dropdown-item">80%</a>
-                                          <a class="dropdown-item">100%</a>
-                                        </div>
-                                      </div>
+                                    <td>{{ $val->bobot }}</td>  
+                                    <td><?php 
+                                        $komponen_opsi = DB::table('komponen_opsi')->where( 'id_komponen','=', $val->id )->get();
+                                      ?>                                                                                    
+                                      <select class="form-control" name="test" id="opsi">                                                                          
+                                        @foreach($komponen_opsi as $u)                                          
+                                            <option value="{{ $u->nilai }}">{{ $u->opsi }}</option>                                                                                      
+                                        @endforeach
+                                      </select>  
+                                                                    
                                     </td> 
+                                                                          
                                   </tr> 
                                   @empty
                                   <tr>
@@ -63,7 +59,7 @@
                             </div>
                             <div class="card-body">
                             <div class="row">
-                            </div>
+                            </div>                            
                             <a class="btn btn-warning float-left mt-2" href="{{url('/masterkomponen')}}" role="button">Kembali</a>
                           </table>
                         </div>
@@ -72,3 +68,5 @@
                 </div>
 <!-- @include('template/footer') -->
 </body>
+<script>
+</script>
