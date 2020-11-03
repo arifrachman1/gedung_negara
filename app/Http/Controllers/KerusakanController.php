@@ -43,21 +43,17 @@ class KerusakanController extends Controller
     }
 
     public function inputFormSurveyor(Request $request) {
-        $tbl_kerusakan = new Kerusakan;
-        $tbl_kerusakan->id = $request->id_kerusakan;
-        $tbl_kerusakan->id_gedung = $request->id_gedung;
         $id_gedung = $request->id_gedung;
-
         $tanggal = $request->tanggal;
         $jam = $request->jam;
-        $tbl_kerusakan->tanggal = $tanggal." ".$jam;
-        //dd($input);
-        $tbl_kerusakan->save();
-
-        $tbl_kerusakan_surveyor = new KerusakanSurveyor;
-        $tbl_kerusakan_surveyor->id_kerusakan = $request->id_kerusakan;
-        $tbl_kerusakan_surveyor->id_user = $request->id_user;
-        $tbl_kerusakan_surveyor->save();
+        $tanggalJam = $tanggal." ".$jam;
+        // session table kerusakan
+        Session::put('kerusakan_id_kerusakan',$request->id_kerusakan);
+        Session::put('kerusakan_id_gedung',  $request->id_gedung);
+        Session::put('kerusakan_tanggal_jam', $tanggalJam);
+        // session table kerusakan surveyor
+        Session::put('kerusakan_surveyor_id_kerusakan', $request->id_kerusakan);
+        Session::put('kerusakan_surveyor_id_user', $request->id_user);
 
         $id_kerusakan = $request->id_kerusakan;
 
@@ -87,15 +83,27 @@ class KerusakanController extends Controller
     public function getDataKomponenOpsi(Request $request) {
         $data = $request->all();
         $id_komponen = $data['id_komponen'];
+        Log::info($id_komponen);
         $dataOpsi = KomponenOpsi::where('id_komponen', $id_komponen)->get();
-        $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
-        //Log::info($data_opsi);
-        return response()->json([ 'dataOpsi' => $dataOpsi, 'bobot' => $bobot['bobot'] ]);
+        return response()->json(['dataOpsi' => $dataOpsi]);
     }
 
-    public function hitungTktKerusakanEstimasi(Request $request) {
-        // where bobot, nilai,
-        // bobot * nilai / 100
+    public function hitungEstimasiKerusakan(Request $request) {
+        // meminta data via ajax
+        $data = $request->all();
+        //Log::info($data);
+        $id_komponen = $data['id_komponen'];
+        $id_komponen_opsi = $data['id_komponen_opsi'];
+
+        // query data bobot komponen dan nilai opsi
+        $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
+        $nilai = KomponenOpsi::select('komponen_opsi.nilai as nilai')->where('id', $id_komponen_opsi)->first();
+
+        // menghitung nilai estimasi kerusakan pada sebuah komponen
+        $hasil_estimasi = ($nilai->nilai * $bobot->bobot) / 100;
+
+        // mengirim nilai estimasi kerusakan ke view
+        return response()->json(['hasil_estimasi' => $hasil_estimasi]);
     }
 
     public function simpanKerusakanDetail(Request $request) {

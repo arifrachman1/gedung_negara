@@ -1,4 +1,3 @@
-<!doctype html>
 @include('template/header')
 
   <!-- Begin Page Content -->
@@ -162,13 +161,13 @@
                              <td>{{ $val->nama_satuan }}</td>
                              @if($val->id_satuan == 1)
                              <td class="estimasi">
-                                <button class="btn btn-primary" onclick="showOpsi({{$val->id_komponen}})">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEstimasi" id="hitungEstimasi" data-id="{{$val->id_komponen}}">
                                   <i class="button"><span class="icon text-white-100">Hitung</span></i>
                                 </button>
                              </td>
                              @else
                              <td class="numerik">
-                                <button class="btn btn-primary" onclick="showNumerik({{$val->id_komponen}})">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnit" id="hitungNumerik" data-id="{{$val->id_komponen}}">
                                   <i class="button"><span class="icon text-white-100">Hitung</span></i>
                                 </button>
                              </td>
@@ -208,20 +207,20 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Klasifikasi Kerusakan</h5>
-          <button class="close" type="button" onclick="closeOpsi()">
+          <button class="close" type="button" data-dismiss="modal">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Satuan : Estimasi</label>
-              <select class="form-control isi-opsi" name="" required>
-                <option>Pilih Opsi</option>
-              </select>
+            <select class="form-control isi-opsi" name="" required>
+              <option>Pilih Opsi</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success btn-opsi" type="button">Simpan</button>
+          <button class="btn btn-success btn-opsi" data-dismiss="modal" type="button">Simpan</button>
         </div>
       </div>
     </div>
@@ -239,7 +238,7 @@
         </div>
         <div class="modal-body"> 
             <div class="row">
-              <div class="col-lg-2">
+              <div class="col-lg-3">
                 <label>Jumlah =</label>
               </div>
               <div class="col-lg-2">
@@ -265,7 +264,7 @@
                 =
               </div>
               <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
+                <input type="text" class="form-control" placeholder="0"  name="" readonly>
               </div>
             </div>
           </div>
@@ -281,7 +280,7 @@
                 =
               </div>
               <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
+                <input type="text" class="form-control" placeholder="0"  name="" readonly>
               </div>
             </div>
           </div>
@@ -297,7 +296,7 @@
                 =
               </div>
               <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
+                <input type="text" class="form-control" placeholder="0"  name="" readonly>
               </div>
             </div>
           </div>
@@ -313,7 +312,7 @@
                 =
               </div>
               <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
+                <input type="text" class="form-control" placeholder="0"  name="" readonly>
               </div>
             </div>
           </div>
@@ -329,7 +328,7 @@
                 =
               </div>
               <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
+                <input type="text" class="form-control" placeholder="0"  name="" readonly>
               </div>
             </div>
           </div>
@@ -345,165 +344,23 @@
                 =
               </div>
               <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
+                <input type="text" class="form-control" placeholder="0"  name="" readonly>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success" type="button">Simpan</button>
+          <button class="btn btn-success" type="button" data-dismiss="modal">Simpan</button>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Modal Unit-->
-  <div class="modal fade" id="Persen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Klasifikasi Kerusakan</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body"> 
-            <div class="row">
-              <div class="col-lg-2">
-                <label>Jumlah=</label>
-              </div>
-              <div class="col-lg-2">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>  
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <div class="col-lg-2">
-              <label>Perhitungan</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-3">
-                0%   
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-              <div class="col-lg-3">
-                =
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-3">
-                20%   
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-              <div class="col-lg-3">
-                =
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-3">
-                40%   
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-              <div class="col-lg-3">
-                =
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-3">
-                60%   
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-              <div class="col-lg-3">
-                =
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-3">
-                80%   
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-              <div class="col-lg-3">
-                =
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-3">
-                100%   
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-              <div class="col-lg-3">
-                =
-              </div>
-              <div class="col-lg-3">
-                <input type="text" class="form-control" placeholder="0"  name="">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success" type="button">Simpan</button>
-        </div>
-      </div>
-    </div>
 </div>
 
-@include('template/footer')
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"> </script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"> </script>
-
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"> </script>
-
-
-<script>
+@include('template/footer')  
+  <script>
     var idKomp;
     var valueOpsi;
-    var bobot;
 
     $.ajaxSetup({
       headers: {
@@ -511,84 +368,68 @@
       }
     });
 
-    // menampilkan modal estimasi berdasarkan id komponen
-    function showOpsi(id_komponen) {
-      idKomp = id_komponen;
+    /* menampilkan modal estimasi kerusakan berdasarkan id komponen */
+    $(document).on('click', '#hitungEstimasi', function() {
+      let id = $(this).attr('data-id');
+      idKomp = id;
+      console.log(id);
       $.ajax({
         url: '{{ route("get_data_komponen_opsi") }}',
         type: 'POST',
-        data: { id_komponen: id_komponen },
+        data: { id_komponen: id },
         success: function(data) {
-          console.log(data);
+          //console.log(data);
+          $('.isi-opsi .dropdown').remove();
           $.each(data.dataOpsi, function(index, data){
             $('.isi-opsi').append('<option class="dropdown" data-id="'+data.id+'">'+data.opsi+'</option>');
           });
-          $('#modalEstimasi').modal('show');
         },
       });
-    }
+    });
 
-    function closeOpsi() {
-      $('.isi-opsi .dropdown').remove();
-      $('#modalEstimasi').modal('hide');
-    }
+    /* menampilkan modal klasifikasi kerusakan berdasarkan id komponen */
+    $(document).on('click', '#hitungNumerik', function() {
+      let id = $(this).attr('data-id');
+      console.log(id);
+    });
+
+    /*function closeOpsi() {
+      $('#modalEstimasi').modal('destroy');
+    }*/
 
     $(document).ready(function() {
 
         $('.isi-opsi').change(function(){
           var idOpsi = $(this).find(':selected').attr('data-id');
-          // mengirim id opsi ke controller via ajax untuk dilakukan proses perhitungan di dalam controller
-          // hal ini dilakukan untuk mencegah pengubahan data operasi perhitungan oleh user
-          $.ajax({
-            url: '{{ route("hitung_tkt_kerusakan_estimasi") }}',
-            type: 'POST',
-            data: {id_opsi: idOpsi},
-            success: function(data) {
-              console.log(data);
-              //! --------------------------------------------
-            },
-          });
-
-          // var val  = this.value;
-          // valueOpsi = val * bobot / 100;
-          console.log(valueOpsi);
-          $('.btn-opsi').attr({'data-val': valueOpsi, 'data-id': idOpsi});
+          $('.btn-opsi').attr({'data-id': idOpsi});
         });
 
-        $('.btn-opsi').click(function(){
-          var id_kerusakan = $('#idKerusakan').val();
+        $('.btn-opsi').click( function() {
           var id_komp_opsi = $('.btn-opsi').attr('data-id');
+          console.log(id_komp_opsi);
           $.ajax({
-            url: '{{ route("simpan_kerusakan_detail") }}',
+            url: '{{ route("hitung_estimasi_kerusakan") }}',
             type: 'POST',
-            data: {
-              id_kerusakan: id_kerusakan,
+            data: { 
               id_komponen: idKomp,
               id_komponen_opsi: id_komp_opsi,
             },
             success: function(data) {
-              console.log(data);
-              var val_opsi = $('.btn-opsi').attr('data-val');
-              var hiddenVal = '<input type="hidden" name="tkt_kerusakan[]" value="' + val_opsi + '" readonly>';
-              $('#td'+idKomp).html(val_opsi + '%' + hiddenVal);
-              if (val_opsi > 0.3) {
+              console.log(data.hasil_estimasi);
+              var hasil_estimasi = data.hasil_estimasi;
+              var hiddenVal = '<input type="hidden" name="hasil_tkt_kerusakan[]" value="' + hasil_estimasi + '" readonly>';
+              $('#td'+idKomp).html(hasil_estimasi + '%' + hiddenVal);
+              if (hasil_estimasi > 0.3) {
                 $('#td_keterangan'+idKomp).html('Rusak Berat');
               } else {
                 $('#td_keterangan'+idKomp).html('Hitung Komponen Lain');
               }
-              $('#modalEstimasi').modal('hide');
-              $('.isi-opsi .dropdown').remove();
+              //closeOpsi();
             },
           });
         });
 
-        $.each(items, function(i) {
-            var $row = $rows.eq(this[0]);
-            var rowspan = $row.data('rowspan');
-            $row.prepend('<td rowspan"' + rowspan + '">' + this[1] + '</td>');
-        });
-
-        $('#kerusakan').DataTable( {
+        /*$('#kerusakan').DataTable( {
             "processing" : true,
             "serverSide" : true,
             scrollY : '250px',
@@ -596,7 +437,7 @@
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
-        });
+        });*/
 
-    });
-</script>
+      });
+  </script>

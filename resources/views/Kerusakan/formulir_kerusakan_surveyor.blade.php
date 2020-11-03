@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label>Nama Bangunan:</label>
-                    <input type="text" class="form-control" placeholder="Nama Bangunan"  name="nama_gedung" value="{{ $input->nama }}" required>
+                    <input type="text" class="form-control" placeholder="Nama Bangunan"  name="nama_gedung" value="{{ $input->nama }}" readonly>
                     <input type="hidden" name="id_gedung" value="{{ $input->id }}">
                 </div>
 
@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                     <label >Alamat:</label>
-                    <input type="text" class="form-control" placeholder="Alamat" name="alamat" value="{{ $input->alamat }}" required>
+                    <input type="text" class="form-control" placeholder="Alamat" name="alamat" value="{{ $input->alamat }}" readonly>
                 </div>  
         
                 <div class="form-group">
@@ -56,7 +56,7 @@
 
                 <div class="form-group">
                     <label>Petugas Survei 1:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor1" value="{{ $surveyor->name }}" required>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor1" value="{{ $surveyor->name }}" readonly>
                 </div>
 
                 <div class="form-group">
@@ -85,13 +85,13 @@
                             <label>Luas Bangunan :</label>
                         </div>
                         <div class="col-lg-2">
-                            <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0" name="luas_bg" value="{{ $input->luas }}" required>
+                            <input type="number" max="10000" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0" name="luas_bg" value="{{ $input->luas }}" readonly>
                         </div>
                         <div class="col-lg-2">
                             <label>Jumlah lantai :</label>
                         </div>
                         <div class="col-lg-2">
-                            <input type="number" max="100" class="form-control" placeholder="0"  name="jml_lantai" value="{{ $input->jumlah_lantai }}" required>
+                            <input type="number" max="100" class="form-control" placeholder="0"  name="jml_lantai" value="{{ $input->jumlah_lantai }}" readonly>
                         </div>
                     </div>
                 </div>
