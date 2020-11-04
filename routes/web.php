@@ -133,6 +133,8 @@ Route::get('tambah_master_kerusakan', 'KerusakanController@pilihanGedung');
 Route::get('formulir_kerusakan_surveyor/{id}', 'KerusakanController@formKerusakanSurveyor');
 Route::get('create_formulir_klasifikasi_kerusakan/{id_gedung}/{id_kerusakan}', 'KerusakanController@formIdentifikasiKerusakan');
 Route::post('hitung_estimasi_kerusakan', 'KerusakanController@hitungEstimasiKerusakan')->name('hitung_estimasi_kerusakan');
+Route::post('hitung_kerusakan_unit', 'KerusakanController@hitungKerusakanUnit')->name('hitung_kerusakan_unit');
+Route::post('hitung_kerusakan_persen', 'KerusakanController@hitungKerusakanPersen')->name('hitung_kerusakan_persen');
 Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 Route::post('get_data_komponen_opsi/', 'KerusakanController@getDataKomponenOpsi')->name('get_data_komponen_opsi');
 Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');

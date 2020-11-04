@@ -68,7 +68,7 @@ class KerusakanController extends Controller
                      'satuan.id as id_satuan', 
                      'satuan.nama as nama_satuan')
             ->rightjoin('komponen as t2', 't1.id', '=', 't2.id_parent')
-            ->join('satuan', 't2.id_satuan' , '=', 'satuan.id')
+            ->join('satuan', 't2.id_satuan', '=', 'satuan.id')
             ->orderBy('t1.nama', 'asc')->get();
         $gedung = Gedung::where('id', $id_gedung)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
@@ -83,15 +83,13 @@ class KerusakanController extends Controller
     public function getDataKomponenOpsi(Request $request) {
         $data = $request->all();
         $id_komponen = $data['id_komponen'];
-        Log::info($id_komponen);
         $dataOpsi = KomponenOpsi::where('id_komponen', $id_komponen)->get();
         return response()->json(['dataOpsi' => $dataOpsi]);
     }
 
     public function hitungEstimasiKerusakan(Request $request) {
-        // meminta data via ajax
+        // request data via ajax
         $data = $request->all();
-        //Log::info($data);
         $id_komponen = $data['id_komponen'];
         $id_komponen_opsi = $data['id_komponen_opsi'];
 
@@ -100,10 +98,60 @@ class KerusakanController extends Controller
         $nilai = KomponenOpsi::select('komponen_opsi.nilai as nilai')->where('id', $id_komponen_opsi)->first();
 
         // menghitung nilai estimasi kerusakan pada sebuah komponen
-        $hasil_estimasi = ($nilai->nilai * $bobot->bobot) / 100;
+        if ($bobot->bobot == null) {
+            $hasil_estimasi = $nilai->nilai;
+        } else {
+            $hasil_estimasi = $nilai->nilai * $bobot->bobot / 100;
+        }
 
         // mengirim nilai estimasi kerusakan ke view
         return response()->json(['hasil_estimasi' => $hasil_estimasi]);
+    }
+
+    public function hitungKerusakanPersen(Request $request) {
+        // request data via ajax
+        $data = $request->all();
+        $id_komponen = $data['id_komponen'];
+        $sum_hasil = $data['sum_hasil'];
+
+        // query data bobot komponen
+        $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
+        Log::info($bobot);
+
+        // menghitung nilai estimasi kerusakan pada sebuah komponen
+        if ($sum_hasil == 0) {
+            $hasil_persen = 0;
+        } else if ($bobot->bobot == null) {
+            $hasil_persen = $sum_hasil;
+        } else {
+            $hasil_persen = $sum_hasil * $bobot->bobot / 100;
+        }
+        
+        // mengirim nilai estimasi kerusakan ke view
+        return response()->json(['hasil_persen' => $hasil_persen]);
+    }
+
+    public function hitungKerusakanUnit(Request $request) {
+        // request data via ajax
+        $data = $request->all();
+        $id_komponen = $data['id_komponen'];
+        $sum_hasil = $data['sum_hasil'];
+
+        // query data bobot komponen
+        $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
+        Log::info($bobot);
+
+        // menghitung nilai estimasi kerusakan pada sebuah komponen
+        if ($sum_hasil == 0) {
+            $hasil_unit = 0;
+        } else if ($bobot->bobot == null) {
+            $hasil_unit = $sum_hasil;
+        } else {
+            $hasil_unit = $sum_hasil * $bobot->bobot / 100;
+        }
+        
+        // mengirim nilai estimasi kerusakan ke view
+        return response()->json(['hasil_unit' => $hasil_unit]);
     }
 
     public function simpanKerusakanDetail(Request $request) {
