@@ -8,7 +8,7 @@
           <!-- Page Heading -->
   <div class="d-sm-flex align-items-center mb-4">
   <img style="widht:100%; height:100px;" class="mr-3 ml-5" src="{{ asset('style/img/5.png') }}">
-    <h1 class="h3 mb-0 text-gray-800 san-bold">SIBG <br> Dinas Pekerjaan Umum & Ruang</h1>
+    <h1 class="h3 mb-0 text-gray-800 san-bold">SIBG <br> Dinas Pekerjaan Umum & Penataan Ruang <br> kabupaten Tuban</h1>
   </div>
 
 <div class="container-fluid">  
