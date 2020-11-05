@@ -46,21 +46,22 @@ class KerusakanController extends Controller
         $id_gedung = $request->id_gedung;
         $tanggal = $request->tanggal;
         $jam = $request->jam;
-        $tanggalJam = $tanggal." ".$jam;
+        $tanggal_jam = $tanggal." ".$jam;
         // session table kerusakan
         Session::put('kerusakan_id_kerusakan',$request->id_kerusakan);
-        Session::put('kerusakan_id_gedung',  $request->id_gedung);
-        Session::put('kerusakan_tanggal_jam', $tanggalJam);
+        Session::put('kerusakan_id_gedung',  $id_gedung);
+        Session::put('kerusakan_tanggal_jam', $tanggal_jam);
         // session table kerusakan surveyor
         Session::put('kerusakan_surveyor_id_kerusakan', $request->id_kerusakan);
         Session::put('kerusakan_surveyor_id_user', $request->id_user);
 
         $id_kerusakan = $request->id_kerusakan;
+        $id_user = $request->id_user;
 
-        return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_kerusakan' => $id_kerusakan]);
+        return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_kerusakan' => $id_kerusakan, 'id_user' => $id_user]);
     }
 
-    public function formIdentifikasiKerusakan($id_gedung, $id_kerusakan) {
+    public function formIdentifikasiKerusakan($id_gedung, $id_kerusakan, $id_user) {
         $komponen = DB::table('komponen as t1')
             ->select('t2.id as id_komponen',
                      't1.nama as nama_komponen', 
@@ -77,7 +78,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_kerusakan'));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_kerusakan', 'id_gedung', 'id_user'));
     }
 
     public function getDataKomponenOpsi(Request $request) {
@@ -122,13 +123,13 @@ class KerusakanController extends Controller
         if ($sum_hasil == 0) {
             $hasil_persen = 0;
         } else if ($bobot->bobot == null) {
-            $hasil_persen = $sum_hasil;
+            $hasil_persen = $sum_hasil / 100;
         } else {
             $hasil_persen = $sum_hasil * $bobot->bobot / 100;
         }
         
         // mengirim nilai estimasi kerusakan ke view
-        return response()->json(['hasil_persen' => $hasil_persen]);
+        return response()->json(['hasil_persen' => $hasil_persen, 'bobot' => $bobot->bobot]);
     }
 
     public function hitungKerusakanUnit(Request $request) {
@@ -136,22 +137,24 @@ class KerusakanController extends Controller
         $data = $request->all();
         $id_komponen = $data['id_komponen'];
         $sum_hasil = $data['sum_hasil'];
+        $jumlah = $data['jumlah'];
+        Log::info($jumlah);
 
         // query data bobot komponen
         $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
-        Log::info($bobot);
+        //Log::info($bobot);
 
         // menghitung nilai estimasi kerusakan pada sebuah komponen
         if ($sum_hasil == 0) {
             $hasil_unit = 0;
         } else if ($bobot->bobot == null) {
-            $hasil_unit = $sum_hasil;
+            $hasil_unit = $sum_hasil / 100;
         } else {
             $hasil_unit = $sum_hasil * $bobot->bobot / 100;
         }
         
         // mengirim nilai estimasi kerusakan ke view
-        return response()->json(['hasil_unit' => $hasil_unit]);
+        return response()->json(['hasil_unit' => $hasil_unit, 'bobot' => $bobot->bobot]);
     }
 
     public function simpanKerusakanDetail(Request $request) {
@@ -169,6 +172,14 @@ class KerusakanController extends Controller
         $data = Kerusakan::where('id', $id)->first();
         $data->delete();
         return redirect('master_kerusakan');
+    }
+
+    public function postInputKerusakan(Request $request) {
+        $input_kerusakan = new Kerusakan;
+        $input_kerusakan->id = $request->id_kerusakan;
+        $input_kerusakan->id_gedung = Session::get('kerusakan_id_gedung');
+        $input_kerusakan->tanggal = Session::get('kerusakan_tanggal_jam');
+        $input_kerusakan->detail_json = 0;
     }
 
 }

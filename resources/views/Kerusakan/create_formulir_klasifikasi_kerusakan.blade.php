@@ -11,6 +11,8 @@
       </div>
 
     <div class="container">
+      <!-- <form method="" action=""> -->
+        
         <div class="panel panel-default">
         
                 <div class="form-group">
@@ -123,86 +125,88 @@
                             Tanggal Hari Ini
                         </div>
                         <div class="col-lg-2">
-                            <?php $now = date("Y-m-d") ?>
-                            <input class="form-control" value="<?=$now?>" readonly>
+                            <?php $now = date("Y-m-d H:i:s") ?>
+                            <input id="tanggalJam" name="tanggal_jam" class="form-control" value="<?=$now?>" readonly>
                         </div>
                     </div>
                   <input type="hidden" id="idKerusakan" name="id_kerusakan" value="{{ $id_kerusakan }}">
+                  <input type="hidden" id="idGedung" name="id_gedung" value="{{ $id_gedung }}">
+                  <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
                 </div>    
+                <a class="btn btn-secondary btn-icon-split" href="{{ url('') }}" role="button">
+                  <span class="icon text-white-100">
+                      Export Excel
+                  </span> 
+                </a>
                 <div class="table-responsive">
-                    <a class="btn btn-secondary btn-icon-split" href="{{ url('') }}" role="button">
-                        <span class="icon text-white-100">
-                            Export Excel
-                        </span> 
-                    </a>
+                  <div class="table-content">
                     <table class="table table-bordered" id="kerusakan" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                             <th>No.</th>
-                             <th>Komponen</th>
-                             <th>Subkomponen</th>
-                             <th>Satuan</th>
-                             <th>Opsi</th>
-                             <th colspan="3">Tingkat Kerusakan</th>
-                            </tr>
-                        </thead>
-                        @php $no = 1; @endphp
-                        <tbody>
-                            @foreach($komponen as $val)
-                            <tr>
-                             <td>{{ $no++ }}</td>
-                             @if($val->nama_komponen == null)
-                             <td>{{ $val->sub_komponen }}</td>
-                             <td>-</td>
-                             @else   
-                             <td>{{ $val->nama_komponen }}</td>
-                             <td>{{ $val->sub_komponen }}</td>
-                             @endif
-                             <td>{{ $val->nama_satuan }}</td>
-                             @if($val->id_satuan == 1)
-                             <td class="estimasi">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEstimasi" id="hitungEstimasi" data-id="{{$val->id_komponen}}">
-                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                </button>
-                             </td>
-                             @elseif($val->id_satuan == 2)
-                             <td class="persen">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalPersen" id="hitungPersen" data-id="{{$val->id_komponen}}">
-                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                </button>
-                             </td>
-                             @else
-                             <td class="unit">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnit" id="hitungUnit" data-id="{{$val->id_komponen}}">
-                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                                </button>
-                             </td>
-                             @endif
+                      <tr>
+                        <th>No.</th>
+                        <th>Komponen</th>
+                        <th>Subkomponen</th>
+                        <th>Satuan</th>
+                        <th>Opsi</th>
+                        <th colspan="3">Tingkat Kerusakan</th>
+                      </tr>
+                      @php $no = 1; @endphp
 
-                             <td id="td{{ $val->id_komponen }}"></td>
-                             <td colspan="2" id="td_keterangan{{ $val->id_komponen }}"></td>
-                            </tr>
-                            @endforeach
-                            <tr>
-                             <td colspan="5">Jumlah Kerusakan</td>
-                             <td>1700%</td>
-                             <td colspan="2" >Rusak Berat</td>
-                            </tr>
-                        </tbody>
+                      @foreach($komponen as $val)
+                      <tr>
+                        <td>{{ $no++ }}</td>
+                        @if($val->nama_komponen == null)
+                        <td>{{ $val->sub_komponen }}</td>
+                        <td>-</td>
+                        @else   
+                        <td>{{ $val->nama_komponen }}</td>
+                        <td>{{ $val->sub_komponen }}</td>
+                        @endif
+                        <td>{{ $val->nama_satuan }}</td>
+                        @if($val->id_satuan == 1)
+                        <td class="estimasi">
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#modalEstimasi" id="hitungEstimasi" data-id="{{$val->id_komponen}}">
+                            <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                          </button>
+                        </td>
+                        @elseif($val->id_satuan == 2)
+                        <td class="persen">
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#modalPersen" id="hitungPersen" data-id="{{$val->id_komponen}}">
+                            <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                          </button>
+                        </td>
+                        @else
+                        <td class="unit">
+                          <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnit" id="hitungUnit" data-id="{{$val->id_komponen}}">
+                            <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                          </button>
+                        </td>
+                        @endif
+
+                        <td id="td{{ $val->id_komponen }}" class="td-hasil" data-val="" data-qty=""></td>
+                        <td colspan="2" id="td_keterangan{{ $val->id_komponen }}"></td>
+                      </tr>
+                      @endforeach
+                      <tr>
+                        <td colspan="5">Jumlah Kerusakan</td>
+                        <td id="totalJmlKerusakan"></td>
+                        <td id="keteranganTotal" colspan="2" ></td>
+                      </tr>
                     </table>
-                    <div class="form-group">
-                        <label >Sketsa Denah Rumah:</label>
-                        <input type="file" name="#" class="form-control-file">
-                    </div>
-                    <div class="form-group">
-                        <label>Gambar Bukti Kerusakan</label>
-                        <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
-                    </div>
+                  </div>
+                  <div class="form-group">
+                      <label >Sketsa Denah Rumah:</label>
+                      <input type="file" name="#" class="form-control-file">
+                  </div>
+                  <div class="form-group">
+                      <label>Gambar Bukti Kerusakan</label>
+                      <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
+                  </div>
                 </div>
-            <input type="submit" class="btn btn-success float-left mt-2 mr-2" value="Submit">
+            <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>
             <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -493,7 +497,7 @@
         <div class="modal-footer">
           <button class="btn btn-success btn-unit" data-dismiss="modal" type="button">Simpan</button>
         </div>
-      </form>
+      <!-- </form> -->
     </div>
   </div>
 </div>
@@ -502,14 +506,42 @@
 <script>
   let idKomp;
   let valueOpsi;
-  let jumlahUnit = 1;
   let hasil0; let hasil1; let hasil2; let hasil3; let hasil4; let hasil5;
+  let jumlahUnit = 1;
 
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
+
+  /* Convert table ke JSON */
+  function tableToJson(table) {
+    var data = [];
+
+    // first row needs to be headers
+    var headers = [];
+    for (var i=0; i<table.rows[0].cells.length; i++) {
+        headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+    }
+
+    // go through cells
+    for (var i=1; i<table.rows.length; i++) {
+
+        var tableRow = table.rows[i];
+        var rowData = {};
+
+        for (var j=0; j<tableRow.cells.length; j++) {
+
+            rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+        }
+
+        data.push(rowData);
+    }       
+
+    return data;
+  }
 
   /* menampilkan modal estimasi kerusakan berdasarkan id komponen */
   $(document).on('click', '#hitungEstimasi', function() {
@@ -535,8 +567,8 @@
     let id = $(this).attr('data-id');
     idKomp = id;
     console.log(id);
-    $('.form-input').val('value', 0);
-    $('.form-hasil').val('value', 0);
+    $('.form-input').val('');
+    $('.form-hasil').val(0);
   });
 
   /* menampilkan modal klasifikasi kerusakan berdasarkan id komponen dengan satuan komponennya unit */
@@ -544,13 +576,22 @@
     let id = $(this).attr('data-id');
     idKomp = id;
     console.log(id);
-    $('.form-input').val('value', 0);
-    $('.form-hasil').val('value', 0);
+    $('#jumlah').val(0);
+    $('.form-input').val('');
+    $('.form-hasil').val(0);
   });
 
-  /*function closeOpsi() {
-    $('#modalEstimasi').modal('destroy');
-  }*/
+  /* menyimpan data ke table kerusakan kolom detail_json */
+  $(document).on('click', '#submitKerusakan', function() {
+    let detailJsonObj = tableToJson($('.table-content').html());
+    console.log(detailJsonObj);
+
+    /*$.ajax({
+      url: '{{ url("submit_kerusakan") }}',
+      type: 'post',
+      data: 
+    });*/
+  });
 
   $(document).ready(function() {
     
@@ -562,7 +603,7 @@
 
     $('.btn-opsi').click( function() {
       var id_komp_opsi = $('.btn-opsi').attr('data-id');
-      console.log(id_komp_opsi);
+      //console.log(id_komp_opsi);
       $.ajax({
         url: '{{ route("hitung_estimasi_kerusakan") }}',
         type: 'POST',
@@ -571,14 +612,30 @@
           id_komponen_opsi: id_komp_opsi,
         },
         success: function(data) {
-          console.log(data.hasil_estimasi);
-          var hasil_estimasi = data.hasil_estimasi;
-          var hiddenVal = '<input type="hidden" name="hasil_tkt_kerusakan[]" value="' + hasil_estimasi + '" readonly>';
-          $('#td'+idKomp).html(hasil_estimasi + '%' + hiddenVal);
+          //console.log(data.hasil_estimasi);
+          var hasil_estimasi = data.hasil_estimasi / 100;
+          $('#td'+idKomp).attr('data-val', hasil_estimasi);
+          $('#td'+idKomp).html(data.hasil_estimasi + '%');
           if (hasil_estimasi > 0.3) {
             $('#td_keterangan'+idKomp).html('Rusak Berat');
           } else {
             $('#td_keterangan'+idKomp).html('Hitung Kerusakan Komponen Lain');
+          }
+
+          // total jumlah kerusakan
+          let sum = 0;
+          $('.td-hasil').each(function () {
+            sum += Number($(this).attr('data-val'));
+          });
+          let sum100 = sum * 100;
+          $('#totalJmlKerusakan').html(sum100+'%');
+          console.log(sum);
+          if(sum <= 30) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
+          } else if (sum > 30 || sum <= 45) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Sedang');
+          } else if (sum > 45) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
         },
       });
@@ -630,7 +687,7 @@
 
     $('.btn-persen').click(function (){
       let sumHasil = hasil0 + hasil1 + hasil2 + hasil3 + hasil4 + hasil5;
-      console.log(sumHasil);
+      //console.log(sumHasil);
       $.ajax({
         url: '{{ route("hitung_kerusakan_persen") }}',
         type: 'POST',
@@ -639,14 +696,33 @@
           sum_hasil: sumHasil,
         },
         success: function(data) {
-          console.log(data.hasil_persen);
+          //console.log(data.hasil_persen);
           var hasil_persen = data.hasil_persen;
-          var hiddenVal = '<input type="hidden" name="hasil_tkt_kerusakan[]" value="' + hasil_persen + '" readonly>';
-          $('#td'+idKomp).html(hasil_persen + '%' + hiddenVal);
+          $('#td'+idKomp).attr('data-val', hasil_persen);
+          let hasil_persen100 = hasil_persen * 100;
+          console.log(data.bobot);
+          console.log(hasil_persen100);
+          $('#td'+idKomp).html(hasil_persen100 + '%');
           if (hasil_persen > 0.3) {
             $('#td_keterangan'+idKomp).html('Rusak Berat');
           } else {
             $('#td_keterangan'+idKomp).html('Hitung Kerusakan Komponen Lain');
+          }
+
+          // total jumlah kerusakan
+          let sum = 0;
+          $('.td-hasil').each(function () {
+            sum += Number($(this).attr('data-val'));
+          });
+          let sum100 = sum * 100;
+          $('#totalJmlKerusakan').html(sum100+'%');
+          console.log(sum);
+          if(sum <= 30) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
+          } else if (sum > 30 || sum <= 45) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Sedang');
+          } else if (sum > 45) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
         },
       });
@@ -704,23 +780,42 @@
 
     $('.btn-unit').click(function (){
       let sumHasil = hasil0 + hasil1 + hasil2 + hasil3 + hasil4 + hasil5;
-      console.log(sumHasil);
+      //console.log(sumHasil);
       $.ajax({
         url: '{{ route("hitung_kerusakan_unit") }}',
         type: 'POST',
         data: { 
           id_komponen: idKomp,
           sum_hasil: sumHasil,
+          jumlah: jumlahUnit,
         },
         success: function(data) {
-          console.log(data.hasil_unit);
+          //console.log(data.hasil_unit);
           var hasil_unit = data.hasil_unit;
-          var hiddenVal = '<input type="hidden" name="hasil_tkt_kerusakan[]" value="' + hasil_unit + '" readonly>';
-          $('#td'+idKomp).html(hasil_unit + '%' + hiddenVal);
+          $('#td'+idKomp).attr('data-val', hasil_unit);
+          $('#td'+idKomp).attr('data-qty', jumlahUnit);
+          let hasil_unit100 = hasil_unit * 100;
+          $('#td'+idKomp).html(hasil_unit100 + '%');
           if (hasil_unit > 0.3) {
             $('#td_keterangan'+idKomp).html('Rusak Berat');
           } else {
             $('#td_keterangan'+idKomp).html('Hitung Kerusakan Komponen Lain');
+          }
+
+          // total jumlah kerusakan
+          let sum = 0;
+          $('.td-hasil').each(function () {
+            sum += Number($(this).attr('data-val'));
+          });
+          let sum100 = sum * 100;
+          $('#totalJmlKerusakan').html(sum100+'%');
+          console.log(sum);
+          if(sum <= 30) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
+          } else if (sum > 30 || sum <= 45) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Sedang');
+          } else if (sum > 45) {
+            $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
         },
       });
