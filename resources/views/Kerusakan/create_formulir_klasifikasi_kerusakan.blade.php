@@ -506,6 +506,7 @@
 <script>
   let idKomp;
   let valueOpsi;
+  let table;
   let hasil0; let hasil1; let hasil2; let hasil3; let hasil4; let hasil5;
   let jumlahUnit = 1;
 
@@ -516,7 +517,7 @@
   });
 
   /* Convert table ke JSON */
-  function tableToJson(table) {
+  function tableToJson() {
     var data = [];
 
     // first row needs to be headers
@@ -583,8 +584,9 @@
 
   /* menyimpan data ke table kerusakan kolom detail_json */
   $(document).on('click', '#submitKerusakan', function() {
-    let detailJsonObj = tableToJson($('.table-content').html());
-    console.log(detailJsonObj);
+    table = $('.table-content').html()
+    let detailJsonObj = tableToJson();
+    console.log(table);
 
     /*$.ajax({
       url: '{{ url("submit_kerusakan") }}',
@@ -630,11 +632,11 @@
           let sum100 = sum * 100;
           $('#totalJmlKerusakan').html(sum100+'%');
           console.log(sum);
-          if(sum <= 30) {
+          if(sum <= 0.3) {
             $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
-          } else if (sum > 30 || sum <= 45) {
+          } else if (sum > 0.3 && sum <= 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Sedang');
-          } else if (sum > 45) {
+          } else if (sum > 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
         },
@@ -717,11 +719,11 @@
           let sum100 = sum * 100;
           $('#totalJmlKerusakan').html(sum100+'%');
           console.log(sum);
-          if(sum <= 30) {
+          if(sum <= 0.3) {
             $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
-          } else if (sum > 30 || sum <= 45) {
+          } else if (sum > 0.3 && sum <= 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Sedang');
-          } else if (sum > 45) {
+          } else if (sum > 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
         },
@@ -810,11 +812,11 @@
           let sum100 = sum * 100;
           $('#totalJmlKerusakan').html(sum100+'%');
           console.log(sum);
-          if(sum <= 30) {
+          if(sum <= 0.3) {
             $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
-          } else if (sum > 30 || sum <= 45) {
+          } else if (sum > 0.3 && sum <= 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Sedang');
-          } else if (sum > 45) {
+          } else if (sum > 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
         },
