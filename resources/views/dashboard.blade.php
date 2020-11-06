@@ -8,10 +8,14 @@
           <!-- Page Heading -->
   <div class="d-sm-flex align-items-center mb-4">
   <img style="widht:100%; height:100px;" class="mr-3 ml-5" src="{{ asset('style/img/5.png') }}">
-    <h1 class="h3 mb-0 text-gray-800 san-bold">SIBG <br> Dinas Pekerjaan Umum & Penataan Ruang <br> Kabupaten Tuban</h1>
+    <h1 class="h3 mb-0 text-gray-800 san-bold">SI BanGuN <br>Sistem Informasi<br>Bangunan Gedung Negara</h1>
   </div>
+  <div class="container">
+  <h5 style="margin-left:105px;">Dinas Pekerjaan Umum & Penataan Ruang<br>Kabupaten Tuban</h5>
+  </div>
+  
 
-<div class="container-fluid">  
+<div class="container-fluid mt-3">  
   <div class="card san-no-border mb-4">
     
     <div class="card-body">
