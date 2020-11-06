@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
     Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
     Route::post('import_excel_master_gedung', 'GedungController@importExcel');
+    Route::get('template_excel_master_gedung', 'GedungController@templateExcel');
     // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
     // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
@@ -138,6 +139,7 @@ Route::post('hitung_kerusakan_persen', 'KerusakanController@hitungKerusakanPerse
 Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 Route::post('get_data_komponen_opsi/', 'KerusakanController@getDataKomponenOpsi')->name('get_data_komponen_opsi');
 Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
+Route::post('submit_kerusakan/', 'KerusakanController@postSubmitKerusakan');
 
 Route::get('view_kerusakan', function (){
     return view('kerusakan/view_kerusakan');
