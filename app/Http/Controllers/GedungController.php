@@ -162,16 +162,6 @@ class GedungController extends Controller
         return redirect('master_gedung');
     }
 
-    public function templateExcel() {
-        $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
-        
-        /** Load $inputFileName to a Spreadsheet object **/
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
-        $sheet = $spreadsheet->getActiveSheet();
-        $writer = new Xlsx($spreadsheet);
-        return redirect('template_excel.xlsx');
-    }
-
     public function exportExcel() {
         $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
 

@@ -86,7 +86,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
     Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
     Route::post('import_excel_master_gedung', 'GedungController@importExcel');
-    Route::get('template_excel_master_gedung', 'GedungController@templateExcel');
+    Route::get('template_excel_master_gedung', function (){
+        $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
+    
+        /** Load $inputFileName to a Spreadsheet object **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = [];
+    
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('sample_excel.xlsx');
+        return redirect('sample_excel.xlsx');
+    });
     // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
     // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
