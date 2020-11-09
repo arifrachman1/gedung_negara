@@ -19,11 +19,6 @@
                         Tambah Kerusakan
                     </span> 
                 </a>
-                <a class="btn btn-info btn-icon-split" href="{{ url('/import_master_kerusakan') }}" role="button">
-                    <span class="icon text-white-100">
-                      Import Excel
-                    </span> 
-                </a>
               @endcan
             </div>
               <div class="table-responsive">

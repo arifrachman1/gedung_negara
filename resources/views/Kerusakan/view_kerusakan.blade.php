@@ -17,10 +17,10 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Nama Instansi Bangunan   
+                            OPD  
                         </div>
                         <div class="col-lg-3">
-                            : Dinas Pendidikan
+                            : Petugas
                         </div>
                         <div class="col-lg-3">
                             Nama bangunan
@@ -33,16 +33,10 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Bujur Timur   
+                            Nomer Asset   
                         </div>
                         <div class="col-lg-3">
-                            : 299,100
-                        </div>
-                        <div class="col-lg-3">
-                            Lintang Selatan   
-                        </div>
-                        <div class="col-lg-3">
-                            : 393,01
+                            : 177013
                         </div>
                     </div>
                 </div>
@@ -81,21 +75,57 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Jumlah Lantai   
+                            Petugas Survey   
                         </div>
                         <div class="col-lg-3">
-                            : 2
+                            : 1. Maulana Malik Ibrahim <br/> 
+                            <br> 2. Hasbi Nurul Jannah <br/>
+                            <br> 3. Udin Sedunia <br/>
                         </div>
+                        <div class="col-lg-3">
+                            Perwakilan OPD
+                        </div>
+                        <div class="col-lg-3">
+                            : 1. Adi Lukito<br/>
+                            <br> 2. Avicena Maula<br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-3"> 
+                            Tanggal Hari Ini
+                        </div>
+                        <div class="col-lg-3">
+                            <?php $now = date("Y-m-d") ?>
+                            <input class="form-control" value="<?=$now?>" readonly>
+                        </div>
+                        <div class="col-lg-3">
+                            Jam   
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" placeholder="11:32:00 am" name="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-lg-3">
                             Luas Bangunan   
                         </div>
                         <div class="col-lg-3">
                             : 100 m2
                         </div>
+                        <div class="col-lg-3">
+                            Jumlah Lantai   
+                        </div>
+                        <div class="col-lg-3">
+                            : 2
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-success">Export to Excel</button>
+                    <button class="btn btn-secondary">Export to Excel</button>
                 </div>
                 <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
