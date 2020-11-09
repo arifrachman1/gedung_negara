@@ -35,12 +35,10 @@ class KerusakanController extends Controller
     }
 
     public function formKerusakanSurveyor($id) {
-        $row = Kerusakan::count(); 
-        $id_kerusakan = ++$row;
         $input = Gedung::find($id);
         $session_name = Session::get('name');
         $surveyor = User::where('name', '=', $session_name)->first();
-        return view('Kerusakan/formulir_kerusakan_surveyor', compact('input', 'surveyor', 'id_kerusakan'));
+        return view('Kerusakan/formulir_kerusakan_surveyor', compact('input', 'surveyor'));
     }
 
     public function inputFormSurveyor(Request $request) {
@@ -48,26 +46,12 @@ class KerusakanController extends Controller
         $tanggal = $request->tanggal;
         $jam = $request->jam;
         $tanggal_jam = $tanggal." ".$jam;
-
-        // create table kerusakan
-        $input_tbl_kerusakan = new Kerusakan;
-        $input_tbl_kerusakan->id_gedung = $id_gedung;
-        $input_tbl_kerusakan->tanggal = $tanggal_jam;
-        $input_tbl_kerusakan->save();
-
-        // create table kerusakan surveyor
-        $input_tbl_surveyor = new KerusakanSurveyor;
-        $input_tbl_surveyor->id_kerusakan =  $input_tbl_kerusakan->id;
-        $input_tbl_surveyor->id_user = $request->id_user;
-        $input_tbl_surveyor->save();
-
-        $id_kerusakan = $input_tbl_kerusakan->id;
         $id_user = $request->id_user;
 
-        return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_kerusakan' => $id_kerusakan, 'id_user' => $id_user]);
+        return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_user' => $id_user]);
     }
 
-    public function formIdentifikasiKerusakan($id_gedung, $id_kerusakan, $id_user) {
+    public function formIdentifikasiKerusakan($id_gedung, $id_user) {
         $komponen = DB::table('komponen as t1')
             ->select('t2.id as id_komponen',
                      't1.nama as nama_komponen', 
@@ -84,7 +68,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_kerusakan', 'id_gedung', 'id_user'));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user'));
     }
 
     public function getDataKomponenOpsi(Request $request) {
@@ -106,25 +90,10 @@ class KerusakanController extends Controller
 
         // menghitung nilai estimasi kerusakan pada sebuah komponen
         if ($bobot->bobot == null) {
-            $hasil_estimasi = $nilai->nilai;
+            $hasil_estimasi = $nilai->nilai / 100;
         } else {
-            $hasil_estimasi = $nilai->nilai * $bobot->bobot / 100;
+            $hasil_estimasi = ($nilai->nilai / 100) * $bobot->bobot / 100;
         }
-
-        /* input data ke tabel
-        $row = KerusakanDetail::count(); 
-        $id_kerusakan_detail = ++$row;*/
-
-        // $input = new KerusakanDetail;
-        // $input->id_kerusakan = $id_kerusakan;
-        // $input->id_komponen = $id_komponen;
-        // $input->id_komponen_opsi = $id_komponen_opsi;
-        // $input->save();
-
-        // $input_klasifikasi = new KerusakanKlasifikasi;
-        // $input_klasifikasi->id_kerusakan_detail = $input->id;
-        // $input_klasifikasi->tingkat_kerusakan = $hasil_estimasi;
-        // $input->save();
 
         // mengirim nilai estimasi kerusakan ke view
         return response()->json(['hasil_estimasi' => $hasil_estimasi]);
@@ -139,23 +108,12 @@ class KerusakanController extends Controller
         // query data bobot komponen
         $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
 
-        // menghitung nilai estimasi kerusakan pada sebuah komponen
+        // menghitung nilai klasifikasi kerusakan pada sebuah komponen
         if ($bobot->bobot == null) {
-            $hasil_persen = $sum_hasil / 100;
+            $hasil_persen = $sum_hasil;
         } else {
             $hasil_persen = $sum_hasil * $bobot->bobot / 100;
         }
-
-        // input data ke tabel
-        // $input = new KerusakanDetail;
-        // $input->id_kerusakan = $id_kerusakan;
-        // $input->id_komponen = $id_komponen;
-        // $input->save();
-
-        // $input_klasifikasi = new KerusakanKlasifikasi;
-        // $input_klasifikasi->id_kerusakan_detail = $input->id;
-        // $input_klasifikasi->tingkat_kerusakan = $hasil_persen;
-        // $input_klasifikasi->save();
         
         // mengirim nilai estimasi kerusakan ke view
         return response()->json(['hasil_persen' => $hasil_persen, 'bobot' => $bobot->bobot]);
@@ -170,41 +128,16 @@ class KerusakanController extends Controller
         // query data bobot komponen
         $bobot = Komponen::select('komponen.bobot as bobot')->where('id', $id_komponen)->first();
 
-        // menghitung nilai estimasi kerusakan pada sebuah komponen
-        if ($sum_hasil == 0) {
-            $hasil_unit = 0;
-        } else if ($bobot->bobot == null) {
+        // menghitung nilai klasifikasi kerusakan pada sebuah komponen
+        if ($bobot->bobot == null) {
             $hasil_unit = $sum_hasil / 100;
         } else {
             $hasil_unit = $sum_hasil * $bobot->bobot / 100;
         }
-
-        /* input data ke tabel
-        $input = new KerusakanDetail;
-        $input->id_kerusakan = $id_kerusakan;
-        $input->id_komponen = $id_komponen;
-        $input->jumlah = $jumlah;
-        $input->save();
-
-        $input_klasifikasi = new KerusakanKlasifikasi;
-        $input_klasifikasi->id_kerusakan_detail = $input->id;
-        $input_klasifikasi->tingkat_kerusakan = $hasil_unit;
-        $input->save();*/
         
         // mengirim nilai estimasi kerusakan ke view
         return response()->json(['hasil_unit' => $hasil_unit, 'bobot' => $bobot->bobot]);
     }
-
-    /*public function simpanKerusakanDetail(Request $request) {
-        $data = $request->all();
-        $input = new KerusakanDetail;
-        $input->id_kerusakan = $data['id_kerusakan'];
-        $input->id_komponen = $data['id_komponen'];
-        $input->id_komponen_opsi = $data['id_komponen_opsi'];
-        $input->save();
-
-        return response()->json(['success' => 'Simpan data sukses']);
-    }*/
 
     public function hapusKerusakan($id) {
         $data = Kerusakan::where('id', $id)->first();
@@ -215,13 +148,14 @@ class KerusakanController extends Controller
     public function postSubmitKerusakan(Request $request) {
         $data = $request->all();
         //Log::info($data);
-        // $data['id_user']
-        // $data['id_kerusakan']
+
+        $id_gedung = $data['id_gedung'];
         $id_komp = $data['id_komp'];
+        $tanggal_jam = $data['tanggal_jam'];
         $id_komponen_opsi = $data['id_komp_opsi'];
         $jumlah = $data['jumlah'];
         $tingkat_kerusakan = $data['tingkat_kerusakan'];
-        Log::info($data);
+        //Log::info($data);
         
         $id_komp_arr = array();
         $jumlah_arr = array();
@@ -244,22 +178,31 @@ class KerusakanController extends Controller
             $tingkat_kerusakan_arr[$key] = $value;
         }
 
-        Log::info($tingkat_kerusakan_arr);
+        // Create data ke table kerusakan
+        $input_tbl_kerusakan = new Kerusakan;
+        $input_tbl_kerusakan->id_gedung = $id_gedung;
+        $input_tbl_kerusakan->tanggal = $tanggal_jam;
+        $input_tbl_kerusakan->save();
 
+        // Create data ke table kerusakan surveyor
+        $input_tbl_surveyor = new KerusakanSurveyor;
+        $input_tbl_surveyor->id_kerusakan =  $input_tbl_kerusakan->id;
+        $input_tbl_surveyor->id_user = $request->id_user;
+        $input_tbl_surveyor->save();
+
+        // Create data ke table kerusakan_detail
         for ($i = 0; $i < count($id_komp_arr); $i++) {
             $input_detail = new KerusakanDetail;
-            $input_detail->id_kerusakan = $data['id_kerusakan'];
+            $input_detail->id_kerusakan = $input_tbl_kerusakan->id;
             $input_detail->id_komponen = $id_komp_arr[$i];
             $input_detail->jumlah = $jumlah[$i];
             $input_detail->id_komponen_opsi = $id_komponen_opsi_arr[$i];
             $input_detail->save();
-        }
 
-        for ($j = 0; $j < count($id_komp_arr); $j++) {
             $input_klasifikasi = new KerusakanKlasifikasi;
             $input_klasifikasi->id_kerusakan_detail = $input_detail->id;
             $input_klasifikasi->jumlah = $jumlah[$i];
-            $input_klasifikasi->tingkat_kerusakan = $tingkat_kerusakan_arr[$j];
+            $input_klasifikasi->tingkat_kerusakan = $tingkat_kerusakan_arr[$i];
             $input_klasifikasi->save();
         }
 

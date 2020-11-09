@@ -15,7 +15,6 @@
       <form  enctype="multipart/form-data" action="{{ url('post_formulir_surveyor') }}" method='post'>
             @csrf
             <div class="form-group">
-                <input type="hidden" name="id_kerusakan" value="{{ $id_kerusakan }}">
                 <div class="form-group">
                     <label>OPD:</label>
                     <input type="text" class="form-control" placeholder="OPD"  name="" required>
@@ -28,8 +27,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Nomer Aset:</label>
-                    <input type="number" step="0.0000000001" min="0.0000000001" class="form-control" placeholder="0"  name="" required>
+                    <label>Nomor Aset:</label>
+                    <input type="text" class="form-control" placeholder="Nomor Aset" name="" required>
                 </div>
 
                 <div class="form-group">
@@ -56,27 +55,27 @@
 
                 <div class="form-group">
                     <label>Petugas Survei 1:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor1" value="{{ $surveyor->name }}" readonly>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]" value="{{ $surveyor->name }}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label>Petugas Survei 2:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="" required>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]" required>
                 </div>
 
                 <div class="form-group">
                     <label>Petugas Survei 3:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="" required>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]" required>
                 </div>
 
                 <div class="form-group">
                     <label>Perwakilan OPD 1:</label>
-                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="" required>
+                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]" required>
                 </div>
 
                 <div class="form-group">
                     <label>Perwakilan OPD 2:</label>
-                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="" required>
+                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]" required>
                 </div>
 
                 <div class="form-group">

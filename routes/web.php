@@ -143,7 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('master_kerusakan', 'KerusakanController@index');
 Route::get('tambah_master_kerusakan', 'KerusakanController@pilihanGedung');
 Route::get('formulir_kerusakan_surveyor/{id}', 'KerusakanController@formKerusakanSurveyor');
-Route::get('create_formulir_klasifikasi_kerusakan/{id_gedung}/{id_kerusakan}/{id_user}', 'KerusakanController@formIdentifikasiKerusakan');
+Route::get('create_formulir_klasifikasi_kerusakan/{id_gedung}/{id_user}', 'KerusakanController@formIdentifikasiKerusakan');
 Route::post('hitung_estimasi_kerusakan', 'KerusakanController@hitungEstimasiKerusakan')->name('hitung_estimasi_kerusakan');
 Route::post('hitung_kerusakan_unit', 'KerusakanController@hitungKerusakanUnit')->name('hitung_kerusakan_unit');
 Route::post('hitung_kerusakan_persen', 'KerusakanController@hitungKerusakanPersen')->name('hitung_kerusakan_persen');

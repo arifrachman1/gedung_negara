@@ -123,12 +123,11 @@
                   <div class="col-lg-3"> 
                       Tanggal Hari Ini
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-3">
                       <?php $now = date("Y-m-d H:i:s") ?>
                       <input id="tanggalJam" name="tanggal_jam" class="form-control" value="<?=$now?>" readonly>
                   </div>
               </div>
-            <input type="hidden" id="idKerusakan" name="id_kerusakan" value="{{ $id_kerusakan }}">
             <input type="hidden" id="idGedung" name="id_gedung" value="{{ $id_gedung }}">
             <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
           </div>    
@@ -195,12 +194,12 @@
               </table>
             </div>
             <div class="form-group">
-                <label >Sketsa Denah Rumah:</label>
-                <input type="file" name="#" class="form-control-file">
+                <label >Sketsa Denah:</label>
+                <input type="file" id="sketsaDenah" name="sketsa_denah" class="form-control-file">
             </div>
             <div class="form-group">
                 <label>Gambar Bukti Kerusakan</label>
-                <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
+                <input type="file" id="gambarBukti" name="gambar_bukti" class="form-control-file">
             </div>
           </div>
             <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>
@@ -264,7 +263,7 @@
                 <input type="number" step="0.01" id="inputNilaiKerusakanPersen0" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
-                =
+                % =
               </div>
               <div class="col-lg-3">
                 <input type="number" step="0.01" id="hasilKerusakanPersen0" class="form-control form-hasil" placeholder="0"  name="" readonly>
@@ -281,7 +280,7 @@
                 <input type="number" step="0.01" id="inputNilaiKerusakanPersen1" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
-                =
+                % =
               </div>
               <div class="col-lg-3">
                 <input type="number" step="0.01" id="hasilKerusakanPersen1" class="form-control form-hasil" placeholder="0"  name="" readonly>
@@ -298,7 +297,7 @@
                 <input type="number" step="0.01" id="inputNilaiKerusakanPersen2" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
-                =
+                % =
               </div>
               <div class="col-lg-3">
                 <input type="number" step="0.01" id="hasilKerusakanPersen2" class="form-control form-hasil" placeholder="0"  name="" readonly>
@@ -315,7 +314,7 @@
                 <input type="number" step="0.01" id="inputNilaiKerusakanPersen3" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
-                =
+                % =
               </div>
               <div class="col-lg-3">
                 <input type="number" step="0.01" id="hasilKerusakanPersen3" class="form-control form-hasil" placeholder="0"  name="" readonly>
@@ -332,7 +331,7 @@
                 <input type="number" step="0.01" id="inputNilaiKerusakanPersen4" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
-                =
+                % =
               </div>
               <div class="col-lg-3">
                 <input type="number" step="0.01" id="hasilKerusakanPersen4" class="form-control form-hasil" placeholder="0"  name="" readonly>
@@ -349,7 +348,7 @@
                 <input type="number" step="0.01" id="inputNilaiKerusakanPersen5" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
-                =
+                % =
               </div>
               <div class="col-lg-3">
                 <input type="number" step="0.01" id="hasilKerusakanPersen5" class="form-control form-hasil" placeholder="0"  name="" readonly>
@@ -510,7 +509,7 @@
   var table;
   var hasil0; var hasil1; var hasil2; var hasil3; var hasil4; var hasil5;
   var hasil = [0, 0, 0, 0, 0, 0];
-  var jumlahUnit = 1;
+  var jumlahUnit = 0;
 
   $.ajaxSetup({
     headers: {
@@ -550,7 +549,7 @@
   $(document).on('click', '#hitungEstimasi', function() {
     let id = $(this).attr('data-id');
     idKomp = id;
-    console.log(id);
+    //console.log(id);
     $.ajax({
       url: '{{ route("get_data_komponen_opsi") }}',
       type: 'POST',
@@ -569,7 +568,7 @@
   $(document).on('click', '#hitungPersen', function() {
     let id = $(this).attr('data-id');
     idKomp = id;
-    console.log(id);
+    //console.log(id);
     $('.form-input').val('');
     $('.form-hasil').val(0);
   });
@@ -578,7 +577,7 @@
   $(document).on('click', '#hitungUnit', function() {
     let id = $(this).attr('data-id');
     idKomp = id;
-    console.log(id);
+    //console.log(id);
     $('#jumlah').val(0);
     $('.form-input').val('');
     $('.form-hasil').val(0);
@@ -587,7 +586,10 @@
   /* menyimpan data ke table kerusakan */
   $(document).on('click', '#submitKerusakan', function() {
     var idUser = $('#idUser').val();
-    var idKerusakan = $('#idKerusakan').val();
+    var idGedung = $('#idGedung').val();
+    var tanggalJam = $('#tanggalJam').val();
+    var sketsaDenah = $('#sketsaDenah').val();
+    var gambarBukti = $('#gambarBukti').val();
 
     var idKomp = $('input[name="id_komp[]"]').map(function () {
         return this.value;
@@ -612,17 +614,35 @@
       type: 'post',
       data: {
         id_user: idUser,
-        id_kerusakan: idKerusakan,
+        id_gedung: idGedung,
+        tanggal_jam: tanggalJam,
+        sketsa_denah: sketsaDenah,
+        gambar_bukti: gambarBukti,
         id_komp: idKomp,
         id_komp_opsi: idKompOpsi,
         jumlah: jumlah,
         tingkat_kerusakan: tingkatKerusakan,
       },
       success: function(data) {
-        console.log('Input sukses');
+        alert('Input sukses');
+        //window.location.href = "{{ url('master_kerusakan/') }}";
       }
     });
   });
+
+  /* function pembulatan */
+  function roundNumber(num, scale) {
+    if(!("" + num).includes("e")) {
+      return +(Math.round(num + "e+" + scale)  + "e-" + scale);
+    } else {
+      var arr = ("" + num).split("e");
+      var sig = "";
+      if(+arr[1] + scale > 0) {
+        sig = "+";
+      }
+      return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+    }
+  }
 
   $(document).ready(function() {
     
@@ -644,17 +664,23 @@
         },
         success: function(data) {
           //console.log(data.hasil_estimasi);
-          var hasil_estimasi = data.hasil_estimasi / 100;
+          var hasil_estimasi = data.hasil_estimasi;
+          hasil_estimasi = roundNumber(hasil_estimasi, 2);
           $('#td'+idKomp).attr('data-val', hasil_estimasi);
           $('#td'+idKomp).attr('data-ops', id_komp_opsi);
 
           $('#id_komp'+idKomp).val(idKomp);
           $('#id_komp_opsi'+idKomp).val(id_komp_opsi);
           $('#jml'+idKomp).val('');
-          $('#nilai'+idKomp).val(data.hasil_estimasi);
+          
+          // td tingkat kerusakan kolom kiri
+          var hasil_estimasi100 = hasil_estimasi * 100;
+          
+          //
+          hasil_estimasi100 = roundNumber(hasil_estimasi100, 2);
+          $('#td'+idKomp).html(hasil_estimasi100 + '%');
 
-          $('#nilai'+idKomp).val(hasil_estimasi);
-          $('#td'+idKomp).html(data.hasil_estimasi + '%');
+          // td tingkat kerusakan kolom kanan
           if (hasil_estimasi > 0.3) {
             $('#td_keterangan'+idKomp).html('Rusak Berat');
           } else {
@@ -666,7 +692,10 @@
           $('.td-hasil').each(function () {
             sum += Number($(this).attr('data-val'));
           });
-          let sum100 = sum * 100;
+          var sum100 = sum * 100;
+
+          // pembulatan
+          sum100 = roundNumber(sum100, 2);
           $('#totalJmlKerusakan').html(sum100+'%');
           console.log(sum);
           if(sum <= 0.3) {
@@ -683,87 +712,99 @@
     /* proses perhitungan klasifikasi kerusakan dengan satuan komponen persen */
 
     $('#inputNilaiKerusakanPersen0').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen0').val());
       if (inputNilaiKerusakan == null) {
         hasil[0] = 0;
       } else {
-        hasil[0] = inputNilaiKerusakan * klsfKerusakan;
+        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        hasil[0] = preHasil;
       }
       if (hasil[0] == NaN) {
         hasil[0] = 0;
       }
-      $('#hasilKerusakanPersen0').val(hasil[0]);
+      $('#hasilKerusakanPersen0').val(preHasil);
     });
 
     $('#inputNilaiKerusakanPersen1').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen1').val());
       if (inputNilaiKerusakan == NaN) {
         hasil[1] = 0;
       } else {
-        hasil[1] = inputNilaiKerusakan * klsfKerusakan;
+        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        hasil[1] = preHasil;
       }
       if (hasil[1] == NaN) {
         hasil[1] = 0;
       }
-      $('#hasilKerusakanPersen1').val(hasil[1]);
+      $('#hasilKerusakanPersen1').val(preHasil);
     });
 
     $('#inputNilaiKerusakanPersen2').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen2').val());
       if (inputNilaiKerusakan == NaN) {
         hasil[2] = 0;
       } else {
-        hasil[2] = inputNilaiKerusakan * klsfKerusakan;
+        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        hasil[2] = preHasil;
       }
       if (hasil[2] == NaN) {
         hasil[2] = 0;
       }
-      $('#hasilKerusakanPersen2').val(hasil[2]);
+      $('#hasilKerusakanPersen2').val(preHasil);
     });
 
     $('#inputNilaiKerusakanPersen3').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen3').val());
       if (inputNilaiKerusakan == NaN) {
         hasil[3] = 0;
       } else {
-        hasil[3] = inputNilaiKerusakan * klsfKerusakan;
+        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        hasil[3] = preHasil;
       }
       if (hasil[3] == NaN) {
         hasil[3] = 0;
       }
-      $('#hasilKerusakanPersen3').val(hasil[3]);
+      $('#hasilKerusakanPersen3').val(preHasil);
     });
 
     $('#inputNilaiKerusakanPersen4').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen4').val());
       if (inputNilaiKerusakan == NaN) {
         hasil[4] = 0;
       } else {
-        hasil[4] = inputNilaiKerusakan * klsfKerusakan;
+        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        hasil[4] = preHasil;
       }
       if (hasil[4] == NaN) {
         hasil[4] = 0;
       }
-      $('#hasilKerusakanPersen4').val(hasil[4]);
+      $('#hasilKerusakanPersen4').val(preHasil);
     });
 
     $('#inputNilaiKerusakanPersen5').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen5').val());
       if (inputNilaiKerusakan == NaN) {
         hasil[5] = 0;
       } else {
-        hasil[5] = inputNilaiKerusakan * klsfKerusakan;
+        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        hasil[5] = preHasil;
       }
       if (hasil[5] == NaN) {
         hasil[5] = 0;
       }
-      $('#hasilKerusakanPersen5').val(hasil[5]);
+      $('#hasilKerusakanPersen5').val(preHasil);
     });
 
     $('.btn-persen').click(function (){
@@ -771,7 +812,6 @@
       hasil.forEach(function(n){
         sumHasil += n;
       });
-      //console.log(sumHasil);
       $.ajax({
         url: '{{ route("hitung_kerusakan_persen") }}',
         type: 'POST',
@@ -780,20 +820,15 @@
           sum_hasil: sumHasil,
         },
         success: function(data) {
-          //console.log(data.hasil_persen);
           var hasil_persen = data.hasil_persen;
-          $('#nilai'+idKomp).val(hasil_persen);
-          let hasil_persen100 = hasil_persen * 100;
-          console.log(data.bobot);
-          console.log(hasil_persen100);
           $('#td'+idKomp).attr('data-val', hasil_persen);
 
           $('#id_komp'+idKomp).val(idKomp);
           $('#id_komp_opsi'+idKomp).val('');
           $('#jml'+idKomp).val('');
-          $('#nilai'+idKomp).val(hasil_persen100);
-
-          $('#td'+idKomp).html(hasil_persen100 + '%');
+          
+          hasil_persen100 = hasil_persen * 100;
+          $('#td'+idKomp).html(roundNumber(hasil_persen100,2) + '%');
           if (hasil_persen > 0.3) {
             $('#td_keterangan'+idKomp).html('Rusak Berat');
           } else {
@@ -805,9 +840,9 @@
           $('.td-hasil').each(function () {
             sum += Number($(this).attr('data-val'));
           });
-          let sum100 = sum * 100;
-          $('#totalJmlKerusakan').html(sum100+'%');
-          console.log(sum);
+          var sum100 = sum * 100;
+          $('#totalJmlKerusakan').html(roundNumber(sum100,2) + '%');
+          //console.log(sum);
           if(sum <= 0.3) {
             $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
           } else if (sum > 0.3 && sum <= 0.45) {
@@ -815,100 +850,114 @@
           } else if (sum > 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
+
+          hasil = [0,0,0,0,0,0];
+          hasil_persen = 0;
         },
       });
     });
 
     /* proses perhitungan klasifikasi kerusakan dengan satuan komponen unit */
-
     $('#inputNilaiKerusakan0').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan0').val());
       jumlahUnit = $('#jumlahUnit').val();
       if (inputNilaiKerusakan == NaN) {
         hasil[0] = 0;
       } else {
-        hasil[0] = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        hasil[0] = preHasil;
       }
       if (hasil[0] == NaN) {
         hasil[0] = 0;
       }
-      $('#hasilKerusakan0').val(hasil[0]);
+      $('#hasilKerusakan0').val(preHasil);
     });
 
     $('#inputNilaiKerusakan1').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan1').val());
       jumlahUnit = $('#jumlahUnit').val();
       if (inputNilaiKerusakan == NaN) {
         hasil[1] = 0;
       } else {
-        hasil[1] = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        hasil[1] = preHasil;
       }
       if (hasil[1] == NaN) {
         hasil[1] = 0;
       }
-      $('#hasilKerusakan1').val(hasil[1]);
+      $('#hasilKerusakan1').val(preHasil);
     });
 
     $('#inputNilaiKerusakan2').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan2').val());
       jumlahUnit = $('#jumlahUnit').val();
       if (inputNilaiKerusakan == NaN) {
         hasil[2] = 0;
       } else {
-        hasil[2] = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        hasil[2] = preHasil;
       }
       if (hasil[2] == NaN) {
         hasil[2] = 0;
       }
-      $('#hasilKerusakan2').val(hasil[2]);
+      $('#hasilKerusakan2').val(preHasil);
     });
 
     $('#inputNilaiKerusakan3').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan3').val());
       jumlahUnit = $('#jumlahUnit').val();
       if (inputNilaiKerusakan == NaN) {
         hasil[3] = 0;
       } else {
-        hasil[3] = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        hasil[3] = preHasil;
       }
       if (hasil[3] == NaN) {
         hasil[3] = 0;
       }
-      $('#hasilKerusakan3').val(hasil[3]);
+      $('#hasilKerusakan3').val(preHasil);
     });
 
     $('#inputNilaiKerusakan4').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan4').val());
       jumlahUnit = $('#jumlahUnit').val();
       if (inputNilaiKerusakan == NaN) {
         hasil[4] = 0;
       } else {
-        hasil[4] = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        hasil[4] = preHasil;
       }
       if (hasil[4] == NaN) {
         hasil[4] = 0;
       }
-      $('#hasilKerusakan4').val(hasil[4]);
+      $('#hasilKerusakan4').val(preHasil);
     });
 
     $('#inputNilaiKerusakan5').change(function (){
+      let preHasil = 0;
       var inputNilaiKerusakan = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan5').val());
       jumlahUnit = $('#jumlahUnit').val();
       if (inputNilaiKerusakan == NaN) {
         hasil[5] = 0;
       } else {
-        hasil[5] = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        hasil[5] = preHasil;
       }
       if (hasil[5] == NaN) {
         hasil[5] = 0;
       }
-      $('#hasilKerusakan5').val(hasil[5]);
+      $('#hasilKerusakan5').val(preHasil);
     });
 
     $('.btn-unit').click(function (){
@@ -916,7 +965,7 @@
       hasil.forEach(function(n){
         sumHasil += n;
       });
-      //console.log(sumHasil);
+      //console.log(sumHasil); hasil = [0,0,0,0,0,0]; return;
       $.ajax({
         url: '{{ route("hitung_kerusakan_unit") }}',
         type: 'POST',
@@ -935,7 +984,6 @@
           $('#id_komp'+idKomp).val(idKomp);
           $('#id_komp_opsi'+idKomp).val('');
           $('#jml'+idKomp).val(jml_unit);
-          $('#nilai'+idKomp).val(hasil_unit100);
 
           $('#td'+idKomp).html(hasil_unit100 + '%');
           if (hasil_unit > 0.3) {
@@ -950,8 +998,8 @@
             sum += Number($(this).attr('data-val'));
           });
           let sum100 = sum * 100;
-          $('#totalJmlKerusakan').html(sum100+'%');
-          console.log(sum);
+          $('#totalJmlKerusakan').html(roundNumber(sum100, 2)+'%');
+          //console.log(sum);
           if(sum <= 0.3) {
             $('#keteranganTotal').html('Tingkat Kerusakan Ringan');
           } else if (sum > 0.3 && sum <= 0.45) {
@@ -959,6 +1007,10 @@
           } else if (sum > 0.45) {
             $('#keteranganTotal').html('Tingkat Kerusakan Berat');
           }
+
+          hasil = [0,0,0,0,0,0];
+          hasil_unit = 0;
+          jumlahUnit = 0;
         },
       });
     });

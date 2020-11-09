@@ -59,6 +59,9 @@
   <!-- Page level custom scripts -->
   <script src="{{ asset('style/js/demo/datatables-demo.js') }}"></script>
 
+  <!-- Kalkulasi klasifikasi kerusakan -->
+  <!-- <script src="{{ asset('style/js/kalkulasi-kerusakan.js') }}"></script> -->
+
 </body>
 
 </html>
