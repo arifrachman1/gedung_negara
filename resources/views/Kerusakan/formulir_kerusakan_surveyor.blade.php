@@ -17,7 +17,7 @@
             <div class="form-group">
                 <div class="form-group">
                     <label>OPD:</label>
-                    <input type="text" class="form-control" placeholder="OPD"  name="" required>
+                    <input type="text" class="form-control" placeholder="OPD"  name="opd" required>
                 </div>
 
                 <div class="form-group">
@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label>Nomor Aset:</label>
-                    <input type="text" class="form-control" placeholder="Nomor Aset" name="" required>
+                    <input type="text" class="form-control" placeholder="Nomor Aset" name="nomor_aset" required>
                 </div>
 
                 <div class="form-group">
@@ -55,27 +55,27 @@
 
                 <div class="form-group">
                     <label>Petugas Survei 1:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]">
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor1">
                 </div>
 
                 <div class="form-group">
                     <label>Petugas Survei 2:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]">
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor2">
                 </div>
 
                 <div class="form-group">
                     <label>Petugas Survei 3:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]">
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor3">
                 </div>
 
                 <div class="form-group">
                     <label>Perwakilan OPD 1:</label>
-                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]">
+                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd1">
                 </div>
 
                 <div class="form-group">
                     <label>Perwakilan OPD 2:</label>
-                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]">
+                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd2">
                 </div>
 
                 <div class="form-group">

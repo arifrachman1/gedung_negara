@@ -641,7 +641,7 @@
       $.ajax({
       url: '{{ url("submit_kerusakan") }}',
       type: 'post',
-      processData: false,
+      //processData: false,
       data: {
         id_user: idUser,
         id_gedung: idGedung,
@@ -650,11 +650,11 @@
         id_komp_opsi: idKompOpsi,
         jumlah: jumlah,
         tingkat_kerusakan: tingkatKerusakan,
-        formData,
+        //formData,
       },
       success: function(data) {
         alert('Input sukses');
-        //window.location.href = "{{ url('master_kerusakan/') }}";
+        window.location.href = "{{ url('master_kerusakan/') }}";
       },
     }); 
     }
