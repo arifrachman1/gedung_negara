@@ -153,11 +153,11 @@
                 <tr>
                   <td>{{ $no++ }}</td>
                   @if($val->nama_komponen == null)
-                  <td>{{ $val->sub_komponen }}</td>
+                  <td>{{ strtoupper($val->sub_komponen) }}</td>
                   <td>-</td>
                   @else   
-                  <td>{{ $val->nama_komponen }}</td>
-                  <td>{{ $val->sub_komponen }}</td>
+                  <td>{{ strtoupper($val->nama_komponen) }}</td>
+                  <td>{{ strtoupper($val->sub_komponen) }}</td>
                   @endif
                   <td>{{ $val->nama_satuan }}</td>
                   @if($val->id_satuan == 1)
@@ -194,12 +194,14 @@
               </table>
             </div>
             <div class="form-group">
-                <label >Sketsa Denah:</label>
+                <label >Sketsa Denah</label>
                 <input type="file" id="sketsaDenah" name="sketsa_denah" class="form-control-file">
+                <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
             </div>
             <div class="form-group">
                 <label>Gambar Bukti Kerusakan</label>
                 <input type="file" id="gambarBukti" name="gambar_bukti" class="form-control-file">
+                <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
             </div>
           </div>
             <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>
