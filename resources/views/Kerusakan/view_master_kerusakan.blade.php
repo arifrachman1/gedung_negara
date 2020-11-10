@@ -315,12 +315,14 @@
                         </tbody>
                     </table>
                     <div class="form-group">
-                        <label >Sketsa Denah Rumah:</label>
-                        <input type="file" name="#" class="form-control-file">
+                        <label >Sketsa Denah</label>
+                        <input type="file" id="sketsaDenah" name="sketsa_denah" class="form-control-file">
+                        <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
                     </div>
                     <div class="form-group">
                         <label>Gambar Bukti Kerusakan</label>
-                        <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
+                        <input type="file" id="gambarBukti" name="gambar_bukti" class="form-control-file">
+                        <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
                     </div>
                 </div>
             <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
