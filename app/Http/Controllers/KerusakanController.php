@@ -147,9 +147,9 @@ class KerusakanController extends Controller
 
     public function postSubmitKerusakan(Request $request) {
         $data = $request->all();
-        //Log::info($data);
+        Log::info($data);
 
-        $id_gedung = $data['id_gedung'];
+        /*$id_gedung = $data['id_gedung'];
         $id_komp = $data['id_komp'];
         $tanggal_jam = $data['tanggal_jam'];
         $id_komponen_opsi = $data['id_komp_opsi'];
@@ -182,13 +182,13 @@ class KerusakanController extends Controller
         $input_tbl_kerusakan = new Kerusakan;
         $input_tbl_kerusakan->id_gedung = $id_gedung;
         $input_tbl_kerusakan->tanggal = $tanggal_jam;
-        $input_tbl_kerusakan->save();
+        //$input_tbl_kerusakan->save();
 
         // Create data ke table kerusakan surveyor
         $input_tbl_surveyor = new KerusakanSurveyor;
         $input_tbl_surveyor->id_kerusakan =  $input_tbl_kerusakan->id;
         $input_tbl_surveyor->id_user = $request->id_user;
-        $input_tbl_surveyor->save();
+        //$input_tbl_surveyor->save();
 
         // Create data ke table kerusakan_detail
         for ($i = 0; $i < count($id_komp_arr); $i++) {
@@ -197,14 +197,14 @@ class KerusakanController extends Controller
             $input_detail->id_komponen = $id_komp_arr[$i];
             $input_detail->jumlah = $jumlah[$i];
             $input_detail->id_komponen_opsi = $id_komponen_opsi_arr[$i];
-            $input_detail->save();
+            //$input_detail->save();
 
             $input_klasifikasi = new KerusakanKlasifikasi;
             $input_klasifikasi->id_kerusakan_detail = $input_detail->id;
             $input_klasifikasi->jumlah = $jumlah[$i];
             $input_klasifikasi->tingkat_kerusakan = $tingkat_kerusakan_arr[$i];
-            $input_klasifikasi->save();
-        }
+            //$input_klasifikasi->save();
+        }*/
 
         return redirect('master_kerusakan');
     }

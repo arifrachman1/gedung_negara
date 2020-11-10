@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2020 at 04:11 AM
+-- Generation Time: Nov 10, 2020 at 06:05 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -83,7 +83,18 @@ CREATE TABLE `gedung` (
 --
 
 INSERT INTO `gedung` (`id`, `id_gedung_kategori`, `nama`, `alamat`, `bujur_timur`, `lintang_selatan`, `legalitas`, `tipe_pemilik`, `alas_hak`, `luas_lahan`, `jumlah_lantai`, `luas`, `tinggi`, `kompleks`, `kepadatan`, `permanensi`, `tkt_resiko_kebakaran`, `penangkal_petir`, `struktur_bawah`, `struktur_bangunan`, `struktur_atap`, `kode_provinsi`, `kode_kabupaten`, `kode_kecamatan`, `kode_kelurahan`, `kdb`, `klb`, `kdh`, `gsb`, `rth`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(105, 8, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 6, 'Legal', 'Negara', 'Letter C', 100, 2, 90, 10, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', '35', '3523', '3523130', '3523130012', 'A', 'A', 'A', 'A', 'A', '2020-11-01 18:24:44', '2020-11-01 22:12:12', NULL);
+(105, 8, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 6, 'Legal', 'Negara', 'Letter C', 100, 5, 90, 10, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', '35', '3523', '3523130', '3523130012', 'A', 'A', 'A', 'A', 'A', '2020-11-01 18:24:44', '2020-11-06 02:55:36', '2020-11-06 02:55:36'),
+(106, 8, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 3.12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', '35', '3578', '3578211', '3578211003', 'A', 'B', 'C', 'D', 'E', '2020-11-06 02:58:02', '2020-11-06 03:42:44', NULL),
+(107, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', NULL, NULL, NULL, NULL, 'A', 'R', 'C', 'D', 'E', '2020-11-06 03:24:50', '2020-11-06 03:41:29', '2020-11-06 03:41:29'),
+(108, NULL, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 8, 'Legal', 'Negara', 'Letter C', 120.231, 2, 20.12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'F', 'C', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'C', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:34', '2020-11-06 03:25:34'),
+(109, NULL, 'SMA Negeri 2 Tuban', 'Jl. DR. Wahidin Sudirohusodo No.867, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 112, 7, 'Legal', 'Negara', 'Letter C', 231, 2, 20.12, 2, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:40', '2020-11-06 03:25:40'),
+(110, NULL, 'Rumah Sakit Dr. R. Koesma', 'Jl. DR. Wahidin Sudirohusodo No.800, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 111, 9, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:29', '2020-11-06 03:25:29'),
+(111, NULL, 'Polres Tuban', 'Jalan Dokter Wahidin SH, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62313', 112, 8, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:27', '2020-11-06 03:25:27'),
+(112, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', NULL, NULL, NULL, NULL, 'A', 'R', 'C', 'D', 'E', '2020-11-06 03:26:17', '2020-11-06 03:41:26', '2020-11-06 03:41:26'),
+(113, 8, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 8, 'Legal', 'Negara', 'Letter C', 120.231, 2, 20.12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'F', 'C', '35', '3523', '3523130', '3523130012', 'A', 'S', 'C', 'C', 'E', '2020-11-06 03:26:17', '2020-11-06 03:44:56', NULL),
+(114, 8, 'SMA Negeri 2 Tuban', 'Jl. DR. Wahidin Sudirohusodo No.867, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 112, 7, 'Legal', 'Negara', 'Letter C', 231, 2, 20.12, 2, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:43:59', NULL),
+(115, 10, 'Rumah Sakit Dr. R. Koesma', 'Jl. DR. Wahidin Sudirohusodo No.800, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 111, 9, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:46:17', NULL),
+(116, 11, 'Polres Tuban', 'Jalan Dokter Wahidin SH, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62313', 112, 8, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:47:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -107,7 +118,9 @@ INSERT INTO `gedung_ketegori` (`id`, `nama`, `created_at`, `updated_at`, `delete
 (1, 'Sekolah', '2020-10-26 10:50:49', '2020-11-01 18:03:14', '2020-11-01 18:03:14'),
 (2, 'Universitas', '2020-11-01 18:02:50', '2020-11-01 18:04:59', '2020-11-01 18:04:59'),
 (8, 'Sekolah', '2020-11-01 18:04:54', '2020-11-01 18:04:54', NULL),
-(9, 'Universitas', '2020-11-01 18:05:23', '2020-11-01 18:05:23', NULL);
+(9, 'Universitas', '2020-11-01 18:05:23', '2020-11-01 18:05:23', NULL),
+(10, 'Kesehatan', '2020-11-06 03:40:35', '2020-11-06 03:40:35', NULL),
+(11, 'Pemerintah', '2020-11-06 03:41:02', '2020-11-06 03:41:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -82433,6 +82446,15 @@ CREATE TABLE `kerusakan` (
   `id_gedung` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
   `detail_json` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sketsa_denah` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gambar_bukti` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `opd` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nomor_aset` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `petugas_survei1` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `petugas_survei2` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `petugas_survei3` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `perwakilan_opd1` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `perwakilan_opd2` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -82442,8 +82464,9 @@ CREATE TABLE `kerusakan` (
 -- Dumping data for table `kerusakan`
 --
 
-INSERT INTO `kerusakan` (`id`, `id_gedung`, `tanggal`, `detail_json`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 105, '2020-11-03 03:06:17', NULL, NULL, NULL, NULL);
+INSERT INTO `kerusakan` (`id`, `id_gedung`, `tanggal`, `detail_json`, `sketsa_denah`, `gambar_bukti`, `opd`, `nomor_aset`, `petugas_survei1`, `petugas_survei2`, `petugas_survei3`, `perwakilan_opd1`, `perwakilan_opd2`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(59, 116, '2020-11-09 00:28:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(60, 106, '2020-11-09 06:59:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82464,7 +82487,18 @@ CREATE TABLE `kerusakan_detail` (
 --
 
 INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `id_komponen_opsi`) VALUES
-(11, 1, 382, NULL, 27);
+(130, 59, 385, 0, NULL),
+(131, 59, 384, 0, NULL),
+(132, 59, 378, 0, NULL),
+(133, 59, 381, 0, 38),
+(134, 59, 382, 0, 26),
+(135, 59, 383, 10, NULL),
+(136, 60, 385, 0, NULL),
+(137, 60, 384, 0, NULL),
+(138, 60, 378, 0, NULL),
+(139, 60, 381, 0, 38),
+(140, 60, 382, 0, 25),
+(141, 60, 383, 90, NULL);
 
 -- --------------------------------------------------------
 
@@ -82476,8 +82510,26 @@ CREATE TABLE `kerusakan_klasifikasi` (
   `id` int(11) NOT NULL,
   `id_kerusakan_detail` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL DEFAULT 0,
-  `tingkat_kerusakan` int(11) NOT NULL
+  `tingkat_kerusakan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kerusakan_klasifikasi`
+--
+
+INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `jumlah`, `tingkat_kerusakan`) VALUES
+(74, 130, 0, 0.08),
+(75, 131, 0, 0.0064),
+(76, 132, 0, 0.0016),
+(77, 133, 0, 0.01),
+(78, 134, 0, 0.2),
+(79, 135, 10, 0.0012),
+(80, 136, 0, 0.1),
+(81, 137, 0, 0.0096),
+(82, 138, 0, 0.008),
+(83, 139, 0, 0.01),
+(84, 140, 0, 0),
+(85, 141, 90, 0.002);
 
 -- --------------------------------------------------------
 
@@ -82496,7 +82548,8 @@ CREATE TABLE `kerusakan_surveyor` (
 --
 
 INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
-(21, 1, 4);
+(62, 59, 4),
+(63, 60, 4);
 
 -- --------------------------------------------------------
 
@@ -82507,7 +82560,7 @@ INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
 CREATE TABLE `komponen` (
   `id` int(11) NOT NULL,
   `nama` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `bobot` int(11) DEFAULT NULL,
+  `bobot` double DEFAULT NULL,
   `id_satuan` int(11) DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -82522,11 +82575,13 @@ CREATE TABLE `komponen` (
 INSERT INTO `komponen` (`id`, `nama`, `bobot`, `id_satuan`, `id_parent`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (377, 'PONDASI', 9, NULL, NULL, NULL, NULL, NULL),
 (378, 'KERANGKA', 2, 2, 377, NULL, NULL, NULL),
-(379, 'ATAP', NULL, 2, NULL, NULL, NULL, NULL),
+(379, 'ATAP', NULL, NULL, NULL, NULL, NULL, NULL),
 (380, 'UTILITAS', NULL, NULL, NULL, NULL, NULL, NULL),
 (381, 'INSTALASI LISTRIK', 5, 1, 380, NULL, NULL, NULL),
-(382, 'INSTALASI AIR', 2, 1, 380, NULL, NULL, NULL),
-(383, 'DRAINASE LIMBAH', 2, 3, 380, NULL, NULL, NULL);
+(382, 'INSTALASI AIR', 100, 1, 380, NULL, NULL, NULL),
+(383, 'DRAINASE LIMBAH', NULL, 13, 380, NULL, NULL, NULL),
+(384, 'Langit-langit', 8, 2, 379, NULL, NULL, NULL),
+(385, 'Plafon', NULL, 2, 379, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83395,7 +83450,8 @@ CREATE TABLE `satuan` (
 INSERT INTO `satuan` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'estimasi', NULL, NULL, NULL),
 (2, '%', NULL, NULL, NULL),
-(3, 'unit', NULL, NULL, NULL);
+(3, 'unit', NULL, NULL, NULL),
+(13, 'm1', '2020-11-04 10:42:24', '2020-11-04 10:44:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -83589,43 +83645,43 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gedung`
 --
 ALTER TABLE `gedung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `gedung_ketegori`
 --
 ALTER TABLE `gedung_ketegori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_detail`
 --
 ALTER TABLE `kerusakan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_klasifikasi`
 --
 ALTER TABLE `kerusakan_klasifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `komponen`
 --
 ALTER TABLE `komponen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=386;
 
 --
 -- AUTO_INCREMENT for table `komponen_opsi`
@@ -83655,7 +83711,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`

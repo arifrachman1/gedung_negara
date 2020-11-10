@@ -55,27 +55,27 @@
 
                 <div class="form-group">
                     <label>Petugas Survei 1:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]" value="{{ $surveyor->name }}" readonly>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]">
                 </div>
 
                 <div class="form-group">
                     <label>Petugas Survei 2:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]" required>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]">
                 </div>
 
                 <div class="form-group">
                     <label>Petugas Survei 3:</label>
-                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]" required>
+                    <input type="text" class="form-control" placeholder="Petugas Survei"  name="surveyor[]">
                 </div>
 
                 <div class="form-group">
                     <label>Perwakilan OPD 1:</label>
-                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]" required>
+                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]">
                 </div>
 
                 <div class="form-group">
                     <label>Perwakilan OPD 2:</label>
-                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]" required>
+                    <input type="text" class="form-control" placeholder="Perwakilan OPD"  name="pwopd[]">
                 </div>
 
                 <div class="form-group">

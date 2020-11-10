@@ -123,7 +123,7 @@
                   <div class="col-lg-3"> 
                       Tanggal Hari Ini
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-sm-3">
                       <?php $now = date("Y-m-d H:i:s") ?>
                       <input id="tanggalJam" name="tanggal_jam" class="form-control" value="<?=$now?>" readonly>
                   </div>
@@ -588,9 +588,8 @@
     var idUser = $('#idUser').val();
     var idGedung = $('#idGedung').val();
     var tanggalJam = $('#tanggalJam').val();
-    var sketsaDenah = $('#sketsaDenah').val();
-    var gambarBukti = $('#gambarBukti').val();
 
+    // membaca data hasil perhitungan klasifikasi kerusakan
     var idKomp = $('input[name="id_komp[]"]').map(function () {
         return this.value;
     }).get();
@@ -608,26 +607,55 @@
     console.log(idKompOpsi);
     console.log(jumlah);
     console.log(tingkatKerusakan);
+    
+    // upload file tanpa submit form (tidak di dalam tag form) | tutorial: https://www.webslesson.info/2017/02/upload-file-without-using-form-submit-in-ajax-php.html
+    var formData = new FormData();
 
-    $.ajax({
+    // upload sketsa denah
+    let fileSketsaDenah = document.getElementById('sketsaDenah').files[0];
+    var nameSketsaDenah = document.getElementById('sketsaDenah').files[0].name;
+    var extSketsaDenah = nameSketsaDenah.split('.').pop().toLowerCase();
+    if (jQuery.inArray(extSketsaDenah, ['png', 'jpg', 'jpeg', 'pdf', 'doc']) == -1) {
+      alert("Format file tidak diizinkan, format file yang diizinkan: PNG, JPG, JPEG, PDF");
+    }
+    let ofReaderSketsaDenah = new FileReader();
+    ofReaderSketsaDenah.readAsDataURL(fileSketsaDenah);
+    var fileSizeSketsaDenah = fileSketsaDenah.size||fileSketsaDenah.fileSize;
+
+    // upload gambar bukti
+    let fileGambarBukti = document.getElementById('gambarBukti').files[0];
+    var nameGambarBukti = document.getElementById('gambarBukti').files[0].name;
+    var extGambarBukti = nameGambarBukti.split('.').pop().toLowerCase();
+    if (jQuery.inArray(extGambarBukti, ['png', 'jpg', 'jpeg', 'pdf', 'doc']) == -1) {
+      alert("Format file tidak diizinkan, format file yang diizinkan: PNG, JPG, JPEG, PDF");
+    }
+    let ofReaderGambarBukti = new FileReader();
+    ofReaderGambarBukti.readAsDataURL(fileGambarBukti);
+    var fileSizeGambarBukti = fileGambarBukti.size||fileGambarBukti.fileSize;
+
+    if (fileSizeSketsaDenah > 5000000 || fileSizeGambarBukti > 5000000) {
+      alert('File terlalu besar, maksimal ukuran file 5 MB');
+    } else {
+      $.ajax({
       url: '{{ url("submit_kerusakan") }}',
       type: 'post',
+      processData: false,
       data: {
         id_user: idUser,
         id_gedung: idGedung,
         tanggal_jam: tanggalJam,
-        sketsa_denah: sketsaDenah,
-        gambar_bukti: gambarBukti,
         id_komp: idKomp,
         id_komp_opsi: idKompOpsi,
         jumlah: jumlah,
         tingkat_kerusakan: tingkatKerusakan,
+        formData,
       },
       success: function(data) {
         alert('Input sukses');
         //window.location.href = "{{ url('master_kerusakan/') }}";
-      }
-    });
+      },
+    }); 
+    }
   });
 
   /* function pembulatan */
