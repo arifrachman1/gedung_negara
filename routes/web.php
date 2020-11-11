@@ -163,10 +163,12 @@ Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 Route::post('get_data_komponen_opsi/', 'KerusakanController@getDataKomponenOpsi')->name('get_data_komponen_opsi');
 Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
 Route::post('submit_kerusakan/', 'KerusakanController@postSubmitKerusakan');
+Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan');
 
 Route::get('view_kerusakan', function (){
-    return view('kerusakan/view_kerusakan');
+    return view('Kerusakan/view_kerusakan');
 });
+
 Route::get('edit_formulir_penilaian_kerusakan', function (){
     return view('kerusakan/edit_formulir_penilaian_kerusakan');
 });

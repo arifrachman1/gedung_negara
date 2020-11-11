@@ -204,8 +204,8 @@
                 <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
             </div>
           </div>
-            <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>
-            <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
+            <button type="button" id="submitKerusakan" class="btn btn-success float-left m-2">Submit</button>
+            <a class="btn btn-warning m-2 float-left" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
           </div>
         </div>
       </form>
@@ -262,7 +262,7 @@
               </div>
               <input type="number" value="0" id="klsfKerusakanPersen0" hidden>
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakanPersen0" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasiPersen0" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 % =
@@ -279,7 +279,7 @@
               </div>
               <input type="hidden" value="0.2" id="klsfKerusakanPersen1">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakanPersen1" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasiPersen1" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 % =
@@ -296,7 +296,7 @@
               </div>
               <input type="hidden" value="0.4" id="klsfKerusakanPersen2">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakanPersen2" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasiPersen2" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 % =
@@ -313,7 +313,7 @@
               </div>
               <input type="hidden" value="0.6" id="klsfKerusakanPersen3">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakanPersen3" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasiPersen3" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 % =
@@ -330,7 +330,7 @@
               </div>
               <input type="hidden" value="0.8" id="klsfKerusakanPersen4">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakanPersen4" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasiPersen4" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 % =
@@ -347,7 +347,7 @@
               </div>
               <input type="hidden" value="1" id="klsfKerusakanPersen5">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakanPersen5" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasiPersen5" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 % =
@@ -400,7 +400,7 @@
               </div>
               <input type="number" value="0" id="klsfKerusakan0" hidden>
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakan0" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasi0" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 =
@@ -417,7 +417,7 @@
               </div>
               <input type="hidden" value="0.2" id="klsfKerusakan1">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakan1" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasi1" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 =
@@ -434,7 +434,7 @@
               </div>
               <input type="hidden" value="0.4" id="klsfKerusakan2">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakan2" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasi2" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 =
@@ -451,7 +451,7 @@
               </div>
               <input type="hidden" value="0.6" id="klsfKerusakan3">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakan3" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasi3" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 =
@@ -468,7 +468,7 @@
               </div>
               <input type="hidden" value="0.8" id="klsfKerusakan4">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakan4" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasi4" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 =
@@ -485,7 +485,7 @@
               </div>
               <input type="hidden" value="1" id="klsfKerusakan5">
               <div class="col-lg-3">
-                <input type="number" step="0.01" id="inputNilaiKerusakan5" class="form-control form-input" placeholder="0"  name="">
+                <input type="number" step="0.01" id="inputNilaiKlasifikasi5" class="form-control form-input" placeholder="0"  name="">
               </div>
               <div class="col-lg-3">
                 =
@@ -509,9 +509,10 @@
   var idKomp;
   var valueOpsi;
   var table;
-  var hasil0; var hasil1; var hasil2; var hasil3; var hasil4; var hasil5;
   var hasil = [0, 0, 0, 0, 0, 0];
   var jumlahUnit = 0;
+  var inputArr = [0,0,0,0,0,0];
+  var klsfArr = [0, 0.2, 0.4, 0.6, 0.8, 1];
 
   $.ajaxSetup({
     headers: {
@@ -593,24 +594,37 @@
 
     // membaca data hasil perhitungan klasifikasi kerusakan
     var idKomp = $('input[name="id_komp[]"]').map(function () {
-        return this.value;
+      return this.value;
     }).get();
+
     var idKompOpsi = $('.td-hasil').map(function () {
-        return $(this).attr('data-ops');
+      return $(this).attr('data-ops');
     }).get();
+
     var jumlah = $('.td-hasil').map(function () {
-        return $(this).attr('data-qty');
+      return $(this).attr('data-qty');
     }).get();
+
     var tingkatKerusakan = $('.td-hasil').map(function () {
-        return $(this).attr('data-val');
+      return $(this).attr('data-val');
+    }).get();
+
+    var inputNilaiKlsf = $('.td-hasil').map(function () {
+      return $(this).data('inp-klsf');
+    }).get();
+
+    var Klasifikasi = $('.td-hasil').map(function () {
+      return $(this).data('klsf');
     }).get();
 
     console.log(idKomp);
     console.log(idKompOpsi);
     console.log(jumlah);
     console.log(tingkatKerusakan);
+    console.log(inputNilaiKlsf);
+    console.log(Klasifikasi);
     
-    // upload file tanpa submit form (tidak di dalam tag form) | tutorial: https://www.webslesson.info/2017/02/upload-file-without-using-form-submit-in-ajax-php.html
+    /* upload file tanpa submit form (tidak di dalam tag form) | tutorial: https://www.webslesson.info/2017/02/upload-file-without-using-form-submit-in-ajax-php.html
     var formData = new FormData();
 
     // upload sketsa denah
@@ -637,8 +651,8 @@
 
     if (fileSizeSketsaDenah > 5000000 || fileSizeGambarBukti > 5000000) {
       alert('File terlalu besar, maksimal ukuran file 5 MB');
-    } else {
-      $.ajax({
+    } else {*/
+    $.ajax({
       url: '{{ url("submit_kerusakan") }}',
       type: 'post',
       //processData: false,
@@ -650,14 +664,16 @@
         id_komp_opsi: idKompOpsi,
         jumlah: jumlah,
         tingkat_kerusakan: tingkatKerusakan,
+        input_nilai_klsf: inputNilaiKlsf,
+        klasifikasi: Klasifikasi,
         //formData,
       },
       success: function(data) {
         alert('Input sukses');
-        window.location.href = "{{ url('master_kerusakan/') }}";
+        //window.location.href = "{{ url('master_kerusakan/') }}";
       },
     }); 
-    }
+    //}
   });
 
   /* function pembulatan */
@@ -741,14 +757,15 @@
 
     /* proses perhitungan klasifikasi kerusakan dengan satuan komponen persen */
 
-    $('#inputNilaiKerusakanPersen0').change(function (){
+    $('#inputNilaiKlasifikasiPersen0').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = Number($(this).val());
+      var inputNilaiKlasifikasi = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen0').val());
-      if (inputNilaiKerusakan == null) {
+      inputArr[0] = inputNilaiKlasifikasi;
+      if (inputNilaiKlasifikasi == null) {
         hasil[0] = 0;
       } else {
-        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        preHasil = inputNilaiKlasifikasi * klsfKerusakan / 100;
         hasil[0] = preHasil;
       }
       if (hasil[0] == NaN) {
@@ -757,14 +774,15 @@
       $('#hasilKerusakanPersen0').val(preHasil);
     });
 
-    $('#inputNilaiKerusakanPersen1').change(function (){
+    $('#inputNilaiKlasifikasiPersen1').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = Number($(this).val());
+      var inputNilaiKlasifikasi = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen1').val());
-      if (inputNilaiKerusakan == NaN) {
+      inputArr[1] = inputNilaiKlasifikasi;
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[1] = 0;
       } else {
-        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        preHasil = inputNilaiKlasifikasi * klsfKerusakan / 100;
         hasil[1] = preHasil;
       }
       if (hasil[1] == NaN) {
@@ -773,14 +791,15 @@
       $('#hasilKerusakanPersen1').val(preHasil);
     });
 
-    $('#inputNilaiKerusakanPersen2').change(function (){
+    $('#inputNilaiKlasifikasiPersen2').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = Number($(this).val());
+      var inputNilaiKlasifikasi = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen2').val());
-      if (inputNilaiKerusakan == NaN) {
+      inputArr[2] = inputNilaiKlasifikasi;
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[2] = 0;
       } else {
-        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        preHasil = inputNilaiKlasifikasi * klsfKerusakan / 100;
         hasil[2] = preHasil;
       }
       if (hasil[2] == NaN) {
@@ -789,14 +808,15 @@
       $('#hasilKerusakanPersen2').val(preHasil);
     });
 
-    $('#inputNilaiKerusakanPersen3').change(function (){
+    $('#inputNilaiKlasifikasiPersen3').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = Number($(this).val());
+      var inputNilaiKlasifikasi = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen3').val());
-      if (inputNilaiKerusakan == NaN) {
+      inputArr[3] = inputNilaiKlasifikasi;
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[3] = 0;
       } else {
-        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        preHasil = inputNilaiKlasifikasi * klsfKerusakan / 100;
         hasil[3] = preHasil;
       }
       if (hasil[3] == NaN) {
@@ -805,14 +825,15 @@
       $('#hasilKerusakanPersen3').val(preHasil);
     });
 
-    $('#inputNilaiKerusakanPersen4').change(function (){
+    $('#inputNilaiKlasifikasiPersen4').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = Number($(this).val());
+      var inputNilaiKlasifikasi = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen4').val());
-      if (inputNilaiKerusakan == NaN) {
+      inputArr[4] = inputNilaiKlasifikasi;
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[4] = 0;
       } else {
-        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        preHasil = inputNilaiKlasifikasi * klsfKerusakan / 100;
         hasil[4] = preHasil;
       }
       if (hasil[4] == NaN) {
@@ -821,14 +842,15 @@
       $('#hasilKerusakanPersen4').val(preHasil);
     });
 
-    $('#inputNilaiKerusakanPersen5').change(function (){
+    $('#inputNilaiKlasifikasiPersen5').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = Number($(this).val());
+      var inputNilaiKlasifikasi = Number($(this).val());
       var klsfKerusakan = Number($('#klsfKerusakanPersen5').val());
-      if (inputNilaiKerusakan == NaN) {
+      inputArr[5] = inputNilaiKlasifikasi;
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[5] = 0;
       } else {
-        preHasil = inputNilaiKerusakan * klsfKerusakan / 100;
+        preHasil = inputNilaiKlasifikasi * klsfKerusakan / 100;
         hasil[5] = preHasil;
       }
       if (hasil[5] == NaN) {
@@ -852,6 +874,12 @@
         success: function(data) {
           var hasil_persen = data.hasil_persen;
           $('#td'+idKomp).attr('data-val', hasil_persen);
+          //console.log(inputArr);
+          //console.log(klsfArr);
+          inputArr = '[[' + inputArr + ']]';
+          klsfArr = '[[' + klsfArr + ']]';
+          $('#td'+idKomp).attr('data-inp-klsf', inputArr);
+          $('#td'+idKomp).attr('data-klsf', klsfArr);
 
           $('#id_komp'+idKomp).val(idKomp);
           $('#id_komp_opsi'+idKomp).val('');
@@ -882,21 +910,24 @@
           }
 
           hasil = [0,0,0,0,0,0];
+          inputArr = [0,0,0,0,0,0];
+          klsfArr = [0, 0.2, 0.4, 0.6, 0.8, 1];
           hasil_persen = 0;
         },
       });
     });
 
     /* proses perhitungan klasifikasi kerusakan dengan satuan komponen unit */
-    $('#inputNilaiKerusakan0').change(function (){
+    $('#inputNilaiKlasifikasi0').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = $(this).val();
+      var inputNilaiKlasifikasi = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan0').val());
+      inputArr[0] = inputNilaiKlasifikasi;
       jumlahUnit = $('#jumlahUnit').val();
-      if (inputNilaiKerusakan == NaN) {
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[0] = 0;
       } else {
-        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKlasifikasi / jumlahUnit) * klsfKerusakan;
         hasil[0] = preHasil;
       }
       if (hasil[0] == NaN) {
@@ -905,15 +936,16 @@
       $('#hasilKerusakan0').val(preHasil);
     });
 
-    $('#inputNilaiKerusakan1').change(function (){
+    $('#inputNilaiKlasifikasi1').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = $(this).val();
+      var inputNilaiKlasifikasi = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan1').val());
+      inputArr[1] = inputNilaiKlasifikasi;
       jumlahUnit = $('#jumlahUnit').val();
-      if (inputNilaiKerusakan == NaN) {
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[1] = 0;
       } else {
-        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKlasifikasi / jumlahUnit) * klsfKerusakan;
         hasil[1] = preHasil;
       }
       if (hasil[1] == NaN) {
@@ -922,15 +954,16 @@
       $('#hasilKerusakan1').val(preHasil);
     });
 
-    $('#inputNilaiKerusakan2').change(function (){
+    $('#inputNilaiKlasifikasi2').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = $(this).val();
+      var inputNilaiKlasifikasi = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan2').val());
+      inputArr[2] = inputNilaiKlasifikasi;
       jumlahUnit = $('#jumlahUnit').val();
-      if (inputNilaiKerusakan == NaN) {
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[2] = 0;
       } else {
-        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKlasifikasi / jumlahUnit) * klsfKerusakan;
         hasil[2] = preHasil;
       }
       if (hasil[2] == NaN) {
@@ -939,15 +972,16 @@
       $('#hasilKerusakan2').val(preHasil);
     });
 
-    $('#inputNilaiKerusakan3').change(function (){
+    $('#inputNilaiKlasifikasi3').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = $(this).val();
+      var inputNilaiKlasifikasi = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan3').val());
+      inputArr[3] = inputNilaiKlasifikasi;
       jumlahUnit = $('#jumlahUnit').val();
-      if (inputNilaiKerusakan == NaN) {
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[3] = 0;
       } else {
-        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKlasifikasi / jumlahUnit) * klsfKerusakan;
         hasil[3] = preHasil;
       }
       if (hasil[3] == NaN) {
@@ -956,15 +990,16 @@
       $('#hasilKerusakan3').val(preHasil);
     });
 
-    $('#inputNilaiKerusakan4').change(function (){
+    $('#inputNilaiKlasifikasi4').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = $(this).val();
+      var inputNilaiKlasifikasi = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan4').val());
+      inputArr[4] = inputNilaiKlasifikasi;
       jumlahUnit = $('#jumlahUnit').val();
-      if (inputNilaiKerusakan == NaN) {
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[4] = 0;
       } else {
-        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKlasifikasi / jumlahUnit) * klsfKerusakan;
         hasil[4] = preHasil;
       }
       if (hasil[4] == NaN) {
@@ -973,15 +1008,16 @@
       $('#hasilKerusakan4').val(preHasil);
     });
 
-    $('#inputNilaiKerusakan5').change(function (){
+    $('#inputNilaiKlasifikasi5').change(function (){
       let preHasil = 0;
-      var inputNilaiKerusakan = $(this).val();
+      var inputNilaiKlasifikasi = $(this).val();
       var klsfKerusakan = Number($('#klsfKerusakan5').val());
+      inputArr[5] = inputNilaiKlasifikasi;
       jumlahUnit = $('#jumlahUnit').val();
-      if (inputNilaiKerusakan == NaN) {
+      if (inputNilaiKlasifikasi == NaN) {
         hasil[5] = 0;
       } else {
-        preHasil = (inputNilaiKerusakan / jumlahUnit) * klsfKerusakan;
+        preHasil = (inputNilaiKlasifikasi / jumlahUnit) * klsfKerusakan;
         hasil[5] = preHasil;
       }
       if (hasil[5] == NaN) {
@@ -1009,7 +1045,12 @@
           var jml_unit = $('#jumlahUnit').val();
           $('#td'+idKomp).attr('data-val', hasil_unit);
           $('#td'+idKomp).attr('data-qty', jumlahUnit);
+          inputArr = '[[' + inputArr + ']]';
+          klsfArr = '[[' + klsfArr + ']]';
+          $('#td'+idKomp).attr('data-inp-klsf', inputArr);
+          $('#td'+idKomp).attr('data-klsf', klsfArr);
           let hasil_unit100 = hasil_unit * 100;
+          hasil_unit100 = roundNumber(hasil_unit100, 2);
 
           $('#id_komp'+idKomp).val(idKomp);
           $('#id_komp_opsi'+idKomp).val('');
@@ -1040,6 +1081,8 @@
 
           hasil = [0,0,0,0,0,0];
           hasil_unit = 0;
+          inputArr = [0,0,0,0,0,0];
+          klsfArr = [0, 0.2, 0.4, 0.6, 0.8, 1];
           jumlahUnit = 0;
         },
       });
