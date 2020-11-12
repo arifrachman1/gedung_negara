@@ -42,7 +42,7 @@
                       @endif
                       <td>{{ $val->alamat }}</td>
                       <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('view_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
-                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('/edit_formulir_penilaian_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
+                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('edit_formulir_penilaian_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
                           <a class="btn btn-danger float-left mr-2" @can('kerusakan.delete') href="{{url('hapus_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
                     </tr>
                     @endforeach

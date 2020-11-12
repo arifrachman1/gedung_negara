@@ -113,7 +113,7 @@
                             Luas Bangunan   
                         </div>
                         <div class="col-lg-3">
-                            : {{ $kerusakan->luas }} m2
+                            : {{ $kerusakan->luas }} m<sup>2</sup>
                         </div>
                         <div class="col-lg-3">
                             Jumlah Lantai   
@@ -127,48 +127,48 @@
                     <button class="btn btn-secondary">Export to Excel</button>
                 </div>
                 <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Komponen</th>
-                      <th>Subkomponen</th>
-                      <th>Satuan</th>
-                      <th colspan="3">Tingkat Kerusakan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @php $no = 1; @endphp
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                            <th>No.</th>
+                            <th>Komponen</th>
+                            <th>Subkomponen</th>
+                            <th>Satuan</th>
+                            <th colspan="3">Tingkat Kerusakan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $no = 1; @endphp
 
-                    @foreach($komponen as $val)
-                    <tr>
-                        <td>{{ $no++ }}</td>
-                        @if($val->nama_komponen == null)
-                        <td>{{ strtoupper($val->sub_komponen) }}</td>
-                        <td>-</td>
-                        @else   
-                        <td>{{ strtoupper($val->nama_komponen) }}</td>
-                        <td>{{ strtoupper($val->sub_komponen) }}</td>
-                        @endif
-                        <td>{{ $val->nama_satuan }}</td>
-                        <td>{{ $val->tingkat_kerusakan }}</td>
-                        @if ( $val->tingkat_kerusakan <= 0.3)
-                        <td colspan="2">Tingkat Kerusakan Ringan</td>
-                        @elseif ( $val->tingkat_kerusakan > 0.3 && $val->tingkat_kerusakan <= 0.45 )
-                        <td colspan="2">Tingkat Kerusakan Sedang</td>
-                        @elseif ( $val->tingkat_kerusakan > 0.45 )
-                        <td colspan="2">Tingkat Kerusakan Berat</td>
-                        @endif
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-                <div class="form-group">
+                            @foreach($komponen as $val)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                @if($val->nama_komponen == null)
+                                <td>{{ strtoupper($val->sub_komponen) }}</td>
+                                <td>-</td>
+                                @else   
+                                <td>{{ strtoupper($val->nama_komponen) }}</td>
+                                <td>{{ strtoupper($val->sub_komponen) }}</td>
+                                @endif
+                                <td>{{ $val->nama_satuan }}</td>
+                                <td>{{ $val->tingkat_kerusakan * 100 }}%</td>
+                                @if ( $val->tingkat_kerusakan <= 0.3)
+                                <td colspan="2">Tingkat Kerusakan Ringan</td>
+                                @elseif ( $val->tingkat_kerusakan > 0.3 && $val->tingkat_kerusakan <= 0.45 )
+                                <td colspan="2">Tingkat Kerusakan Sedang</td>
+                                @elseif ( $val->tingkat_kerusakan > 0.45 )
+                                <td colspan="2">Tingkat Kerusakan Berat</td>
+                                @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
 
                 </div>
-                <div class="form-group">
-
-              </div>
             </thead>
             <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a>
         

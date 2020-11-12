@@ -121,7 +121,7 @@
           <div class="form-group">
               <div class="row">
                   <div class="col-lg-3"> 
-                      Tanggal Hari Ini
+                      Tanggal
                   </div>
                   <div class="col-sm-3">
                       <?php $now = date("Y-m-d H:i:s") ?>
