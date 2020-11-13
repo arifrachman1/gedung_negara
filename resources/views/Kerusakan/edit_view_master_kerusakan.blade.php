@@ -12,15 +12,14 @@
       </div>
 
     <div class="container">
-        <div class="panel panel-default">
-        
+        <div class="panel panel-default">        
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Nama Instansi Bangunan   
+                            OPD  
                         </div>
                         <div class="col-lg-3">
-                            : Dinas Pendidikan
+                            : Petugas
                         </div>
                         <div class="col-lg-3">
                             Nama bangunan
@@ -33,16 +32,10 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Bujur Timur   
+                            Nomer Asset   
                         </div>
                         <div class="col-lg-3">
-                            : 299,100
-                        </div>
-                        <div class="col-lg-3">
-                            Lintang Selatan   
-                        </div>
-                        <div class="col-lg-3">
-                            : 393,01
+                            : 177013
                         </div>
                     </div>
                 </div>
@@ -81,16 +74,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Jumlah Lantai   
+                            Petugas Survey   
                         </div>
                         <div class="col-lg-3">
-                            : 2
+                            : 1. Maulana Malik Ibrahim <br/> 
+                            <br> 2. Hasbi Nurul Jannah <br/>
+                            <br> 3. Udin Sedunia <br/>
                         </div>
                         <div class="col-lg-3">
-                            Luas Bangunan   
+                            Perwakilan OPD
                         </div>
                         <div class="col-lg-3">
-                            : 100 m2
+                            : 1. Adi Lukito<br/>
+                            <br> 2. Avicena Maula<br/>
                         </div>
                     </div>
                 </div>
@@ -99,18 +95,35 @@
                         <div class="col-lg-3"> 
                             Tanggal Hari Ini
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <?php $now = date("Y-m-d") ?>
                             <input class="form-control" value="<?=$now?>" readonly>
                         </div>
+                        <div class="col-lg-3">
+                            Jam   
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" placeholder="11:32:00 am" name="" readonly>
+                        </div>
                     </div>
-                </div>    
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            Luas Bangunan   
+                        </div>
+                        <div class="col-lg-3">
+                            : 100 m2
+                        </div>
+                        <div class="col-lg-3">
+                            Jumlah Lantai   
+                        </div>
+                        <div class="col-lg-3">
+                            : 2
+                        </div>
+                    </div>
+                </div> 
                 <div class="table-responsive">
-                    <a class="btn btn-success btn-icon-split" href="{{ url('') }}" role="button">
-                        <span class="icon text-white-100">
-                            Export Excel
-                        </span> 
-                    </a>
                     <table class="table table-bordered" id="kerusakan" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -301,6 +314,8 @@
                     <div class="form-group">
                         <label>Gambar Bukti Kerusakan</label>
                         <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
+                    </div>
+                    <div class="form_group">
                     </div>
                 </div>
             <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>

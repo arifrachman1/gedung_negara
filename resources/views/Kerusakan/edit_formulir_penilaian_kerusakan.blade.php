@@ -48,7 +48,10 @@
                     </div>
                     <div class="col-lg-2"> 
                         <label>Jam</label>
-                        : 10:39
+                            <?php
+                            date_default_timezone_set('Asia/Jakarta');
+                             $now = date("H:i:s a") ?>
+                            <input class="form-control" value="<?=$now?>" readonly>
                     </div>
                 </div>
             </div>
