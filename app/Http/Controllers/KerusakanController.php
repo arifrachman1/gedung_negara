@@ -18,6 +18,9 @@ use App\Komponen;
 use App\KomponenOpsi;
 use App\User;
 use Log;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class KerusakanController extends Controller
 {
@@ -87,6 +90,52 @@ class KerusakanController extends Controller
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
         return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user'));
+    }
+    private function setCellDropdown($sheet, $cellAddr){
+        $validation = $sheet->getCell($cellAddr)
+            ->getDataValidation();
+        $validation->setType( \PhpOffice\PhpSpreadsheet\Cell\DataValidation::TYPE_LIST );
+        $validation->setErrorStyle( \PhpOffice\PhpSpreadsheet\Cell\DataValidation::STYLE_INFORMATION );
+        $validation->setAllowBlank(false);
+        $validation->setShowInputMessage(true);
+        $validation->setShowErrorMessage(true);
+        $validation->setShowDropDown(true);
+        $validation->setErrorTitle('Input error');
+        $validation->setError('Value is not in list.');
+        $validation->setPromptTitle('Pick from list');
+        $validation->setPrompt('Please pick a value from the drop-down list.');
+        $validation->setFormula1('"Item A,Item B,Item C"');
+    }
+    public function exportKerusakan(Request $request){
+        
+        $temp_file = storage_path('excel_template').'/temp_kerusakan.xlsx';
+        $output_file = storage_path('app/public/excel/kerusakan').'/temp_kerusakan.xlsx';
+
+        /** Load $inputFileName to a Spreadsheet object **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($temp_file);
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        /**
+         * Header - detail gedung
+         */
+
+        $addr = [
+            'OPD' => 'G3',
+            'nama bangunan' => 'G4',
+            'momor asset' => 'G5',
+            'alamat' => 'G6',
+            'alamat detail' => 'G7',
+            'tgl survey' => 'G8'
+        ];
+        
+        // petugas survey
+
+        $sheet->insertNewRowBefore(10, 1);
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($output_file);
+        return $output_file;
+        return redirect('master_gedung.xlsx');
     }
 
     public function submitKlasifikasiKerusakan(Request $request){
