@@ -20,7 +20,7 @@
                     </div> <br>
                     <div class="control-group before-add-more"><br>
                       <label>Subkomponen</label>
-                        <input type="text" name="nama2[]" class="form-control">
+                        <input type="text" name="nama2[]" class="form-control" required>
                       <label>Satuan</label>
                         <div class="form-group">
                           <select class="form-control" name="satuan2[]" id="satuan">
