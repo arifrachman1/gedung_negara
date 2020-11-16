@@ -131,7 +131,7 @@
             <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
           </div>    
           <hr>
-          <a class="btn btn-secondary float-right mb-3" href="{{ url('') }}">
+          <a class="btn btn-secondary mb-3" href="{{ route('kerusakan.excel.export', ['id_gedung' => $id_gedung]) }}">
             <span class="icon text-white-100">
                 Export Excel
             </span> 

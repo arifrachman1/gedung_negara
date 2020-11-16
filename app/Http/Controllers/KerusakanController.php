@@ -88,10 +88,13 @@ class KerusakanController extends Controller
         $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
-                  
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user'));
+
+        $kerusakan_data = [
+            "id_gedung" => $id_gedung,
+        ];
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user', 'kerusakan_data'));
     }
-    private function setCellDropdown($sheet, $cellAddr){
+    private function setCellDropdown($sheet, $cellAddr, $options){
         $validation = $sheet->getCell($cellAddr)
             ->getDataValidation();
         $validation->setType( \PhpOffice\PhpSpreadsheet\Cell\DataValidation::TYPE_LIST );
@@ -102,12 +105,30 @@ class KerusakanController extends Controller
         $validation->setShowDropDown(true);
         $validation->setErrorTitle('Input error');
         $validation->setError('Value is not in list.');
-        $validation->setPromptTitle('Pick from list');
-        $validation->setPrompt('Please pick a value from the drop-down list.');
+        $validation->setPromptTitle('Opsi kerusakan');
+        $validation->setPrompt('Silahkan pilih kerusakan');
         $validation->setFormula1('"Item A,Item B,Item C"');
     }
     public function exportKerusakan(Request $request){
         
+        $opd        = Session::get('opd');
+        $nomorAset  = Session::get('nomor_aset');
+        $surveyor1  = Session::get('surveyor1');
+        $surveyor2  = Session::get('surveyor2'); 
+        $surveyor3  = Session::get('surveyor3');
+        $pwopd1     = Session::get('pwopd1');
+        $pwopd2     = Session::get('pwopd2');
+        $dateNow    = date('Y-m-d');
+        $timeNow    = date('H:i:s');
+
+        $id_gedung = $request->get('id_gedung');
+        $gedung = Gedung::where('id', $id_gedung)->first();
+        $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
+        $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
+        $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
+        $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
+        $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
+
         $temp_file = storage_path('excel_template').'/temp_kerusakan.xlsx';
         $output_file = storage_path('app/public/excel/kerusakan').'/temp_kerusakan.xlsx';
 
@@ -119,23 +140,75 @@ class KerusakanController extends Controller
          * Header - detail gedung
          */
 
-        $addr = [
-            'OPD' => 'G3',
-            'nama bangunan' => 'G4',
-            'momor asset' => 'G5',
-            'alamat' => 'G6',
-            'alamat detail' => 'G7',
-            'tgl survey' => 'G8'
-        ];
+        $sheet->setCellValue('G3', $opd);
+        $sheet->setCellValue('G4', $gedung->nama);
+        $sheet->setCellValue('G5', $nomorAset);
+        $sheet->setCellValue('G6', $gedung->alamat);
+        $sheet->setCellValue('G8', date('Y-m-d H:i:s'));
+        $sheet->setCellValue('G9', $surveyor1);
+        $sheet->setCellValue('G10', $surveyor2);
+        $sheet->setCellValue('G11', $surveyor3);
+        $sheet->setCellValue('G12', $pwopd1);
+        $sheet->setCellValue('G13', $pwopd2);
+        $sheet->setCellValue('G14', $gedung->luas);
+        $sheet->setCellValue('N8', $timeNow);
+        $sheet->setCellValue('P14', $gedung->jumlah_lantai);
+
+        /**
+         * Get komponen kerusakan
+         */
         
+        $id_parents = DB::table('komponen as prnt')
+            ->select('prnt.id_parent as id')
+            ->join('komponen as chld', 'chld.id', '=', 'prnt.id_parent')
+            ->groupBy('prnt.id_parent')
+            ->get()->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereIn('id', $id_parents)
+            ->get();
+        foreach ($komponens as $parent) {
+            $subKomponen = DB::table('komponen as kom')
+                ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
+                ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+                ->where('id_parent', $parent->id)
+                ->get();
+            $parent->numberOfSub = count($subKomponen);
+            $parent->subKomponen = $subKomponen;
+        }
+
+    
+        // dd($komponens);
+
+        $indexStartKomponen = 21;
+        $numbering = 1;
+        $currentRow = $indexStartKomponen;
+        foreach ($komponens as $indexKomponen => $komponen) {
+            $sheet->setCellValue('C'.$currentRow, $komponen->id );
+            $sheet->setCellValue('D'.$currentRow, $komponen->nama );
+            foreach ($komponen->subKomponen as $indexSubKomponen => $subKomponen) {
+                $sheet->insertNewRowBefore($currentRow + 1, 1);
+                $sheet->setCellValue('B'.$currentRow, $numbering++ );
+                $sheet->setCellValue('E'.$currentRow, $subKomponen->id );
+                $sheet->setCellValue('F'.$currentRow, $subKomponen->nama );
+                $sheet->setCellValue('H'.$currentRow, $subKomponen->id_satuan );
+                if($subKomponen->id_satuan == 1){
+                    
+                    $sheet->mergeCells("K24:T24");
+                    // $this->setCellDropdown($sheet, "K$currentRow", []);
+                }
+                $currentRow++;
+            }
+        }
+
+
         // petugas survey
 
-        $sheet->insertNewRowBefore(10, 1);
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($output_file);
-        return $output_file;
-        return redirect('master_gedung.xlsx');
+        //  $output_file;
+        return redirect('/storage/excel/kerusakan/temp_kerusakan.xlsx');
     }
 
     public function submitKlasifikasiKerusakan(Request $request){
