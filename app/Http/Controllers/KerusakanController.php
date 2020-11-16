@@ -197,20 +197,15 @@ class KerusakanController extends Controller
                 $sheet->setCellValue('E'.$currentRow, $subKomponen->id );
                 $sheet->setCellValue('F'.$currentRow, $subKomponen->nama );
                 $sheet->setCellValue('H'.$currentRow, $subKomponen->id_satuan );
+                $sheet->setCellValue('J'.$currentRow, $subKomponen->bobot );
                 if($subKomponen->id_satuan == 1){
-                    
-                    // dd("K$currentRow:T$currentRow");
                     $sheet->mergeCells("K$currentRow:T$currentRow");
-                    // $this->setCellDropdown($sheet, "K$currentRow", []);
+                    $this->setCellDropdown($sheet, "K$currentRow", []);
                 }
                 $currentRow++;
             }
         }
-
-
         // petugas survey
-
-
         $writer = new Xlsx($spreadsheet);
         $writer->save($output_file);
         //  $output_file;
