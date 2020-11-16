@@ -32,14 +32,20 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($kerusakan as $val)
                     <tr>
-                      <td>SMAN 19 Surabaya</td>
-                      <td>Sekolah</td>
-                      <td>Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
-                      <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('/view_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
-                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('/edit_formulir_penilaian_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
-                          <a class="btn btn-danger float-left mr-2" @can('kerusakan.create') href="" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                      <td>{{ $val->nama_gedung }}</td>
+                      @if($val->jenis_gd == null)
+                      <td>-</td>
+                      @else
+                      <td>{{ $val->jenis_gd }}</td>
+                      @endif
+                      <td>{{ $val->alamat }}</td>
+                      <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('view_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
+                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('edit_formulir_penilaian_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
+                          <a class="btn btn-danger float-left mr-2" @can('kerusakan.delete') href="{{url('hapus_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

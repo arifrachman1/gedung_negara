@@ -98,6 +98,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
     Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
     Route::post('import_excel_master_gedung', 'GedungController@importExcel');
+    Route::get('template_excel_master_gedung', function (){
+        $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
+    
+        /** Load $inputFileName to a Spreadsheet object **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = [];
+    
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('sample_excel.xlsx');
+        return redirect('sample_excel.xlsx');
+    });
     // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
     // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
 
@@ -140,21 +152,28 @@ Route::group(['middleware' => 'auth'], function () {
 
 //-------------MASTER KERUSAKAN----------------------
 
-Route::get('master_kerusakan', function (){
-    return view('kerusakan/master_kerusakan');
-});
-Route::get('tambah_master_kerusakan', function (){
-    return view('kerusakan/tambah_master_kerusakan');
-});
-Route::get('formulir_penilaian_kerusakan', function (){
-    return view('kerusakan/formulir_penilaian_kerusakan');
-});
-Route::get('view_master_kerusakan', function (){
-    return view('kerusakan/view_master_kerusakan');
-});
+Route::get('master_kerusakan', 'KerusakanController@index');
+Route::get('tambah_master_kerusakan', 'KerusakanController@pilihanGedung');
+Route::get('formulir_kerusakan_surveyor/{id}', 'KerusakanController@formKerusakanSurveyor');
+Route::get('create_formulir_klasifikasi_kerusakan/{id_gedung}/{id_user}', 'KerusakanController@formIdentifikasiKerusakan');
+Route::post('submit_klasifikasi_kerusakan', 'KerusakanController@submitKlasifikasiKerusakan');
+Route::post('hitung_estimasi_kerusakan', 'KerusakanController@hitungEstimasiKerusakan')->name('hitung_estimasi_kerusakan');
+Route::post('hitung_kerusakan_unit', 'KerusakanController@hitungKerusakanUnit')->name('hitung_kerusakan_unit');
+Route::post('hitung_kerusakan_persen', 'KerusakanController@hitungKerusakanPersen')->name('hitung_kerusakan_persen');
+Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
+Route::post('get_data_komponen_opsi/', 'KerusakanController@getDataKomponenOpsi')->name('get_data_komponen_opsi');
+Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
+Route::post('submit_kerusakan/', 'KerusakanController@postSubmitKerusakan');
+Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan');
+Route::get('edit_formulir_penilaian_kerusakan/{id}', 'KerusakanController@editFormKerusakan');
+Route::post('post_edit_formulir_surveyor', 'KerusakanController@postEditFormSurveyor');
+Route::get('edit_formulir_klasifikasi_kerusakan/{id_kerusakan}', 'KerusakanController@formEditIdentifikasiKerusakan');
+Route::post('post_import_excel_kerusakan/', 'KerusakanController@importExcelKerusakan');
+
 Route::get('view_kerusakan', function (){
-    return view('kerusakan/view_kerusakan');
+    return view('Kerusakan/view_kerusakan');
 });
+
 Route::get('edit_formulir_penilaian_kerusakan', function (){
     return view('kerusakan/edit_formulir_penilaian_kerusakan');
 });
@@ -164,9 +183,6 @@ Route::get('edit_view_master_kerusakan', function (){
 Route::get('import_master_kerusakan', function (){
     return view('kerusakan/import_master_kerusakan');
 });
-
-
-//-------------KERUSAKAN--------------
 Route::get('kerusakan', function (){
     return view('kerusakan/master_kerusakan');
 });

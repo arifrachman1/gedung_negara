@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2020 at 06:05 AM
+-- Generation Time: Nov 12, 2020 at 09:29 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -82465,8 +82465,7 @@ CREATE TABLE `kerusakan` (
 --
 
 INSERT INTO `kerusakan` (`id`, `id_gedung`, `tanggal`, `detail_json`, `sketsa_denah`, `gambar_bukti`, `opd`, `nomor_aset`, `petugas_survei1`, `petugas_survei2`, `petugas_survei3`, `perwakilan_opd1`, `perwakilan_opd2`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(59, 116, '2020-11-09 00:28:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(60, 106, '2020-11-09 06:59:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(98, 116, '2020-11-11 22:41:30', NULL, NULL, NULL, 'udin', '2', 'a', 'v', 's', 'd', 'e', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82478,27 +82477,22 @@ CREATE TABLE `kerusakan_detail` (
   `id` int(11) NOT NULL,
   `id_kerusakan` int(11) NOT NULL,
   `id_komponen` int(11) NOT NULL,
+  `id_komponen_opsi` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `id_komponen_opsi` int(11) DEFAULT NULL
+  `tingkat_kerusakan` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kerusakan_detail`
 --
 
-INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `id_komponen_opsi`) VALUES
-(130, 59, 385, 0, NULL),
-(131, 59, 384, 0, NULL),
-(132, 59, 378, 0, NULL),
-(133, 59, 381, 0, 38),
-(134, 59, 382, 0, 26),
-(135, 59, 383, 10, NULL),
-(136, 60, 385, 0, NULL),
-(137, 60, 384, 0, NULL),
-(138, 60, 378, 0, NULL),
-(139, 60, 381, 0, 38),
-(140, 60, 382, 0, 25),
-(141, 60, 383, 90, NULL);
+INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `id_komponen_opsi`, `jumlah`, `tingkat_kerusakan`) VALUES
+(284, 98, 385, NULL, 0, 0.004),
+(285, 98, 384, NULL, 0, 0.00064),
+(286, 98, 378, NULL, 0, 0.00024),
+(287, 98, 381, 38, 0, 0.01),
+(288, 98, 382, 27, 0, 0.4),
+(289, 98, 383, NULL, 2, 0.006);
 
 -- --------------------------------------------------------
 
@@ -82509,27 +82503,159 @@ INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `
 CREATE TABLE `kerusakan_klasifikasi` (
   `id` int(11) NOT NULL,
   `id_kerusakan_detail` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL DEFAULT 0,
-  `tingkat_kerusakan` double NOT NULL
+  `nilai_input_klasifikasi` int(11) NOT NULL DEFAULT 0,
+  `klasifikasi` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kerusakan_klasifikasi`
 --
 
-INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `jumlah`, `tingkat_kerusakan`) VALUES
-(74, 130, 0, 0.08),
-(75, 131, 0, 0.0064),
-(76, 132, 0, 0.0016),
-(77, 133, 0, 0.01),
-(78, 134, 0, 0.2),
-(79, 135, 10, 0.0012),
-(80, 136, 0, 0.1),
-(81, 137, 0, 0.0096),
-(82, 138, 0, 0.008),
-(83, 139, 0, 0.01),
-(84, 140, 0, 0),
-(85, 141, 90, 0.002);
+INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `nilai_input_klasifikasi`, `klasifikasi`) VALUES
+(554, 284, 0, 0),
+(555, 284, 2, 0.2),
+(556, 284, 0, 0.4),
+(557, 284, 0, 0.6),
+(558, 284, 0, 0.8),
+(559, 284, 0, 1),
+(560, 284, 0, 0),
+(561, 284, 0, 0.2),
+(562, 284, 2, 0.4),
+(563, 284, 0, 0.6),
+(564, 284, 0, 0.8),
+(565, 284, 0, 1),
+(566, 284, 0, 0),
+(567, 284, 0, 0.2),
+(568, 284, 0, 0.4),
+(569, 284, 2, 0.6),
+(570, 284, 0, 0.8),
+(571, 284, 0, 1),
+(572, 284, 0, 0),
+(573, 284, 0, 0.2),
+(574, 284, 0, 0.4),
+(575, 284, 2, 0.6),
+(576, 284, 0, 0.8),
+(577, 284, 0, 1),
+(578, 285, 0, 0),
+(579, 285, 2, 0.2),
+(580, 285, 0, 0.4),
+(581, 285, 0, 0.6),
+(582, 285, 0, 0.8),
+(583, 285, 0, 1),
+(584, 285, 0, 0),
+(585, 285, 0, 0.2),
+(586, 285, 2, 0.4),
+(587, 285, 0, 0.6),
+(588, 285, 0, 0.8),
+(589, 285, 0, 1),
+(590, 285, 0, 0),
+(591, 285, 0, 0.2),
+(592, 285, 0, 0.4),
+(593, 285, 2, 0.6),
+(594, 285, 0, 0.8),
+(595, 285, 0, 1),
+(596, 285, 0, 0),
+(597, 285, 0, 0.2),
+(598, 285, 0, 0.4),
+(599, 285, 2, 0.6),
+(600, 285, 0, 0.8),
+(601, 285, 0, 1),
+(602, 286, 0, 0),
+(603, 286, 2, 0.2),
+(604, 286, 0, 0.4),
+(605, 286, 0, 0.6),
+(606, 286, 0, 0.8),
+(607, 286, 0, 1),
+(608, 286, 0, 0),
+(609, 286, 0, 0.2),
+(610, 286, 2, 0.4),
+(611, 286, 0, 0.6),
+(612, 286, 0, 0.8),
+(613, 286, 0, 1),
+(614, 286, 0, 0),
+(615, 286, 0, 0.2),
+(616, 286, 0, 0.4),
+(617, 286, 2, 0.6),
+(618, 286, 0, 0.8),
+(619, 286, 0, 1),
+(620, 286, 0, 0),
+(621, 286, 0, 0.2),
+(622, 286, 0, 0.4),
+(623, 286, 2, 0.6),
+(624, 286, 0, 0.8),
+(625, 286, 0, 1),
+(626, 287, 0, 0),
+(627, 287, 2, 0.2),
+(628, 287, 0, 0.4),
+(629, 287, 0, 0.6),
+(630, 287, 0, 0.8),
+(631, 287, 0, 1),
+(632, 287, 0, 0),
+(633, 287, 0, 0.2),
+(634, 287, 2, 0.4),
+(635, 287, 0, 0.6),
+(636, 287, 0, 0.8),
+(637, 287, 0, 1),
+(638, 287, 0, 0),
+(639, 287, 0, 0.2),
+(640, 287, 0, 0.4),
+(641, 287, 2, 0.6),
+(642, 287, 0, 0.8),
+(643, 287, 0, 1),
+(644, 287, 0, 0),
+(645, 287, 0, 0.2),
+(646, 287, 0, 0.4),
+(647, 287, 2, 0.6),
+(648, 287, 0, 0.8),
+(649, 287, 0, 1),
+(650, 288, 0, 0),
+(651, 288, 2, 0.2),
+(652, 288, 0, 0.4),
+(653, 288, 0, 0.6),
+(654, 288, 0, 0.8),
+(655, 288, 0, 1),
+(656, 288, 0, 0),
+(657, 288, 0, 0.2),
+(658, 288, 2, 0.4),
+(659, 288, 0, 0.6),
+(660, 288, 0, 0.8),
+(661, 288, 0, 1),
+(662, 288, 0, 0),
+(663, 288, 0, 0.2),
+(664, 288, 0, 0.4),
+(665, 288, 2, 0.6),
+(666, 288, 0, 0.8),
+(667, 288, 0, 1),
+(668, 288, 0, 0),
+(669, 288, 0, 0.2),
+(670, 288, 0, 0.4),
+(671, 288, 2, 0.6),
+(672, 288, 0, 0.8),
+(673, 288, 0, 1),
+(674, 289, 0, 0),
+(675, 289, 2, 0.2),
+(676, 289, 0, 0.4),
+(677, 289, 0, 0.6),
+(678, 289, 0, 0.8),
+(679, 289, 0, 1),
+(680, 289, 0, 0),
+(681, 289, 0, 0.2),
+(682, 289, 2, 0.4),
+(683, 289, 0, 0.6),
+(684, 289, 0, 0.8),
+(685, 289, 0, 1),
+(686, 289, 0, 0),
+(687, 289, 0, 0.2),
+(688, 289, 0, 0.4),
+(689, 289, 2, 0.6),
+(690, 289, 0, 0.8),
+(691, 289, 0, 1),
+(692, 289, 0, 0),
+(693, 289, 0, 0.2),
+(694, 289, 0, 0.4),
+(695, 289, 2, 0.6),
+(696, 289, 0, 0.8),
+(697, 289, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -82540,7 +82666,7 @@ INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `jumlah`, `tin
 CREATE TABLE `kerusakan_surveyor` (
   `id` int(11) NOT NULL,
   `id_kerusakan` int(11) NOT NULL,
-  `id_user` bigint(20) NOT NULL
+  `id_user` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -82548,8 +82674,7 @@ CREATE TABLE `kerusakan_surveyor` (
 --
 
 INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
-(62, 59, 4),
-(63, 60, 4);
+(101, 98, 4);
 
 -- --------------------------------------------------------
 
@@ -82605,7 +82730,7 @@ CREATE TABLE `komponen_opsi` (
 
 INSERT INTO `komponen_opsi` (`id`, `opsi`, `nilai`, `id_komponen`, `created_at`, `updated_at`, `delete_at`) VALUES
 (25, 'Tidak ada kerusakan', 0, 382, NULL, NULL, NULL),
-(26, 'Kebocoran pipa terbats ditempat yang terlihat atau mudah dicapai, keran-keran kecil rusak, sehingga biaya perbaikan kurang dari 1 % biaya instalasi baru', 20, 382, NULL, NULL, NULL),
+(26, 'Kebocoran pipa terbatas di tempat yang terlihat atau mudah dicapai, keran-keran kecil rusak, sehingga biaya perbaikan kurang dari 1 % biaya instalasi baru', 20, 382, NULL, NULL, NULL),
 (27, 'Bagian-bagian kecil pemipaan bocor, motor pompa terbakar, keran-keran kecil rusak, sehingga biaya perbaikan antara 1-10% dari biaya instalasi baru', 40, 382, NULL, NULL, NULL),
 (28, 'Pompa, motor, pipa, dan keran rusak apabuila diganti atau diperbaiki memerlukan biaya antara 10-25 % dari biaya instalasi baru', 60, 382, NULL, NULL, NULL),
 (29, 'Sebagian besar pompa, sebagian besar motor terbakar, pipa utama bocor namun ditempat terbuka, beberapa keran tidak befungsi, sehingga biaya perbaikan 25- 50 % dari biaya instalasi baru', 80, 382, NULL, NULL, NULL),
@@ -83543,7 +83668,8 @@ ALTER TABLE `kerusakan_klasifikasi`
 --
 ALTER TABLE `kerusakan_surveyor`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_kerusakan_surveyor_kerusakan_idx` (`id_kerusakan`);
+  ADD KEY `fk_kerusakan_surveyor_kerusakan_idx` (`id_kerusakan`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `komponen`
@@ -83657,25 +83783,25 @@ ALTER TABLE `gedung_ketegori`
 -- AUTO_INCREMENT for table `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_detail`
 --
 ALTER TABLE `kerusakan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_klasifikasi`
 --
 ALTER TABLE `kerusakan_klasifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=698;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `komponen`
@@ -83765,7 +83891,8 @@ ALTER TABLE `kerusakan_klasifikasi`
 -- Constraints for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  ADD CONSTRAINT `fk_kerusakan_surveyor_kerusakan` FOREIGN KEY (`id_kerusakan`) REFERENCES `kerusakan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_kerusakan_surveyor_kerusakan` FOREIGN KEY (`id_kerusakan`) REFERENCES `kerusakan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kerusakan_surveyor_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `komponen`
