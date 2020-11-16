@@ -65,26 +65,26 @@ class KerusakanController extends Controller
         return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_user' => $id_user]);
     }
 
-    public function formIdentifikasiKerusakan($id_gedung, $id_user) {
-        $opd = Session::get('opd');
-        $nomor_aset = Session::get('nomor_aset');
-        $petugas_survei1 = Session::get('surveyor1');
-        $petugas_survei2 = Session::get('surveyor2'); 
-        $petugas_survei3 = Session::get('surveyor3');
-        $perwakilan_opd1 = Session::get('pwopd1');
-        $perwakilan_opd2 = Session::get('pwopd2');
-        $tanggal = Session::get('tanggal');
-        $jam = Session::get('jam');
-        $gedung = Gedung::where('id', $id_gedung)->first();
-        $komponen = DB::table('komponen as t1')
-            ->select('t2.id as id_komponen',
-                     't1.nama as nama_komponen', 
-                     't2.nama as sub_komponen', 
-                     'satuan.id as id_satuan', 
-                     'satuan.nama as nama_satuan')
-            ->rightjoin('komponen as t2', 't1.id', '=', 't2.id_parent')
-            ->join('satuan', 't2.id_satuan', '=', 'satuan.id')
-            ->orderBy('t1.id', 'asc')->get();
+    public function formIdentifikasiKerusakan($id_gedung, $id_user) {   
+        $id_parents = DB::table('komponen as prnt')
+            ->select('prnt.id_parent as id')
+            ->join('komponen as chld', 'chld.id', '=', 'prnt.id_parent')
+            ->groupBy('prnt.id_parent')
+            ->get()->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereIn('id', $id_parents)
+            ->get();
+        foreach ($komponens as $parent) {
+            $subKomponen = DB::table('komponen as kom')
+                ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
+                ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+                ->where('id_parent', $parent->id)
+                ->get();
+            $parent->numberOfSub = count($subKomponen);
+            $parent->subKomponen = $subKomponen;
+        }
+                    
         $gedung = Gedung::where('id', $id_gedung)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
         $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
@@ -92,12 +92,85 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 
-            'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 
-            'id_user', 'opd', 'nomor_aset', 'petugas_survei1',
-            'petugas_survei2', 'petugas_survei3', 'perwakilan_opd1', 'perwakilan_opd2',
-            'tanggal', 'jam'
-        ));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user'));
+    }
+
+    public function submitKlasifikasiKerusakan(Request $request){
+        $_klasifikasiKerusakan = [0.20, 0.40, 0.60, 0.80, 1.00];
+        $timeUpload = strtotime("now");
+        
+        //File Bukti
+        foreach ($request->gambar_bukti as $index => $gambar_bukti) {
+            $buktiExt       = $gambar_bukti->getClientOriginalExtension();
+            $buktiFileName  = "bukti_".$timeUpload.'_'.$index.'.'.$buktiExt;
+            $gambar_bukti->move('bukti', $buktiFileName);
+        }
+
+        //Files Denah
+        foreach ($request->sketsa_denah as $index => $denah) {  
+            $denahExt    = $denah->getClientOriginalExtension();
+            $denahFileName   =   "denah_".$timeUpload.'_'.$index.'.'.$denahExt;
+            $denah->move('denah', $denahFileName);
+        }
+
+        // Create data ke table kerusakan
+        $newKerusakan = new Kerusakan;
+        $newKerusakan->id_gedung         = $request->id_gedung;
+        $newKerusakan->tanggal           = date('Y-m-d H:i:s');
+        $newKerusakan->opd               = Session::get('opd');
+        $newKerusakan->nomor_aset        = Session::get('nomor_aset');
+        $newKerusakan->petugas_survei1   = Session::get('surveyor1');
+        $newKerusakan->petugas_survei2   = Session::get('surveyor2'); 
+        $newKerusakan->petugas_survei3   = Session::get('surveyor3');
+        $newKerusakan->perwakilan_opd1   = Session::get('pwopd1');
+        $newKerusakan->perwakilan_opd2   = Session::get('pwopd2');
+        $newKerusakan->created_at        = date('Y-m-d H:i:s');
+        $newKerusakan->save();
+        
+        // Create data ke table kerusakan surveyor
+        $newKerusakanSurveyor = new KerusakanSurveyor;
+        $newKerusakanSurveyor->id_kerusakan  = $newKerusakan->id;
+        $newKerusakanSurveyor->id_user       = $request->id_user;
+        $newKerusakanSurveyor->save();
+
+        $satuans = $request->get('satuans');
+        foreach ($satuans as $index => $satuan) {
+            $newKerusakanDetail = new KerusakanDetail;
+            $newKerusakanDetail->id_kerusakan       = $newKerusakan->id;
+            $newKerusakanDetail->id_komponen        = $request->get('komponens')[$index];
+            $newKerusakanDetail->tingkat_kerusakan  = $request->get('tk_value')[$index];
+
+            if($satuan == 1){
+                $newKerusakanDetail->id_komponen_opsi   =  $request->get('val_estimasi_'.$index)[0];
+                $newKerusakanDetail->save();
+            }else if($satuan == 2){
+                $newKerusakanDetail->save();
+                $inputPersentases = $request->get('val_persentase_'.$index);
+                foreach ($inputPersentases as $indexInput => $input) {
+                    $input_klasifikasi = new KerusakanKlasifikasi;
+                    $input_klasifikasi->id_kerusakan_detail     = $newKerusakanDetail->id;
+                    $input_klasifikasi->nilai_input_klasifikasi = ($input) ? $input : 0;
+                    $input_klasifikasi->klasifikasi             = $_klasifikasiKerusakan[$indexInput];
+                    $input_klasifikasi->save();
+                }
+            }else{
+                $newKerusakanDetail->jumlah             = $request->get('val_jumlah_unit_'.$index)[0];
+                $newKerusakanDetail->save();
+                $inputUnits = $request->get('val_unit_'.$index);
+                foreach ($inputUnits as $indexInput => $input) {
+                    $input_klasifikasi = new KerusakanKlasifikasi;
+                    $input_klasifikasi->id_kerusakan_detail     = $newKerusakanDetail->id;
+                    $input_klasifikasi->nilai_input_klasifikasi = ($input) ? $input : 0;
+                    $input_klasifikasi->klasifikasi             = $_klasifikasiKerusakan[$indexInput];
+                    $input_klasifikasi->save();
+                }
+            }
+
+        }
+
+        return redirect()
+            ->action('KerusakanController@index')
+            ->with(['success' => 'Kerusakan berhasil ditambahkan.']);
     }
 
     public function getDataKomponenOpsi(Request $request) {
