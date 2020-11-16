@@ -79,6 +79,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit_master_gedung/{id}', 'GedungController@edit');
     Route::post('edit_master_gedung_post/{id}', 'GedungController@edit_post');
     Route::get('export_pdf_master_gedung/', 'GedungController@exportPDF');
+    Route::get('template_excel_master_gedung', function (){
+        $inputFileName = '../storage/excel_template/temp_gedung.xlsx';
+    
+        /** Load $inputFileName to a Spreadsheet object **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = [];
+    
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('sample_excel.xlsx');
+        return redirect('sample_excel.xlsx');
+    });
     Route::get('tambah_excel_master_gedung', function (){
         return view ('gedung/tambah_excel_master_gedung');
     });
