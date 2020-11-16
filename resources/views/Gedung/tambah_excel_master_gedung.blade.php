@@ -70,6 +70,7 @@
                   </div>
               </div> -->
                 <button type="submit"  class="btn btn-success float-left mr-2 mt-2">Submit</button>
+                <a class="btn btn-secondary float-left mr-2 mt-2" href="{{url('/template_excel_master_gedung')}}" role="button">Download Template</a>
                 <a class="btn btn-warning float-left mr-2 mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
             </table>
           </div>

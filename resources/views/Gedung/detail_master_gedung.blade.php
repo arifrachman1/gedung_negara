@@ -27,6 +27,12 @@
                                     : {{ $detail_gedung->nama_kat }}
                                 </div>
                                 <div class="col-sm-4">
+                                    Alamat 
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->alamat }}
+                                </div>
+                                <div class="col-sm-4">
                                     Bujur Timur   
                                 </div>
                                 <div class="col-sm-8">
@@ -43,12 +49,6 @@
                                 </div>
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->legalitas }}
-                                </div>
-                                <div class="col-sm-4">
-                                    Tipe Milik  
-                                </div>
-                                <div class="col-sm-8">
-                                    : {{ $detail_gedung->tipe_milik }}
                                 </div>
                                 <div class="col-sm-4">
                                     Alas Hak   
@@ -81,13 +81,7 @@
                                     : {{ $detail_gedung->tinggi_bangunan }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Kelas Tinggi   
-                                </div>
-                                <div class="col-sm-8">
-                                    : {{ $detail_gedung->kelas_tinggi }}
-                                </div>
-                                <div class="col-sm-4">
-                                    Kompleks   
+                                    Kompleksitas  
                                 </div>
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->kompleks }}
@@ -182,6 +176,36 @@
                                     : {{ $desa_kelurahan->nama }}
                                 </div>
                                 @endif
+                                <div class="col-sm-4">
+                                    KDB  
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->kdb }}
+                                </div>
+                                <div class="col-sm-4">
+                                    KLB 
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->klb }}
+                                </div>
+                                <div class="col-sm-4">
+                                    KDH   
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->kdh }}
+                                </div>
+                                <div class="col-sm-4">
+                                    GSB
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->gsb }}
+                                </div>
+                                <div class="col-sm-4">
+                                    RTH
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->rth }}
+                                </div>
 
                             </div>
                             <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>

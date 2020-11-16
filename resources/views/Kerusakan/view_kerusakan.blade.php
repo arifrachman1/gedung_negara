@@ -17,32 +17,26 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Nama Instansi Bangunan   
+                            OPD  
                         </div>
                         <div class="col-lg-3">
-                            : Dinas Pendidikan
+                            : {{ $kerusakan->opd }}
                         </div>
                         <div class="col-lg-3">
                             Nama bangunan
                         </div>
                         <div class="col-lg-3">
-                            : SMAN 19 Surabaya
+                            : {{ $kerusakan->nama_gedung }}
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Bujur Timur   
+                            Nomor Aset   
                         </div>
                         <div class="col-lg-3">
-                            : 299,100
-                        </div>
-                        <div class="col-lg-3">
-                            Lintang Selatan   
-                        </div>
-                        <div class="col-lg-3">
-                            : 393,01
+                            : {{ $kerusakan->nomor_aset }}
                         </div>
                     </div>
                 </div>
@@ -52,13 +46,13 @@
                             Provinsi   
                         </div>
                         <div class="col-lg-3">
-                            : Jawa Timur
+                            : {{ $provinsi->nama_provinsi }}
                         </div>
                         <div class="col-lg-3">
                             Kabupaten / Kota   
                         </div>
                         <div class="col-lg-3">
-                            : Surabaya
+                            : {{ $kab_kota->nama_kota }}
                         </div>
                     </div>
                 </div>
@@ -68,170 +62,113 @@
                             Kecamatan   
                         </div>
                         <div class="col-lg-3">
-                            : Kenjeran
+                            : {{ $kecamatan->nama_kecamatan }}
                         </div>
                         <div class="col-lg-3">
                             Kelurahan   
                         </div>
                         <div class="col-lg-3">
-                            : Tanah kali Ke Dinding
+                            : {{ $desa_kelurahan->nama_kelurahan }}
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-3">
-                            Jumlah Lantai   
+                            Petugas Survey   
                         </div>
                         <div class="col-lg-3">
-                            : 2
+                            : 1. {{ $kerusakan->petugas_survei1 }}<br/> 
+                            <br> 2. {{ $kerusakan->petugas_survei2 }} <br/>
+                            <br> 3. {{ $kerusakan->petugas_survei3 }} <br/>
                         </div>
+                        <div class="col-lg-3">
+                            Perwakilan OPD
+                        </div>
+                        <div class="col-lg-3">
+                            : 1. {{ $kerusakan->perwakilan_opd1 }}<br/>
+                            <br> 2. {{ $kerusakan->perwakilan_opd2 }}<br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-3"> 
+                            Tanggal Hari Ini
+                        </div>
+                        <div class="col-lg-3">
+                            : {{ substr($kerusakan->tanggal, 0, -9) }}
+                        </div>
+                        <div class="col-lg-3">
+                            Jam   
+                        </div>
+                        <div class="col-lg-3">
+                            : {{ substr($kerusakan->tanggal, -8) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-lg-3">
                             Luas Bangunan   
                         </div>
                         <div class="col-lg-3">
-                            : 100 m2
+                            : {{ $kerusakan->luas }} m<sup>2</sup>
+                        </div>
+                        <div class="col-lg-3">
+                            Jumlah Lantai   
+                        </div>
+                        <div class="col-lg-3">
+                            : {{ $kerusakan->jml_lantai }}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-success">Export to Excel</button>
+                    <button class="btn btn-secondary">Export to Excel</button>
                 </div>
                 <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Komponen</th>
-                      <th>Subkomponen</th>
-                      <th>Satuan</th>
-                      <th colspan="3">Tingkat Kerusakan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Pondasi</td>
-                      <td>Pondasi</td>
-                      <td>Estimasi</td>
-                      <td>0%</td>
-                      <td colspan="2">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3">2</td>
-                        <td rowspan="3">Struktur</td>
-                        <td>Kolom</td>
-                        <td>Unit</td>
-                        <td>0%</td>
-                        <td rowspan="3">0%</td>
-                        <td rowspan="3">Hitung kerusakan komponen lain</td>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                            <th>No.</th>
+                            <th>Komponen</th>
+                            <th>Subkomponen</th>
+                            <th>Satuan</th>
+                            <th colspan="3">Tingkat Kerusakan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $no = 1; @endphp
 
-                    </tr>
-                    <tr>
-                        <td>Balok</td>
-                        <td>Unit</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td>Pelat</td>
-                        <td>Unit</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Atap</td>
-                        <td></td>
-                        <td>%</td>
-                        <td>0%</td>
-                        <td colspan="2">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Plafond</td>
-                        <td></td>
-                        <td>%</td>
-                        <td>0%</td>
-                        <td colspan="2">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="4">5</td>
-                        <td rowspan="4" >Dinding</td>
-                        <td>batu Bata</td>
-                        <td>%</td>
-                        <td>0%</td>
-                        <td rowspan="4">0%</td>
-                        <td rowspan="4">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td>Kaca</td>
-                        <td>Unit</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td>Pintu</td>
-                        <td>Unit</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td>Kusen</td>
-                        <td>Unit</td>
-                        <td>0%</td>
+                            @foreach($komponen as $val)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                @if($val->nama_komponen == null)
+                                <td>{{ strtoupper($val->sub_komponen) }}</td>
+                                <td>-</td>
+                                @else   
+                                <td>{{ strtoupper($val->nama_komponen) }}</td>
+                                <td>{{ strtoupper($val->sub_komponen) }}</td>
+                                @endif
+                                <td>{{ $val->nama_satuan }}</td>
+                                <td>{{ $val->tingkat_kerusakan * 100 }}%</td>
+                                @if ( $val->tingkat_kerusakan <= 0.3)
+                                <td colspan="2">Tingkat Kerusakan Ringan</td>
+                                @elseif ( $val->tingkat_kerusakan > 0.3 && $val->tingkat_kerusakan <= 0.45 )
+                                <td colspan="2">Tingkat Kerusakan Sedang</td>
+                                @elseif ( $val->tingkat_kerusakan > 0.45 )
+                                <td colspan="2">Tingkat Kerusakan Berat</td>
+                                @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="form-group">
 
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Lantai</td>
-                        <td>Penutup lantai</td>
-                        <td>%</td>
-                        <td>0%</td>
-                        <td colspan="2">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3">7</td>
-                        <td rowspan="3">Utilitas</td>
-                        <td>Instalasi Listrik</td>
-                        <td>Estimasi</td>
-                        <td>0%</td>
-                        <td rowspan="3">0%</td>
-                        <td rowspan="3">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td>Instalasi Air</td>
-                        <td>Estimasi</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td>Drainase Limbah</td>
-                        <td>m1</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3">8</td>
-                        <td rowspan="3">Finishing</td>
-                        <td>Finishing Langit-Langit</td>
-                        <td>%</td>
-                        <td>0%</td>
-                        <td rowspan="3">0%</td>
-                        <td rowspan="3">Hitung kerusakan komponen lain</td>
-                    </tr>
-                    <tr>
-                        <td>Finishing Dinding</td>
-                        <td>%</td>
-                        <td>0%</td>
-                    </tr>
-                    <tr>
-                        <td>Finishing Kusen/Pintu</td>
-                        <td>Unit</td>
-                        <td>0%</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="form-group">
+                    </div>
+                    <div class="form-group">
 
                 </div>
-                <div class="form-group">
-
-              </div>
             </thead>
             <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a>
         

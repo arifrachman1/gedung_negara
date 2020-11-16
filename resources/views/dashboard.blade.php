@@ -8,7 +8,11 @@
           <!-- Page Heading -->
   <div class="d-sm-flex align-items-center mb-4">
   <img style="widht:100%; height:100px;" class="mr-3 ml-5" src="{{ asset('style/img/5.png') }}">
+<<<<<<< HEAD
     <h1 class="h3 mb-0 text-gray-800 san-bold">SI BanGuN <br>Sistem Informasi<br>Bangunan Gedung Negara</h1>
+=======
+    <h1 class="h3 mb-0 text-gray-800 san-bold">SI BanGuN<br>SISTEM INFORMASI<br>BANGUNAN GEDUNG NEGARA<br>Dinas Pekerjaan Umum & Penataan Ruang <br> Kabupaten Tuban</h1>
+>>>>>>> 75c08786988ae71054bbad5039f51de60c437d71
   </div>
   <div class="container">
   <h5 style="margin-left:105px;">Dinas Pekerjaan Umum & Penataan Ruang<br>Kabupaten Tuban</h5>
