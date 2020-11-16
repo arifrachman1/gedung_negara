@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2020 at 06:05 AM
+-- Generation Time: Nov 11, 2020 at 06:12 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -82509,7 +82509,7 @@ INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `
 CREATE TABLE `kerusakan_klasifikasi` (
   `id` int(11) NOT NULL,
   `id_kerusakan_detail` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL DEFAULT 0,
+  `nilai_klasifikasi` int(11) NOT NULL DEFAULT 0,
   `tingkat_kerusakan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -82517,7 +82517,7 @@ CREATE TABLE `kerusakan_klasifikasi` (
 -- Dumping data for table `kerusakan_klasifikasi`
 --
 
-INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `jumlah`, `tingkat_kerusakan`) VALUES
+INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `nilai_klasifikasi`, `tingkat_kerusakan`) VALUES
 (74, 130, 0, 0.08),
 (75, 131, 0, 0.0064),
 (76, 132, 0, 0.0016),
@@ -82540,16 +82540,8 @@ INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `jumlah`, `tin
 CREATE TABLE `kerusakan_surveyor` (
   `id` int(11) NOT NULL,
   `id_kerusakan` int(11) NOT NULL,
-  `id_user` bigint(20) NOT NULL
+  `id_user` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `kerusakan_surveyor`
---
-
-INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
-(62, 59, 4),
-(63, 60, 4);
 
 -- --------------------------------------------------------
 
@@ -83543,7 +83535,8 @@ ALTER TABLE `kerusakan_klasifikasi`
 --
 ALTER TABLE `kerusakan_surveyor`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_kerusakan_surveyor_kerusakan_idx` (`id_kerusakan`);
+  ADD KEY `fk_kerusakan_surveyor_kerusakan_idx` (`id_kerusakan`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `komponen`
@@ -83765,7 +83758,8 @@ ALTER TABLE `kerusakan_klasifikasi`
 -- Constraints for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  ADD CONSTRAINT `fk_kerusakan_surveyor_kerusakan` FOREIGN KEY (`id_kerusakan`) REFERENCES `kerusakan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_kerusakan_surveyor_kerusakan` FOREIGN KEY (`id_kerusakan`) REFERENCES `kerusakan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kerusakan_surveyor_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `komponen`

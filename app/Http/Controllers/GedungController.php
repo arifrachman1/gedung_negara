@@ -27,24 +27,28 @@ class GedungController extends Controller
             ->select(
                 'gedung.nama as nama',
                 'gedung_ketegori.nama as nama_kat',
+                'gedung.alamat as alamat',
                 'gedung.bujur_timur as bujur_timur',
                 'gedung.lintang_selatan as lintang_selatan',
                 'gedung.legalitas as legalitas',
-                'gedung.tipe_milik as tipe_milik',
                 'gedung.alas_hak as alas_hak',
                 'gedung.luas_lahan as luas_lahan',
                 'gedung.jumlah_lantai as jumlah_lantai',
                 'gedung.luas as luas_bangunan',
                 'gedung.tinggi as tinggi_bangunan',
-                'gedung.kelas_tinggi as kelas_tinggi',
                 'gedung.kompleks as kompleks',
                 'gedung.kepadatan as kepadatan',
                 'gedung.permanensi as permanensi',
-                'gedung.risk_bakar as risk_bakar',
-                'gedung.penangkal as penangkal',
+                'gedung.tkt_resiko_kebakaran as risk_bakar',
+                'gedung.penangkal_petir as penangkal',
                 'gedung.struktur_bawah as struktur_bawah',
                 'gedung.struktur_bangunan as struktur_bangunan',
                 'gedung.struktur_atap as struktur_atap',
+                'gedung.kdb as kdb',
+                'gedung.klb as klb',
+                'gedung.kdh as kdh',
+                'gedung.gsb as gsb',
+                'gedung.rth as rth',
             )->find($id);
         $daerah = Gedung::where('id', $id)->select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->first();
         $provinsi = Provinsi::where('id_prov', $daerah->kode_provinsi)->select('provinsi.nama as nama')->first();
@@ -63,7 +67,7 @@ class GedungController extends Controller
 
     public function getKabKota($id) {
         $kabKota = Provinsi::where('id_prov', $id)->with('kabupatenKota')->get();
-        Log::info($kabKota);
+        //Log::info($kabKota);
         return response()->json([ 'kabKota' => $kabKota ]);
     }
 

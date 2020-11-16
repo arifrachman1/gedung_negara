@@ -32,14 +32,21 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($kerusakan as $val)
                     <tr>
-                      <td>SMAN 19 Surabaya</td>
-                      <td>Sekolah</td>
-                      <td>Tanah Kali Kedinding,kec.Kenjeran,Kota Surabaya</td>
-                      <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('/view_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
-                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('/edit_formulir_penilaian_kerusakan')}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
-                          <a class="btn btn-danger float-left mr-2" @can('kerusakan.create') href="" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a>
+                      <td>{{ $val->nama_gedung }}</td>
+                      @if($val->jenis_gd == null)
+                      <td>-</td>
+                      @else
+                      <td>{{ $val->jenis_gd }}</td>
+                      @endif
+                      <td>{{ $val->alamat }}</td>
+                      <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('view_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
+                          <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('edit_formulir_penilaian_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
+                          <!-- <a class="btn btn-danger float-left mr-2" @can('kerusakan.delete') href="{{url('hapus_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a> -->
+                          <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -51,6 +58,34 @@
 
       </div>
       <!-- End of Main Content -->
-
 <!-- @include('template/footer') -->
+<!-- Modal -->
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+    <form action="{{url('deleteKerusakan')}}" method="post">
+      {{ csrf_field() }}
+      @method('POST')
+      <input type="hidden" id="id_kerusakan" name="id">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
+        </div> 
+       <div class="modal-footer">
+        <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
+        <button type=submit class="btn btn-danger">Ya, hapus</button>
+      </div>
+    </div>
+  </form>
+ </div>
 </body>
+
+
+
+<script>
+  $(document).on('click','#delete',function(){
+         let id = $(this).attr('data-id');
+         console.log(id);
+         $('#id_kerusakan').val(id);
+    });        
+</script>
+

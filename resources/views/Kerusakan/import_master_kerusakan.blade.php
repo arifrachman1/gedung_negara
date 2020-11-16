@@ -11,7 +11,8 @@
         <h6 class="m-0 font-weight-bold text-white">TAMBAH DATA PERHITUNGAN KERUSAKAN DENGAN EXCEL</h6>
       </div>
       <div class="card-body">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="{{ url('post_import_excel_kerusakan/') }}" method="post" enctype="multipart/form-data">
+        @csrf
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -19,7 +20,7 @@
                     <label >Tambahkan Perhitungan dengan Excel:</label>
                     <input type="file" name="file_excel" class="form-control">
                     </div>
-                    <a href="" class="btn btn-success float-left mt-2 mr-2">Submit</a>
+                    <button type="submit" class="btn btn-success float-left mt-2 mr-2">Submit</button>
                     <a class="btn btn-warning float-left mr-2 mt-2" href="{{url('/view_master_kerusakan')}}" role="button">Kembali</a>
                 </thead>
             </table>

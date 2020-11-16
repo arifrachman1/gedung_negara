@@ -4,15 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KomponenOpsi extends Model
+class KerusakanDetail extends Model
 {
-    protected $table = 'komponen_opsi';
+    protected $table = 'kerusakan_detail';
     protected $primaryKey = 'id';
+    protected $guarded = [];
     // protected $fillable = [''];
     public $timestamps = false;
-
-    public function opsi()
-    {
-        return $this->BelongsTo(komponen::class,'id');
-    }
 }

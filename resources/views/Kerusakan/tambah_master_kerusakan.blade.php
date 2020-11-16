@@ -25,21 +25,23 @@
                     <tr>
                       <th>Nama Gedung</th>
                       <th>Legalitas</th>
-                      <th>Tipe Milik</th>
+                      <th>Tipe Pemilik</th>
                       <th>Alas Hak</th>
                       <th>Luas Lahan</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($gedung as $val)
                     <tr>
-                      <td>SMAN 19 Surabaya</td>
-                      <td>Legal</td>
-                      <td>Negara</td>
-                      <td></td>
-                      <td>1905</td>
-                      <td><a class="btn btn-success" href="{{url('/formulir_penilaian_kerusakan')}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a>
+                      <td>{{ $val->nama }}</td>
+                      <td>{{ $val->legalitas }}</td>
+                      <td>{{ $val->tipe_pemilik }}</td>
+                      <td>{{ $val->alas_hak }}</td>
+                      <td>{{ $val->luas_lahan }}</td>
+                      <td><a class="btn btn-success" href="{{url('/formulir_kerusakan_surveyor/'.$val->id)}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
