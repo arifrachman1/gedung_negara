@@ -167,6 +167,7 @@ Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan');
 Route::get('edit_formulir_penilaian_kerusakan/{id}', 'KerusakanController@editFormKerusakan');
 Route::post('post_edit_formulir_surveyor', 'KerusakanController@postEditFormSurveyor');
 Route::get('edit_formulir_klasifikasi_kerusakan/{id_kerusakan}', 'KerusakanController@formEditIdentifikasiKerusakan');
+Route::post('post_import_excel_kerusakan/', 'KerusakanController@importExcelKerusakan');
 
 Route::get('view_kerusakan', function (){
     return view('Kerusakan/view_kerusakan');

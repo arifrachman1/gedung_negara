@@ -17,6 +17,10 @@ use App\Gedung;
 use App\Komponen;
 use App\KomponenOpsi;
 use App\User;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PDF;
 use Log;
 
 class KerusakanController extends Controller
@@ -54,12 +58,24 @@ class KerusakanController extends Controller
         Session::put('surveyor3', $request->surveyor3);
         Session::put('pwopd1', $request->pwopd1);
         Session::put('pwopd2', $request->pwopd2);
+        Session::put('tanggal', $tanggal);
+        Session::put('jam', $jam);
 
 
         return redirect()->action('KerusakanController@formIdentifikasiKerusakan', ['id_gedung' => $id_gedung, 'id_user' => $id_user]);
     }
 
     public function formIdentifikasiKerusakan($id_gedung, $id_user) {
+        $opd = Session::get('opd');
+        $nomor_aset = Session::get('nomor_aset');
+        $petugas_survei1 = Session::get('surveyor1');
+        $petugas_survei2 = Session::get('surveyor2'); 
+        $petugas_survei3 = Session::get('surveyor3');
+        $perwakilan_opd1 = Session::get('pwopd1');
+        $perwakilan_opd2 = Session::get('pwopd2');
+        $tanggal = Session::get('tanggal');
+        $jam = Session::get('jam');
+        $gedung = Gedung::where('id', $id_gedung)->first();
         $komponen = DB::table('komponen as t1')
             ->select('t2.id as id_komponen',
                      't1.nama as nama_komponen', 
@@ -76,7 +92,12 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
                   
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user'));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponen', 'gedung', 'daerah', 'provinsi', 
+            'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 
+            'id_user', 'opd', 'nomor_aset', 'petugas_survei1',
+            'petugas_survei2', 'petugas_survei3', 'perwakilan_opd1', 'perwakilan_opd2',
+            'tanggal', 'jam'
+        ));
     }
 
     public function getDataKomponenOpsi(Request $request) {
@@ -388,6 +409,86 @@ class KerusakanController extends Controller
         }
         
         return response()->json(['message', 'Input sukses']);
+    }
+
+    public function importExcelKerusakan(Request $request) {
+        // Pindah file ke folder public
+        $file = $request->file('file_excel');
+        $path = public_path();
+        $file->move($path, $file->getClientOriginalName());
+
+        // Import file
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $inputFileType = 'Xlsx';
+        $inputFileName = $file->getClientOriginalName();
+        $reader = IOFactory::createReader($inputFileType);
+        $spreadsheet = $reader->load($inputFileName);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+
+        //Log::info($highestRow);
+
+        $lines = $highestRow - 1;
+
+        if ($lines <= 0) {
+            echo "<script>alert('Tidak ada data di dalam tabel Excel')</script>";
+        }
+
+        $kerusakan = new Kerusakan;
+        $kerusakan->opd = $worksheet->getCellByColumnAndRow(5, 3)->getValue();
+        $nama_gedung = $worksheet->getCellByColumnAndRow(5, 4)->getValue();
+        $nama_like = '%'.$nama_gedung.'%';
+        $id_gedung = Gedung::where('nama', 'like', $nama_like)->first();
+        $kerusakan->id_gedung = $id_gedung->id;
+        $kerusakan->nomor_aset = $worksheet->getCellByColumnAndRow(5, 5)->getValue();
+        $val_tgl = $worksheet->getCell('E8')->getValue(); $val_jam = $worksheet->getCellByColumnAndRow(8, 12)->getValue();
+        $tgl = date('Y-m-d', ($val_tgl-25569)*86400);
+        $jam = date('H:i:s', (($val_jam-25569)*3600)-25200);
+        //Log::info($tgl.' '.$jam);
+        $kerusakan->tanggal = $tgl.' '.$jam;
+        $kerusakan->petugas_survei1 = substr($worksheet->getCellByColumnAndRow(5, 9)->getValue(), 2);
+        $kerusakan->petugas_survei2 = substr($worksheet->getCellByColumnAndRow(5, 10)->getValue(), 2);
+        $kerusakan->petugas_survei3 = substr($worksheet->getCellByColumnAndRow(5, 11)->getValue(), 2);
+        $kerusakan->perwakilan_opd1 = substr($worksheet->getCellByColumnAndRow(5, 12)->getValue(), 2);
+        $kerusakan->perwakilan_opd2 = substr($worksheet->getCellByColumnAndRow(5, 13)->getValue(), 2);
+        //$kerusakan->save();
+        //Log::info($kerusakan);
+
+        $gedung = Gedung::where('id', $kerusakan->id_gedung)->first();
+        $alamat1 = $worksheet->getCell('E6')->getValue();
+        $alamat2 = $worksheet->getCell('E7')->getValue();
+        $gedung->alamat = $alamat1.' '.$alamat2;
+        $gedung->luas = $worksheet->getCellByColumnAndRow(5, 14)->getValue();
+        $gedung->jumlah_lantai = $worksheet->getCellByColumnAndRow(14, 14)->getValue();
+        //$gedung->save();
+        Log::info($gedung);
+
+        /*
+        for ( $row = 21; $row <= ($highestRow - 1); ++$row ) {
+            if($nama_komponen == "") break; // mencegah pembacaan row melebihi row yang dibutuhkan
+            $detail = new KerusakanDetail;
+            $detail->id_kerusakan = $kerusakan->id;
+            $nama_komponen = $worksheet->getCellByColumnAndRow('C', $row)->getValue();
+            $detail->id_komponen = Komponen::select('komponen.id as id')->where('nama', 'like', '%', $nama_komponen, '%');
+            $nama_subkomponen = $worksheet->getCellByColumnAndRow('D', $row)->getValue();
+            $detail->jumlah = $worksheet->getCellByColumnAndRow('G', $row)->getValue();
+            $detail->id_komponen = Komponen::select('komponen.id as id')->where('nama', 'like', '%', $nama_komponen, '%');
+            $satuan = $worksheet->getCellByColumnAndRow('F', $row)->getValue();
+            if ($satuan == 'estimasi') {
+                $opsi = $worksheet->getCellByColumnAndRow('I', $row)->getValue();
+                $detail->id_komponen_opsi = KomponenOpsi::select('komponen_opsi.id as id')->where('opsi', 'like', '%', $opsi, '%');
+            } else if ($satuan == 'unit') {
+                
+            } else if ($satuan == '%') {
+
+            }
+            $detail->tingkat_kerusakan = $worksheet->getCellByColumnAndRow('S', $row)->getValue();
+            //$detail->save();
+        }
+
+        //return redirect('master_kerusakan');*/
     }
 
 }

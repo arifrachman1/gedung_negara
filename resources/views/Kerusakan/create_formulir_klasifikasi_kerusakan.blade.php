@@ -14,126 +14,118 @@
       <!-- <form method="" action=""> -->
         
         <div class="panel panel-default">
-          <div class="form-group">
-              <div class="row">
-                  <div class="col-lg-3">
-                      Nama Instansi Bangunan   
-                  </div>
-                  <div class="col-lg-3">
-                      : Dinas Pendidikan
-                  </div>
-                  <div class="col-lg-3">
-                      Nama Bangunan
-                  </div>
-                  <div class="col-lg-3">
-                      : {{ $gedung->nama }}
-                  </div>
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row">
-                  <div class="col-lg-3">
-                      Bujur Timur   
-                  </div>
-                  <div class="col-lg-3">
-                      : {{ $gedung->bujur_timur }}
-                  </div>
-                  <div class="col-lg-3">
-                      Lintang Selatan   
-                  </div>
-                  <div class="col-lg-3">
-                      : {{ $gedung->lintang_selatan }}
-                  </div>
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row">
-                  <div class="col-lg-3">
-                      Provinsi   
-                  </div>
-                  @if($daerah->kode_provinsi == null)
-                  <div class="col-lg-3">
-                      : -
-                  </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $provinsi->nama_provinsi }}
-                  </div>
-                  @endif
-                  <div class="col-lg-3">
-                      Kabupaten / Kota   
-                  </div>
-                  @if($daerah->kode_kabupaten == null)
-                  <div class="col-lg-3">
-                      : -
-                  </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $kab_kota->nama_kota }}
-                  </div>
-                  @endif
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row">
-                  <div class="col-lg-3">
-                      Kecamatan   
-                  </div>
-                  @if($daerah->kode_kecamatan == null)
-                  <div class="col-lg-3">
-                      : -
-                  </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $kecamatan->nama_kecamatan }}
-                  </div>
-                  @endif
-                  <div class="col-lg-3">
-                      Kelurahan   
-                  </div>
-                  @if($daerah->kode_kelurahan == null)
-                  <div class="col-lg-3">
-                      : -
-                  </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $desa_kelurahan->nama_kelurahan }}
-                  </div>
-                  @endif
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row">
-                  <div class="col-lg-3">
-                      Jumlah Lantai   
-                  </div>
-                  <div class="col-lg-3">
-                      : {{ $gedung->jumlah_lantai }}
-                  </div>
-                  <div class="col-lg-3">
-                      Luas Bangunan   
-                  </div>
-                  <div class="col-lg-3">
-                      : {{ $gedung->luas }} m<sup>2</sup>
-                  </div>
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row">
-                  <div class="col-lg-3"> 
-                      Tanggal
-                  </div>
-                  <div class="col-sm-3">
-                      <?php $now = date("Y-m-d H:i:s") ?>
-                      <input id="tanggalJam" name="tanggal_jam" class="form-control" value="<?=$now?>" readonly>
-                  </div>
-              </div>
-            <input type="hidden" id="idGedung" name="id_gedung" value="{{ $id_gedung }}">
-            <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
-          </div>    
-          <a class="btn btn-secondary btn-icon-split" href="{{ url('') }}" role="button">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        OPD  
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $opd }}
+                    </div>
+                    <div class="col-lg-3">
+                        Nama Bangunan
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $gedung->nama }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Nomor Aset   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $nomor_aset }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Provinsi   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $provinsi->nama_provinsi }}
+                    </div>
+                    <div class="col-lg-3">
+                        Kabupaten / Kota   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $kab_kota->nama_kota }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Kecamatan   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $kecamatan->nama_kecamatan }}
+                    </div>
+                    <div class="col-lg-3">
+                        Kelurahan   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $desa_kelurahan->nama_kelurahan }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Petugas Survey   
+                    </div>
+                    <div class="col-lg-3">
+                        : 1. {{ $petugas_survei1 }}<br/> 
+                        <br>&nbsp 2. {{ $petugas_survei2 }} <br/>
+                        <br>&nbsp 3. {{ $petugas_survei3 }} <br/>
+                    </div>
+                    <div class="col-lg-3">
+                        Perwakilan OPD
+                    </div>
+                    <div class="col-lg-3">
+                        : 1. {{ $perwakilan_opd1 }}<br/>
+                        <br>&nbsp 2. {{ $perwakilan_opd2 }}<br/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3"> 
+                        Tanggal
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $tanggal }}
+                    </div>
+                    <div class="col-lg-3">
+                        Jam   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $jam }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Luas Bangunan   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $gedung->luas }} m<sup>2</sup>
+                    </div>
+                    <div class="col-lg-3">
+                        Jumlah Lantai   
+                    </div>
+                    <div class="col-lg-3">
+                        : {{ $gedung->jumlah_lantai }}
+                    </div>
+                </div>
+            </div>   
+          <a class="btn btn-info btn-icon-split mt-2 mb-2" href="{{ url('/import_master_kerusakan') }}" role="button">
             <span class="icon text-white-100">
-                Export Excel
+              Import Excel
             </span> 
           </a>
           <div class="table-responsive">
