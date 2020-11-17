@@ -61,7 +61,7 @@
 
   <!-- Kalkulasi klasifikasi kerusakan -->
   <!-- <script src="{{ asset('style/js/kalkulasi-kerusakan.js') }}"></script> -->
-
+  @stack('scripts')
 </body>
 
 </html>

@@ -164,11 +164,12 @@ Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 Route::post('get_data_komponen_opsi/', 'KerusakanController@getDataKomponenOpsi')->name('get_data_komponen_opsi');
 Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
 Route::post('submit_kerusakan/', 'KerusakanController@postSubmitKerusakan');
-Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan');
+Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan')->name("kerusakan.view");
 Route::get('edit_formulir_penilaian_kerusakan/{id}', 'KerusakanController@editFormKerusakan');
 Route::post('post_edit_formulir_surveyor', 'KerusakanController@postEditFormSurveyor');
 Route::get('edit_formulir_klasifikasi_kerusakan/{id_kerusakan}', 'KerusakanController@formEditIdentifikasiKerusakan');
 Route::get('kerusakan/export_template', 'KerusakanController@exportKerusakan')->name('kerusakan.excel.export');
+Route::post('kerusakan/import_excel', 'KerusakanController@importKerusakan')->name('kerusakan.excel.import');
 
 Route::get('view_kerusakan', function (){
     return view('Kerusakan/view_kerusakan');
