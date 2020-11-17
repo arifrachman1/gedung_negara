@@ -416,6 +416,42 @@ class KerusakanController extends Controller
     }
 
     public function formEditIdentifikasiKerusakan($id_kerusakan) {
+        $id_parents = KerusakanDetail::select('id_parent as id')
+            ->join('komponen', 'komponen.id', '=', 'kerusakan_detail.id_komponen')
+            ->where('id_kerusakan', $id_kerusakan)
+            ->distinct('komponen.id_parent')->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereIn('id', $id_parents)
+            ->get();
+        foreach ($komponens as $komponen) { 
+            $subKomponens = DB::table('kerusakan_detail as kd')
+            ->select(
+                'kom.id', 'kom.nama', 'kom.bobot', 'kd.id as id_kerusakan_detail', 'kom.id_satuan', 'sat.nama as satuan',
+                'kd.tingkat_kerusakan', 'kd.jumlah', 'kd.id_komponen_opsi'
+            )
+            ->where('id_kerusakan', $id_kerusakan)
+            ->where('id_parent', $komponen->id)
+            ->join('komponen as kom', 'kom.id', '=', 'kd.id_komponen')
+            ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+            ->get()->toArray();
+
+            $sumTingkatKerusakan = 0;
+            foreach($subKomponens as $subKomponen){
+                if($subKomponen->id_satuan != 1){
+                    $subKomponen->kerusakan_klasifikasi = DB::table('kerusakan_klasifikasi')
+                        ->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)
+                        ->get()->toArray();
+                }
+                $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;
+            }
+            $komponen->subKomponen = $subKomponens;
+            $komponen->numberOfSub = count($subKomponens);
+
+            $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
+        }
+        // dd($komponens);
+
         $kerusakan = Kerusakan::select('kerusakan.id as id_kerusakan',
                                        'kerusakan.opd as opd', 
                                        'kerusakan.nomor_aset as nomor_aset',
@@ -440,19 +476,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
         
-        $komponen = DB::table('komponen as t1')
-            ->select('t2.id as id_komponen',
-                     't1.nama as nama_komponen', 
-                     't2.nama as sub_komponen', 
-                     'satuan.id as id_satuan', 
-                     'satuan.nama as nama_satuan',
-                     'kerusakan_detail.tingkat_kerusakan'
-                     )
-            ->rightjoin('komponen as t2', 't1.id', '=', 't2.id_parent')
-            ->join('satuan', 't2.id_satuan', '=', 'satuan.id')
-            ->join('kerusakan_detail', 't2.id', '=', 'kerusakan_detail.id_komponen')
-            ->orderBy('t1.id', 'asc')->get();
-        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponen'));
+        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens'));
     }
 
     public function postSubmitEditKerusakan(Request $request) {
