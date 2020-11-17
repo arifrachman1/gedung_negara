@@ -230,7 +230,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colspan="5">Jumlah Kerusakan</td>
+                    <td colspan="6">Jumlah Kerusakan</td>
                     <td>
                       <p id="textTotalKerusakan"></p>
                     </td>
@@ -276,7 +276,6 @@
         <div class="form-group">
           <label>Satuan: Estimasi</label>
           <select class="form-control" id="bufferEstimasi">
-            <option value="0" disabled>Pilih Opsi</option>
           </select>
         </div>
       </div>

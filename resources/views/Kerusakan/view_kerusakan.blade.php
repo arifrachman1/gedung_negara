@@ -182,10 +182,7 @@
                                                 </select>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-success" id="btn-save-estimasi" data-dismiss="modal" type="button">Simpan</button>
-                                            </div>
-                                            </div>
+                                          </div>
                                         </div>
                                     </div>
                                     @elseif($subKomponen->id_satuan == 2)
@@ -297,6 +294,11 @@
                                 @php $index++ @endphp
                                 @endforeach
                             @endforeach
+                            <tr>
+                              <td colspan="6">Jumlah Kerusakan</td>
+                              <td> {{ $sumAlltingkatKerusakan }}% </td>
+                              <td colspan="2"> {{ $sumAlltingkatKerusakanText }} </td>
+                            </tr>
                         </tbody>
                     </table>
                     <div class="form-group">
