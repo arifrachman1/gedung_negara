@@ -162,7 +162,8 @@ Route::post('hitung_kerusakan_unit', 'KerusakanController@hitungKerusakanUnit')-
 Route::post('hitung_kerusakan_persen', 'KerusakanController@hitungKerusakanPersen')->name('hitung_kerusakan_persen');
 Route::post('post_formulir_surveyor', 'KerusakanController@inputFormSurveyor');
 Route::post('get_data_komponen_opsi/', 'KerusakanController@getDataKomponenOpsi')->name('get_data_komponen_opsi');
-Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
+// Route::get('hapus_kerusakan/{id}', 'KerusakanController@hapusKerusakan');
+Route::post('deleteKerusakan','KerusakanController@delete')->name('hapuskerusakan'); 
 Route::post('submit_kerusakan/', 'KerusakanController@postSubmitKerusakan');
 Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan');
 Route::get('edit_formulir_penilaian_kerusakan/{id}', 'KerusakanController@editFormKerusakan');

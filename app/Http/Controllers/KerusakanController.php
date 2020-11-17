@@ -241,9 +241,14 @@ class KerusakanController extends Controller
         return response()->json(['hasil_unit' => $hasil_unit, 'bobot' => $bobot->bobot]);
     }
 
-    public function hapusKerusakan($id) {
-        $data = Kerusakan::where('id', $id)->first();
-        $data->delete();
+    // public function hapusKerusakan($id) {
+    //     $data = Kerusakan::where('id', $id)->first();
+    //     $data->delete();
+    //     return redirect('master_kerusakan');
+    // }
+    function delete(Request $request) {
+        $delete = Kerusakan::find($request->id);
+        $delete->delete();
         return redirect('master_kerusakan');
     }
 
