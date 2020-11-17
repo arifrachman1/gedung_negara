@@ -22,9 +22,11 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PDF;
 use Log;
+use Illuminate\Support\Facades\Validator;
 
 class KerusakanController extends Controller
 {
+    private $opsi_index = 0;
     public function index() {
         $kerusakan = Kerusakan::select('kerusakan.id as id','gedung.nama as nama_gedung', 'gedung_ketegori.nama as jenis_gd', 'gedung.alamat as alamat')
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
@@ -91,8 +93,346 @@ class KerusakanController extends Controller
         $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
-                  
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user'));
+
+        $kerusakan_data = [
+            "id_gedung" => $id_gedung,
+        ];
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user', 'kerusakan_data'));
+    }
+    private function setCellDropdown($sheet, $opsiSheet, $cellAddr, $cellResult, $cellIdOption, $options, $selected = 0){
+        // set opsi . $this->opsi_index
+        $this->opsi_index += 3;
+        $first_opsi = $this->opsi_index;
+        $selected_opsi = null;
+        foreach($options as $i => $o){
+            if($i == 0) $selected_opsi = $o->opsi;
+            if($o->id == $selected) $selected_opsi = $o->opsi;
+            $opsiSheet->setCellValue('B'.$this->opsi_index, $o->opsi);
+            $opsiSheet->setCellValue('C'.$this->opsi_index, $o->nilai/100);
+            $opsiSheet->setCellValue('D'.$this->opsi_index, $o->id);
+            $this->opsi_index++;
+        }
+        $last_opsi = $this->opsi_index - 1;
+
+        // set dropdown
+        $validation = $sheet->getCell($cellAddr)
+            ->getDataValidation();
+        $validation->setType( \PhpOffice\PhpSpreadsheet\Cell\DataValidation::TYPE_LIST );
+        $validation->setErrorStyle( \PhpOffice\PhpSpreadsheet\Cell\DataValidation::STYLE_INFORMATION );
+        $validation->setAllowBlank(false);
+        $validation->setShowInputMessage(true);
+        $validation->setShowErrorMessage(true);
+        $validation->setShowDropDown(true);
+        $validation->setErrorTitle('Input error');
+        $validation->setError('Value is not in list.');
+        $validation->setPromptTitle('Opsi kerusakan');
+        $validation->setPrompt('Silahkan pilih kerusakan');
+        $validation->setFormula1('Opsi!$B$'.$first_opsi.':$B$'.$last_opsi);
+        if($selected_opsi !== null)
+            $sheet->setCellValue($cellAddr, $selected_opsi);
+        $sheet->setCellValue($cellResult, '=VLOOKUP('.$cellAddr.', Opsi.$B$'.$first_opsi.':$D$'.$last_opsi.', 2, 0)');
+        $sheet->setCellValue($cellIdOption, '=VLOOKUP('.$cellAddr.', Opsi.$B$'.$first_opsi.':$D$'.$last_opsi.', 3, 0)');
+    }
+    public function exportKerusakan(Request $request){
+        
+        $opd        = Session::get('opd');
+        $nomorAset  = Session::get('nomor_aset');
+        $surveyor1  = Session::get('surveyor1');
+        $surveyor2  = Session::get('surveyor2'); 
+        $surveyor3  = Session::get('surveyor3');
+        $pwopd1     = Session::get('pwopd1');
+        $pwopd2     = Session::get('pwopd2');
+        $dateNow    = date('Y-m-d');
+        $timeNow    = date('H:i:s');
+
+        $id_gedung = $request->get('id_gedung');
+        $id_kerusakan = $request->get('id_kerusakan');
+        $gedung = Gedung::where('id', $id_gedung)->first();
+        $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
+        $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
+        $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
+        $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
+        $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
+
+
+        /**
+         * Jika data kerusakan sudah terisi
+         */
+
+        $kerusakan_ob = ["kerusakan_detail" => []];
+        if($id_kerusakan !== null && ($kerusakan = Kerusakan::where('id', $id_kerusakan)->first()) !== null){
+            $kerusakan_detail = KerusakanDetail::where('id_kerusakan', $id_kerusakan)->get();
+            
+            $opd        = $kerusakan->opd;
+            $nomorAset  = $kerusakan->nomor_aset;
+            $surveyor1  = $kerusakan->petugas_survei1;
+            $surveyor2  = $kerusakan->petugas_survei2; 
+            $surveyor3  = $kerusakan->petugas_survei3;
+            $pwopd1     = $kerusakan->perwakilan_opd1;
+            $pwopd2     = $kerusakan->perwakilan_opd2;
+            foreach($kerusakan_detail as $kd){
+                $kk = [];
+                $kerusakan_klasifikasi = KerusakanKlasifikasi::where('id_kerusakan_detail', $kd->id)->get();
+                foreach($kerusakan_klasifikasi as $_kk){
+                    $kk[$_kk->klasifikasi] = $_kk;
+                }
+                $opsi = KomponenOpsi::select("id", "opsi")->where('id', $kd->id_komponen_opsi)->first();
+                $kerusakan_ob['kerusakan_detail'][$kd->id_komponen] = [
+                    "detail" => $kd,
+                    "opsi" => ($opsi !== null)? $opsi->opsi:null,
+                    "kerusakan_klasifikasi" => $kk
+                ];
+
+            }
+        }
+
+        $temp_file = storage_path('excel_template').'/temp_kerusakan.xlsx';
+        $output_file = storage_path('app/public/excel/kerusakan').'/temp_kerusakan.xlsx';
+
+        /** Load $inputFileName to a Spreadsheet object **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($temp_file);
+        $spreadsheet->setActiveSheetIndexByName('Opsi');
+        // FORM KERUSAKAN
+        $sheetOpsi = $spreadsheet->getActiveSheet();
+        $spreadsheet->setActiveSheetIndexByName('FORM KERUSAKAN');
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        /**
+         * Header - detail gedung
+         */
+
+        $sheet->setCellValue('G3', $opd);
+        $sheet->setCellValue('G4', $gedung->nama);
+        $sheet->setCellValue('G5', $nomorAset);
+        $sheet->setCellValue('G6', $gedung->alamat);
+        // $sheet->setCellValue('G8', date('Y-m-d H:i:s'));
+        $sheet->setCellValue('G9', $surveyor1);
+        $sheet->setCellValue('G10', $surveyor2);
+        $sheet->setCellValue('G11', $surveyor3);
+        $sheet->setCellValue('G12', $pwopd1);
+        $sheet->setCellValue('G13', $pwopd2);
+        $sheet->setCellValue('G14', $gedung->luas);
+        $sheet->setCellValue('O8', $timeNow);
+        $sheet->setCellValue('Q14', $gedung->jumlah_lantai);
+
+        /**
+         * Get komponen kerusakan
+         */
+        
+        $id_parents = DB::table('komponen as prnt')
+            ->select('prnt.id_parent as id')
+            ->join('komponen as chld', 'chld.id', '=', 'prnt.id_parent')
+            ->groupBy('prnt.id_parent')
+            ->get()->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereIn('id', $id_parents)
+            ->get();
+        foreach ($komponens as $parent) {
+            $subKomponen = DB::table('komponen as kom')
+                ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
+                ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+                ->where('id_parent', $parent->id)
+                ->get();
+            foreach ($subKomponen as &$sk) {
+                if($sk->id_satuan == 1){
+                    $sk->options = DB::table('komponen_opsi as ko')
+                        ->where('ko.id_komponen', $sk->id)
+                        ->get();
+                }
+            }
+            $parent->numberOfSub = count($subKomponen);
+            $parent->subKomponen = $subKomponen;
+        }
+
+        $indexStartKomponen = 21;
+        $numbering = 1;
+        $currentRow = $indexStartKomponen;
+        foreach ($komponens as $indexKomponen => $komponen) {
+            $sheet->setCellValue('C'.$currentRow, $komponen->id );
+            $sheet->setCellValue('D'.$currentRow, $komponen->nama );
+            foreach ($komponen->subKomponen as $indexSubKomponen => $subKomponen) {
+                $sheet->insertNewRowBefore($currentRow + 1, 1);
+                $sheet->setCellValue('B'.$currentRow, $numbering++ );
+                $sheet->setCellValue('E'.$currentRow, $subKomponen->id );
+                $sheet->setCellValue('F'.$currentRow, $subKomponen->nama );
+                $sheet->mergeCells("F$currentRow:G$currentRow");
+                $sheet->setCellValue('H'.$currentRow, $subKomponen->id_satuan );
+                $sheet->setCellValue('I'.$currentRow, $subKomponen->id_satuan );
+                $sheet->setCellValue('K'.$currentRow, $subKomponen->bobot );
+                
+                if($subKomponen->id_satuan == 1){
+                    $sheet->mergeCells("L$currentRow:U$currentRow");
+                    $this->setCellDropdown($sheet, $sheetOpsi, "L$currentRow", "V$currentRow", "Y$currentRow", $subKomponen->options);
+                }else{
+                    // implement formula
+                    $cr = $currentRow;
+                    $sheet->setCellValue('M'.$cr, '=IF($J'.$cr.' > 0, (L'.$cr.'/$J'.$cr.')*$L$19, 0)');
+                    $sheet->setCellValue('O'.$cr, '=IF($J'.$cr.' > 0, (N'.$cr.'/$J'.$cr.')*$N$19, 0)');
+                    $sheet->setCellValue('Q'.$cr, '=IF($J'.$cr.' > 0, (P'.$cr.'/$J'.$cr.')*$P$19, 0)');
+                    $sheet->setCellValue('S'.$cr, '=IF($J'.$cr.' > 0, (R'.$cr.'/$J'.$cr.')*$R$19, 0)');
+                    $sheet->setCellValue('U'.$cr, '=IF($J'.$cr.' > 0, (T'.$cr.'/$J'.$cr.')*$T$19, 0)');
+                    $sheet->setCellValue(
+                        'V'.$cr, 
+                        '=(M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*IF(K'.$cr.', K'.$cr.'/100, 1)'
+                    );
+                    if(isset($kerusakan_ob["kerusakan_detail"][$subKomponen->id])){
+                        $kd = $kerusakan_ob["kerusakan_detail"][$subKomponen->id];
+                        if( $kd["detail"]->jumlah)
+                            $sheet->setCellValue('J'.$cr, $kd["detail"]->jumlah);
+                        if($kd["kerusakan_klasifikasi"][0.2]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('L'.$cr, $kd["kerusakan_klasifikasi"][0.2]->nilai_input_klasifikasi);
+                        if($kd["kerusakan_klasifikasi"][0.4]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('N'.$cr, $kd["kerusakan_klasifikasi"][0.4]->nilai_input_klasifikasi);
+                        if($kd["kerusakan_klasifikasi"][0.6]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('P'.$cr, $kd["kerusakan_klasifikasi"][0.6]->nilai_input_klasifikasi);
+                        if($kd["kerusakan_klasifikasi"][0.8]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('R'.$cr, $kd["kerusakan_klasifikasi"][0.8]->nilai_input_klasifikasi);
+                        if($kd["kerusakan_klasifikasi"][1.0]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('T'.$cr, $kd["kerusakan_klasifikasi"][1.0]->nilai_input_klasifikasi);
+                    }
+                }
+                $currentRow++;
+            }
+        }
+
+        // petugas survey
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($output_file);
+        //  $output_file;
+        return redirect('/storage/excel/kerusakan/temp_kerusakan.xlsx');
+    }
+    public function importKerusakan(Request $request){
+        
+        $resp = [
+            "status" => 300,
+            "message" => "Error"
+        ];
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|max:100',
+            'excel_kerusakan_file' => 'required|mimes:xlsx|max:10140'
+        ]);
+        if ($validator->fails()) {
+            $resp["message"] = "Upload file dengan format excel";
+            return response()->json($resp);
+        }
+        $gedung = Gedung::where('id', $request->id_gedung)->first();
+        $extension = $request->excel_kerusakan_file->extension();
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $inputFileType = 'Xlsx';
+        $inputFileName = $request->excel_kerusakan_file;
+        $reader = IOFactory::createReader($inputFileType);
+        $spreadsheet = $reader->load($inputFileName);
+        $spreadsheet->setActiveSheetIndexByName('FORM KERUSAKAN');
+        $worksheet = $spreadsheet->getActiveSheet();
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+
+        /**
+         * get header
+         */
+        
+        $surveyor = [];
+        $pwopd = [];
+        $opd = $worksheet->getCellByColumnAndRow(7, 3)->getValue();
+        $nomorAset = $worksheet->getCellByColumnAndRow(7, 5)->getValue();
+        $surveyor[] = $worksheet->getCellByColumnAndRow(7, 9)->getValue();
+        $surveyor[] = $worksheet->getCellByColumnAndRow(7, 10)->getValue();
+        $surveyor[] = $worksheet->getCellByColumnAndRow(7, 11)->getValue();
+        $pwopd[] = $worksheet->getCellByColumnAndRow(7, 12)->getValue();
+        $pwopd[] = $worksheet->getCellByColumnAndRow(7, 13)->getValue();
+
+        // Create data ke table kerusakan
+
+        DB::beginTransaction();
+        try{
+            $newKerusakan = new Kerusakan;
+            $newKerusakan->id_gedung         = $gedung->id;
+            $newKerusakan->tanggal           = date('Y-m-d H:i:s');
+            $newKerusakan->opd               = $opd;
+            $newKerusakan->nomor_aset        = $nomorAset;
+            $newKerusakan->petugas_survei1   = $surveyor[0];
+            $newKerusakan->petugas_survei2   = $surveyor[1];
+            $newKerusakan->petugas_survei3   = $surveyor[2];
+            $newKerusakan->perwakilan_opd1   = $pwopd[0];
+            $newKerusakan->perwakilan_opd2   = $pwopd[1];
+            $newKerusakan->created_at        = date('Y-m-d H:i:s');
+            $newKerusakan->save();
+
+            $indexStartKomponen = 21;
+            for ($row = $indexStartKomponen; $row <= $highestRow; $row++) {
+                $id_komponen = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                $id_sub_komponen = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                $id_satuan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                if($id_satuan === null || $id_satuan == "") break;
+
+                // $tingkat_kerusakan = 0.0;
+                // for($i = 0; $i < 5; $i++){
+                //     $jumlah_item = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                //     $jumlah_rusak = $worksheet->getCellByColumnAndRow(12+($i*2), $row)->getValue();
+                //     if($jumlah_item === null || $jumlah_item == "") $jumlah_item = 0;
+                //     if($jumlah_rusak === null || $jumlah_rusak == "") $jumlah_rusak = 0;
+                //     $tingkat_kerusakan += ($jumlah_item > 0)? ($jumlah_rusak/$jumlah_item)*(0.2*($i+1)):0;
+                // }
+                
+                // $bobot = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                // if($bobot !== null && $bobot != "") {
+                //     $tingkat_kerusakan *= $bobot/100;
+                // };
+                
+                $tingkat_kerusakan = 0;
+                $newKerusakanDetail = new KerusakanDetail;
+                $newKerusakanDetail->id_kerusakan       = $newKerusakan->id;
+                $newKerusakanDetail->id_komponen        = $id_sub_komponen;
+                $newKerusakanDetail->tingkat_kerusakan  = $tingkat_kerusakan;
+                
+                $jumlah_item = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                if($jumlah_item === null || $jumlah_item == "") $jumlah_item = 0;
+
+                if($id_satuan == 1){
+                    $opsi_selected = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                    $opsi = KomponenOpsi::select("id")
+                        ->where('opsi', $opsi_selected)
+                        ->where('id_kompoenen', $id_sub_komponen)
+                        ->first();
+                    $tingkat_kerusakan = $opsi->nilai/100;
+                    $newKerusakanDetail->id_komponen_opsi = $opsi->id;
+                    $newKerusakanDetail->save();
+                }else{
+                    ($jumlah_item != 0) && $newKerusakanDetail->jumlah = $jumlah_item;
+                    $newKerusakanDetail->save();
+                    for($i = 0; $i < 5; $i++){
+                        $jumlah_rusak = $worksheet->getCellByColumnAndRow(12+($i*2), $row)->getValue();
+                        if($jumlah_rusak === null || $jumlah_rusak == "") $jumlah_rusak = 0;
+                        $nilai_input_klasifikasi = ($jumlah_item > 0)? ($jumlah_rusak/$jumlah_item)*(0.2*($i+1)):0;
+                        $tingkat_kerusakan += $nilai_input_klasifikasi;
+                        $input_klasifikasi = new KerusakanKlasifikasi;
+                        $input_klasifikasi->id_kerusakan_detail     = $newKerusakanDetail->id;
+                        $input_klasifikasi->nilai_input_klasifikasi = $jumlah_rusak;
+                        $input_klasifikasi->klasifikasi             = 0.2*($i+1);
+                        $input_klasifikasi->save();
+                    }
+                    
+                }
+                
+                $bobot = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                if($bobot !== null && $bobot != "") {
+                    $tingkat_kerusakan *= $bobot/100;
+                };
+                $newKerusakanDetail->tingkat_kerusakan = $tingkat_kerusakan;
+                $newKerusakanDetail->save();
+            }
+            
+            $resp["status"] = 200;
+            $resp["message"] = "Success";
+            $resp["redirect_to"] = route('kerusakan.view', ['id'=> $newKerusakan->id]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $resp["message"] = "Error. ".$e->getMessage();
+        }
+        return response()->json($resp);
     }
 
     public function submitKlasifikasiKerusakan(Request $request){
@@ -417,6 +757,42 @@ class KerusakanController extends Controller
     }
 
     public function formEditIdentifikasiKerusakan($id_kerusakan) {
+        $id_parents = KerusakanDetail::select('id_parent as id')
+            ->join('komponen', 'komponen.id', '=', 'kerusakan_detail.id_komponen')
+            ->where('id_kerusakan', $id_kerusakan)
+            ->distinct('komponen.id_parent')->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereIn('id', $id_parents)
+            ->get();
+        foreach ($komponens as $komponen) { 
+            $subKomponens = DB::table('kerusakan_detail as kd')
+            ->select(
+                'kom.id', 'kom.nama', 'kom.bobot', 'kd.id as id_kerusakan_detail', 'kom.id_satuan', 'sat.nama as satuan',
+                'kd.tingkat_kerusakan', 'kd.jumlah', 'kd.id_komponen_opsi'
+            )
+            ->where('id_kerusakan', $id_kerusakan)
+            ->where('id_parent', $komponen->id)
+            ->join('komponen as kom', 'kom.id', '=', 'kd.id_komponen')
+            ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+            ->get()->toArray();
+
+            $sumTingkatKerusakan = 0;
+            foreach($subKomponens as $subKomponen){
+                if($subKomponen->id_satuan != 1){
+                    $subKomponen->kerusakan_klasifikasi = DB::table('kerusakan_klasifikasi')
+                        ->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)
+                        ->get()->toArray();
+                }
+                $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;
+            }
+            $komponen->subKomponen = $subKomponens;
+            $komponen->numberOfSub = count($subKomponens);
+
+            $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
+        }
+        // dd($komponens);
+
         $kerusakan = Kerusakan::select('kerusakan.id as id_kerusakan',
                                        'kerusakan.opd as opd', 
                                        'kerusakan.nomor_aset as nomor_aset',
@@ -441,19 +817,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
         
-        $komponen = DB::table('komponen as t1')
-            ->select('t2.id as id_komponen',
-                     't1.nama as nama_komponen', 
-                     't2.nama as sub_komponen', 
-                     'satuan.id as id_satuan', 
-                     'satuan.nama as nama_satuan',
-                     'kerusakan_detail.tingkat_kerusakan'
-                     )
-            ->rightjoin('komponen as t2', 't1.id', '=', 't2.id_parent')
-            ->join('satuan', 't2.id_satuan', '=', 'satuan.id')
-            ->join('kerusakan_detail', 't2.id', '=', 'kerusakan_detail.id_komponen')
-            ->orderBy('t1.id', 'asc')->get();
-        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponen'));
+        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens'));
     }
 
     public function postSubmitEditKerusakan(Request $request) {
