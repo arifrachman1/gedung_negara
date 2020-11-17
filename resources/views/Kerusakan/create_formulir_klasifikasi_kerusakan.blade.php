@@ -1,5 +1,6 @@
-@include('template/header')
+@extends('template.default')
 
+@section('content')
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -131,7 +132,7 @@
             <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
           </div>    
           <hr>
-          <a class="btn btn-secondary float-right mb-3" href="{{ url('') }}">
+          <a class="btn btn-success mb-3 btn-show-form-kerusakan" href="#" id-gedung="{{$id_gedung}}">
             <span class="icon text-white-100">
               Import Excel
             </span> 
@@ -323,7 +324,10 @@
   </div>
 </div>
 
-@include('template/footer')
+@include("Kerusakan.import_excel", ['id_gedung' => $id_gedung])
+@endsection
+
+@push('scripts')
 <script>
   $(document).ready(function(){
     $.ajaxSetup({
@@ -597,3 +601,4 @@
     });
   })
 </script>
+@endpush
