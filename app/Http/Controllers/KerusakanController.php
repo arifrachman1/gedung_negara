@@ -280,13 +280,13 @@ class KerusakanController extends Controller
                         if($kd["kerusakan_klasifikasi"][0.2]->nilai_input_klasifikasi != 0.0)
                             $sheet->setCellValue('L'.$cr, $kd["kerusakan_klasifikasi"][0.2]->nilai_input_klasifikasi);
                         if($kd["kerusakan_klasifikasi"][0.4]->nilai_input_klasifikasi != 0.0)
-                            $sheet->setCellValue('N'.$cr, $kd["kerusakan_klasifikasi"][0.4]);
+                            $sheet->setCellValue('N'.$cr, $kd["kerusakan_klasifikasi"][0.4]->nilai_input_klasifikasi);
                         if($kd["kerusakan_klasifikasi"][0.6]->nilai_input_klasifikasi != 0.0)
-                            $sheet->setCellValue('P'.$cr, $kd["kerusakan_klasifikasi"][0.6]);
+                            $sheet->setCellValue('P'.$cr, $kd["kerusakan_klasifikasi"][0.6]->nilai_input_klasifikasi);
                         if($kd["kerusakan_klasifikasi"][0.8]->nilai_input_klasifikasi != 0.0)
-                            $sheet->setCellValue('R'.$cr, $kd["kerusakan_klasifikasi"][0.8]);
+                            $sheet->setCellValue('R'.$cr, $kd["kerusakan_klasifikasi"][0.8]->nilai_input_klasifikasi);
                         if($kd["kerusakan_klasifikasi"][1.0]->nilai_input_klasifikasi != 0.0)
-                            $sheet->setCellValue('T'.$cr, $kd["kerusakan_klasifikasi"][1.0]);
+                            $sheet->setCellValue('T'.$cr, $kd["kerusakan_klasifikasi"][1.0]->nilai_input_klasifikasi);
                     }
                 }
                 $currentRow++;
