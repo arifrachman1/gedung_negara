@@ -169,7 +169,7 @@ class KerusakanController extends Controller
         }
 
         return redirect()
-            ->action('KerusakanController@viewKerusakan')
+            ->action('KerusakanController@viewKerusakan', [$newKerusakan->id])
             ->with(['success' => 'Kerusakan berhasil ditambahkan.']);
     }
 
@@ -300,9 +300,10 @@ class KerusakanController extends Controller
 
                     $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;
                 }
-                $komponen->sumTingkatKerusakan = $this->mapStatusTingkatKerusakan($sumTingkatKerusakan);
+                $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
+                $komponen->sumTingkatKerusakanStatus = $this->mapStatusTingkatKerusakan($sumTingkatKerusakan);
         }
-        dd($komponens);
+        //dd($komponens);
 
         $kerusakan = Kerusakan::select('kerusakan.opd as opd', 'gedung.nama as nama_gedung', 'gedung.luas as luas', 'gedung.jumlah_lantai as jml_lantai', 'kerusakan.nomor_aset as nomor_aset', 'kerusakan.tanggal as tanggal', 'kerusakan.petugas_survei1 as petugas_survei1', 'kerusakan.petugas_survei2 as petugas_survei2', 'kerusakan.petugas_survei3 as petugas_survei3', 'kerusakan.perwakilan_opd1 as perwakilan_opd1', 'kerusakan.perwakilan_opd2 as perwakilan_opd2')->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')->where('kerusakan.id', $id_kerusakan)->first();
 

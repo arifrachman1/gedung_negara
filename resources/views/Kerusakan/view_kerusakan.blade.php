@@ -228,10 +228,7 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-success" id="btn-save-persen" data-dismiss="modal" type="button">Simpan</button>
-                                            </div>
+                                              </div>
                                             </div>
                                         </div>
                                     </div>
@@ -276,27 +273,24 @@
                                                     <div class="row">
                                                         <div class="col-lg-3">{{ $klasifikasi->klasifikasi }}</div>
                                                         <div class="col-lg-3">
-                                                            <input type="number" class="form-control input-value-unit" placeholder="0" value="{{ $klasifikasi->nilai_input_klasifikasi }}" data-index-klasifikasi="1">
+                                                            <input type="number" class="form-control input-value-unit" placeholder="0" value="{{ $klasifikasi->nilai_input_klasifikasi }}" data-index-klasifikasi="1" readonly>
                                                         </div>
                                                         <div class="col-lg-3">=</div>
                                                         <div class="col-lg-3">
-                                                            <input type="number" class="form-control text-value-unit" placeholder="0" value="{{ ($klasifikasi->nilai_input_klasifikasi / $subKomponen->jumlah) * $klasifikasi->klasifikasi  }}" readonly="">
+                                                            <input type="number" class="form-control text-value-unit" placeholder="0" value="{{ ($klasifikasi->nilai_input_klasifikasi / $subKomponen->jumlah) * $klasifikasi->klasifikasi  }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                            </div>
-                                            <div class="modal-footer">
-                                                <p id="show-error"></p>
-                                                <button class="btn btn-success" id="btn-save-unit" type="button">Simpan</button>
-                                            </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     @endif
-                                    <td>{{ $subKomponen->tingkat_kerusakan }}%</td>
+                                    <td>{{$subKomponen->tingkat_kerusakan * 100}}%</td>
                                     @if($subIndex == 0)
-                                        <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->sumTingkatKerusakan }}</td>
+                                      <td style="border-right: 0">{{ is_numeric($komponen->sumTingkatKerusakan) ? $komponen->sumTingkatKerusakan * 100 : $komponen->sumTingkatKerusakan }}%</td>
+                                      <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->sumTingkatKerusakanStatus }}</td>
                                     @endif
 
                                 </tr>
