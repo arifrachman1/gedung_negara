@@ -130,8 +130,7 @@ class KerusakanController extends Controller
         $validation->setFormula1('Opsi!$B$'.$first_opsi.':$B$'.$last_opsi);
         if($selected_opsi !== null)
             $sheet->setCellValue($cellAddr, $selected_opsi);
-        $sheet->setCellValue($cellResult, '=VLOOKUP('.$cellAddr.', Opsi.$B$'.$first_opsi.':$D$'.$last_opsi.', 2, 0)');
-        $sheet->setCellValue($cellIdOption, '=VLOOKUP('.$cellAddr.', Opsi.$B$'.$first_opsi.':$D$'.$last_opsi.', 3, 0)');
+        $sheet->setCellValue($cellResult, '=VLOOKUP('.$cellAddr.', \'Opsi\'!$B$'.$first_opsi.':$D$'.$last_opsi.', 2, 0)');
     }
     public function exportKerusakan(Request $request){
         
