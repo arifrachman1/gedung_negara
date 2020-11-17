@@ -221,7 +221,7 @@
                                                     </div>
                                                     <div class="col-lg-3">% =</div>
                                                     <div class="col-lg-3">
-                                                        <input type="number" class="form-control form-hasil" value="{{ ($klasifikasi->klasifikasi * $klasifikasi->nilai_input_klasifikasi) / 100 }}" placeholder="0" readonly="">
+                                                        <input type="number" class="form-control form-hasil" value="{{ round((($klasifikasi->klasifikasi * $klasifikasi->nilai_input_klasifikasi) / 100), 2) }}" placeholder="0" readonly="">
                                                     </div>
                                                 </div>
                                                 @endforeach
@@ -274,7 +274,7 @@
                                                         </div>
                                                         <div class="col-lg-3">=</div>
                                                         <div class="col-lg-3">
-                                                            <input type="number" class="form-control text-value-unit" placeholder="0" value="{{ ($subKomponen->jumlah) ? (($klasifikasi->nilai_input_klasifikasi / $subKomponen->jumlah) * $klasifikasi->klasifikasi) / 100 : 0  }}" readonly>
+                                                            <input type="number" class="form-control text-value-unit" placeholder="0" value="{{ ($subKomponen->jumlah) ? round(((($klasifikasi->nilai_input_klasifikasi / $subKomponen->jumlah) * $klasifikasi->klasifikasi) / 100), 2) : 0  }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
