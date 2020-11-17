@@ -275,23 +275,26 @@ class KerusakanController extends Controller
                 ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
                 ->get()->toArray();
 
-            $komponen->numberOfSub = count($subKomponen);
-            $komponen->subKomponen = $subKomponen;
-            
-            foreach($komponen->subKomponen as $subKomponen){
-                if ($subKomponen->id_satuan == 2) {
-                    $subKomponen->klasifikasi = DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)->get()->toArray();
+                $komponen->numberOfSub = count($subKomponen);
+                $komponen->subKomponen = $subKomponen;
+
+                $sumTingkatKerusakan = 0;
+                foreach($komponen->subKomponen as $subKomponen){
+                    if ($subKomponen->id_satuan == 2) {
+                        $subKomponen->klasifikasi = DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)->get()->toArray();
+                    }
+                    else{
+                        $subKomponen->klasifikasi = DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)->get()->toArray();
+                    }
+
+                    $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;
                 }
-                else{
-                    $subKomponen->klasifikasi = DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)->get()->toArray();
-                }
-            }
-            
+                $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
         }
+        // dd($komponens);
 
         $kerusakan = Kerusakan::select('kerusakan.opd as opd', 'gedung.nama as nama_gedung', 'gedung.luas as luas', 'gedung.jumlah_lantai as jml_lantai', 'kerusakan.nomor_aset as nomor_aset', 'kerusakan.tanggal as tanggal', 'kerusakan.petugas_survei1 as petugas_survei1', 'kerusakan.petugas_survei2 as petugas_survei2', 'kerusakan.petugas_survei3 as petugas_survei3', 'kerusakan.perwakilan_opd1 as perwakilan_opd1', 'kerusakan.perwakilan_opd2 as perwakilan_opd2')->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')->where('kerusakan.id', $id_kerusakan)->first();
 
-        // dd($komponens);
         
         $gedung = Gedung::select('gedung.id as id_gedung')->join('kerusakan', 'gedung.id', '=', 'kerusakan.id_gedung')->where('kerusakan.id', $id_kerusakan)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $gedung->id_gedung)->first();

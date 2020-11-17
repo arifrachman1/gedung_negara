@@ -142,7 +142,6 @@
                         <tbody>
                             @php $index = 0; @endphp
                             @foreach($komponens as $parentIndex => $komponen)
-                            @php $sumTingkatKerusakan = 0; @endphp
                                 @foreach($komponen->subKomponen as $subIndex => $subKomponen)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
@@ -296,9 +295,8 @@
                                     </div>
                                     @endif
                                     <td>{{ $subKomponen->tingkat_kerusakan }}%</td>
-                                    @php $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;@endphp
-                                    @if($subIndex == count($komponen->subKomponen))
-                                        <td rowspan="{{ $komponen->numberOfSub }}">{{ $sumTingkatKerusakan }}</td>
+                                    @if($subIndex == 0)
+                                        <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->sumTingkatKerusakan }}</td>
                                     @endif
 
                                 </tr>
