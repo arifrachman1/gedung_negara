@@ -173,11 +173,16 @@ class KerusakanController extends Controller
                 ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
                 ->where('id_parent', $parent->id)
                 ->get();
+            foreach ($subKomponen as &$sk) {
+                if($sk->id_satuan == 1){
+                    $sk->options = DB::table('komponen_opsi as ko')
+                        ->where('ko.id_komponen', $sk->id)
+                        ->get();
+                }
+            }
             $parent->numberOfSub = count($subKomponen);
             $parent->subKomponen = $subKomponen;
         }
-
-    
         // dd($komponens);
 
         $indexStartKomponen = 21;
@@ -192,6 +197,7 @@ class KerusakanController extends Controller
                 $sheet->setCellValue('E'.$currentRow, $subKomponen->id );
                 $sheet->setCellValue('F'.$currentRow, $subKomponen->nama );
                 $sheet->setCellValue('H'.$currentRow, $subKomponen->id_satuan );
+                $sheet->setCellValue('J'.$currentRow, $subKomponen->bobot );
                 if($subKomponen->id_satuan == 1){
                     $sheet->mergeCells("K$currentRow:T$currentRow");
                     $this->setCellDropdown($sheet, "K$currentRow", []);
@@ -199,11 +205,7 @@ class KerusakanController extends Controller
                 $currentRow++;
             }
         }
-
-
         // petugas survey
-
-
         $writer = new Xlsx($spreadsheet);
         $writer->save($output_file);
         //  $output_file;
