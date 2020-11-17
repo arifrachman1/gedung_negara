@@ -245,6 +245,10 @@ class KerusakanController extends Controller
             $parent->subKomponen = $subKomponen;
         }
 
+        // $jml_sub_komp = -1;
+        // foreach ($komponens as $komponen) 
+        //     foreach ($komponen->subKomponen as $subKomponen) 
+        //         $jml_sub_komp++;
         $indexStartKomponen = 21;
         $numbering = 1;
         $currentRow = $indexStartKomponen;
@@ -252,13 +256,12 @@ class KerusakanController extends Controller
             $sheet->setCellValue('C'.$currentRow, $komponen->id );
             $sheet->setCellValue('D'.$currentRow, $komponen->nama );
             foreach ($komponen->subKomponen as $indexSubKomponen => $subKomponen) {
-                $sheet->insertNewRowBefore($currentRow + 1, 1);
                 $sheet->setCellValue('B'.$currentRow, $numbering++ );
                 $sheet->setCellValue('E'.$currentRow, $subKomponen->id );
                 $sheet->setCellValue('F'.$currentRow, $subKomponen->nama );
                 $sheet->mergeCells("F$currentRow:G$currentRow");
                 $sheet->setCellValue('H'.$currentRow, $subKomponen->id_satuan );
-                $sheet->setCellValue('I'.$currentRow, $subKomponen->id_satuan );
+                $sheet->setCellValue('I'.$currentRow, $subKomponen->satuan );
                 $sheet->setCellValue('K'.$currentRow, $subKomponen->bobot );
                 
                 if($subKomponen->id_satuan == 1){
@@ -295,7 +298,8 @@ class KerusakanController extends Controller
                 $currentRow++;
             }
         }
-
+        $sheet->removeRow($currentRow, 40-$currentRow+$indexStartKomponen);
+        $sheet->setCellValue("V".$currentRow, '=(SUM(V'.$indexStartKomponen.':V'.($currentRow-1).'))');
         // petugas survey
         $writer = new Xlsx($spreadsheet);
         $writer->save($output_file);
