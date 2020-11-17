@@ -169,7 +169,7 @@ class KerusakanController extends Controller
         }
 
         return redirect()
-            ->action('KerusakanController@index')
+            ->action('KerusakanController@viewKerusakan')
             ->with(['success' => 'Kerusakan berhasil ditambahkan.']);
     }
 
@@ -247,45 +247,55 @@ class KerusakanController extends Controller
         return redirect('master_kerusakan');
     }
 
-    public function viewKerusakan($id) {
-        $kerusakan = Kerusakan::select('kerusakan.id as id_kerusakan',
-                                       'kerusakan.opd as opd', 
-                                       'kerusakan.nomor_aset as nomor_aset',
-                                       'kerusakan.petugas_survei1 as petugas_survei1',
-                                       'kerusakan.petugas_survei2 as petugas_survei2',
-                                       'kerusakan.petugas_survei3 as petugas_survei3',
-                                       'kerusakan.perwakilan_opd1 as perwakilan_opd1',
-                                       'kerusakan.perwakilan_opd2 as perwakilan_opd2',
-                                       'kerusakan.tanggal as tanggal',
-                                       'gedung.id as id_gedung',
-                                       'gedung.nama as nama_gedung',
-                                       'gedung.luas as luas', 
-                                       'gedung.jumlah_lantai as jml_lantai')
-                                ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
-                                ->where('kerusakan.id', $id)
-                                ->first();
+    public function viewKerusakan($id_kerusakan) {
+        $id_parents = KerusakanDetail::select('id_parent as id')
+            ->join('komponen', 'komponen.id', '=', 'kerusakan_detail.id_komponen')
+            ->where('id_kerusakan', $id_kerusakan)
+            ->distinct('komponen.id_parent')->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereIn('id', $id_parents)
+            ->get();
+        foreach ($komponens as $komponen) {
+            $subKomponen = DB::table('kerusakan_detail as kd')
+                ->select(
+                    'kom.id as id_komponen','kom.id_satuan', 'kom.nama', 'kom.bobot',
+                    'kd.tingkat_kerusakan', 'kd.jumlah', 'kd.id as id_kerusakan_detail', 
+                    'kd.id_komponen_opsi as id_komponen_opsi',
+                    'sat.id as id_satuan', 'sat.nama as satuan'
+                )
+                ->where('id_kerusakan', $id_kerusakan)
+                ->where('id_parent', $komponen->id)
+                ->join('komponen as kom', 'kom.id', '=', 'kd.id_komponen')
+                ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+                ->get()->toArray();
+
+            $komponen->numberOfSub = count($subKomponen);
+            $komponen->subKomponen = $subKomponen;
+            
+            foreach($komponen->subKomponen as $subKomponen){
+                if ($subKomponen->id_satuan == 2) {
+                    $subKomponen->klasifikasi = DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)->get()->toArray();
+                }
+                else{
+                    $subKomponen->klasifikasi = DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)->get()->toArray();
+                }
+            }
+            
+        }
+
+        $kerusakan = Kerusakan::select('kerusakan.opd as opd', 'gedung.nama as nama_gedung', 'gedung.luas as luas', 'gedung.jumlah_lantai as jml_lantai', 'kerusakan.nomor_aset as nomor_aset', 'kerusakan.tanggal as tanggal', 'kerusakan.petugas_survei1 as petugas_survei1', 'kerusakan.petugas_survei2 as petugas_survei2', 'kerusakan.petugas_survei3 as petugas_survei3', 'kerusakan.perwakilan_opd1 as perwakilan_opd1', 'kerusakan.perwakilan_opd2 as perwakilan_opd2')->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')->where('kerusakan.id', $id_kerusakan)->first();
+
+        // dd($komponens);
         
-        $gedung = Gedung::select('gedung.id as id_gedung')->join('kerusakan', 'gedung.id', '=', 'kerusakan.id_gedung')->where('kerusakan.id', $id)->first();
+        $gedung = Gedung::select('gedung.id as id_gedung')->join('kerusakan', 'gedung.id', '=', 'kerusakan.id_gedung')->where('kerusakan.id', $id_kerusakan)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $gedung->id_gedung)->first();
         $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
         $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
-        
-        $komponen = DB::table('komponen as t1')
-            ->select('t2.id as id_komponen',
-                     't1.nama as nama_komponen', 
-                     't2.nama as sub_komponen', 
-                     'satuan.id as id_satuan', 
-                     'satuan.nama as nama_satuan',
-                     'kerusakan_detail.tingkat_kerusakan'
-                     )
-            ->rightjoin('komponen as t2', 't1.id', '=', 't2.id_parent')
-            ->join('satuan', 't2.id_satuan', '=', 'satuan.id')
-            ->join('kerusakan_detail', 't2.id', '=', 'kerusakan_detail.id_komponen')
-            ->orderBy('t1.id', 'asc')->get();
 
-        return view('Kerusakan/view_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponen'));
+        return view('Kerusakan/view_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens'));
     }
 
     public function postSubmitKerusakan(Request $request) {
