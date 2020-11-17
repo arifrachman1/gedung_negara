@@ -137,7 +137,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @php $index = $sumOfTingkatKerusakan = 0; @endphp
+                      @php $index = 0; @endphp
                       @foreach($komponens as $parentIndex => $komponen)
                         @foreach($komponen->subKomponen as $subIndex => $subKomponen)
                         <input type="hidden" name="satuans[]" value="{{ $subKomponen->id_satuan }}" class="satuans">
@@ -192,13 +192,12 @@
                             </td>
                           @endif
                           <td>
-                          @php $sumOfTingkatKerusakan += $subKomponen->tingkat_kerusakan; @endphp
-                            <p class="tk_text_{{ $parentIndex }}"> {{ $subKomponen->tingkat_kerusakan }}</p>
+                            <p class="tk_text_{{ $parentIndex }}"> {{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan * 100 : 0 }}%</p>
                             <input type="hidden" class="tk_value tk_value_{{ $parentIndex}}" name="tk_value[]" value="{{ $subKomponen->tingkat_kerusakan }}">
                           </td>
                           @if($subIndex == 0)
                             <td rowspan="{{ $komponen->numberOfSub }}">
-                              <p class="tk_keterangan_{{ $parentIndex }}">{{ $komponen->sumTingkatKerusakan }}</p>
+                              <p class="tk_keterangan_{{ $parentIndex }}">{{ $komponen->sumTingkatKerusakanText }}</p>
                             </td>
                           @endif
                         </tr>
@@ -210,10 +209,10 @@
                       <tr>
                         <td colspan="6">Jumlah Kerusakan</td>
                         <td>
-                          <p id="textTotalKerusakan">{{ $sumOfTingkatKerusakan }}</p>
+                          <p id="textTotalKerusakan">{{ $sumAllTingkatKerusakan }}</p>
                         </td>
                         <td colspan="2" >
-                          <p id="keteranganTotal">{{ $sumOfTingkatKerusakan }}</p>
+                          <p id="keteranganTotal">{{ $sumAllTingkatKerusakanText }}</p>
                         </td>
                       </tr>
                     </tfoot>
@@ -227,11 +226,9 @@
                     <label>Gambar Bukti Kerusakan</label>
                     <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
                 </div>
-                <div class="form_group">
-                </div>
             </div>
-            <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
-            <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
+              <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
+              <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
         </div>
       </div>
     </div>
@@ -434,7 +431,7 @@
 
       let percent = toDouble(toPercent(nilai_opsi, bobot));
       $('.input_estimasi_'+index_komponen).val(id_opsi);
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(percent + ' %');
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((percent * 100) + ' %');
       $('.tk_value_'+index_parent).eq(index_sub_komponen).val(percent);
 
       sumOfAllKerusakan(index_parent);
@@ -487,7 +484,7 @@
       _klasifikasiKerusakanPersen[index_komponen] = bufferKlasifikasiKerusakanPersen;
 
       sum = toDouble(toPercentFinal(sum, bobot));
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sum + ' %');
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
       $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
 
       sumOfAllKerusakan(index_parent);
@@ -554,7 +551,7 @@
         _klasifikasiKerusakanUnit[index_komponen] = bufferKlasifikasiKerusakanUnit;
 
         sum = toDouble(toPercentFinal(sum, bobot));
-        $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sum + ' %');
+        $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
         $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
         sumOfAllKerusakan(index_parent);        
         $('#modalUnit').modal('hide');

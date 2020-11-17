@@ -398,7 +398,7 @@ class KerusakanController extends Controller
                     $opsi_selected = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
                     $opsi = KomponenOpsi::select("id")
                         ->where('opsi', $opsi_selected)
-                        ->where('id_kompoenen', $id_sub_komponen)
+                        ->where('id_komponen', $id_sub_komponen)
                         ->first();
                     $tingkat_kerusakan = $opsi->nilai/100;
                     $newKerusakanDetail->id_komponen_opsi = $opsi->id;
@@ -597,7 +597,10 @@ class KerusakanController extends Controller
     }
 
     public function mapStatusTingkatKerusakan($tingkat_kerusakan) {
-        if ($tingkat_kerusakan <= 0.3) {
+        $status = '';
+        if($tingkat_kerusakan == 0){
+            $status = "Tidak ada kerusakan";
+        } else if ($tingkat_kerusakan <= 0.3) {
             $status = "Tingkat Kerusakan Rendah";
         } else if ($tingkat_kerusakan > 0.3 && $tingkat_kerusakan <= 0.45) {
             $status = "Tingkat Kerusakan Sedang";
@@ -616,6 +619,7 @@ class KerusakanController extends Controller
             ->select('id', 'nama')
             ->whereIn('id', $id_parents)
             ->get();
+        $sumAlltingkatKerusakan = 0;
         foreach ($komponens as $komponen) {
             $subKomponen = DB::table('kerusakan_detail as kd')
                 ->select(
@@ -646,8 +650,10 @@ class KerusakanController extends Controller
                 }
                 $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
                 $komponen->sumTingkatKerusakanStatus = $this->mapStatusTingkatKerusakan($sumTingkatKerusakan);
+                $sumAlltingkatKerusakan += $sumTingkatKerusakan;
         }
-        //dd($komponens);
+        $sumAlltingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAlltingkatKerusakan);
+        // dd($komponens);
 
         $kerusakan = Kerusakan::select('kerusakan.opd as opd', 'gedung.nama as nama_gedung', 'gedung.luas as luas', 'gedung.jumlah_lantai as jml_lantai', 'kerusakan.nomor_aset as nomor_aset', 'kerusakan.tanggal as tanggal', 'kerusakan.petugas_survei1 as petugas_survei1', 'kerusakan.petugas_survei2 as petugas_survei2', 'kerusakan.petugas_survei3 as petugas_survei3', 'kerusakan.perwakilan_opd1 as perwakilan_opd1', 'kerusakan.perwakilan_opd2 as perwakilan_opd2')->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')->where('kerusakan.id', $id_kerusakan)->first();
 
@@ -659,7 +665,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
 
-        return view('Kerusakan/view_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens'));
+        return view('Kerusakan/view_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText'));
     }
 
     public function postSubmitKerusakan(Request $request) {
@@ -769,6 +775,7 @@ class KerusakanController extends Controller
             ->select('id', 'nama')
             ->whereIn('id', $id_parents)
             ->get();
+        $sumAllTingkatKerusakan = 0;
         foreach ($komponens as $komponen) { 
             $subKomponens = DB::table('kerusakan_detail as kd')
             ->select(
@@ -781,6 +788,9 @@ class KerusakanController extends Controller
             ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
             ->get()->toArray();
 
+            $komponen->numberOfSub = count($subKomponens);
+            $komponen->subKomponen = $subKomponens;
+
             $sumTingkatKerusakan = 0;
             foreach($subKomponens as $subKomponen){
                 if($subKomponen->id_satuan != 1){
@@ -790,11 +800,11 @@ class KerusakanController extends Controller
                 }
                 $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;
             }
-            $komponen->subKomponen = $subKomponens;
-            $komponen->numberOfSub = count($subKomponens);
-
             $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
+            $komponen->sumTingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumTingkatKerusakan);
+            $sumAllTingkatKerusakan += $sumTingkatKerusakan;
         }
+        $sumAllTingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAllTingkatKerusakan);
         // dd($komponens);
 
         $kerusakan = Kerusakan::select('kerusakan.id as id_kerusakan',
@@ -821,7 +831,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
         
-        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens'));
+        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sumAllTingkatKerusakan', 'sumAllTingkatKerusakanText'));
     }
 
     public function postSubmitEditKerusakan(Request $request) {
