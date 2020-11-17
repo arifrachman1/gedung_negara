@@ -394,7 +394,7 @@ class KerusakanController extends Controller
                     $opsi_selected = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
                     $opsi = KomponenOpsi::select("id")
                         ->where('opsi', $opsi_selected)
-                        ->where('id_kompoenen', $id_sub_komponen)
+                        ->where('id_komponen', $id_sub_komponen)
                         ->first();
                     $tingkat_kerusakan = $opsi->nilai/100;
                     $newKerusakanDetail->id_komponen_opsi = $opsi->id;
