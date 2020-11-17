@@ -23,9 +23,6 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PDF;
 use Log;
 use Illuminate\Support\Facades\Validator;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class KerusakanController extends Controller
 {
