@@ -102,7 +102,8 @@ class KerusakanController extends Controller
         $first_opsi = $this->opsi_index;
         $selected_opsi = null;
         foreach($options as $i => $o){
-            if($i == $selected) $selected_opsi = $o->opsi;
+            if($i == 0) $selected_opsi = $o->opsi;
+            if($o->id == $selected) $selected_opsi = $o->opsi;
             $opsiSheet->setCellValue('B'.$this->opsi_index, $o->opsi);
             $opsiSheet->setCellValue('C'.$this->opsi_index, $o->nilai/100);
             $opsiSheet->setCellValue('D'.$this->opsi_index, $o->id);
@@ -142,12 +143,45 @@ class KerusakanController extends Controller
         $timeNow    = date('H:i:s');
 
         $id_gedung = $request->get('id_gedung');
+        $id_kerusakan = $request->get('id_kerusakan');
         $gedung = Gedung::where('id', $id_gedung)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
         $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
         $kab_kota = KabupatenKota::select('kota.nama as nama_kota')->where('id_kota', $daerah->kode_kabupaten)->first();
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
+
+
+        /**
+         * Jika data kerusakan sudah terisi
+         */
+
+        $kerusakan_ob = ["kerusakan_detail" => []];
+        if($id_kerusakan !== null && ($kerusakan = Kerusakan::where('id', $id_kerusakan)->first()) !== null){
+            $kerusakan_detail = KerusakanDetail::where('id_kerusakan', $id_kerusakan)->get();
+            
+            $opd        = $kerusakan->opd;
+            $nomorAset  = $kerusakan->nomor_aset;
+            $surveyor1  = $kerusakan->petugas_survei1;
+            $surveyor2  = $kerusakan->petugas_survei2; 
+            $surveyor3  = $kerusakan->petugas_survei3;
+            $pwopd1     = $kerusakan->perwakilan_opd1;
+            $pwopd2     = $kerusakan->perwakilan_opd2;
+            foreach($kerusakan_detail as $kd){
+                $kk = [];
+                $kerusakan_klasifikasi = KerusakanKlasifikasi::where('id_kerusakan_detail', $kd->id)->get();
+                foreach($kerusakan_klasifikasi as $_kk){
+                    $kk[$_kk->klasifikasi] = $_kk;
+                }
+                $opsi = KomponenOpsi::select("id", "opsi")->where('id', $kd->id_komponen_opsi)->first();
+                $kerusakan_ob['kerusakan_detail'][$kd->id_komponen] = [
+                    "detail" => $kd,
+                    "opsi" => ($opsi !== null)? $opsi->opsi:null,
+                    "kerusakan_klasifikasi" => $kk
+                ];
+
+            }
+        }
 
         $temp_file = storage_path('excel_template').'/temp_kerusakan.xlsx';
         $output_file = storage_path('app/public/excel/kerusakan').'/temp_kerusakan.xlsx';
@@ -239,10 +273,26 @@ class KerusakanController extends Controller
                         'V'.$cr, 
                         '=(M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*IF(K'.$cr.', K'.$cr.'/100, 1)'
                     );
+                    if(isset($kerusakan_ob["kerusakan_detail"][$subKomponen->id])){
+                        $kd = $kerusakan_ob["kerusakan_detail"][$subKomponen->id];
+                        if( $kd["detail"]->jumlah)
+                            $sheet->setCellValue('J'.$cr, $kd["detail"]->jumlah);
+                        if($kd["kerusakan_klasifikasi"][0.2]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('L'.$cr, $kd["kerusakan_klasifikasi"][0.2]->nilai_input_klasifikasi);
+                        if($kd["kerusakan_klasifikasi"][0.4]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('N'.$cr, $kd["kerusakan_klasifikasi"][0.4]);
+                        if($kd["kerusakan_klasifikasi"][0.6]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('P'.$cr, $kd["kerusakan_klasifikasi"][0.6]);
+                        if($kd["kerusakan_klasifikasi"][0.8]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('R'.$cr, $kd["kerusakan_klasifikasi"][0.8]);
+                        if($kd["kerusakan_klasifikasi"][1.0]->nilai_input_klasifikasi != 0.0)
+                            $sheet->setCellValue('T'.$cr, $kd["kerusakan_klasifikasi"][1.0]);
+                    }
                 }
                 $currentRow++;
             }
         }
+
         // petugas survey
         $writer = new Xlsx($spreadsheet);
         $writer->save($output_file);
@@ -334,14 +384,19 @@ class KerusakanController extends Controller
                 $newKerusakanDetail->id_komponen        = $id_sub_komponen;
                 $newKerusakanDetail->tingkat_kerusakan  = $tingkat_kerusakan;
                 
+                $jumlah_item = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                if($jumlah_item === null || $jumlah_item == "") $jumlah_item = 0;
+
                 if($id_satuan == 1){
                     $opsi_selected = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                    $opsi = KomponenOpsi::select("id")->where('opsi', $opsi_selected)->first();
+                    $opsi = KomponenOpsi::select("id")
+                        ->where('opsi', $opsi_selected)
+                        ->where('id_kompoenen', $id_sub_komponen)
+                        ->first();
+                    $tingkat_kerusakan = $opsi->nilai/100;
                     $newKerusakanDetail->id_komponen_opsi = $opsi->id;
                     $newKerusakanDetail->save();
                 }else{
-                    $jumlah_item = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-                    if($jumlah_item === null || $jumlah_item == "") $jumlah_item = 0;
                     ($jumlah_item != 0) && $newKerusakanDetail->jumlah = $jumlah_item;
                     $newKerusakanDetail->save();
                     for($i = 0; $i < 5; $i++){
@@ -351,7 +406,7 @@ class KerusakanController extends Controller
                         $tingkat_kerusakan += $nilai_input_klasifikasi;
                         $input_klasifikasi = new KerusakanKlasifikasi;
                         $input_klasifikasi->id_kerusakan_detail     = $newKerusakanDetail->id;
-                        $input_klasifikasi->nilai_input_klasifikasi = $nilai_input_klasifikasi;
+                        $input_klasifikasi->nilai_input_klasifikasi = $jumlah_rusak;
                         $input_klasifikasi->klasifikasi             = 0.2*($i+1);
                         $input_klasifikasi->save();
                     }
