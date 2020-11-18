@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Komponen extends Model
 {
@@ -11,6 +12,10 @@ class Komponen extends Model
     protected $guarded = [];
     // protected $fillable = [''];
     public $timestamps = false;
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     public function satuan()
     {

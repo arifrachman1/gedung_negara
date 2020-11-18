@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-secondary">Export to Excel</button>
+                    <button class="btn btn-secondary" href="{{url('kerusakan.excel.export')}}">Export to Excel</button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
