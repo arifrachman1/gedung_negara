@@ -34,27 +34,13 @@
                   @php $no = 1; @endphp
                   @foreach($kategori as $val)
                     <tr>
-                    <td>{{$no++}}</td>
+                      <td>{{$no++}}</td>
                       <td>{{ $val->nama }}</td>
                       <td>
-                        <a class="btn btn-warning" @can('jenisgedung.update') href="{{ url('edit_master_jenisgedung/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> |
-                        <a @can('jenisgedung.delete') data-toggle="modal" data-target="#delete" href="#"  @endcan class="btn btn-danger" ><i class="button"><span class="icon text-white-100">Hapus</span> </a></span> </i></a></td>
+                        <a class="btn btn-warning mr-1" @can('jenisgedung.update') href="{{ url('edit_master_jenisgedung/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a>
+                        <button class="btn btn-danger" @can('jenisgedung.delete') data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" id="delete" @endcan><i class="button"><span class="icon text-white-100">Hapus</span></i></button>
+                      </td>
                     </tr>
-                            <div class="modal fade" id="delete" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Hapus Jenis Gedung</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <div class="modal-body">Jika anda menghapus Jenis Gedung ini akan menyebabkan hilangnya data pada Data Gedung yang lain.!!! Apakah anda yakin mau menghapusnya?
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a class="btn btn-danger" href="{{ url('hapus_master_jenisgedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Hapus</span> </a> </div>
-                                    </div>
                   @endforeach
                   </tbody>
             </table>
@@ -64,6 +50,36 @@
       
       <!-- End of Main Content -->
 
-</body>
  @include('template/footer')
- </html>
+ <!-- Modal -->
+<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+  <form action="{{url('hapus_master_jenisgedung')}}" method="post">
+    {{ csrf_field() }}
+    @method('POST')
+    <input type="hidden" id="id_jenis_gedung" name="id">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Hapus Jenis Gedung</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">Apakah anda yakin mau menghapusnya?</div>
+          <div class="modal-footer">
+            <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
+            <button type=submit class="btn btn-danger">Ya, hapus</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+
+  $(document).on('click','#delete',function(){
+    let id = $(this).attr('data-id');
+    console.log(id);
+    $('#id_jenis_gedung').val(id);
+  });
+      
+</script>

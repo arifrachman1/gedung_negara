@@ -36,8 +36,8 @@ class KategoriGedungController extends Controller
         return redirect('master_jenisgedung');
     }
 
-    public function delete($id) {
-        $delete = KategoriGedung::find($id);
+    public function delete(Request $request) {
+        $delete = KategoriGedung::find($request->id);
         $delete->delete();
         return redirect('master_jenisgedung');
     }

@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view ('gedung/tambah_excel_master_gedung');
     });
 
-    Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
+    Route::post('hapus_master_gedung/', 'GedungController@delete');
     Route::get('export_excel_master_gedung', 'GedungController@exportExcel');
     Route::post('import_excel_master_gedung', 'GedungController@importExcel');
     Route::get('template_excel_master_gedung', function (){
@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('tambah_master_jenisgedung_post', 'KategoriGedungController@input_post');
     Route::get('edit_master_jenisgedung/{id}', 'KategoriGedungController@edit');
     Route::post('edit_master_jenisgedung_post', 'KategoriGedungController@edit_post');
-    Route::get('hapus_master_jenisgedung/{id}', 'KategoriGedungController@delete');
+    Route::post('hapus_master_jenisgedung/', 'KategoriGedungController@delete');
     
   //---------------PENGATURAN------------------
 

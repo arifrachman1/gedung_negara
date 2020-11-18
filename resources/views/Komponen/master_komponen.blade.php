@@ -56,39 +56,39 @@
 </div>
 <!-- /.container-fluid -->
 
+@include('template/footer')
+
 <!-- Modal -->
 <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
-    <form action="{{url('delete')}}" method="post">
-      {{ csrf_field() }}
-      @method('POST')
-      <input type="hidden" id="id_komponen" name="id">
+  <form action="{{url('delete')}}" method="post">
+    {{ csrf_field() }}
+    @method('POST')
+    <input type="hidden" id="id_komponen" name="id">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Hapus Komponen</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-          <div class="modal-body">Jika anda menghapus Komponen ini akan menyebabkan hilangnya data pada Data Kerusakan yang lain.!!! Apakah anda yakin mau menghapusnya?</div>
-        <div class="modal-footer">
-        <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
-        <button type=submit class="btn btn-danger">Ya, hapus</button>
+        <div class="modal-body">Jika anda menghapus Komponen ini akan menyebabkan hilangnya data pada Data Kerusakan yang lain.!!! Apakah anda yakin mau menghapusnya?</div>
+          <div class="modal-footer">
+            <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
+            <button type=submit class="btn btn-danger">Ya, hapus</button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
- </div>
 </div>
-</html>
-</body>
-@include('template/footer')
 
- <script>
- 
+<script>
+
   $(document).on('click','#delete',function(){
-         let id = $(this).attr('data-id');
-         console.log(id);
-         $('#id_komponen').val(id);
-    });
-        
-    </script>
+    let id = $(this).attr('data-id');
+    console.log(id);
+    $('#id_komponen').val(id);
+  });
+      
+</script>
 
 
