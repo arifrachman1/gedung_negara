@@ -284,9 +284,9 @@
                                         </div>
                                     </div>
                                     @endif
-                                    <td>{{$subKomponen->tingkat_kerusakan * 100}}%</td>
+                                    <td>{{$subKomponen->tingkat_kerusakan}}%</td>
                                     @if($subIndex == 0)
-                                      <td style="border-right: 0">{{ is_numeric($komponen->sumTingkatKerusakan) ? $komponen->sumTingkatKerusakan * 100 : $komponen->sumTingkatKerusakan }}%</td>
+                                      <td style="border-right: 0">{{ $komponen->sumTingkatKerusakan }}%</td>
                                       <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->sumTingkatKerusakanStatus }}</td>
                                     @endif
 

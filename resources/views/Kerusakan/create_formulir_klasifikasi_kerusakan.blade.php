@@ -342,14 +342,15 @@
     let index_parent = index_komponen = id_komponen = index_sub_komponen = bobot = null;
 
     function toDouble(param){
-      return param.toFixed(2);
+      return param;
+      // return param.toFixed(2);
     }
 
-    function toPercent(param, bobot, jumlahUnit){
-      return (jumlahUnit) ? ((param / jumlahUnit) * bobot) / 100 : (param * bobot) / 100;
+    function sumKlasifikasiKerusakan(param, bobot, jumlahUnit){
+      return (jumlahUnit) ? ((param / jumlahUnit) * bobot) : (param * bobot) / 100;
     }
 
-    function toPercentFinal(param, bobot){
+    function sumTingkatKerusakan(param, bobot){
       return (bobot) ? (param * bobot) / 100 : param;
     }
 
@@ -362,11 +363,11 @@
       }
       if(sum == 0 ){
         text = 'Tidak ada kerusakan';
-      }else if(sum <= 0.3) {
+      }else if(sum <= 30) {
         text =  'Tingkat Kerusakan Ringan';
-      } else if (sum > 0.3 && sum <= 0.45) {
+      } else if (sum > 30 && sum <= 45) {
         text =  'Tingkat Kerusakan Sedang';
-      } else if (sum > 0.45) {
+      } else if (sum > 45) {
         text =  'Tingkat Kerusakan Berat';
       }
       return text;
@@ -376,7 +377,7 @@
       let text;
       if(param == 0 ){
         text = 'Tidak ada kerusakan';
-      }else if (param > 0.3) {
+      }else if (param > 30) {
         text = 'Rusak Berat';
       } else {
         text = 'Hitung Kerusakan Komponen Lain';
@@ -390,16 +391,13 @@
       for (let index = 0; index < total_komponen; index++)
         total += Number($('.tk_value')[index].value);
       total = toDouble(total);
-      $('#textTotalKerusakan').text((total*100)+ ' %');
-      let textTotal = toTextTotal(total);
-      $('#keteranganTotal').text(textTotal)
-
-      let status = toTextKlasifikasi(index_parent);
-      $('.tk_keterangan_'+index_parent).text(status);
+      $('#textTotalKerusakan').text(total + ' %');
+      $('#keteranganTotal').text(toTextTotal(total));
+      $('.tk_keterangan_'+index_parent).text(toTextKlasifikasi(index_parent));
     }
 
 
-    //Opsi
+    //Estimasi
     let id_opsi = bobot_opsi = null;
     $('.hitungEstimasi').click( function() {
       id_komponen = $(this).attr('data-id');
@@ -432,10 +430,10 @@
       nilai_opsi = $('option:selected', select).attr('data-nilai-opsi');
       id_opsi = $(select).val();
 
-      let percent = toDouble(toPercent(nilai_opsi, bobot));
+      let resultKlasifikasiKerusakan = toDouble(sumTingkatKerusakan(nilai_opsi, bobot));
       $('.input_estimasi_'+index_komponen).val(id_opsi);
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((percent * 100) + ' %');
-      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(percent);
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(resultKlasifikasiKerusakan + ' %');
+      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(resultKlasifikasiKerusakan);
 
       sumOfAllKerusakan(index_parent);
     })
@@ -462,20 +460,20 @@
       $('.input-value-persen').change(function(){
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
-        let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toDouble(toPercent(input_klasifikasi, persentase));
-        $('.text-value-persen').eq(index_klasifikasi).val(percent);
+        let bobotKlasifikasi = klasifikasiKerusakan[index_klasifikasi];
+        let resultKlasifikasi = toDouble(sumKlasifikasiKerusakan(input_klasifikasi, bobotKlasifikasi));
+        $('.text-value-persen').eq(index_klasifikasi).val(resultKlasifikasi);
       });
     })
 
     $('#btn-save-persen').click(function(){
-      let sum = 0;
+      let sumKlasifikasiKerusakan = 0;
       let bufferKlasifikasiKerusakanPersen = [];
       
       for (let index = 0; index < klasifikasiKerusakan.length; index++) {
         let bufferInput  = Number($('.input-value-persen').eq(index).val());
         let bufferResult = Number($('.text-value-persen').eq(index).val());
-        sum += bufferResult;
+        sumKlasifikasiKerusakan += bufferResult;
         
         bufferKlasifikasiKerusakanPersen.push({
           input: bufferInput,
@@ -485,10 +483,9 @@
         $('.input_persentase_'+index_komponen).eq(index).val(bufferInput);
       }
       _klasifikasiKerusakanPersen[index_komponen] = bufferKlasifikasiKerusakanPersen;
-
-      sum = toDouble(toPercentFinal(sum, bobot));
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
-      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
+      sumKlasifikasiKerusakan = toDouble((sumTingkatKerusakan(sumKlasifikasiKerusakan, bobot)) * 100);
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sumKlasifikasiKerusakan + ' %');
+      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sumKlasifikasiKerusakan);
 
       sumOfAllKerusakan(index_parent);
     })
@@ -519,9 +516,9 @@
       $('.input-value-unit').change(function(){
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
-        let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toPercent(input_klasifikasi, persentase, ele_jumlahUnitModal.val());
-        $('.text-value-unit').eq(index_klasifikasi).val(toDouble(percent));
+        let bobotKlasifikasi = klasifikasiKerusakan[index_klasifikasi];
+        let resultKlasifikasi = sumKlasifikasiKerusakan(input_klasifikasi, bobotKlasifikasi, ele_jumlahUnitModal.val());
+        $('.text-value-unit').eq(index_klasifikasi).val(toDouble(resultKlasifikasi));
       });
 
       $('#btn-save-unit').click(function(){
@@ -535,13 +532,13 @@
         }
         ele_jumlahUnit.val(jumlah_unit);
 
-        let sum = 0;
+        let sumKlasifikasiKerusakan = 0;
         let bufferKlasifikasiKerusakanUnit = [];
         
         for (let index = 0; index < klasifikasiKerusakan.length; index++) {
           let bufferInput  = Number($('.input-value-unit').eq(index).val());
           let bufferResult = Number($('.text-value-unit').eq(index).val());
-          sum += bufferResult;
+          sumKlasifikasiKerusakan += bufferResult;
           
           bufferKlasifikasiKerusakanUnit.push({
             input: bufferInput,
@@ -551,10 +548,9 @@
           $('.input_unit_'+index_komponen).eq(index).val(bufferInput);
         }
         _klasifikasiKerusakanUnit[index_komponen] = bufferKlasifikasiKerusakanUnit;
-
-        sum = toDouble(toPercentFinal(sum, bobot));
-        $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
-        $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
+        sumKlasifikasiKerusakan = toDouble((sumTingkatKerusakan(sumKlasifikasiKerusakan, bobot) * 100));
+        $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sumKlasifikasiKerusakan + ' %');
+        $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sumKlasifikasiKerusakan);
         sumOfAllKerusakan(index_parent);        
         $('#modalUnit').modal('hide');
       })

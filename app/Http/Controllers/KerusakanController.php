@@ -599,9 +599,9 @@ class KerusakanController extends Controller
         $status = '';
         if($tingkat_kerusakan == 0){
             $status = "Tidak ada kerusakan";
-        } else if ($tingkat_kerusakan <= 0.3) {
+        } else if ($tingkat_kerusakan <= 30) {
             $status = "Tingkat Kerusakan Rendah";
-        } else if ($tingkat_kerusakan > 0.3 && $tingkat_kerusakan <= 0.45) {
+        } else if ($tingkat_kerusakan > 30 && $tingkat_kerusakan <= 45) {
             $status = "Tingkat Kerusakan Sedang";
         } else {
             $status = "Tingkat Kerusakan Tinggi";
@@ -774,7 +774,6 @@ class KerusakanController extends Controller
             ->select('id', 'nama')
             ->whereIn('id', $id_parents)
             ->get();
-        $sumAllTingkatKerusakan = 0;
         foreach ($komponens as $komponen) { 
             $subKomponens = DB::table('kerusakan_detail as kd')
             ->select(
@@ -801,9 +800,7 @@ class KerusakanController extends Controller
             }
             $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
             $komponen->sumTingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumTingkatKerusakan);
-            $sumAllTingkatKerusakan += $sumTingkatKerusakan;
         }
-        $sumAllTingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAllTingkatKerusakan);
         // dd($komponens);
 
         $kerusakan = Kerusakan::select('kerusakan.id as id_kerusakan',
@@ -830,7 +827,11 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
         
-        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sumAllTingkatKerusakan', 'sumAllTingkatKerusakanText'));
+        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens'));
+    }
+
+    public function submitEditKerusakanForm(Request $request){
+        // die('yeay');
     }
 
     public function postSubmitEditKerusakan(Request $request) {

@@ -122,6 +122,8 @@
                     </div>
                 </div>
             </div>
+            <form method="POST" action="{{ url('edit_klasifikasi_kerusakan')}}" enctype="multipart/form-data">
+            @csrf
             <div class="table-responsive">
                 <div class="table-content">
                   <table class="table table-bordered" id="table-kerusakan" width="100%" cellspacing="0">
@@ -192,7 +194,7 @@
                             </td>
                           @endif
                           <td>
-                            <p class="tk_text_{{ $parentIndex }}"> {{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan * 100 : 0 }}%</p>
+                            <p class="tk_text_{{ $parentIndex }}"> {{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan : 0 }}%</p>
                             <input type="hidden" class="tk_value tk_value_{{ $parentIndex}}" name="tk_value[]" value="{{ $subKomponen->tingkat_kerusakan }}">
                           </td>
                           @if($subIndex == 0)
@@ -209,10 +211,10 @@
                       <tr>
                         <td colspan="6">Jumlah Kerusakan</td>
                         <td>
-                          <p id="textTotalKerusakan">{{ $sumAllTingkatKerusakan }}</p>
+                          <p id="totalKerusakan"></p>
                         </td>
                         <td colspan="2" >
-                          <p id="keteranganTotal">{{ $sumAllTingkatKerusakanText }}</p>
+                          <p id="keteranganTotal"></p>
                         </td>
                       </tr>
                     </tfoot>
@@ -230,6 +232,7 @@
               <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
               <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
         </div>
+        </form>
       </div>
     </div>
   </div>
@@ -249,7 +252,6 @@
         <div class="form-group">
           <label>Satuan: Estimasi</label>
           <select class="form-control" id="bufferEstimasi">
-            <option value="0" disabled>Pilih Opsi</option>
           </select>
         </div>
       </div>
@@ -304,9 +306,77 @@
     let _klasifikasiKerusakanPersen = _klasifikasiKerusakanUnit = [];
     let klasifikasiKerusakan = [0.20, 0.40, 0.60, 0.80, 1.00];
 
-    //Init
-    let eleContent  = $('#table-kerusakan tbody tr');
-    let eleSatuan   = $('.satuans');
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    let total_komponen = $('#table-kerusakan tbody tr').length;
+
+    let index_parent = index_komponen = id_komponen = index_sub_komponen = bobot = null;
+
+    function toDouble(param){
+      return param;
+      // return param.toFixed(2);
+    }
+
+    function sumKlasifikasiKerusakan(param, bobot, jumlahUnit){
+      return (jumlahUnit) ? ((param / jumlahUnit) * bobot) : (param * bobot) / 100;
+    }
+
+    function sumTingkatKerusakan(param, bobot){
+      return (bobot) ? (param * bobot) / 100 : param;
+    }
+
+    function toTextKlasifikasi(indexParent){
+      let input = $('.tk_value_'+indexParent);
+      let sum = 0;
+      let text;
+      for (let index = 0; index < input.length; index++) {
+        sum += Number(input[index].value);
+      }
+      if(sum == 0 ){
+        text = 'Tidak ada kerusakan';
+      }else if(sum <= 30) {
+        text =  'Tingkat Kerusakan Ringan';
+      } else if (sum > 30 && sum <= 45) {
+        text =  'Tingkat Kerusakan Sedang';
+      } else if (sum >45) {
+        text =  'Tingkat Kerusakan Berat';
+      }
+      return text;
+    }
+
+    function toTextTotal(param){
+      let text;
+      if(param == 0 ){
+        text = 'Tidak ada kerusakan';
+      }else if (param > 30) {
+        text = 'Rusak Berat';
+      } else {
+        text = 'Hitung Kerusakan Komponen Lain';
+      }
+
+      return text;
+    }
+
+    function sumOfAllKerusakan(){
+      let total = 0;
+      for (let index = 0; index < total_komponen; index++)
+        total += Number($('.tk_value')[index].value);
+      total = toDouble(total);
+      $('#totalKerusakan').text(total + ' %');
+      $('#keteranganTotal').text(toTextTotal(total))
+      $('.tk_keterangan_'+index_parent).text(toTextKlasifikasi(index_parent));
+    }
+
+    //Init data to form
+    let eleContent            = $('#table-kerusakan tbody tr');
+    let eleSatuan             = $('.satuans');
+    let eleTingkatKerusakan   = $('.tk_value');
+    let totalTingkatkerusakan = 0;
     for (let index = 0; index < eleContent.length; index++) {
       let _input_persentase = [];
       let _input_unit       = [];
@@ -328,77 +398,12 @@
         }
         _klasifikasiKerusakanUnit[index] = bufferUnit;
       }
+      totalTingkatkerusakan += Number(eleTingkatKerusakan[index].value);
     }
+    $('#totalKerusakan').text(toDouble(totalTingkatkerusakan)+'%');
+    $('#keteranganTotal').text(toTextTotal( (totalTingkatkerusakan) ? totalTingkatkerusakan / 100 : 0 ));
 
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-    let total_komponen = $('#table-kerusakan tbody tr').length;
-
-    let index_parent = index_komponen = id_komponen = index_sub_komponen = bobot = null;
-
-    function toDouble(param){
-      return param.toFixed(2);
-    }
-
-    function toPercent(param, bobot, jumlahUnit){
-      return (jumlahUnit) ? ((param / jumlahUnit) * bobot) / 100 : (param * bobot) / 100;
-    }
-
-    function toPercentFinal(param, bobot){
-      return (bobot) ? (param * bobot) / 100 : param;
-    }
-
-    function toTextKlasifikasi(indexParent){
-      let input = $('.tk_value_'+indexParent);
-      let sum = 0;
-      let text;
-      for (let index = 0; index < input.length; index++) {
-        sum += Number(input[index].value);
-      }
-      if(sum == 0 ){
-        text = 'Tidak ada kerusakan';
-      }else if(sum <= 0.3) {
-        text =  'Tingkat Kerusakan Ringan';
-      } else if (sum > 0.3 && sum <= 0.45) {
-        text =  'Tingkat Kerusakan Sedang';
-      } else if (sum > 0.45) {
-        text =  'Tingkat Kerusakan Berat';
-      }
-      return text;
-    }
-
-    function toTextTotal(param){
-      let text;
-      if(param == 0 ){
-        text = 'Tidak ada kerusakan';
-      }else if (param > 0.3) {
-        text = 'Rusak Berat';
-      } else {
-        text = 'Hitung Kerusakan Komponen Lain';
-      }
-
-      return text;
-    }
-
-    function sumOfAllKerusakan(){
-      let total = 0;
-      for (let index = 0; index < total_komponen; index++)
-        total += Number($('.tk_value')[index].value);
-      total = toDouble(total);
-      $('#textTotalKerusakan').text(total+ ' %');
-      let textTotal = toTextTotal(total);
-      $('#keteranganTotal').text(textTotal)
-
-      let status = toTextKlasifikasi(index_parent);
-      $('.tk_keterangan_'+index_parent).text(status);
-    }
-
-
-    //Opsi
+    //Estimasi
     let id_opsi = bobot_opsi = null;
     $('.hitungEstimasi').click( function() {
       id_komponen = $(this).attr('data-id');
@@ -429,10 +434,10 @@
       nilai_opsi = $('option:selected', select).attr('data-nilai-opsi');
       id_opsi = $(select).val();
 
-      let percent = toDouble(toPercent(nilai_opsi, bobot));
+      let resultKlasifikasiKerusakan = toDouble(sumTingkatKerusakan(nilai_opsi, bobot));
       $('.input_estimasi_'+index_komponen).val(id_opsi);
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((percent * 100) + ' %');
-      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(percent);
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(resultKlasifikasiKerusakan + ' %');
+      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(resultKlasifikasiKerusakan);
 
       sumOfAllKerusakan(index_parent);
     })
@@ -456,9 +461,9 @@
       $('.input-value-persen').change(function(){
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
-        let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toDouble(toPercent(input_klasifikasi, persentase));
-        $('.text-value-persen').eq(index_klasifikasi).val(percent);
+        let bobotKlasifikasi = klasifikasiKerusakan[index_klasifikasi];
+        let resultKlasifikasi = toDouble(sumKlasifikasiKerusakan(input_klasifikasi, bobotKlasifikasi));
+        $('.text-value-persen').eq(index_klasifikasi).val(resultKlasifikasi);
       });
 
       $('.input-value-persen').change();
@@ -466,13 +471,13 @@
     })
 
     $('#btn-save-persen').click(function(){
-      let sum = 0;
+      let sumKlasifikasiKerusakan = 0;
       let bufferKlasifikasiKerusakanPersen = [];
       
       for (let index = 0; index < klasifikasiKerusakan.length; index++) {
         let bufferInput  = Number($('.input-value-persen').eq(index).val());
         let bufferResult = Number($('.text-value-persen').eq(index).val());
-        sum += bufferResult;
+        sumKlasifikasiKerusakan += bufferResult;
         
         bufferKlasifikasiKerusakanPersen.push({
           input: bufferInput,
@@ -482,10 +487,9 @@
         $('.input_persentase_'+index_komponen).eq(index).val(bufferInput);
       }
       _klasifikasiKerusakanPersen[index_komponen] = bufferKlasifikasiKerusakanPersen;
-
-      sum = toDouble(toPercentFinal(sum, bobot));
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
-      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
+      sumKlasifikasiKerusakan = toDouble((sumTingkatKerusakan(sumKlasifikasiKerusakan, bobot)) * 100);
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sumKlasifikasiKerusakan + ' %');
+      $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sumKlasifikasiKerusakan);
 
       sumOfAllKerusakan(index_parent);
     })
@@ -513,7 +517,7 @@
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
         let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toPercent(input_klasifikasi, persentase, ele_jumlahUnitModal.val());
+        let percent = sumKlasifikasiKerusakan(input_klasifikasi, persentase, ele_jumlahUnitModal.val());
         $('.text-value-unit').eq(index_klasifikasi).val(toDouble(percent));
       });
 
@@ -533,13 +537,13 @@
         }
         ele_jumlahUnit.val(jumlah_unit);
 
-        let sum = 0;
+        let sumKlasifikasiKerusakan = 0;
         let bufferKlasifikasiKerusakanUnit = [];
         
         for (let index = 0; index < klasifikasiKerusakan.length; index++) {
           let bufferInput  = Number($('.input-value-unit').eq(index).val());
           let bufferResult = Number($('.text-value-unit').eq(index).val());
-          sum += bufferResult;
+          sumKlasifikasiKerusakan += bufferResult;
           
           bufferKlasifikasiKerusakanUnit.push({
             input: bufferInput,
@@ -550,9 +554,9 @@
         }
         _klasifikasiKerusakanUnit[index_komponen] = bufferKlasifikasiKerusakanUnit;
 
-        sum = toDouble(toPercentFinal(sum, bobot));
-        $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
-        $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
+        sumKlasifikasiKerusakan = toDouble((sumTingkatKerusakan(sumKlasifikasiKerusakan, bobot)) * 100);
+        $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sumKlasifikasiKerusakan + ' %');
+        $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sumKlasifikasiKerusakan);
         sumOfAllKerusakan(index_parent);        
         $('#modalUnit').modal('hide');
       })

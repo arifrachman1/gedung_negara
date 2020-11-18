@@ -167,6 +167,7 @@ Route::post('deleteKerusakan','KerusakanController@delete')->name('hapuskerusaka
 Route::post('submit_kerusakan/', 'KerusakanController@postSubmitKerusakan');
 Route::get('view_kerusakan/{id}', 'KerusakanController@viewKerusakan')->name("kerusakan.view");
 Route::get('edit_formulir_penilaian_kerusakan/{id}', 'KerusakanController@editFormKerusakan');
+Route::post('edit_klasifikasi_kerusakan', 'KerusakanController@submitEditKerusakanForm');
 Route::post('post_edit_formulir_surveyor', 'KerusakanController@postEditFormSurveyor');
 Route::get('edit_formulir_klasifikasi_kerusakan/{id_kerusakan}', 'KerusakanController@formEditIdentifikasiKerusakan');
 Route::get('kerusakan/export_template', 'KerusakanController@exportKerusakan')->name('kerusakan.excel.export');
