@@ -59,7 +59,7 @@
     <form action="{{url('hapususer/'.$val->id)}}" method="post">
       {{ csrf_field() }}
       @method('GET')
-      <input type="hidden" id="" name="id">
+      <input type="hidden" id="id_user" name="id">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -73,4 +73,13 @@
   </form>
  </div>
 </html>
+
 <script>
+ 
+ $(document).on('click','#delete',function(){
+        let id = $(this).attr('data-id');
+        console.log(id);
+        $('#id_user').val(id);
+   });
+       
+   </script>

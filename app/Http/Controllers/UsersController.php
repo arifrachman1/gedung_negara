@@ -75,8 +75,8 @@ class UsersController extends Controller
         return redirect('masteruser');
     }
 
-    public function deleteUser($id) {
-        $user = User::find($id);
+    public function deleteUser (Request $request) {
+        $user = User::find($request->id);
         $user->delete();
         return redirect('masteruser');
     }

@@ -34,7 +34,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  @php $no = 1; @endphp
+                    @php $no = 1; @endphp
                     @foreach($kerusakan as $val)
                     <tr>
                       <td>{{$no++}}</td>
