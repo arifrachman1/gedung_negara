@@ -3,7 +3,8 @@
 <body>
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
+        <div>
+        <div>
           <!-- Page Heading -->
 
           <!-- DataTales Example -->
@@ -44,7 +45,7 @@
                       <td><a class="btn btn-primary float-left mr-2" @can('kerusakan.read') href="{{url('view_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">View</span></i></a>
                           <a class="btn btn-warning float-left mr-2" @can('kerusakan.update') href="{{url('edit_formulir_penilaian_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Edit</span></i></a> 
                           <!-- <a class="btn btn-danger float-left mr-2" @can('kerusakan.delete') href="{{url('hapus_kerusakan/'.$val->id)}}" @endcan><i class="button"><span class="icon text-white-100">Hapus</span> </i></a> -->
-                          <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
+                          <button data-toggle="modal" @can('kerusakan.delete') data-target="#deleteModal" data-id="{{ $val->id }}" @endcan class="btn btn-danger" id="delete" >Hapus</button>
                     </tr>
                     @endforeach
                   </tbody>
@@ -55,10 +56,9 @@
 
         </div>
         <!-- /.container-fluid -->
-
-      </div>
+      
       <!-- End of Main Content -->
-<!-- @include('template/footer') -->
+@include('template/footer')
 <!-- Modal -->
 <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
     <form action="{{url('deleteKerusakan')}}" method="post">
