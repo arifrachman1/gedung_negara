@@ -503,21 +503,20 @@
       $('#modalUnit .modal-body').html(modalBody);
 
       let ele_jumlahUnit = $('#input_jumlah_unit_'+index_komponen);
-      let ele_jumlahUnitModal = $('#jumlahUnit');
       
-      ele_jumlahUnitModal.val(ele_jumlahUnit.val());
+      $('#jumlahUnit').val(ele_jumlahUnit.val());
       $('#modalUnit').modal('show');
 
       $('.input-value-unit').change(function(){
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
         let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toPercent(input_klasifikasi, persentase, ele_jumlahUnitModal.val());
+        let percent = toPercent(input_klasifikasi, persentase, $('#jumlahUnit').val());
         $('.text-value-unit').eq(index_klasifikasi).val(toDouble(percent));
       });
 
       $('#btn-save-unit').click(function(){
-        let jumlah_unit = ele_jumlahUnitModal.val();
+        let jumlah_unit = $('#jumlahUnit').val();
         if(!jumlah_unit){
           $('#show-error')
             .html('Harap mengisi Jumlah Unit.')
@@ -551,7 +550,7 @@
         $('#modalUnit').modal('hide');
       })
 
-      ele_jumlahUnitModal.change(function(){
+      $('#jumlahUnit').change(function(){
         $('#show-error').html('');
         $('.input-value-unit').change();
       })
