@@ -296,7 +296,7 @@
                             @endforeach
                             <tr>
                               <td colspan="6">Jumlah Kerusakan</td>
-                              <td> {{ $sumAlltingkatKerusakan * 100 }}% </td>
+                              <td> {{ $sumAlltingkatKerusakan }}% </td>
                               <td colspan="2"> {{ $sumAlltingkatKerusakanText }} </td>
                             </tr>
                         </tbody>
