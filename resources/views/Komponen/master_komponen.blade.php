@@ -40,7 +40,7 @@
                   <td>
                     <a href="{{url('detail/'.$val->id)}}" class="btn btn-primary mr-1">Detail</a>                
                     <a class="btn btn-warning" @can('komponen.update') href="{{url('edit/'.$val->id)}}" @endcan   ><i class="a"><span class="icon text-white-100">Edit</span> </i></a>                    
-                    <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                
+                    <button @can('komponen.update') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                
                   </td>             
                 </tr> 
                 @empty
