@@ -44,6 +44,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <td>No</th>
                       <th>Nama Gedung</th>
                       <th>Legalitas</th>
                       <th>Tipe Pemilik</th>
@@ -53,8 +54,10 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @php $no = 1; @endphp
                   @foreach($gedung as $val)
                     <tr>
+                      <td>{{ $no++ }}</td>
                       <td>{{ $val->nama }}</td>
                       @if ($val->legalitas == null)
                       <td>-</td>

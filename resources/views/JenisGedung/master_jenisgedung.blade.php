@@ -25,13 +25,16 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>No</th>
                       <th>Nama Jenis Gedung</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                  @php $no = 1; @endphp
                   @foreach($kategori as $val)
                     <tr>
+                    <td>{{$no++}}</td>
                       <td>{{ $val->nama }}</td>
                       <td>
                         <a class="btn btn-warning" @can('jenisgedung.update') href="{{ url('edit_master_jenisgedung/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> |
