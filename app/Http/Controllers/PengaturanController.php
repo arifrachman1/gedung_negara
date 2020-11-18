@@ -17,7 +17,7 @@ class PengaturanController extends Controller
     public function pengaturan() {
         $name = Session::get('name');
         $user = User::where('name', $name)->first();
-        return view('pengaturan/pengaturankw', compact('user'));
+        return view('Pengaturan/pengaturankw', compact('user'));
     }
 
     public function updatePwd($id, Request $request) {

@@ -9,11 +9,11 @@ class KategoriGedungController extends Controller
 {
     public function index() {
         $kategori = KategoriGedung::get();
-        return view('jenisgedung/master_jenisgedung', compact('kategori'));
+        return view('JenisGedung/master_jenisgedung', compact('kategori'));
     }
 
     public function input() {
-        return view('jenisgedung/tambah_master_jenisgedung');
+        return view('JenisGedung/tambah_master_jenisgedung');
     }
 
     public function input_post(Request $request) {
@@ -26,7 +26,7 @@ class KategoriGedungController extends Controller
 
     public function edit($id) {
         $edit = KategoriGedung::find($id);
-        return view('jenisgedung/edit_master_jenisgedung', compact('edit'));
+        return view('JenisGedung/edit_master_jenisgedung', compact('edit'));
     }
 
     public function edit_post(Request $request) {

@@ -19,7 +19,7 @@ class GedungController extends Controller
 {
     public function index() {
         $gedung = Gedung::get();
-        return view('gedung/master_gedung', compact('gedung'));
+        return view('Gedung/master_gedung', compact('gedung'));
     }
 
     public function detail($id) {
@@ -56,13 +56,13 @@ class GedungController extends Controller
         $kab_kota = KabupatenKota::where('id_kota', $daerah->kode_kabupaten)->select('kota.nama as nama')->first();
         $kecamatan = Kecamatan::where('id_kec', $daerah->kode_kecamatan)->select('kecamatan.nama as nama')->first();
         $desa_kelurahan = DesaKelurahan::where('id_kel', $daerah->kode_kelurahan)->select('kelurahan.nama as nama')->first();
-        return view('gedung/detail_master_gedung', compact('detail_gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
+        return view('Gedung/detail_master_gedung', compact('detail_gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
     }
 
     public function input(Request $request) {
         $jenis_gedung = KategoriGedung::get();
 
-        return view('gedung/tambah_master_gedung', compact('jenis_gedung'));
+        return view('Gedung/tambah_master_gedung', compact('jenis_gedung'));
     }
 
     public function getKabKota($id) {
@@ -118,7 +118,7 @@ class GedungController extends Controller
         $daerah = Provinsi::get();
         $kategori = KategoriGedung::get();
         $edit = Gedung::find($id);
-        return view('gedung/edit_master_gedung', compact('edit', 'kategori', 'daerah'));
+        return view('Gedung/edit_master_gedung', compact('edit', 'kategori', 'daerah'));
     }
 
     public function edit_post($id, Request $request) {

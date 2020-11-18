@@ -1,5 +1,6 @@
-@include('template/header')
+@extends('template.default')
 
+@section('content')
   <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -131,7 +132,7 @@
             <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
           </div>    
           <hr>
-          <a class="btn btn-secondary float-right mb-3" href="{{ url('') }}">
+          <a class="btn btn-success mb-3 btn-show-form-kerusakan" href="#" id-gedung="{{$id_gedung}}">
             <span class="icon text-white-100">
               Import Excel
             </span> 
@@ -229,7 +230,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colspan="5">Jumlah Kerusakan</td>
+                    <td colspan="6">Jumlah Kerusakan</td>
                     <td>
                       <p id="textTotalKerusakan"></p>
                     </td>
@@ -275,7 +276,6 @@
         <div class="form-group">
           <label>Satuan: Estimasi</label>
           <select class="form-control" id="bufferEstimasi">
-            <option value="0" disabled>Pilih Opsi</option>
           </select>
         </div>
       </div>
@@ -323,7 +323,10 @@
   </div>
 </div>
 
-@include('template/footer')
+@include("Kerusakan.import_excel", ['id_gedung' => $id_gedung])
+@endsection
+
+@push('scripts')
 <script>
   $(document).ready(function(){
     $.ajaxSetup({
@@ -387,7 +390,7 @@
       for (let index = 0; index < total_komponen; index++)
         total += Number($('.tk_value')[index].value);
       total = toDouble(total);
-      $('#textTotalKerusakan').text(total+ ' %');
+      $('#textTotalKerusakan').text((total*100)+ ' %');
       let textTotal = toTextTotal(total);
       $('#keteranganTotal').text(textTotal)
 
@@ -431,7 +434,7 @@
 
       let percent = toDouble(toPercent(nilai_opsi, bobot));
       $('.input_estimasi_'+index_komponen).val(id_opsi);
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(percent + ' %');
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((percent * 100) + ' %');
       $('.tk_value_'+index_parent).eq(index_sub_komponen).val(percent);
 
       sumOfAllKerusakan(index_parent);
@@ -484,7 +487,7 @@
       _klasifikasiKerusakanPersen[index_komponen] = bufferKlasifikasiKerusakanPersen;
 
       sum = toDouble(toPercentFinal(sum, bobot));
-      $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sum + ' %');
+      $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
       $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
 
       sumOfAllKerusakan(index_parent);
@@ -550,7 +553,7 @@
         _klasifikasiKerusakanUnit[index_komponen] = bufferKlasifikasiKerusakanUnit;
 
         sum = toDouble(toPercentFinal(sum, bobot));
-        $('.tk_text_'+index_parent).eq(index_sub_komponen).text(sum + ' %');
+        $('.tk_text_'+index_parent).eq(index_sub_komponen).text((sum * 100) + ' %');
         $('.tk_value_'+index_parent).eq(index_sub_komponen).val(sum);
         sumOfAllKerusakan(index_parent);        
         $('#modalUnit').modal('hide');
@@ -597,3 +600,4 @@
     });
   })
 </script>
+@endpush
