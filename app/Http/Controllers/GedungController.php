@@ -18,7 +18,7 @@ use Log;
 class GedungController extends Controller
 {
     public function index() {
-        $gedung = Gedung::get();
+        $gedung = Gedung::whereNull('deleted_at')->get();
         return view('Gedung/master_gedung', compact('gedung'));
     }
 
@@ -49,7 +49,7 @@ class GedungController extends Controller
                 'gedung.kdh as kdh',
                 'gedung.gsb as gsb',
                 'gedung.rth as rth',
-            )->find($id);
+            )->whereNull('deleted_at')->where('gedung.id', $id)->first();
         $daerah = Gedung::where('id', $id)->select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->first();
         $provinsi = Provinsi::where('id_prov', $daerah->kode_provinsi)->select('provinsi.nama as nama')->first();
         //dd($provinsi);
