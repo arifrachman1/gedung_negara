@@ -100,7 +100,12 @@ class KerusakanController extends Controller
         ];
         return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user', 'kerusakan_data'));
     }
-    private function setCellDropdown($sheet, $opsiSheet, $cellAddr, $cellResult, $cellIdOption, $options, $selected = 0){
+    private function setCellDropdown($sheet, $opsiSheet, $currentRow, $options, $selected = 0){
+        $cellAddr   = "L$currentRow";
+        $cellResult = "V$currentRow";
+        $cellBobot  = "K$currentRow";
+
+        
         // set opsi . $this->opsi_index
         $this->opsi_index += 3;
         $first_opsi = $this->opsi_index;
@@ -131,7 +136,7 @@ class KerusakanController extends Controller
         $validation->setFormula1('Opsi!$B$'.$first_opsi.':$B$'.$last_opsi);
         if($selected_opsi !== null)
             $sheet->setCellValue($cellAddr, $selected_opsi);
-        $sheet->setCellValue($cellResult, '=VLOOKUP('.$cellAddr.', \'Opsi\'!$B$'.$first_opsi.':$D$'.$last_opsi.', 2, 0)');
+        $sheet->setCellValue($cellResult, '=(VLOOKUP('.$cellAddr.', \'Opsi\'!$B$'.$first_opsi.':$D$'.$last_opsi.', 2, 0) * '.$cellBobot .')/100');
     }
     public function exportKerusakan(Request $request){
         
@@ -266,19 +271,46 @@ class KerusakanController extends Controller
                 
                 if($subKomponen->id_satuan == 1){
                     $sheet->mergeCells("L$currentRow:U$currentRow");
-                    $this->setCellDropdown($sheet, $sheetOpsi, "L$currentRow", "V$currentRow", "Y$currentRow", $subKomponen->options);
+                    $this->setCellDropdown($sheet, $sheetOpsi, $currentRow, $subKomponen->options);
                 }else{
-                    // implement formula
-                    $cr = $currentRow;
-                    $sheet->setCellValue('M'.$cr, '=IF($J'.$cr.' > 0, (L'.$cr.'/$J'.$cr.')*$L$19, 0)');
-                    $sheet->setCellValue('O'.$cr, '=IF($J'.$cr.' > 0, (N'.$cr.'/$J'.$cr.')*$N$19, 0)');
-                    $sheet->setCellValue('Q'.$cr, '=IF($J'.$cr.' > 0, (P'.$cr.'/$J'.$cr.')*$P$19, 0)');
-                    $sheet->setCellValue('S'.$cr, '=IF($J'.$cr.' > 0, (R'.$cr.'/$J'.$cr.')*$R$19, 0)');
-                    $sheet->setCellValue('U'.$cr, '=IF($J'.$cr.' > 0, (T'.$cr.'/$J'.$cr.')*$T$19, 0)');
-                    $sheet->setCellValue(
-                        'V'.$cr, 
-                        '=(M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*IF(K'.$cr.', K'.$cr.'/100, 1)'
-                    );
+                    if($subKomponen->id_satuan == 2){
+                        $cr = $currentRow;
+
+                        //set format persen
+                        $sheet->getStyle('L'.$cr)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_PERCENTAGE);
+                        $sheet->getStyle('N'.$cr)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_PERCENTAGE);
+                        $sheet->getStyle('P'.$cr)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_PERCENTAGE);
+                        $sheet->getStyle('R'.$cr)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_PERCENTAGE);
+                        $sheet->getStyle('T'.$cr)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_PERCENTAGE);
+
+                        // implement formula
+                        $sheet->setCellValue('M'.$cr, '=$L'.$cr.'*$L$19');
+                        $sheet->setCellValue('O'.$cr, '=$N'.$cr.'*$N$19');
+                        $sheet->setCellValue('Q'.$cr, '=$P'.$cr.'*$P$19');
+                        $sheet->setCellValue('S'.$cr, '=$R'.$cr.'*$R$19');
+                        $sheet->setCellValue('U'.$cr, '=$T'.$cr.'*$T$19');
+                        $sheet->setCellValue(
+                            'V'.$cr, 
+                            '=((M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*$K'.$cr.')/100'
+                        );
+                    }else{
+                        $cr = $currentRow;
+
+                        //set default jumlah
+                        $sheet->setCellValue('J'.$cr, '1');
+
+                        // implement formula
+                        $sheet->setCellValue('M'.$cr, '=($L'.$cr.'/$J'.$cr.')*$L$19');
+                        $sheet->setCellValue('O'.$cr, '=($N'.$cr.'/$J'.$cr.')*$N$19');
+                        $sheet->setCellValue('Q'.$cr, '=($P'.$cr.'/$J'.$cr.')*$P$19');
+                        $sheet->setCellValue('S'.$cr, '=($R'.$cr.'/$J'.$cr.')*$R$19');
+                        $sheet->setCellValue('U'.$cr, '=($T'.$cr.'/$J'.$cr.')*$T$19');
+                        $sheet->setCellValue(
+                            'V'.$cr, 
+                            '=((M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*$K'.$cr.')/100'
+                        );
+                    }
+
                     if(isset($kerusakan_ob["kerusakan_detail"][$subKomponen->id])){
                         $kd = $kerusakan_ob["kerusakan_detail"][$subKomponen->id];
                         if( $kd["detail"]->jumlah)
