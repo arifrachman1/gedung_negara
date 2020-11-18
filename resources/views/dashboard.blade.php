@@ -36,7 +36,7 @@
           <div class="card san-bg-2 san-bg-img-1">
             <div class="card-body">
               <h4 class="san-bold san-white">Kerusakan</h4>
-              <h1 class="count san-bold san-white" style="font-size: 32px;">0</h1>
+              <h1 class="count san-bold san-white" style="font-size: 32px;">{{$kerusakan}}</h1>
             </div>
           </div>
         </div>
