@@ -75,6 +75,7 @@ class KerusakanController extends Controller
             ->get()->pluck('id')->toArray();
         $komponens = DB::table('komponen')
             ->select('id', 'nama')
+            ->whereNull('deleted_at')
             ->whereIn('id', $id_parents)
             ->get();
         foreach ($komponens as $parent) {
@@ -648,6 +649,7 @@ class KerusakanController extends Controller
             ->distinct('komponen.id_parent')->pluck('id')->toArray();
         $komponens = DB::table('komponen')
             ->select('id', 'nama')
+            ->whereNull('deleted_at')
             ->whereIn('id', $id_parents)
             ->get();
         $sumAlltingkatKerusakan = 0;
@@ -804,6 +806,7 @@ class KerusakanController extends Controller
             ->distinct('komponen.id_parent')->pluck('id')->toArray();
         $komponens = DB::table('komponen')
             ->select('id', 'nama')
+            ->whereNull('deleted_at')
             ->whereIn('id', $id_parents)
             ->get();
         foreach ($komponens as $komponen) { 

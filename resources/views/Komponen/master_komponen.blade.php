@@ -25,7 +25,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                <th>No</th>
+                  <th>No</th>
                   <th>Nama Komponen</th>
                   <th>Action</th>
                 </tr>
@@ -65,9 +65,11 @@
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Anda yakin ingin menghapus ?</h5>
-        </div> 
-       <div class="modal-footer">
+          <h4 class="modal-title">Hapus Komponen</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+          <div class="modal-body">Jika anda menghapus Komponen ini akan menyebabkan hilangnya data pada Data Kerusakan yang lain.!!! Apakah anda yakin mau menghapusnya?</div>
+        <div class="modal-footer">
         <button type=button data-dismiss="modal" class="btn btn-warning">Tidak</button>
         <button type=submit class="btn btn-danger">Ya, hapus</button>
       </div>
