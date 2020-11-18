@@ -231,7 +231,7 @@ class KerusakanController extends Controller
             ->get()->pluck('id')->toArray();
         $komponens = DB::table('komponen')
             ->select('id', 'nama')
-            // ->whereNull('deleted_at')
+            ->whereNull('deleted_at')
             ->whereIn('id', $id_parents)
             ->get();
         foreach ($komponens as $parent) {
