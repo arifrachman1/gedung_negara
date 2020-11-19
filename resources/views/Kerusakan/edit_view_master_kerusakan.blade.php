@@ -239,7 +239,7 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                  <img style="width:500px; height:500px;" src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}">
+                                  <img style="width:500px; height:500px;"src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}">
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -269,7 +269,7 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                  <img src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}">
+                                  <img style="width:500px; height:500px;" src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}">
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
