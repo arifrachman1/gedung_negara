@@ -238,7 +238,7 @@
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <div class="modal-body" style="width:1000px; height:500px;">
+                                  <div class="modal-body" style="width:100%; height:500px;">
                                   <img style="width:100%; height:500px; object-fit: cover;"src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}">
                                   </div>
                                   <div class="modal-footer">
@@ -268,7 +268,7 @@
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <div class="modal-body" style="width:1000px; height:500px;">
+                                  <div class="modal-body" style="width:100%; height:500px;">
                                   <img style="width:100%; height:500px;  object-fit: cover;" src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}">
                                   </div>
                                   <div class="modal-footer">
