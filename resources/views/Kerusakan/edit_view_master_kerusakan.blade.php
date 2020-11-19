@@ -236,7 +236,7 @@
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <div class="modal-body" style="widht:500px; heingt:100%;">
+                                  <div class="modal-body" style="widht:500px; heingt:500px;">
                                   <img src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}">
                                   </div>
                                   <div class="modal-footer">
