@@ -39,7 +39,7 @@ class KerusakanController extends Controller
     }
 
     public function pilihanGedung() {
-        $gedung = Gedung::get();
+        $gedung = Gedung::whereNull('deleted_at')->get();
         return view('Kerusakan/tambah_master_kerusakan', compact('gedung'));
     }
 
