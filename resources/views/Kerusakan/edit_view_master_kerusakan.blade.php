@@ -122,117 +122,170 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="{{ url('edit_klasifikasi_kerusakan')}}" enctype="multipart/form-data">
-            @csrf
-            <div class="table-responsive">
-                <div class="table-content">
-                  <table class="table table-bordered" id="table-kerusakan" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Komponen</th>
-                        <th>Subkomponen</th>
-                        <th>Satuan</th>
-                        <th>Bobot</th>
-                        <th>Opsi</th>
-                        <th colspan="3">Tingkat Kerusakan</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @php $index = 0; @endphp
-                      @foreach($komponens as $parentIndex => $komponen)
-                        @foreach($komponen->subKomponen as $subIndex => $subKomponen)
-                        <input type="hidden" name="satuans[]" value="{{ $subKomponen->id_satuan }}" class="satuans">
-                        <input type="hidden" name="komponens[]" value="{{ $subKomponen->id}}">
+            <form method="POST" id="formEditKlasifikasiKerusakan" action="{{ url('edit_klasifikasi_kerusakan')}}" enctype="multipart/form-data">
+              @csrf
+              <div class="table-responsive">
+                  <div class="table-content">
+                    <table class="table table-bordered" id="table-kerusakan" width="100%" cellspacing="0">
+                      <thead>
                         <tr>
-                          <td>{{ $index + 1 }}</td>
-                          @if($subIndex == 0)
-                            <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->nama }}</td>
-                          @endif
-                          <td>{{ $subKomponen->nama }}</td>
-                          <td>{{ $subKomponen->satuan }}</td>
-                          <td>{{ $subKomponen->bobot }}</td>
-                          @if($subKomponen->id_satuan == 1)
-                            <input type="hidden" class="input_estimasi_{{ $index }}" name="val_estimasi_{{ $index }}[]" value="{{ $subKomponen->id_komponen_opsi }}">
-                            <td class="estimasi">
-                              <button class="btn btn-primary hitungEstimasi" type="button"
-                                data-id="{{ $subKomponen->id }}"
-                                data-bobot="{{ $subKomponen->bobot }}"
-                                data-index-komponen="{{ $index }}"
-                                data-parent-index="{{ $parentIndex}}"
-                                data-sub-index="{{ $subIndex }}">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                              </button>
-                            </td>
-                          @elseif($subKomponen->id_satuan == 2)
-                            @foreach($subKomponen->kerusakan_klasifikasi as $kk)
-                              <input type="hidden" class="input_persentase_{{ $index }}" name="val_persentase_{{ $index }}[]" value="{{ $kk->nilai_input_klasifikasi }}">
-                            @endforeach
-                            <td class="persen">
-                              <button class="btn btn-primary hitungPersen" type="button"
-                                data-bobot="{{ $subKomponen->bobot }}"
-                                data-index-komponen="{{ $index }}"
-                                data-parent-index="{{ $parentIndex}}"
-                                data-sub-index="{{ $subIndex }}">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                              </button>
-                            </td>
-                          @else
-                            <input type="hidden" id="input_jumlah_unit_{{ $index }}" name="val_jumlah_unit_{{ $index }}[]" value="{{ $subKomponen->jumlah }}">
-                            @foreach($subKomponen->kerusakan_klasifikasi as $kk)
-                              <input type="hidden" class="input_unit_{{ $index }}" name="val_unit_{{ $index }}[]" value="{{ $kk->nilai_input_klasifikasi }}">
-                            @endforeach
-
-                            <td class="unit">
-                              <button class="btn btn-primary hitungUnit" type="button"
-                                data-bobot="{{ $subKomponen->bobot }}"
-                                data-index-komponen="{{ $index }}"
-                                data-parent-index="{{ $parentIndex}}"
-                                data-sub-index="{{ $subIndex }}">
-                                <i class="button"><span class="icon text-white-100">Hitung</span></i>
-                              </button>
-                            </td>
-                          @endif
-                          <td>
-                            <p class="tk_text_{{ $parentIndex }}"> {{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan : 0 }}%</p>
-                            <input type="hidden" class="tk_value tk_value_{{ $parentIndex}}" name="tk_value[]" value="{{ $subKomponen->tingkat_kerusakan }}">
-                          </td>
-                          @if($subIndex == 0)
-                            <td rowspan="{{ $komponen->numberOfSub }}">
-                              <p class="tk_keterangan_{{ $parentIndex }}">{{ $komponen->sumTingkatKerusakanText }}</p>
-                            </td>
-                          @endif
+                          <th>No.</th>
+                          <th>Komponen</th>
+                          <th>Subkomponen</th>
+                          <th>Satuan</th>
+                          <th>Bobot</th>
+                          <th>Opsi</th>
+                          <th colspan="3">Tingkat Kerusakan</th>
                         </tr>
-                        @php $index++ @endphp
+                      </thead>
+                      <tbody>
+                        @php $index = 0; @endphp
+                        @foreach($komponens as $parentIndex => $komponen)
+                          @foreach($komponen->subKomponen as $subIndex => $subKomponen)
+                          <input type="hidden" name="satuans[]" value="{{ $subKomponen->id_satuan }}" class="satuans">
+                          <input type="hidden" name="komponens[]" value="{{ $subKomponen->id}}">
+                          <tr>
+                            <td>{{ $index + 1 }}</td>
+                            @if($subIndex == 0)
+                              <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->nama }}</td>
+                            @endif
+                            <td>{{ $subKomponen->nama }}</td>
+                            <td>{{ $subKomponen->satuan }}</td>
+                            <td>{{ $subKomponen->bobot }}</td>
+                            @if($subKomponen->id_satuan == 1)
+                              <input type="hidden" class="input_estimasi_{{ $index }}" name="val_estimasi_{{ $index }}[]" value="{{ $subKomponen->id_komponen_opsi }}">
+                              <td class="estimasi">
+                                <button class="btn btn-primary hitungEstimasi" type="button"
+                                  data-id="{{ $subKomponen->id }}"
+                                  data-bobot="{{ $subKomponen->bobot }}"
+                                  data-index-komponen="{{ $index }}"
+                                  data-parent-index="{{ $parentIndex}}"
+                                  data-sub-index="{{ $subIndex }}">
+                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </button>
+                              </td>
+                            @elseif($subKomponen->id_satuan == 2)
+                              @foreach($subKomponen->kerusakan_klasifikasi as $kk)
+                                <input type="hidden" class="input_persentase_{{ $index }}" name="val_persentase_{{ $index }}[]" value="{{ $kk->nilai_input_klasifikasi }}">
+                              @endforeach
+                              <td class="persen">
+                                <button class="btn btn-primary hitungPersen" type="button"
+                                  data-bobot="{{ $subKomponen->bobot }}"
+                                  data-index-komponen="{{ $index }}"
+                                  data-parent-index="{{ $parentIndex}}"
+                                  data-sub-index="{{ $subIndex }}">
+                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </button>
+                              </td>
+                            @else
+                              <input type="hidden" id="input_jumlah_unit_{{ $index }}" name="val_jumlah_unit_{{ $index }}[]" value="{{ $subKomponen->jumlah }}">
+                              @foreach($subKomponen->kerusakan_klasifikasi as $kk)
+                                <input type="hidden" class="input_unit_{{ $index }}" name="val_unit_{{ $index }}[]" value="{{ $kk->nilai_input_klasifikasi }}">
+                              @endforeach
+
+                              <td class="unit">
+                                <button class="btn btn-primary hitungUnit" type="button"
+                                  data-bobot="{{ $subKomponen->bobot }}"
+                                  data-index-komponen="{{ $index }}"
+                                  data-parent-index="{{ $parentIndex}}"
+                                  data-sub-index="{{ $subIndex }}">
+                                  <i class="button"><span class="icon text-white-100">Hitung</span></i>
+                                </button>
+                              </td>
+                            @endif
+                            <td>
+                              <p class="tk_text_{{ $parentIndex }}"> {{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan : 0 }}%</p>
+                              <input type="hidden" class="tk_value tk_value_{{ $parentIndex}}" name="tk_value[]" value="{{ $subKomponen->tingkat_kerusakan }}">
+                            </td>
+                            @if($subIndex == 0)
+                              <td rowspan="{{ $komponen->numberOfSub }}">
+                                <p class="tk_keterangan_{{ $parentIndex }}">{{ $komponen->sumTingkatKerusakanText }}</p>
+                              </td>
+                            @endif
+                          </tr>
+                          @php $index++ @endphp
+                          @endforeach
                         @endforeach
-                      @endforeach
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="6">Jumlah Kerusakan</td>
-                        <td>
-                          <p id="totalKerusakan"></p>
-                        </td>
-                        <td colspan="2" >
-                          <p id="keteranganTotal"></p>
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                <div class="form-group">
-                    <label >Sketsa Denah</label>
-                    <input type="file" name="#" class="form-control-file">
-                </div>
-                <div class="form-group">
-                    <label>Gambar Bukti Kerusakan</label>
-                    <input type="file" id="file-multiple-input" name="" multiple="" class="form-control-file">
-                </div>
-            </div>
-              <button type="submit"  class="btn btn-success float-left mt-2 mr-2">Submit</button>
-              <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
-        </div>
-        </form>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="6">Jumlah Kerusakan</td>
+                          <td>
+                            <p id="totalKerusakan"></p>
+                          </td>
+                          <td colspan="2" >
+                            <p id="keteranganTotal"></p>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <div class="form-group">
+                      <label >Sketsa Denah</label>
+                      <ol>
+                        @foreach($sketsaDenah as $denah)
+                          <li> 
+                            <a href="#gambarDenah_{{ $denah->id}}" data-toggle="modal" data-target="#gambarDenah_{{ $denah->id}}">{{ $denah->sketsa_denah }}</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="gambarDenah_{{ $denah->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                  <img src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        @endforeach
+                      </ol>
+                      <input type="file" name="sketsaDenah[]" id="sketsaDenah" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
+                  </div>
+                  <div class="form-group">
+                      <label>Gambar Bukti Kerusakan</label>
+                      <ol>
+                        @foreach($gambarBukti as $bukti)
+                          <li>
+                            <a href="#gambarBukti_{{ $bukti->id}}" data-toggle="modal" data-target="#gambarBukti_{{ $bukti->id}}">{{ $bukti->gambar_bukti }}</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="gambarBukti_{{ $bukti->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                  <img src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        @endforeach
+                      </ol>
+                      <input type="file" name="gambarBukti[]" id="gambarBukti" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
+                  </div>
+              </div>
+                <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>
+                <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
+                <p id="notifFileEmpty"></p>
+              </div>
+            </form>
       </div>
     </div>
   </div>
@@ -597,7 +650,7 @@
       for (let index = 0; index < eleFBukti.files.length; index++) {
         valid = eleFBukti.files.item(index).size <= 5242880;
       }
-      if(valid) $('#formKlasifikasiKerusakan').submit()
+      if(valid) $('#formEditKlasifikasiKerusakan').submit()
     });
   })
 </script>

@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/bukti
+/public/denah
 /storage/*.key
 /vendor
 .env
