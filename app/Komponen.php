@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Komponen extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'komponen';
     protected $primaryKey = 'id';
     protected $guarded = [];
     // protected $fillable = [''];
     public $timestamps = false;
 
-    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 

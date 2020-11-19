@@ -33,13 +33,13 @@ class KerusakanController extends Controller
         $kerusakan = Kerusakan::select('kerusakan.id as id','gedung.nama as nama_gedung', 'gedung_ketegori.nama as jenis_gd', 'gedung.alamat as alamat')
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
                                 ->join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
-                                ->whereNull('gedung.deleted_at')
+                                ->orderBy('kerusakan.id', 'desc')
                                 ->get();
         return view('Kerusakan/master_kerusakan', compact('kerusakan'));
     }
 
     public function pilihanGedung() {
-        $gedung = Gedung::whereNull('deleted_at')->get();
+        $gedung = Gedung::get();
         return view('Kerusakan/tambah_master_kerusakan', compact('gedung'));
     }
 
