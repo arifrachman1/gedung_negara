@@ -124,6 +124,7 @@
             </div>
             <form method="POST" id="formEditKlasifikasiKerusakan" action="{{ url('edit_klasifikasi_kerusakan')}}" enctype="multipart/form-data">
               @csrf
+              <input type="hidden" name="id_kerusakan" value="{{ $id_kerusakan }}">
               <div class="table-responsive">
                   <div class="table-content">
                     <table class="table table-bordered" id="table-kerusakan" width="100%" cellspacing="0">
@@ -142,8 +143,9 @@
                         @php $index = 0; @endphp
                         @foreach($komponens as $parentIndex => $komponen)
                           @foreach($komponen->subKomponen as $subIndex => $subKomponen)
-                          <input type="hidden" name="satuans[]" value="{{ $subKomponen->id_satuan }}" class="satuans">
-                          <input type="hidden" name="komponens[]" value="{{ $subKomponen->id}}">
+                          <input type="hidden" name="id_satuans[]" value="{{ $subKomponen->id_satuan }}" class="satuans">
+                          <input type="hidden" name="id_komponens[]" value="{{ $subKomponen->id}}">
+                          <input type="hidden" name="id_kerusakan_details[]" value=" {{ $subKomponen->id_kerusakan_detail }} ">
                           <tr>
                             <td>{{ $index + 1 }}</td>
                             @if($subIndex == 0)
@@ -248,7 +250,7 @@
                           </li>
                         @endforeach
                       </ol>
-                      <input type="file" name="sketsaDenah[]" id="sketsaDenah" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
+                      <input type="file" name="sketsa_denah[]" id="sketsaDenah" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
                   </div>
                   <div class="form-group">
                       <label>Gambar Bukti Kerusakan</label>
@@ -278,7 +280,7 @@
                           </li>
                         @endforeach
                       </ol>
-                      <input type="file" name="gambarBukti[]" id="gambarBukti" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
+                      <input type="file" name="gambar_bukti[]" id="gambarBukti" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
                   </div>
               </div>
                 <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>
@@ -562,8 +564,6 @@
       })
       $('#modalUnit .modal-body').html(modalBody);
 
-      let ele_jumlahUnit = $('#input_jumlah_unit_'+index_komponen);      
-
       $('.input-value-unit').change(function(){
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
@@ -572,7 +572,11 @@
         $('.text-value-unit').eq(index_klasifikasi).val(toDouble(percent));
       });
 
-      $('#jumlahUnit').val(ele_jumlahUnit.val());
+      $('#jumlahUnit').val($('#input_jumlah_unit_'+index_komponen).val());
+      if($('#jumlahUnit').val()){
+        $('#show-error').html('');
+      }
+
       $('.input-value-unit').change();
       $('#modalUnit').modal('show');
 
@@ -586,7 +590,7 @@
 
           return false;
         }
-        ele_jumlahUnit.val(jumlah_unit);
+        $('#input_jumlah_unit_'+index_komponen).val(jumlah_unit);
 
         let sumKlasifikasiKerusakan = 0;
         let bufferKlasifikasiKerusakanUnit = [];

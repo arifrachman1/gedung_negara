@@ -506,23 +506,24 @@
           : '<div class="form-group"><div class="row"><div class="col-lg-3">'+toDouble(param)+'</div><div class="col-lg-3"><input type="number" class="form-control input-value-unit" placeholder="0" data-index-klasifikasi="'+index+'"></div><div class="col-lg-3">=</div><div class="col-lg-3"><input type="number" class="form-control text-value-unit" placeholder="0" readonly></div></div></div>';
       })
       $('#modalUnit .modal-body').html(modalBody);
-
-      let ele_jumlahUnit = $('#input_jumlah_unit_'+index_komponen);
-      let ele_jumlahUnitModal = $('#jumlahUnit');
       
-      ele_jumlahUnitModal.val(ele_jumlahUnit.val());
+      $('#jumlahUnit').val($('#input_jumlah_unit_'+index_komponen).val());
+      if($('#jumlahUnit').val()){
+        $('#show-error').html('');
+      }
+
       $('#modalUnit').modal('show');
 
       $('.input-value-unit').change(function(){
         let input_klasifikasi = $(this).val();
         let index_klasifikasi = $(this).attr('data-index-klasifikasi');
         let bobotKlasifikasi = klasifikasiKerusakan[index_klasifikasi];
-        let resultKlasifikasi = sumKlasifikasiKerusakan(input_klasifikasi, bobotKlasifikasi, ele_jumlahUnitModal.val());
+        let resultKlasifikasi = sumKlasifikasiKerusakan(input_klasifikasi, bobotKlasifikasi, $('#jumlahUnit').val());
         $('.text-value-unit').eq(index_klasifikasi).val(toDouble(resultKlasifikasi));
       });
 
       $('#btn-save-unit').click(function(){
-        let jumlah_unit = ele_jumlahUnitModal.val();
+        let jumlah_unit = $('#jumlahUnit').val();
         if(!jumlah_unit){
           $('#show-error')
             .html('Harap mengisi Jumlah Unit.')
@@ -530,7 +531,7 @@
 
           return false;
         }
-        ele_jumlahUnit.val(jumlah_unit);
+        $('#input_jumlah_unit_'+index_komponen).val(jumlah_unit);
 
         let sumKlasifikasiKerusakan = 0;
         let bufferKlasifikasiKerusakanUnit = [];
@@ -555,7 +556,7 @@
         $('#modalUnit').modal('hide');
       })
 
-      ele_jumlahUnitModal.change(function(){
+      $('#jumlahUnit').change(function(){
         $('#show-error').html('');
         $('.input-value-unit').change();
       })

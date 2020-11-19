@@ -813,11 +813,11 @@ class KerusakanController extends Controller
         $id_user = $request->id_user;
         Session::put('opd', $request->opd);
         Session::put('nomor_aset', $request->nomor_aset);
-        Session::put('surveyor1', $request->surveyor1);
-        Session::put('surveyor2', $request->surveyor2);
-        Session::put('surveyor3', $request->surveyor3);
-        Session::put('pwopd1', $request->pwopd1);
-        Session::put('pwopd2', $request->pwopd2);
+        Session::put('surveyor1', $request->petugas_survei1);
+        Session::put('surveyor2', $request->petugas_survei2);
+        Session::put('surveyor3', $request->petugas_survei3);
+        Session::put('pwopd1', $request->perwakilan_opd1);
+        Session::put('pwopd2', $request->perwakilan_opd2);
 
 
         return redirect()->action('KerusakanController@formEditIdentifikasiKerusakan', ['id_kerusakan' => $id_kerusakan]);
@@ -889,11 +889,117 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
         
-        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sketsaDenah', 'gambarBukti'));
+        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sketsaDenah', 'gambarBukti', 'id_kerusakan'));
     }
 
     public function submitEditKerusakanForm(Request $request){
-        // die('yeay');
+        DB::beginTransaction();
+        try{
+            $kerusakan = Kerusakan::find($request->id_kerusakan);
+            if(!$kerusakan){
+                return redirect('master_kerusakan')->with(['error' => 'Error, edit kerusakan gagal.']);
+            }
+            $kerusakan->opd             = Session::get('opd');
+            $kerusakan->nomor_aset      = Session::get('nomor_aset');
+            $kerusakan->petugas_survei1 = Session::get('surveyor1');
+            $kerusakan->petugas_survei2 = Session::get('surveyor2'); 
+            $kerusakan->petugas_survei3 = Session::get('surveyor3');
+            $kerusakan->perwakilan_opd1 = Session::get('pwopd1');
+            $kerusakan->perwakilan_opd2 = Session::get('pwopd2');    
+            $kerusakan->updated_at      = date('Y-m-d');
+            $kerusakan->save();
+
+            $id_kerusakan_details   = $request->id_kerusakan_details;
+
+            foreach($id_kerusakan_details as $index => $id_kerusakan_detail){
+                $id_komponen           = $request->id_komponens[$index];
+                $id_satuan             = $request->id_satuans[$index];
+
+                //Update kerusakan Detail
+                $kerusakanDetail = KerusakanDetail::find($id_kerusakan_detail);
+                $kerusakanDetail->id_komponen       = $id_komponen;
+                $kerusakanDetail->jumlah            = ($id_satuan != 1 && $id_satuan != 2) ? $request->get('val_jumlah_unit_'.$index)[0] : null;
+                $kerusakanDetail->id_komponen_opsi  = ($id_satuan == 1) ? $request->get('val_estimasi_'.$index)[0] : null;
+                $kerusakanDetail->tingkat_kerusakan = $request->tk_value[$index];
+                $kerusakanDetail->save();
+
+                //Update kerusakan klasifikasi
+                $_klasifikasiKerusakan = [0.20, 0.40, 0.60, 0.80, 1.00];
+                if($id_satuan == 2){
+                    DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $id_kerusakan_details[$index])->delete();
+                    $_inputKlasifikasiPersen = $request->get('val_persentase_'.$index);
+                    foreach($_inputKlasifikasiPersen as $indexKlasifikasi  => $input){
+                        $newKerusakanKlasifikasi = new KerusakanKlasifikasi;
+                        $newKerusakanKlasifikasi->id_kerusakan_detail       = $id_kerusakan_detail;
+                        $newKerusakanKlasifikasi->nilai_input_klasifikasi   = $input;
+                        $newKerusakanKlasifikasi->klasifikasi               = $_klasifikasiKerusakan[$indexKlasifikasi];
+                        $newKerusakanKlasifikasi->save();
+                    }
+                }else if($id_satuan != 1){
+                    DB::table('kerusakan_klasifikasi')->where('id_kerusakan_detail', $id_kerusakan_details[$index])->delete();
+                    $_inputKlasifikasiUnit = $request->get('val_unit_'.$index);
+                    foreach($_inputKlasifikasiUnit as $indexKlasifikasi  => $input){
+                        $newKerusakanKlasifikasi = new KerusakanKlasifikasi;
+                        $newKerusakanKlasifikasi->id_kerusakan_detail       = $id_kerusakan_detail;
+                        $newKerusakanKlasifikasi->nilai_input_klasifikasi   = $input;
+                        $newKerusakanKlasifikasi->klasifikasi               = $_klasifikasiKerusakan[$indexKlasifikasi];
+                        $newKerusakanKlasifikasi->save();
+                    }
+                }
+            }
+
+            //Edit file denah dan bukti
+            if($request->gambar_bukti){
+                $_prevGambarBukti = GambarBukti::where('id_kerusakan', $request->id_kerusakan)->get();
+                foreach($_prevGambarBukti as $bukti){
+                    if(file_exists('bukti/'.$bukti->gambar_bukti)) unlink('bukti/'.$bukti->gambar_bukti);
+                    $bukti->delete();
+                }
+                
+                $timeUpload = strtotime("now");
+                foreach ($request->gambar_bukti as $index => $gambar_bukti) {
+                    $buktiExt       = $gambar_bukti->getClientOriginalExtension();
+                    $buktiFileName  = "bukti_".$timeUpload.'_'.$index.'.'.$buktiExt;
+                    $gambar_bukti->move('bukti', $buktiFileName);
+    
+                    $newGambar = new GambarBukti;
+                    $newGambar->id_kerusakan = $kerusakan->id;
+                    $newGambar->gambar_bukti = $buktiFileName;
+                    $newGambar->created_at   = date('Y-m-d H:i:s');
+                    $newGambar->save();
+                }    
+            }
+
+            if($request->sketsa_denah){
+                $_prevSketsaDenah = SketsaDenah::where('id_kerusakan', $request->id_kerusakan)->get();
+                foreach($_prevSketsaDenah as $denah){
+                    if(file_exists('denah/'.$denah->sketsa_denah)) unlink('denah/'.$denah->sketsa_denah);
+                    $denah->delete();
+                }
+    
+                foreach ($request->sketsa_denah as $index => $denah) {  
+                    $denahExt    = $denah->getClientOriginalExtension();
+                    $denahFileName   =   "denah_".$timeUpload.'_'.$index.'.'.$denahExt;
+                    $denah->move('denah', $denahFileName);
+    
+                    $newSketsaDenah = new SketsaDenah;
+                    $newSketsaDenah->id_kerusakan = $kerusakan->id;
+                    $newSketsaDenah->sketsa_denah = $denahFileName;
+                    $newSketsaDenah->created_at   = date('Y-m-d H:i:s');
+                    $newSketsaDenah->save();
+                }    
+            }
+
+            DB::commit();
+            return redirect()
+                ->action('KerusakanController@viewKerusakan', [$kerusakan->id])
+                ->with(['success' => 'Kerusakan berhasil diedit.']);
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()
+                ->action('KerusakanController@viewKerusakan', [$request->id_kerusakan])
+                ->with(['error' => 'Kerusakan gagal diedit.']);
+        }
     }
 
     public function postSubmitEditKerusakan(Request $request) {
