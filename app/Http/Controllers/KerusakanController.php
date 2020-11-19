@@ -803,7 +803,7 @@ class KerusakanController extends Controller
                                 ->where('kerusakan.id', $id)
                                 ->first();
         
-        return view('kerusakan/edit_formulir_penilaian_kerusakan', compact('kerusakan'));
+        return view('Kerusakan/edit_formulir_penilaian_kerusakan', compact('kerusakan'));
     }
 
     public function postEditFormSurveyor(Request $request) {
