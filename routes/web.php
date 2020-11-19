@@ -92,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect('sample_excel.xlsx');
     });
     Route::get('tambah_excel_master_gedung', function (){
-        return view ('gedung/tambah_excel_master_gedung');
+        return view ('Gedung/tambah_excel_master_gedung');
     });
 
     Route::post('hapus_master_gedung/', 'GedungController@delete');
