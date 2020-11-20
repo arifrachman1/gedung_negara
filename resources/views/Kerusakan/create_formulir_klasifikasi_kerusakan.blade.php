@@ -232,10 +232,10 @@
                   <tr>
                     <td colspan="6">Jumlah Kerusakan</td>
                     <td>
-                      <p id="textTotalKerusakan"></p>
+                      <p id="totalKerusakan"></p>
                     </td>
                     <td colspan="2" >
-                      <p id="keteranganTotal"></p>
+                      <p id="keteranganTotalKerusakan"></p>
                     </td>
                   </tr>
                 </tfoot>
@@ -254,7 +254,7 @@
           </div>
             <button type="button" id="submitKerusakan" class="btn btn-success float-left m-2">Submit</button>
             <a class="btn btn-warning m-2 float-left" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
-            <p id="notifFileEmpty"></p>
+            <p id="notifSubmitError"></p>
           </div>
         </div>
       </form>
@@ -436,8 +436,8 @@
       for (let index = 0; index < total_komponen; index++)
         total += Number($('.tk_value')[index].value);
       total = toDouble(total);
-      $('#textTotalKerusakan').text(total + ' %');
-      $('#keteranganTotal').text(toTextKategoriKerusakan(total));
+      $('#totalKerusakan').text(total + ' %');
+      $('#keteranganTotalKerusakan').text(toTextKategoriKerusakan(total));
       $('.tk_keterangan_'+indexParent).text(toTextKlasifikasi(indexParent));
     }
 
@@ -565,10 +565,10 @@
     //Validation
     function setNotifSubmitError(status, message){
       if(status)
-        $('#notifFileEmpty')
+        $('#notifSubmitError')
             .html(message)
             .css('color', 'red');
-      else $('#notifFileEmpty').html('');
+      else $('#notifSubmitError').html('');
     }
 
 

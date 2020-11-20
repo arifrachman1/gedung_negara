@@ -678,11 +678,11 @@ class KerusakanController extends Controller
         if($tingkat_kerusakan == 0){
             $status = "Tidak ada kerusakan";
         } else if ($tingkat_kerusakan <= 30) {
-            $status = "Tingkat Kerusakan Rendah";
+            $status = "Tingkat Kerusakan Ringan";
         } else if ($tingkat_kerusakan > 30 && $tingkat_kerusakan <= 45) {
             $status = "Tingkat Kerusakan Sedang";
         } else {
-            $status = "Tingkat Kerusakan Tinggi";
+            $status = "Tingkat Kerusakan Berat";
         }
         return $status;
     }
