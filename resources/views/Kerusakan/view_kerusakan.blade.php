@@ -284,7 +284,7 @@
                                         </div>
                                     </div>
                                     @endif
-                                    <td>{{$subKomponen->tingkat_kerusakan}}%</td>
+                                    <td>{{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan : '0' }}%</td>
                                     @if($subIndex == 0)
                                       <td style="border-right: 0">{{ $komponen->sumTingkatKerusakan }}%</td>
                                       <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->sumTingkatKerusakanStatus }}</td>
@@ -301,13 +301,70 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="form-group">
-
+                    <div class="form-group mt-3">
+                    @if( count($sketsaDenah) > 0 )
+                        <label >Sketsa Denah</label>
+                        <ol>
+                            @foreach($sketsaDenah as $denah)
+                            <li> 
+                                <a href="#gambarDenah_{{ $denah->id}}" data-toggle="modal" data-target="#gambarDenah_{{ $denah->id}}">{{ $denah->sketsa_denah }}</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="gambarDenah_{{ $denah->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Sketsa Denah</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="width:100%; height:500px;">
+                                    <img style="width:100%; height:500px; object-fit: cover;"src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ol>
+                    @endif
                     </div>
                     <div class="form-group">
-
-                </div>
+                    @if( count($gambarBukti) > 0 )
+                        <label>Gambar Bukti Kerusakan</label>
+                        <ol>
+                            @foreach($gambarBukti as $bukti)
+                            <li>
+                                <a href="#gambarBukti_{{ $bukti->id}}" data-toggle="modal" data-target="#gambarBukti_{{ $bukti->id}}">{{ $bukti->gambar_bukti }}</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="gambarBukti_{{ $bukti->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Gambar Bukti Kerusakan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="width:100%; height:500px;">
+                                    <img style="width:100%; height:500px;  object-fit: cover;" src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ol>
+                    @endif
+                    </div>
             </thead>
+            <hr>
             <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a>
         
           </table>
