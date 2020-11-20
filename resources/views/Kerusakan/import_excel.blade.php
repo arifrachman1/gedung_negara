@@ -52,7 +52,7 @@
       let url = $(this).attr("action");
       let formData = new FormData(this);
       if(formData.get('excel_kerusakan_file') == ""){
-        showErrorAlert("File tidak boleh koosng");
+        showErrorAlert("File tidak boleh kosong");
         return;
       }
       submitUploadUsulan(url, formData, {
@@ -84,8 +84,9 @@
     function inUploading(progress){
       $("#btn-submit-excel-kerusakan-import").html(Math.round(progress)+"% uploading");
     }
-    function onUploaded(status, message, data, redirect_to = null){
+    function onUploaded(status, message, redirect_to = null){
       if(status == 'success'){
+        showErrorAlert("File berhasil diupload");
         let new_param = '';
         if(redirect_to !== null){
           // if(location.href.search("\\?") == -1) new_param += "?";

@@ -274,7 +274,7 @@
                                                         </div>
                                                         <div class="col-lg-3">=</div>
                                                         <div class="col-lg-3">
-                                                            <input type="number" class="form-control text-value-unit" placeholder="0" value="{{ ($subKomponen->jumlah) ? round(((($klasifikasi->nilai_input_klasifikasi / $subKomponen->jumlah) * $klasifikasi->klasifikasi) / 100), 2) : 0  }}" readonly>
+                                                            <input type="number" class="form-control text-value-unit" placeholder="0" value="{{ ($subKomponen->jumlah) ? round((($klasifikasi->nilai_input_klasifikasi / $subKomponen->jumlah) * $klasifikasi->klasifikasi), 2) : 0  }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,80 +326,15 @@
       }
     });
 
-    let _klasifikasiKerusakanPersen = _klasifikasiKerusakanUnit = [];
-    let klasifikasiKerusakan = [0.20, 0.40, 0.60, 0.80, 1.00];
-    let total_komponen = $('#table-kerusakan tbody tr').length;
-
-    let index_parent = index_komponen = id_komponen = index_sub_komponen = bobot = null;
-
-    function toDouble(param){
-      return param.toFixed(2);
+    function percentToDecimal(param){
+      return param * 100;
     }
-
-    function toPercent(param, bobot, jumlahUnit){
-      return (jumlahUnit) ? ((param / jumlahUnit) * bobot) / 100 : (param * bobot) / 100;
-    }
-
-    function toPercentFinal(param, bobot){
-      return (bobot) ? (param * bobot) / 100 : param;
-    }
-
-    function toTextKlasifikasi(indexParent){
-      let input = $('.tk_value_'+indexParent);
-      let sum = 0;
-      let text;
-      for (let index = 0; index < input.length; index++) {
-        sum += Number(input[index].value);
-      }
-      if(sum == 0 ){
-        text = 'Tidak ada kerusakan';
-      }else if(sum <= 0.3) {
-        text =  'Tingkat Kerusakan Ringan';
-      } else if (sum > 0.3 && sum <= 0.45) {
-        text =  'Tingkat Kerusakan Sedang';
-      } else if (sum > 0.45) {
-        text =  'Tingkat Kerusakan Berat';
-      }
-      return text;
-    }
-
-    function toTextTotal(param){
-      let text;
-      if(param == 0 ){
-        text = 'Tidak ada kerusakan';
-      }else if (param > 0.3) {
-        text = 'Rusak Berat';
-      } else {
-        text = 'Hitung Kerusakan Komponen Lain';
-      }
-
-      return text;
-    }
-
-    function sumOfAllKerusakan(){
-      let total = 0;
-      for (let index = 0; index < total_komponen; index++)
-        total += Number($('.tk_value')[index].value);
-      total = toDouble(total);
-      $('#textTotalKerusakan').text(total+ ' %');
-      let textTotal = toTextTotal(total);
-      $('#keteranganTotal').text(textTotal)
-
-      let status = toTextKlasifikasi(index_parent);
-      $('.tk_keterangan_'+index_parent).text(status);
-    }
-
 
     //Opsi
-    let id_opsi = bobot_opsi = null;
+    let id_komponen = id_komponen_opsi = null;
     $('.hitungEstimasi').click( function() {
       id_komponen = $(this).attr('data-id');
-      index_parent = $(this).attr('data-parent-index');
-      index_komponen = $(this).attr('data-index-komponen');
-      index_sub_komponen = $(this).attr('data-sub-index');
       id_komponen_opsi = $(this).attr('data-val');
-      bobot = Number($(this).attr('data-bobot'));
-      console.log(index_komponen);
 
       $.ajax({
         url: '{{ route("get_data_komponen_opsi") }}',
@@ -410,111 +345,11 @@
         success: function(response) {
           $('#bufferEstimasi .dropdown').remove();
           response.dataOpsi.forEach( item => $('#bufferEstimasi').append('<option class="dropdown" data-nilai-opsi="'+item.nilai+'" value="'+item.id+'">'+item.opsi+'</option>'));
-
           $('#bufferEstimasi').val(id_komponen_opsi);
-
           $('#modalEstimasi').modal('show');
         }
       })
 
-    });
-
-    // Persen
-    $('.hitungPersen').click(function() {
-      index_parent = $(this).attr('data-parent-index');
-      index_komponen = $(this).attr('data-index-komponen');
-      index_sub_komponen = $(this).attr('data-sub-index');
-      bobot = Number($(this).attr('data-bobot'));
-
-      let existingData = _klasifikasiKerusakanPersen[index_komponen];
-      
-      let modalBody = '<div class="row"><div class="col-lg-2"><label>Perhitungan</label></div></div>';
-      klasifikasiKerusakan.forEach((param, index)=>{
-        modalBody += (existingData) ?
-          '<div class="row my-2"><div class="col-lg-3">'+toDouble(param)+'</div><div class="col-lg-3"><input type="number" class="form-control input-value-persen" placeholder="0" data-index-klasifikasi="'+index+'" value="'+existingData[index].input+'"></div><div class="col-lg-3">% =</div><div class="col-lg-3"><input type="number" class="form-control form-hasil text-value-persen" placeholder="0" value="'+existingData[index].result+'" readonly></div></div>'
-          : '<div class="row my-2"><div class="col-lg-3">'+toDouble(param)+'</div><div class="col-lg-3"><input type="number" class="form-control input-value-persen" placeholder="0" data-index-klasifikasi="'+index+'"></div><div class="col-lg-3">% =</div><div class="col-lg-3"><input type="number" class="form-control form-hasil text-value-persen" placeholder="0" readonly></div></div>';
-      })
-
-      $('#modalPersen .modal-body').html(modalBody);
-      $('#modalPersen').modal('show');
-
-      $('.input-value-persen').change(function(){
-        let input_klasifikasi = $(this).val();
-        let index_klasifikasi = $(this).attr('data-index-klasifikasi');
-        let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toDouble(toPercent(input_klasifikasi, persentase));
-        $('.text-value-persen').eq(index_klasifikasi).val(percent);
-      });
-    })
-
-    //Unit
-    $('.hitungUnit').click(function(){
-      index_parent = $(this).attr('data-parent-index');
-      index_komponen = $(this).attr('data-index-komponen');
-      index_sub_komponen = $(this).attr('data-sub-index');
-      bobot = Number($(this).attr('data-bobot'));
-
-      let existingData = _klasifikasiKerusakanUnit[index_komponen];
-      let modalBody = '<div class="row"><div class="col-lg-3"><label>Jumlah</label></div><div class="col-lg-3"><input type="number" id="jumlahUnit" class="form-control" placeholder="0"></div></div><div class="row my-2"><div class="col-lg-2"><label>Perhitungan</label></div></div>'
-
-      klasifikasiKerusakan.forEach((param, index)=>{
-        modalBody += (existingData) ? 
-          '<div class="form-group"><div class="row"><div class="col-lg-3">'+toDouble(param)+'</div><div class="col-lg-3"><input type="number" class="form-control input-value-unit" placeholder="0" data-index-klasifikasi="'+index+'" value="'+existingData[index].input+'"></div><div class="col-lg-3">=</div><div class="col-lg-3"><input type="number" class="form-control text-value-unit" placeholder="0" value="'+existingData[index].result+'" readonly></div></div></div>'
-          : '<div class="form-group"><div class="row"><div class="col-lg-3">'+toDouble(param)+'</div><div class="col-lg-3"><input type="number" class="form-control input-value-unit" placeholder="0" data-index-klasifikasi="'+index+'"></div><div class="col-lg-3">=</div><div class="col-lg-3"><input type="number" class="form-control text-value-unit" placeholder="0" readonly></div></div></div>';
-      })
-      $('#modalUnit .modal-body').html(modalBody);
-
-      let ele_jumlahUnit = $('#input_jumlah_unit_'+index_komponen);
-      
-      $('#jumlahUnit').val(ele_jumlahUnit.val());
-      $('#modalUnit').modal('show');
-
-      $('.input-value-unit').change(function(){
-        let input_klasifikasi = $(this).val();
-        let index_klasifikasi = $(this).attr('data-index-klasifikasi');
-        let persentase = klasifikasiKerusakan[index_klasifikasi];
-        let percent = toPercent(input_klasifikasi, persentase, $('#jumlahUnit').val());
-        $('.text-value-unit').eq(index_klasifikasi).val(toDouble(percent));
-      });
-
-      $('#jumlahUnit').change(function(){
-        $('#show-error').html('');
-        $('.input-value-unit').change();
-      })
-    })
-
-
-    $('#sketsaDenah, #gambarBukti').change(function(){
-      $('#notifFileEmpty').html('');
-    })
-    
-    $('#submitKerusakan').click(function(){
-      // File validation
-      let eleFDenah = $('#sketsaDenah')[0];
-      let eleFBukti = $('#gambarBukti')[0];
-      fileExist = eleFDenah.files.length && eleFBukti.files.length;
-      if(!fileExist){
-        $('#notifFileEmpty')
-          .html('Harap upload file yang diperlukan.')
-          .css('color', 'red');
-        return false;
-      }
-
-      if(eleFDenah.files.length > 3 || eleFBukti.files.length > 5){
-        $('#notifFileEmpty')
-          .html('Perhatian: Sketsa denah maksimal 3 foto dan gambar bukti maksimal 5 foto.')
-          .css('color', 'red');
-        return false;
-      }
-
-      let valid = false;
-      for (let index = 0; index < eleFDenah.files.length; index++){
-        valid = eleFDenah.files.item(index).size <= 5242880;
-      }
-      for (let index = 0; index < eleFBukti.files.length; index++) {
-        valid = eleFBukti.files.item(index).size <= 5242880;
-      }
-      if(valid) $('#formKlasifikasiKerusakan').submit()
     });
   })
 </script>

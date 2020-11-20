@@ -33,13 +33,13 @@ class KerusakanController extends Controller
         $kerusakan = Kerusakan::select('kerusakan.id as id','gedung.nama as nama_gedung', 'gedung_ketegori.nama as jenis_gd', 'gedung.alamat as alamat')
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
                                 ->join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
-                                ->whereNull('gedung.deleted_at')
+                                ->orderBy('kerusakan.id', 'desc')
                                 ->get();
         return view('Kerusakan/master_kerusakan', compact('kerusakan'));
     }
 
     public function pilihanGedung() {
-        $gedung = Gedung::whereNull('deleted_at')->get();
+        $gedung = Gedung::get();
         return view('Kerusakan/tambah_master_kerusakan', compact('gedung'));
     }
 
@@ -103,9 +103,11 @@ class KerusakanController extends Controller
         ];
         return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user', 'kerusakan_data'));
     }
+
     private function setCellDropdown($sheet, $opsiSheet, $currentRow, $options, $selected = 0){
         $cellAddr   = "L$currentRow";
-        $cellResult = "V$currentRow";
+        $cellValue  = "V$currentRow";
+        $cellResult = "W$currentRow";
         $cellBobot  = "K$currentRow";
 
         
@@ -139,10 +141,11 @@ class KerusakanController extends Controller
         $validation->setFormula1('Opsi!$B$'.$first_opsi.':$B$'.$last_opsi);
         if($selected_opsi !== null)
             $sheet->setCellValue($cellAddr, $selected_opsi);
+        $sheet->setCellValue($cellValue, '=VLOOKUP('.$cellAddr.', \'Opsi\'!$B$'.$first_opsi.':$D$'.$last_opsi.', 3, 0)');
         $sheet->setCellValue($cellResult, '=(VLOOKUP('.$cellAddr.', \'Opsi\'!$B$'.$first_opsi.':$D$'.$last_opsi.', 2, 0) * '.$cellBobot .')/100');
     }
-    public function exportKerusakan(Request $request){
-        
+
+    public function exportKerusakan(Request $request){        
         $opd        = Session::get('opd');
         $nomorAset  = Session::get('nomor_aset');
         $surveyor1  = Session::get('surveyor1');
@@ -294,7 +297,7 @@ class KerusakanController extends Controller
                         $sheet->setCellValue('S'.$cr, '=$R'.$cr.'*$R$19');
                         $sheet->setCellValue('U'.$cr, '=$T'.$cr.'*$T$19');
                         $sheet->setCellValue(
-                            'V'.$cr, 
+                            'W'.$cr, 
                             '=((M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*$K'.$cr.')/100'
                         );
                     }else{
@@ -310,7 +313,7 @@ class KerusakanController extends Controller
                         $sheet->setCellValue('S'.$cr, '=($R'.$cr.'/$J'.$cr.')*$R$19');
                         $sheet->setCellValue('U'.$cr, '=($T'.$cr.'/$J'.$cr.')*$T$19');
                         $sheet->setCellValue(
-                            'V'.$cr, 
+                            'W'.$cr, 
                             '=((M'.$cr.'+O'.$cr.'+Q'.$cr.'+S'.$cr.'+U'.$cr.')*$K'.$cr.')/100'
                         );
                     }
@@ -335,15 +338,15 @@ class KerusakanController extends Controller
             }
         }
         $sheet->removeRow($currentRow, 40-$currentRow+$indexStartKomponen);
-        $sheet->setCellValue("V".$currentRow, '=(SUM(V'.$indexStartKomponen.':V'.($currentRow-1).'))');
+        $sheet->setCellValue("W".$currentRow, '=(SUM(W'.$indexStartKomponen.':W'.($currentRow-1).'))');
         // petugas survey
         $writer = new Xlsx($spreadsheet);
         $writer->save($output_file);
         //  $output_file;
         return redirect('/storage/excel/kerusakan/temp_kerusakan.xlsx');
     }
-    public function importKerusakan(Request $request){
-        
+
+    public function importKerusakan(Request $request){    
         $resp = [
             "status" => 300,
             "message" => "Error"
@@ -421,47 +424,64 @@ class KerusakanController extends Controller
                 //     $tingkat_kerusakan *= $bobot/100;
                 // };
                 
-                $tingkat_kerusakan = 0;
                 $newKerusakanDetail = new KerusakanDetail;
                 $newKerusakanDetail->id_kerusakan       = $newKerusakan->id;
                 $newKerusakanDetail->id_komponen        = $id_sub_komponen;
-                $newKerusakanDetail->tingkat_kerusakan  = $tingkat_kerusakan;
+                // $newKerusakanDetail->tingkat_kerusakan  = $tingkat_kerusakan;
                 
-                $jumlah_item = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                $jumlah_item    = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                $bobot          = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+
                 if($jumlah_item === null || $jumlah_item == "") $jumlah_item = 0;
+                if($bobot === null || $bobot == "") $bobot = 0;
 
                 if($id_satuan == 1){
-                    $opsi_selected = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                    $opsi = KomponenOpsi::select("id")
-                        ->where('opsi', $opsi_selected)
+                    $id_opsi_selected = $worksheet->getCellByColumnAndRow(22, $row)->getFormattedValue();
+                    $opsi = KomponenOpsi::select("id", "nilai")
+                        ->where('id', $id_opsi_selected)
                         ->where('id_komponen', $id_sub_komponen)
                         ->first();
-                    $tingkat_kerusakan = $opsi->nilai/100;
-                    $newKerusakanDetail->id_komponen_opsi = $opsi->id;
+                    $tingkat_kerusakan = ($opsi->nilai * $bobot) / 100;
+                    $newKerusakanDetail->id_komponen_opsi   = $opsi->id;
+                    $newKerusakanDetail->tingkat_kerusakan  = $tingkat_kerusakan;
                     $newKerusakanDetail->save();
-                }else{
-                    ($jumlah_item != 0) && $newKerusakanDetail->jumlah = $jumlah_item;
+                }else if($id_satuan == 2){
                     $newKerusakanDetail->save();
+                    $tingkat_kerusakan = 0;
                     for($i = 0; $i < 5; $i++){
-                        $jumlah_rusak = $worksheet->getCellByColumnAndRow(12+($i*2), $row)->getValue();
-                        if($jumlah_rusak === null || $jumlah_rusak == "") $jumlah_rusak = 0;
-                        $nilai_input_klasifikasi = ($jumlah_item > 0)? ($jumlah_rusak/$jumlah_item)*(0.2*($i+1)):0;
-                        $tingkat_kerusakan += $nilai_input_klasifikasi;
+                        $persentaseRusak = $worksheet->getCellByColumnAndRow(12+($i*2), $row)->getValue();
+                        $persentaseRusak = $persentaseRusak * 100;
+                        if($persentaseRusak === null || $persentaseRusak == "") $persentaseRusak = 0;
+                        $klasifikasi                = 0.2*($i+1);
+                        $tingkat_kerusakan          += $persentaseRusak * $klasifikasi;
+
                         $input_klasifikasi = new KerusakanKlasifikasi;
                         $input_klasifikasi->id_kerusakan_detail     = $newKerusakanDetail->id;
-                        $input_klasifikasi->nilai_input_klasifikasi = $jumlah_rusak;
-                        $input_klasifikasi->klasifikasi             = 0.2*($i+1);
+                        $input_klasifikasi->nilai_input_klasifikasi = $persentaseRusak;
+                        $input_klasifikasi->klasifikasi             = $klasifikasi;
                         $input_klasifikasi->save();
                     }
-                    
+                    $newKerusakanDetail->tingkat_kerusakan = (($tingkat_kerusakan * $bobot) / 100);
+                    $newKerusakanDetail->save();
+                }else{
+                    $newKerusakanDetail->jumlah = $jumlah_item;
+                    $newKerusakanDetail->save();
+                    $tingkat_kerusakan = 0;
+                    for($i = 0; $i < 5; $i++){
+                        $nilaiKerusakan = $worksheet->getCellByColumnAndRow(12+($i*2), $row)->getValue();
+                        if($nilaiKerusakan === null || $nilaiKerusakan == "") $nilaiKerusakan = 0;
+                        $klasifikasi                = 0.2*($i+1);
+                        $tingkat_kerusakan          += (($nilaiKerusakan / $jumlah_item) * $klasifikasi);
+
+                        $input_klasifikasi = new KerusakanKlasifikasi;
+                        $input_klasifikasi->id_kerusakan_detail     = $newKerusakanDetail->id;
+                        $input_klasifikasi->nilai_input_klasifikasi = $nilaiKerusakan;
+                        $input_klasifikasi->klasifikasi             = $klasifikasi;
+                        $input_klasifikasi->save();
+                    }
+                    $newKerusakanDetail->tingkat_kerusakan = (($tingkat_kerusakan * $bobot));
+                    $newKerusakanDetail->save();
                 }
-                
-                $bobot = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-                if($bobot !== null && $bobot != "") {
-                    $tingkat_kerusakan *= $bobot/100;
-                };
-                $newKerusakanDetail->tingkat_kerusakan = $tingkat_kerusakan;
-                $newKerusakanDetail->save();
             }
             
             $resp["status"] = 200;

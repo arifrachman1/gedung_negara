@@ -342,8 +342,8 @@
     let index_parent = index_komponen = id_komponen = index_sub_komponen = bobot = null;
 
     function toDouble(param){
-      return param;
-      // return param.toFixed(2);
+      // return param;
+      return param.toFixed(2);
     }
 
     function sumKlasifikasiKerusakan(param, bobot, jumlahUnit){
@@ -351,7 +351,8 @@
     }
 
     function sumTingkatKerusakan(param, bobot){
-      return (bobot) ? (param * bobot) / 100 : param;
+      // return (bobot) ? (param * bobot) / 100 : param;
+      return (param * bobot) / 100;
     }
 
     function toTextKlasifikasi(indexParent){
