@@ -346,8 +346,8 @@
     }
 
     function getTingkatKerusakan(param, bobot){
-      // return (bobot) ? (param * bobot) / 100 : param;
-      return (param * bobot) / 100;
+      return (bobot) ? (param * bobot) / 100 : param;
+      // return (param * bobot) / 100;
     }
 
     function toTextKategoriKerusakan(param){
@@ -484,7 +484,7 @@
         setNotifErrorEstimasi(true, 'Harap pilih opsi.')
         return false;
       }
-      let resultKlasifikasiKerusakan = toDouble(getTingkatKerusakan(nilai_opsi, komponen.bobot));
+      let resultKlasifikasiKerusakan = getTingkatKerusakan(nilai_opsi, komponen.bobot);
       $('.input_estimasi_'+ komponen.index_komponen).val(id_opsi);
       setTingkatKerusakan(komponen.index_parent, komponen.index_sub_komponen, resultKlasifikasiKerusakan);
     })
