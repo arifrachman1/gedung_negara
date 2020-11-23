@@ -45,15 +45,27 @@
                         <div class="col-lg-3">
                             Provinsi   
                         </div>
+                        @if($provinsi == null)
+                        <div class="col-lg-3">
+                            : -
+                        </div>
+                        @else
                         <div class="col-lg-3">
                             : {{ $provinsi->nama_provinsi }}
                         </div>
+                        @endif
                         <div class="col-lg-3">
                             Kabupaten / Kota   
                         </div>
+                        @if($kab_kota == null)
+                        <div class="col-lg-3">
+                            : -
+                        </div>
+                        @else
                         <div class="col-lg-3">
                             : {{ $kab_kota->nama_kota }}
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
@@ -61,15 +73,27 @@
                         <div class="col-lg-3">
                             Kecamatan   
                         </div>
+                        @if($kecamatan == null)
+                        <div class="col-lg-3">
+                            : -
+                        </div>
+                        @else
                         <div class="col-lg-3">
                             : {{ $kecamatan->nama_kecamatan }}
                         </div>
+                        @endif
                         <div class="col-lg-3">
                             Kelurahan   
                         </div>
+                        @if($desa_kelurahan == null)
+                        <div class="col-lg-3">
+                            : -
+                        </div>
+                        @else
                         <div class="col-lg-3">
                             : {{ $desa_kelurahan->nama_kelurahan }}
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
@@ -286,7 +310,7 @@
                                     @endif
                                     <td>{{ ($subKomponen->tingkat_kerusakan) ? $subKomponen->tingkat_kerusakan : '0' }}%</td>
                                     @if($subIndex == 0)
-                                      <td style="border-right: 0">{{ $komponen->sumTingkatKerusakan }}%</td>
+                                      <td style="border-right: 0">{{round($komponen->sumTingkatKerusakan, 3)}}%</td>
                                       <td rowspan="{{ $komponen->numberOfSub }}">{{ $komponen->sumTingkatKerusakanStatus }}</td>
                                     @endif
 
@@ -296,7 +320,7 @@
                             @endforeach
                             <tr>
                               <td colspan="6">Jumlah Kerusakan</td>
-                              <td> {{ $sumAlltingkatKerusakan }}% </td>
+                              <td> {{ round($sumAlltingkatKerusakan,3) }}% </td>
                               <td colspan="2"> {{ $sumAlltingkatKerusakanText }} </td>
                             </tr>
                         </tbody>
@@ -408,6 +432,5 @@
       })
 
     });
-
   })
 </script>

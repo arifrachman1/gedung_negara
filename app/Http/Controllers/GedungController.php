@@ -27,6 +27,7 @@ class GedungController extends Controller
             ->select(
                 'gedung.nama as nama',
                 'gedung_ketegori.nama as nama_kat',
+                'gedung.nomor_seri as nomor_seri',
                 'gedung.alamat as alamat',
                 'gedung.bujur_timur as bujur_timur',
                 'gedung.lintang_selatan as lintang_selatan',
@@ -87,6 +88,7 @@ class GedungController extends Controller
         $input = new Gedung;
         $input->nama = $request->nama_gd;
         $input->id_gedung_kategori = $request->kategori_gd;
+        $input->nomor_seri = $request->nomor_seri;
         $input->alamat = $request->alamat;
         $input->bujur_timur = $request->bt;
         $input->lintang_selatan = $request->ls;
@@ -125,6 +127,7 @@ class GedungController extends Controller
         $edit = Gedung::find($id);
         $edit->nama = $request->nama_gd;
         $edit->id_gedung_kategori = $request->kategori_gd;
+        $edit->nomor_seri = $request->nomor_seri;
         $edit->alamat = $request->alamat;
         $edit->bujur_timur = $request->bt;
         $edit->lintang_selatan = $request->ls;
@@ -227,28 +230,29 @@ class GedungController extends Controller
 
             $sql->nama = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
             $sql->alamat = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $sql->bujur_timur = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-            $sql->lintang_selatan = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-            $sql->legalitas = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-            $sql->tipe_pemilik = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-            $sql->alas_hak = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-            $sql->luas_lahan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-            $sql->jumlah_lantai = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-            $sql->luas = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-            $sql->tinggi = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-            $sql->kompleks = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-            $sql->kepadatan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-            $sql->permanensi = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
-            $sql->tkt_resiko_kebakaran = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-            $sql->penangkal_petir = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
-            $sql->struktur_bawah = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-            $sql->struktur_bangunan = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
-            $sql->struktur_atap = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
-            $sql->kdb = $worksheet->getCellByColumnAndRow(21, $row)->getValue();
-            $sql->klb = $worksheet->getCellByColumnAndRow(22, $row)->getValue();
-            $sql->kdh = $worksheet->getCellByColumnAndRow(23, $row)->getValue();
-            $sql->gsb = $worksheet->getCellByColumnAndRow(24, $row)->getValue();
-            $sql->rth = $worksheet->getCellByColumnAndRow(25, $row)->getValue();
+            $sql->nomor_seri = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+            $sql->bujur_timur = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+            $sql->lintang_selatan = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+            $sql->legalitas = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+            $sql->tipe_pemilik = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+            $sql->alas_hak = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+            $sql->luas_lahan = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+            $sql->jumlah_lantai = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+            $sql->luas = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+            $sql->tinggi = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+            $sql->kompleks = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+            $sql->kepadatan = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+            $sql->permanensi = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+            $sql->tkt_resiko_kebakaran = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+            $sql->penangkal_petir = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+            $sql->struktur_bawah = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
+            $sql->struktur_bangunan = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
+            $sql->struktur_atap = $worksheet->getCellByColumnAndRow(21, $row)->getValue();
+            $sql->kdb = $worksheet->getCellByColumnAndRow(22, $row)->getValue();
+            $sql->klb = $worksheet->getCellByColumnAndRow(23, $row)->getValue();
+            $sql->kdh = $worksheet->getCellByColumnAndRow(24, $row)->getValue();
+            $sql->gsb = $worksheet->getCellByColumnAndRow(25, $row)->getValue();
+            $sql->rth = $worksheet->getCellByColumnAndRow(26, $row)->getValue();
             $sql->save();
         }
 
