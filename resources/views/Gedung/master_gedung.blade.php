@@ -26,13 +26,13 @@
               </span> 
             @endcan
           </a>
-          <a class="btn btn-secondary btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
-          @can('excel.Export')
+          <!--<a class="btn btn-secondary btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
+          
               <span class="icon text-white-100">
                   Export Excel
               </span> 
-            @endcan
-          </a>
+          
+          </a>-->
           <a class="btn btn-secondary btn-icon-split" href="{{ url('export_pdf_master_gedung') }}" role="button">
               <span class="icon text-white-100">
                   Export PDF
