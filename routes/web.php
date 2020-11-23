@@ -172,6 +172,7 @@ Route::post('edit_klasifikasi_kerusakan', 'KerusakanController@submitEditKerusak
 Route::post('post_edit_formulir_surveyor', 'KerusakanController@postEditFormSurveyor');
 Route::get('edit_formulir_klasifikasi_kerusakan/{id_kerusakan}', 'KerusakanController@formEditIdentifikasiKerusakan');
 Route::get('kerusakan/export_template', 'KerusakanController@exportKerusakan')->name('kerusakan.excel.export');
+Route::get('exportKerusakanPDF/{id}', 'KerusakanController@exportKerusakanPDF');
 Route::post('kerusakan/import_excel', 'KerusakanController@importKerusakan')->name('kerusakan.excel.import');
 
 Route::get('view_kerusakan', function (){
