@@ -31,6 +31,11 @@
     </div>
 
     <div class="form-group">
+      <label>Nomor Seri Gedung</label>
+      <input type="text" class="form-control" placeholder="Nomor Seri Gedung" name="nomor_seri" required>
+    </div>
+
+    <div class="form-group">
       <label>Alamat:</label>
       <textarea name="alamat" cols="30" rows="3" class="form-control" placeholder="Masukkan Alamat Di Sini" required></textarea>
     </div>

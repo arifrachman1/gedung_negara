@@ -27,6 +27,12 @@
                                     : {{ $detail_gedung->nama_kat }}
                                 </div>
                                 <div class="col-sm-4">
+                                    Nomor Seri Gedung   
+                                </div>
+                                <div class="col-sm-8">
+                                    : {{ $detail_gedung->nomor_seri }}
+                                </div>
+                                <div class="col-sm-4">
                                     Alamat 
                                 </div>
                                 <div class="col-sm-8">
