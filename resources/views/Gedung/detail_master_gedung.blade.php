@@ -220,7 +220,15 @@
                                 </div>
 
                             </div>
-                            <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                            <hr>
+                            <div class="my-2">
+                                <a class="btn btn-warning" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                                <a class="btn btn-secondary btn-icon-split" href="{{ url('export_pdf_detail_gedung', ['id' => $detail_gedung->id]) }}" role="button">
+                                    <span class="icon text-white-100">
+                                        Export PDF
+                                    </span> 
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
