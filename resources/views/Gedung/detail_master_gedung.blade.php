@@ -29,9 +29,15 @@
                                 <div class="col-sm-4">
                                     Nomor Seri Gedung   
                                 </div>
+                                @if ($detail_gedung->nomor_seri == null)
+                                <div class="col-sm-8">
+                                    : -
+                                </div>
+                                @else
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->nomor_seri }}
                                 </div>
+                                @endif
                                 <div class="col-sm-4">
                                     Alamat 
                                 </div>
