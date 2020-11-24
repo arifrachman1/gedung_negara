@@ -107,8 +107,8 @@ Route::group(['middleware' => 'auth'], function () {
         $data = [];
     
         $writer = new Xlsx($spreadsheet);
-        $writer->save('sample_excel.xlsx');
-        return redirect('sample_excel.xlsx');
+        $writer->save('template_gedung.xlsx');
+        return redirect('template_gedung.xlsx');
     });
     // Route::get('tambah_master_gedung_input', 'GedungController@input_action');
     // Route::get('hapus_master_gedung/{id}', 'GedungController@delete');
