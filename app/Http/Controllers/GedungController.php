@@ -99,7 +99,7 @@ class GedungController extends Controller
 
         $pdf = PDF::loadView('Gedung/detail_gedung_pdf', compact('detail_gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream();
+        return $pdf->stream($detail_gedung->nama .''. now()->toDateString() .'.pdf');
     }
 
     public function input(Request $request) {
@@ -303,10 +303,10 @@ class GedungController extends Controller
 
     public function exportPDF() {
         $gedung = Gedung::all();
-
+        
         $pdf = PDF::loadView('Gedung/gedung_pdf', compact('gedung'));
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream();
+        return $pdf->stream('Rekap Data Gedung '. now()->toDateString() .'.pdf');
     }
 
 }
