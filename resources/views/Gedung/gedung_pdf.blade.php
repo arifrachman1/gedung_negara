@@ -17,36 +17,44 @@
         table, th, td {
             border: 1px solid black;
         }
+        body {
+                margin-top: 3cm;
+                margin-left: 2cm;
+                margin-right: 2cm;
+                margin-bottom: 2cm;
+            }
 
         #watermark {
-                position: fixed;
-                bottom:   0px;
-                left:     0px;
-                /* * The width and height may change 
-                    according to the dimensions of your letterhead
+            position: fixed;
+                /** 
+                    Set a position in the page for your image
+                    This should center it vertically
                 **/
-                width:    21.8cm;
-                height:   28cm;
+                bottom:   5cm;
+                left:     11cm;
 
-                /* * Your watermark should be behind every content* */
+                /** Change image dimensions**/
+                width:    8cm;
+                height:   8cm;
+
+                /** Your watermark should be behind every content**/
                 z-index:  -1000;
              }
-        @page { margin: 100px 50px; }
+        @page { margin: 0cm 0cm; }
         .header {
                 position: fixed;
-                top: -60px;
-                left: 0px;
-                right: 0px;
-                height: 50px;
-
-                /** Extra personal styles **/
-                background-color: #03a9f4;
-                color: white;
-                text-align: center;
-                line-height: 35px;
+                top: 0cm;
+                left: 0cm;
+                right: 0cm;
+                height: 3cm;
             }
         /* .header { position: fixed; left: 0px; top: -100px; right: 0px; height: 100px; text-align: center; } */
-        .footer { position: fixed; left: 0px; bottom: -50px; right: 0px; height: 50px;text-align: center;}
+        .footer {         position: fixed; 
+                bottom: 0cm; 
+                left: 0cm; 
+                right: 0cm;
+                height: 2cm;
+                text-align: center;}
         .footer .pagenum:before { content: counter(page); }
         </style>
 	</style>
@@ -54,10 +62,10 @@
     <body>
 
         <div id="watermark">
-            <img src="{{ asset('style/img/5.png') }}" />
+            <img src="{{ asset('style/img/watermark.png') }}" width="100%" height="100%"/>
         </div>
           <div class="header">
-            <h2>Isi Header</h2>
+          <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
         </div>
         <div class="footer">
             Page <span class="pagenum"></span>
