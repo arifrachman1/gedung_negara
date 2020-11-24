@@ -8,7 +8,7 @@
         <style type="text/css">
             table tr td,
             table tr th{
-                font-size: 15pt;
+                font-size: 12pt;
             }
             table {
                 border-collapse: collapse;
@@ -18,12 +18,48 @@
                 border: 0px solid black;
                 padding: 5px;
             }
+
         </style>
         <center>
-            <h5>Detail Gedung </h4>
+            <h4>Detail Gedung </h4>
         </center>
-
-        <div class="my-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        Nama Gedung
+                    </td>
+                    <td>
+                        : <strong>{{ $detail_gedung->nama }} </strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Jenis Gedung
+                    </td>
+                    <td>
+                        : <strong>{{ $detail_gedung->nama_kat }}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Nomor Seri Gedung
+                    </td>
+                    <td>
+                        : <strong>{{ ($detail_gedung->nomor_seri) ? $detail_gedung->nomor_seri : '-' }}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Alamat
+                    </td>
+                    <td>
+                        : <strong>{{ $detail_gedung->alamat }}</strong>
+                    </td>
+                </tr>
+            </thead>
+        </table> <br/><br/>
+    <!-- <div class="my-2">
             <div class="row">
                 Nama Gedung: <strong>{{ $detail_gedung->nama }} </strong>
             </div>
@@ -40,7 +76,8 @@
                 Alamat: <strong>{{ $detail_gedung->alamat }}</strong>
             </div>
         </div>
-        <table class="table">
+    -->
+        <table>
             <tbody>
                 <tr>
                     <td>Bujur Timur</td>
