@@ -8,20 +8,21 @@
         <style type="text/css">
             table tr td,
             table tr th{
-                font-size: 8pt;
+                font-size: 15pt;
             }
-
             table {
                 border-collapse: collapse;
+                border-spacing: 25px;
             }
-
             table, th, td {
-                border: 1px solid black;
+                border: 0px solid black;
+                padding: 5px;
             }
         </style>
         <center>
-            <h5>Detail Gedung</h4>
+            <h5>Detail Gedung </h4>
         </center>
+
         <div class="my-2">
             <div class="row">
                 Nama Gedung: <strong>{{ $detail_gedung->nama }} </strong>
@@ -38,106 +39,86 @@
             <div class="row">
                 Alamat: <strong>{{ $detail_gedung->alamat }}</strong>
             </div>
-
-            <div class="row">
-                Bujur Timur: <strong>{{ $detail_gedung->bujur_timur }}</strong>
-            </div>
-
-            <div class="row">
-                Lintang Selatan: <strong>{{ $detail_gedung->lintang_selatan }}</strong>
-            </div>
-
-            <div class="row">
-                Legalitas: <strong>{{ $detail_gedung->legalitas }}</strong>
-            </div>
-
-            <div class="row">
-                Alas Hak: <strong>{{ $detail_gedung->alas_hak }}</strong>
-            </div>
-
-            <div class="row">
-                Luas lahan: <strong>{{ $detail_gedung->luas_lahan }}</strong>
-            </div>
-
-            <div class="row">
-                Jumlah Lantai: <strong>{{ $detail_gedung->jumlah_lantai }}</strong>
-            </div>
-
-            <div class="row">
-                Luas Bangunan: <strong>{{ $detail_gedung->luas_bangunan }}</strong>
-            </div>
-
-            <div class="row">
-                Tinggi Bangunan: <strong>{{ $detail_gedung->tinggi_bangunan }}</strong>
-            </div>
-
-            <div class="row">
-                Kompleksitas: <strong>{{ $detail_gedung->kompleks }}</strong>
-            </div>
-
-            <div class="row">
-                Kepadatan: <strong>{{ $detail_gedung->kepadatan }}</strong>
-            </div>
-
-            <div class="row">
-                Permanensi: <strong>{{ $detail_gedung->permanensi }}</strong>
-            </div>
-
-            <div class="row">
-                Resiko Kebakaran: <strong>{{ $detail_gedung->risk_bakar }}</strong>
-            </div>
-
-            <div class="row">
-                Penangkal: <strong>{{ $detail_gedung->penangkal }}</strong>
-            </div>
-
-            <div class="row">
-                Struktur Bawah: <strong>{{ $detail_gedung->struktur_bawah }}</strong>
-            </div>
-
-            <div class="row">
-                Struktur Bangunan: <strong>{{ $detail_gedung->struktur_bangunan }}</strong>
-            </div>
-
-            <div class="row">
-                Struktur Atap: <strong>{{ $detail_gedung->struktur_atap }}</strong>
-            </div>
-
-            <div class="row">
-                Provinsi: <strong>{{ ($provinsi->nama) ? $provinsi->nama : '-' }}</strong>
-            </div>
-
-            <div class="row">
-                Kabupaten: <strong>{{ $kab_kota->nama }}</strong>
-            </div>
-
-            <div class="row">
-                Kecamatan: <strong>{{ ($kecamatan->nama) ? $kecamatan->nama : '-' }}</strong>
-            </div>
-
-            <div class="row">
-                Kelurahan: <strong>{{ ($desa_kelurahan->nama) ? $desa_kelurahan->nama : '-' }}</strong>
-            </div>
-
-            <div class="row">
-                KDB: <strong>{{ $detail_gedung->kdb }}</strong>
-            </div>
-
-            <div class="row">
-                KLB: <strong>{{ $detail_gedung->klb }}</strong>
-            </div>
-
-            <div class="row">
-                KDH: <strong>{{ $detail_gedung->kdh }}</strong>
-            </div>
-
-            <div class="row">
-                GSB: <strong>{{ $detail_gedung->gsb }}</strong>
-            </div>
-
-            <div class="row">
-                RTH: <strong>{{ $detail_gedung->rth }}</strong>
-            </div>
         </div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Bujur Timur</td>
+                    <td>: <strong>{{ $detail_gedung->bujur_timur }}</strong></td>
+                    <td>Struktur Bawah</td>
+                    <td>: <strong>{{ $detail_gedung->struktur_bawah }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Lintang Selatan</td>
+                    <td>: <strong>{{ $detail_gedung->lintang_selatan }}</strong></td>
+                    <td>Struktur Bangunan</td>
+                    <td>: <strong>{{ $detail_gedung->struktur_bangunan }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Legalitas</td>
+                    <td>: <strong>{{ $detail_gedung->legalitas }}</strong></td>
+                    <td>Struktur Atap</td>
+                    <td>: <strong>{{ $detail_gedung->struktur_atap }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Alas Hak</td>
+                    <td>: <strong>{{ $detail_gedung->alas_hak }}</strong></td>
+                    <td>Provinsi</td>
+                    <td>: <strong>{{ ($provinsi->nama) ? $provinsi->nama : '-' }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Luas lahan</td>
+                    <td>: <strong>{{ $detail_gedung->luas_lahan }}</strong></td>
+                    <td>Kabupaten</td>
+                    <td>: <strong>{{ $kab_kota->nama }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Jumlah Lantai</td>
+                    <td>: <strong>{{ $detail_gedung->jumlah_lantai }}</strong></td>
+                    <td>Kecamatan</td>
+                    <td>: <strong>{{ ($kecamatan->nama) ? $kecamatan->nama : '-' }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Luas Bangunan</td>
+                    <td>: <strong>{{ $detail_gedung->luas_bangunan }}</strong></td>
+                    <td>Kelurahan</td>
+                    <td>: <strong>{{ ($desa_kelurahan->nama) ? $desa_kelurahan->nama : '-' }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Tinggi Bangunan</td>
+                    <td>: <strong>{{ $detail_gedung->tinggi_bangunan }}</strong></td>
+                    <td>KDB</td>
+                    <td>: <strong>{{ $detail_gedung->kdb }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Kompleksitas</td>
+                    <td>: <strong>{{ $detail_gedung->kompleks }}</strong></td>
+                    <td>KLB</td>
+                    <td>: <strong>{{ $detail_gedung->klb }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Kepadatan</td>
+                    <td>: <strong>{{ $detail_gedung->kepadatan }}</strong></td>
+                    <td>KDH</td>
+                    <td>: <strong>{{ $detail_gedung->kdh }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Permanensi</td>
+                    <td>: <strong>{{ $detail_gedung->permanensi }}</strong></td>
+                    <td>GSB</td>
+                    <td>: <strong>{{ $detail_gedung->gsb }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Resiko Kebakaran</td>
+                    <td>: <strong>{{ $detail_gedung->risk_bakar }}</strong></td>
+                    <td>RTH</td>
+                    <td>: <strong>{{ $detail_gedung->rth }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Penangkal</td>
+                    <td>: <strong>{{ $detail_gedung->penangkal }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>

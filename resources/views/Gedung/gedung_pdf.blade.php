@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>   
         <title>Daftar Gedung PDF</title>
-        <style>
-			body{
-				background-image: url('{{ public_path('/style/img/5.png') }}');
-			}
-		</style>
 	    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     </head>
     <body>
@@ -26,7 +21,6 @@
         }
 	</style>
 	<center>
-        <img src="{{ public_path('/style/img/5.png') }}" height="200px">
 		<h5>Daftar Gedung</h4>
 	</center>
  
