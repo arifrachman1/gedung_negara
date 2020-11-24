@@ -347,6 +347,8 @@ class KerusakanController extends Controller
     }
 
     public function exportKerusakanPDF($id_kerusakan){
+        $name = Session::get('name');
+        $profile = User::where('name', $name)->first();  
         $id_parents = KerusakanDetail::select('id_parent as id')
             ->join('komponen', 'komponen.id', '=', 'kerusakan_detail.id_komponen')
             ->where('id_kerusakan', $id_kerusakan)
@@ -388,7 +390,7 @@ class KerusakanController extends Controller
         }
         $sumAlltingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAlltingkatKerusakan);
 
-        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText'));
+        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText','profile'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }

@@ -63,7 +63,7 @@
                 height: 2cm;
                 text-align: left;}
         .footer .pagenum:before { content: counter(page); }
-        </style>
+        
 	</style>
     </head>
     <body>
