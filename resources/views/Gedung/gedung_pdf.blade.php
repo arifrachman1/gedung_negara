@@ -3,15 +3,8 @@
     <head>   
         <title>Daftar Gedung PDF</title>
 	    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-<<<<<<< HEAD
-    </head>
-    <body>
-    <style type="text/css">
-    
-=======
         <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
         <style type="text/css">
->>>>>>> a73eed6a836bfd60864d610840d4d4a28caf1e9c
 		table tr td,
 		table tr th{
 			font-size: 8pt;
@@ -85,6 +78,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>No. Seri</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>BT</th>
@@ -116,6 +110,7 @@
                     @foreach($gedung as $g)
                     <tr>
                         <td>{{ $i++ }}</td>
+                        <td>{{ $g->nomor_seri }}</td>
                         <td>{{ $g->nama }}</td>
                         <td>{{ $g->alamat }}</td>
                         <td>{{ $g->bujur_timur }}</td>

@@ -84,9 +84,15 @@
                     <td>
                         Jenis Gedung
                     </td>
+                    @if($nama_kat == null)
                     <td>
-                        : <strong>{{ $detail_gedung->nama_kat }}</strong>
+                        : <strong> - </strong>
                     </td>
+                    @else
+                    <td>
+                        : <strong>{{ $nama_kat->nama_kategori }}</strong>
+                    </td>
+                    @endif
                 </tr>
                 <tr>
                     <td>
@@ -148,25 +154,41 @@
                     <td>Alas Hak</td>
                     <td>: <strong>{{ $detail_gedung->alas_hak }}</strong></td>
                     <td>Provinsi</td>
+                    @if($provinsi == null)
+                    <td>: <strong> - </strong></td>
+                    @else
                     <td>: <strong>{{ ($provinsi->nama) ? $provinsi->nama : '-' }}</strong></td>
+                    @endif
                 </tr>
                 <tr>
                     <td>Luas lahan</td>
                     <td>: <strong>{{ $detail_gedung->luas_lahan }}</strong></td>
                     <td>Kabupaten</td>
+                    @if($kab_kota == null)
+                    <td>: <strong> - </strong></td>
+                    @else
                     <td>: <strong>{{ $kab_kota->nama }}</strong></td>
+                    @endif
                 </tr>
                 <tr>
                     <td>Jumlah Lantai</td>
                     <td>: <strong>{{ $detail_gedung->jumlah_lantai }}</strong></td>
                     <td>Kecamatan</td>
-                    <td>: <strong>{{ ($kecamatan->nama) ? $kecamatan->nama : '-' }}</strong></td>
+                    @if($kecamatan == null)
+                    <td>: <strong> - </strong></td>
+                    @else
+                    <td>: <strong>{{ $kecamatan->nama }}</strong></td>
+                    @endif
                 </tr>
                 <tr>
                     <td>Luas Bangunan</td>
                     <td>: <strong>{{ $detail_gedung->luas_bangunan }}</strong></td>
                     <td>Kelurahan</td>
-                    <td>: <strong>{{ ($desa_kelurahan->nama) ? $desa_kelurahan->nama : '-' }}</strong></td>
+                    @if($desa_kelurahan == null)
+                    <td>: <strong> - </strong></td>
+                    @else
+                    <td>: <strong>{{ $desa_kelurahan->nama }}</strong></td>
+                    @endif
                 </tr>
                 <tr>
                     <td>Tinggi Bangunan</td>
