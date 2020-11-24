@@ -58,7 +58,7 @@
                     <div id="placholder"></div>
                     <!-- bobot -->
                     <label class="font-weight-bold">Bobot</label>                    
-                      <input type="number" name="bobots[]" value="{{$value->bobot}}" class="form-control"> 
+                      <input type="number" step="any" name="bobots[]" value="{{$value->bobot}}" class="form-control"> 
                   </div><br>
                   <button class="btn btn-danger remove" value="delet" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                 <hr>
@@ -93,7 +93,7 @@
                         </select>
                         <div id="placholders"></div>
                         <label class="font-weight-bold">Bobot</label>
-                        <input type="number" name="bobots[]"  class="form-control"> 
+                        <input type="number" step="any" name="bobots[]"  class="form-control"> 
                       </div><br>
                     <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button><hr>
                 </div> 

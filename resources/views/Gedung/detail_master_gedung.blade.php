@@ -4,16 +4,21 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div class="card shadow mb-4">
-    <div class="card-header bg-primary py-3">
+  <div class="card shadow">
+    <div class="card-header bg-primary">
       <h6 class="m-0 font-weight-bold text-white">DETAIL DATA GEDUNG</h6>
     </div>
     <div class="card-body">
+        <a class="btn btn-secondary ml-3" href="{{ url('export_pdf_detail_gedung', ['id' => $detail_gedung->id]) }}" role="button">
+            <span class="icon text-white-100">
+                Export PDF
+            </span> 
+        </a>
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <form>
             @csrf
-                    <div class="container p-3 my-3 row">
+                    <div class="container my-3 row">
                         <div class="card">
                             <div class="card-header">
                                 Nama Gedung : {{ $detail_gedung->nama }}
@@ -220,7 +225,10 @@
                                 </div>
 
                             </div>
-                            <a class="btn btn-warning float-left mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                            <hr>
+                            <div class="my-2">
+                                <a class="btn btn-warning" href="{{url('/master_gedung')}}" role="button">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>

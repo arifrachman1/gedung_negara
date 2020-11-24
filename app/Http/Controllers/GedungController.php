@@ -25,6 +25,7 @@ class GedungController extends Controller
     public function detail($id) {
         $detail_gedung = Gedung::join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
             ->select(
+                'gedung.id as id',
                 'gedung.nama as nama',
                 'gedung_ketegori.nama as nama_kat',
                 'gedung.nomor_seri as nomor_seri',
@@ -58,6 +59,47 @@ class GedungController extends Controller
         $kecamatan = Kecamatan::where('id_kec', $daerah->kode_kecamatan)->select('kecamatan.nama as nama')->first();
         $desa_kelurahan = DesaKelurahan::where('id_kel', $daerah->kode_kelurahan)->select('kelurahan.nama as nama')->first();
         return view('Gedung/detail_master_gedung', compact('detail_gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
+    }
+
+    public function exportPDFDetailGedung($id){
+        $detail_gedung = Gedung::join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
+            ->select(
+                'gedung.id as id',
+                'gedung.nama as nama',
+                'gedung_ketegori.nama as nama_kat',
+                'gedung.nomor_seri as nomor_seri',
+                'gedung.alamat as alamat',
+                'gedung.bujur_timur as bujur_timur',
+                'gedung.lintang_selatan as lintang_selatan',
+                'gedung.legalitas as legalitas',
+                'gedung.alas_hak as alas_hak',
+                'gedung.luas_lahan as luas_lahan',
+                'gedung.jumlah_lantai as jumlah_lantai',
+                'gedung.luas as luas_bangunan',
+                'gedung.tinggi as tinggi_bangunan',
+                'gedung.kompleks as kompleks',
+                'gedung.kepadatan as kepadatan',
+                'gedung.permanensi as permanensi',
+                'gedung.tkt_resiko_kebakaran as risk_bakar',
+                'gedung.penangkal_petir as penangkal',
+                'gedung.struktur_bawah as struktur_bawah',
+                'gedung.struktur_bangunan as struktur_bangunan',
+                'gedung.struktur_atap as struktur_atap',
+                'gedung.kdb as kdb',
+                'gedung.klb as klb',
+                'gedung.kdh as kdh',
+                'gedung.gsb as gsb',
+                'gedung.rth as rth',
+            )->where('gedung.id', $id)->first();
+        $daerah = Gedung::where('id', $id)->select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->first();
+        $provinsi = Provinsi::where('id_prov', $daerah->kode_provinsi)->select('provinsi.nama as nama')->first();
+        $kab_kota = KabupatenKota::where('id_kota', $daerah->kode_kabupaten)->select('kota.nama as nama')->first();
+        $kecamatan = Kecamatan::where('id_kec', $daerah->kode_kecamatan)->select('kecamatan.nama as nama')->first();
+        $desa_kelurahan = DesaKelurahan::where('id_kel', $daerah->kode_kelurahan)->select('kelurahan.nama as nama')->first();
+
+        $pdf = PDF::loadView('Gedung/detail_gedung_pdf', compact('detail_gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->stream();
     }
 
     public function input(Request $request) {

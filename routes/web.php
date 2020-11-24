@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('lokasi_desa/{id}', 'GedungController@getDesaKelurahan');
     Route::post('input_master_gedung', 'GedungController@inputPost');
     Route::get('detail_master_gedung/{id}', 'GedungController@detail');
+    Route::get('export_pdf_detail_gedung/{id}', 'GedungController@exportPDFDetailGedung');
     Route::get('edit_master_gedung/{id}', 'GedungController@edit');
     Route::post('edit_master_gedung_post/{id}', 'GedungController@edit_post');
     Route::get('export_pdf_master_gedung/', 'GedungController@exportPDF');
@@ -171,6 +172,7 @@ Route::post('edit_klasifikasi_kerusakan', 'KerusakanController@submitEditKerusak
 Route::post('post_edit_formulir_surveyor', 'KerusakanController@postEditFormSurveyor');
 Route::get('edit_formulir_klasifikasi_kerusakan/{id_kerusakan}', 'KerusakanController@formEditIdentifikasiKerusakan');
 Route::get('kerusakan/export_template', 'KerusakanController@exportKerusakan')->name('kerusakan.excel.export');
+Route::get('exportKerusakanPDF/{id}', 'KerusakanController@exportKerusakanPDF');
 Route::post('kerusakan/import_excel', 'KerusakanController@importKerusakan')->name('kerusakan.excel.import');
 
 Route::get('view_kerusakan', function (){

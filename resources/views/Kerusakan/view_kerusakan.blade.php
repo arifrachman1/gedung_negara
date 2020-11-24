@@ -148,7 +148,11 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-secondary" href="{{url('kerusakan.excel.export')}}">Export to Excel</button>
+                    <a class="btn btn-secondary" href="{{ url('exportKerusakanPDF', [ 'id' => $id_kerusakan ]) }}">
+                        <span class="icon text-white-100">
+                            Export Excel
+                        </span> 
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -389,8 +393,9 @@
                     </div>
             </thead>
             <hr>
-            <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning float-left mt-2">Kembali</a>
-        
+            <div class="my-2">
+                <a href="{{ url('/master_kerusakan') }}" class="btn btn-warning">Kembali</a>
+            </div>
           </table>
         </div>
       </div>

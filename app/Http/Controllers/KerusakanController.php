@@ -346,6 +346,53 @@ class KerusakanController extends Controller
         return redirect('/storage/excel/kerusakan/temp_kerusakan.xlsx');
     }
 
+    public function exportKerusakanPDF($id_kerusakan){
+        $id_parents = KerusakanDetail::select('id_parent as id')
+            ->join('komponen', 'komponen.id', '=', 'kerusakan_detail.id_komponen')
+            ->where('id_kerusakan', $id_kerusakan)
+            ->distinct('komponen.id_parent')->pluck('id')->toArray();
+        $komponens = DB::table('komponen')
+            ->select('id', 'nama')
+            ->whereNull('deleted_at')
+            ->whereIn('id', $id_parents)
+            ->get();
+        $sumAlltingkatKerusakan = 0;
+        foreach ($komponens as $komponen) { 
+            $subKomponens = DB::table('kerusakan_detail as kd')
+            ->select(
+                'kom.id', 'kom.nama', 'kom.bobot', 'kd.id as id_kerusakan_detail', 'kom.id_satuan', 'sat.nama as satuan',
+                'kd.tingkat_kerusakan', 'kd.jumlah', 'kd.id_komponen_opsi',
+                'ko.opsi as nama_opsi'
+            )
+            ->where('id_kerusakan', $id_kerusakan)
+            ->where('id_parent', $komponen->id)
+            ->join('komponen as kom', 'kom.id', '=', 'kd.id_komponen')
+            ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
+            ->leftJoin('komponen_opsi as ko', 'ko.id', '=', 'kd.id_komponen_opsi')
+            ->get()->toArray();
+
+            $sumTingkatKerusakan = 0;
+            foreach($subKomponens as $subKomponen){
+                if($subKomponen->id_satuan != 1){
+                    $subKomponen->kerusakan_klasifikasi = DB::table('kerusakan_klasifikasi')
+                        ->where('id_kerusakan_detail', $subKomponen->id_kerusakan_detail)
+                        ->get();
+                }
+                $sumTingkatKerusakan += $subKomponen->tingkat_kerusakan;
+            }
+            $komponen->subKomponen = $subKomponens;
+            $komponen->numberOfSub = count($subKomponens);
+            $komponen->sumTingkatKerusakan = $sumTingkatKerusakan;
+            $komponen->sumTingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumTingkatKerusakan);
+            $sumAlltingkatKerusakan += $sumTingkatKerusakan;
+        }
+        $sumAlltingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAlltingkatKerusakan);
+
+        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
+    }
+
     public function importKerusakan(Request $request){    
         $resp = [
             "status" => 300,
@@ -745,7 +792,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
 
-        return view('Kerusakan/view_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'sketsaDenah', 'gambarBukti'));
+        return view('Kerusakan/view_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'sketsaDenah', 'gambarBukti', 'id_kerusakan'));
     }
 
     public function postSubmitKerusakan(Request $request) {
