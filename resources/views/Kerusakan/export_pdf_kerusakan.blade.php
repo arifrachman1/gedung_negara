@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>Daftar Gedung PDF</title>
-	    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     </head>
     <body>
+    <div class="">
     <style type="text/css">
 		table tr td,
 		table tr th{
@@ -18,8 +19,12 @@
         table, th, td {
             border: 1px solid black;
         }
+
+        @page {
+   margin: 2cm;
+   size: landscape;
+}
 	</style>
-    <h5>Daftar Gedung</h4>
  
 	<table class='table table-center table-bordered'>
 		<thead>
@@ -55,10 +60,11 @@
                 <th colspan="3">(12)</th>
             </tr>
         </thead>
+        @php $nomor = 1 @endphp
         @foreach($komponens as $komponen)
             @foreach($komponen->subKomponen as $subIndex => $subKomponen)
             <tr>
-                <td>{{ $subIndex + 1}}</td>
+                <td>{{ $nomor++ }}</td>
                 @if($subIndex == 0)
                     <td rowspan="{{ $komponen->numberOfSub}}">{{ $komponen->nama }}</td>
                 @endif
@@ -94,6 +100,7 @@
         </tr>
 		<tbody>
 		</tbody>
-	</table>
+    </table>
+</div>
     </body>
 </html>

@@ -150,7 +150,7 @@
                 <div class="col-lg-2">
                     <a class="btn btn-secondary" href="{{ url('exportKerusakanPDF', [ 'id' => $id_kerusakan ]) }}">
                         <span class="icon text-white-100">
-                            Export Excel
+                            Export PDF
                         </span> 
                     </a>
                 </div>
