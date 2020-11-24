@@ -29,24 +29,7 @@
                 margin-left: 2cm;
                 margin-right: 2cm;
                 margin-bottom: 2cm;
-            }
-
-            #watermark {
-                position: fixed;
-                    /** 
-                        Set a position in the page for your image
-                        This should center it vertically
-                    **/
-                    bottom:   5cm;
-                    left:     11cm;
-
-                    /** Change image dimensions**/
-                    width:    8cm;
-                    height:   8cm;
-
-                    /** Your watermark should be behind every content**/
-                    z-index:  -1000;
-                }
+            }           
             @page { margin: 0cm 0cm; }
             .header {
                     position: fixed;
