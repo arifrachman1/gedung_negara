@@ -28,15 +28,9 @@
                                 <div class="col-sm-4">
                                     Jenis Gedung   
                                 </div>
-                                @if ($nama_kat == null)
                                 <div class="col-sm-8">
-                                    : -
+                                    : {{ ($detail_gedung->nama_kat) ? $detail_gedung->nama_kat : '-' }}
                                 </div>
-                                @else
-                                <div class="col-sm-8">
-                                    : {{ $nama_kat->nama_kategori }}
-                                </div>
-                                @endif
                                 <div class="col-sm-4">
                                     Nomor Seri Gedung   
                                 </div>

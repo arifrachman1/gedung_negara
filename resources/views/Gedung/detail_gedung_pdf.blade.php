@@ -110,15 +110,9 @@
                     <td>
                         Jenis Gedung
                     </td>
-                    @if($nama_kat == null)
                     <td>
-                        : <strong> - </strong>
+                        : <strong>{{ $detail_gedung->nama_kategori }}</strong>
                     </td>
-                    @else
-                    <td>
-                        : <strong>{{ $nama_kat->nama_kategori }}</strong>
-                    </td>
-                    @endif
                 </tr>
                 <tr>
                     <td>
