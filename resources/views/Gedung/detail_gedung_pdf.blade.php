@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Daftar Gedung PDF</title>
+        <title>Daftar Gedung PDF</title>        
 	    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     </head>
     <style type="text/css">
@@ -23,23 +23,7 @@
                     margin-right: 2cm;
                     margin-bottom: 0cm;
                 }
-
-            #watermark {
-                position: fixed;
-                    /** 
-                        Set a position in the page for your image
-                        This should center it vertically
-                    **/
-                    bottom:   5cm;
-                    left:     11cm;
-
-                    /** Change image dimensions**/
-                    width:    8cm;
-                    height:   8cm;
-
-                    /** Your watermark should be behind every content**/
-                    z-index:  -1000;
-                }
+            
             @page { margin: 0cm 0cm; }
             .header {
                     position: fixed;
@@ -51,25 +35,67 @@
             /* .header { position: fixed; left: 0px; top: -100px; right: 0px; height: 100px; text-align: center; } */
             .footer {         position: fixed; 
                     bottom: 0cm; 
-                    left: 0cm; 
+                    left: 2cm; 
                     right: 0cm;
                     height: 2cm;
-                    text-align: center;}
+                    text-align: left;}
             .footer .pagenum:before { content: counter(page); }
         </style>
     <body>
-        <div id="watermark">
-            <img src="{{ asset('style/img/watermark.png') }}" width="100%" height="100%"/>
-        </div>
-          <div class="header">
+        <div class="header">
           <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
         </div>
-        <div class="footer">
-            Page <span class="pagenum"></span>
+        
+        <div class="footer">    
+            <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
+            <br>
+            Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Tuban
+            <br>
+            Pada <?php
+            function format_hari_tanggal($waktu)
+            {
+                $hari_array = array(
+                    'Minggu',
+                    'Senin',
+                    'Selasa',
+                    'Rabu',
+                    'Kamis',
+                    'Jumat',
+                    'Sabtu'
+                );
+                $hr = date('w', strtotime($waktu));
+                $hari = $hari_array[$hr];
+                $tanggal = date('j', strtotime($waktu));
+                $bulan_array = array(
+                    1 => 'Januari',
+                    2 => 'Februari',
+                    3 => 'Maret',
+                    4 => 'April',
+                    5 => 'Mei',
+                    6 => 'Juni',
+                    7 => 'Juli',
+                    8 => 'Agustus',
+                    9 => 'September',
+                    10 => 'Oktober',
+                    11 => 'November',
+                    12 => 'Desember',
+                );
+                $bl = date('n', strtotime($waktu));
+                $bulan = $bulan_array[$bl];
+                $tahun = date('Y', strtotime($waktu));
+                $jam = date( 'H:i:s', strtotime($waktu));
+                
+                //untuk menampilkan hari, tanggal bulan tahun jam
+                //return "$hari, $tanggal $bulan $tahun $jam";
+            
+                //untuk menampilkan hari, tanggal bulan tahun
+                return "$hari, $tanggal $bulan $tahun";
+            }
+            $date=date('Y-m-d');
+            echo "".format_hari_tanggal($date);
+            ?> oleh {{ $profile->name}} </p>            
         </div>  
-        <center>
-            <h4>Detail Gedung </h4>
-        </center>
+
         <table class="table">
             <thead>
                 <tr>
@@ -206,3 +232,20 @@
         </table>
     </body>
 </html>
+<script language="javascript">
+            function show_hari()
+            {
+                //membuat variabel bertipe array untuk nama hari
+                var NamaHari = new Array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat",
+                "Sabtu");
+                //membuat variabel bertipe array untuk nama bulan
+                var NamaBulan = new Array("Januari", "Februari", "Maret", "April", "Mei",
+                "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                var sekarang = new Date();
+                var HariIni = NamaHari[sekarang.getDay()];
+                var BulanIni = NamaBulan[sekarang.getMonth()];
+                var tglSekarang = sekarang.getDate();
+                var TahunIni = sekarang.getFullYear();
+                document.write(HariIni + ", " + tglSekarang + " " + BulanIni + " " + TahunIni);
+            }
+        </script>
