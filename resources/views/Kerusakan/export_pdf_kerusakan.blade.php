@@ -3,7 +3,6 @@
     <head>
         <title>Daftar Gedung PDF</title>
         <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-    </head>
         <style type="text/css">
             /* CSS Detail Gedung */
             #detail-gedung {
@@ -47,14 +46,11 @@
                     text-align: center;}
             .footer .pagenum:before { content: counter(page); }
         </style>
+    </head>
     <body>
         <div class="header">
             <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
         </div>
-        <div class="footer">
-            Page <span class="pagenum"></span>
-        </div>  
-        <h3>Detail Gedung</h3>    
         <table id="detail-gedung">
             <thead>
                 <tr>
@@ -196,4 +192,53 @@
             </tbody>
         </table>
     </body>
+    <footer>
+    <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
+            <br>
+            Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Tuban
+            <br>
+            Pada <?php
+            function format_hari_tanggal($waktu)
+            {
+                $hari_array = array(
+                    'Minggu',
+                    'Senin',
+                    'Selasa',
+                    'Rabu',
+                    'Kamis',
+                    'Jumat',
+                    'Sabtu'
+                );
+                $hr = date('w', strtotime($waktu));
+                $hari = $hari_array[$hr];
+                $tanggal = date('j', strtotime($waktu));
+                $bulan_array = array(
+                    1 => 'Januari',
+                    2 => 'Februari',
+                    3 => 'Maret',
+                    4 => 'April',
+                    5 => 'Mei',
+                    6 => 'Juni',
+                    7 => 'Juli',
+                    8 => 'Agustus',
+                    9 => 'September',
+                    10 => 'Oktober',
+                    11 => 'November',
+                    12 => 'Desember',
+                );
+                $bl = date('n', strtotime($waktu));
+                $bulan = $bulan_array[$bl];
+                $tahun = date('Y', strtotime($waktu));
+                $jam = date( 'H:i:s', strtotime($waktu));
+                
+                //untuk menampilkan hari, tanggal bulan tahun jam
+                //return "$hari, $tanggal $bulan $tahun $jam";
+            
+                //untuk menampilkan hari, tanggal bulan tahun
+                return "$hari, $tanggal $bulan $tahun";
+            }
+            $date=date('Y-m-d');
+            echo "".format_hari_tanggal($date);
+            ?> oleh {{ $profile->name}} </p>            
+    </footer>
 </html>
