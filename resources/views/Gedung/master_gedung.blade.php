@@ -27,11 +27,9 @@
             @endcan
           </a>
           <!--<a class="btn btn-secondary btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
-          
               <span class="icon text-white-100">
                   Export Excel
               </span> 
-          
           </a>-->
           <a class="btn btn-secondary btn-icon-split" href="{{ url('export_pdf_master_gedung') }}" role="button">
               <span class="icon text-white-100">
@@ -43,7 +41,7 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <td>No</th>
+                <th>No. Seri</th>
                 <th>Nama Gedung</th>
                 <th>Legalitas</th>
                 <th>Tipe Pemilik</th>
@@ -53,10 +51,13 @@
               </tr>
             </thead>
             <tbody>
-            @php $no = 1; @endphp
             @foreach($gedung as $val)
               <tr>
-                <td>{{ $no++ }}</td>
+                @if ($val->nomor_seri == null)
+                <td>-</td>
+                @else
+                <td>{{ $val->nomor_seri }}</td>
+                @endif
                 <td>{{ $val->nama }}</td>
                 @if ($val->legalitas == null)
                 <td>-</td>
@@ -93,7 +94,6 @@
   </div>
   <!-- /.container-fluid -->
   
-     
 @include('template/footer')
 
 <!-- Modal -->
