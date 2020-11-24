@@ -150,7 +150,7 @@
       <input type="text" class="form-control" placeholder="RTH"  name="rth" required>
     </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
           <label>Provinsi:</label>
@@ -186,7 +186,7 @@
             </select>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <button type="submit"  class="btn btn-success float-left mr-2 mt-2">Submit</button>
     <a class="btn btn-warning float-left mr-2 mt-2" href="{{url('/master_gedung')}}" role="button">Kembali</a>
