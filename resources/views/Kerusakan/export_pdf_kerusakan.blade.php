@@ -5,6 +5,7 @@
         <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     </head>
         <style type="text/css">
+        
             table tr td,
             table tr th{
                 font-size: 8pt;
@@ -18,6 +19,7 @@
                 border: 1px solid black;
             }
             body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                     margin-top: 3cm;
                     margin-left: 2cm;
                     margin-right: 2cm;
@@ -67,7 +69,6 @@
         <div class="footer">
             Page <span class="pagenum"></span>
         </div>  
-    <h5>Daftar Gedung</h4>
  
 	<table class='table table-center table-bordered'>
 		<thead>
