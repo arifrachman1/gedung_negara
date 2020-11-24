@@ -98,8 +98,8 @@ class GedungController extends Controller
         $desa_kelurahan = DesaKelurahan::where('id_kel', $daerah->kode_kelurahan)->select('kelurahan.nama as nama')->first();
 
         $pdf = PDF::loadView('Gedung/detail_gedung_pdf', compact('detail_gedung', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
-        $pdf->setPaper('A4', 'potrait');
-        return $pdf->stream();
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream($detail_gedung->nama .''. now()->toDateString() .'.pdf');
     }
 
     public function input(Request $request) {
@@ -307,10 +307,10 @@ class GedungController extends Controller
 
     public function exportPDF() {
         $gedung = Gedung::all();
-
+        
         $pdf = PDF::loadView('Gedung/gedung_pdf', compact('gedung'));
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream();
+        return $pdf->stream('Rekap Data Gedung '. now()->toDateString() .'.pdf');
     }
 
 }
