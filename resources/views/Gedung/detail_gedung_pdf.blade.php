@@ -4,8 +4,7 @@
         <title>Daftar Gedung PDF</title>
 	    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     </head>
-    <body>
-        <style type="text/css">
+    <style type="text/css">
             table tr td,
             table tr th{
                 font-size: 12pt;
@@ -18,8 +17,56 @@
                 border: 0px solid black;
                 padding: 5px;
             }
+            body {
+                    margin-top: 3cm;
+                    margin-left: 2cm;
+                    margin-right: 2cm;
+                    margin-bottom: 0cm;
+                }
 
+            #watermark {
+                position: fixed;
+                    /** 
+                        Set a position in the page for your image
+                        This should center it vertically
+                    **/
+                    bottom:   5cm;
+                    left:     11cm;
+
+                    /** Change image dimensions**/
+                    width:    8cm;
+                    height:   8cm;
+
+                    /** Your watermark should be behind every content**/
+                    z-index:  -1000;
+                }
+            @page { margin: 0cm 0cm; }
+            .header {
+                    position: fixed;
+                    top: 0cm;
+                    left: 0cm;
+                    right: 0cm;
+                    height: 3cm;
+                }
+            /* .header { position: fixed; left: 0px; top: -100px; right: 0px; height: 100px; text-align: center; } */
+            .footer {         position: fixed; 
+                    bottom: 0cm; 
+                    left: 0cm; 
+                    right: 0cm;
+                    height: 2cm;
+                    text-align: center;}
+            .footer .pagenum:before { content: counter(page); }
         </style>
+    <body>
+        <div id="watermark">
+            <img src="{{ asset('style/img/watermark.png') }}" width="100%" height="100%"/>
+        </div>
+          <div class="header">
+          <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
+        </div>
+        <div class="footer">
+            Page <span class="pagenum"></span>
+        </div>  
         <center>
             <h4>Detail Gedung </h4>
         </center>
