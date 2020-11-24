@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
+use App\User;
 use App\Gedung;
 use App\KategoriGedung;
 use App\Provinsi;
@@ -64,6 +66,8 @@ class GedungController extends Controller
     }
 
     public function exportPDFDetailGedung($id){
+        $name = Session::get('name');
+        $profile = User::where('name', $name)->first();   
         $detail_gedung = Gedung::select(
                 'gedung.id as id',
                 'gedung.nama as nama',
@@ -100,8 +104,8 @@ class GedungController extends Controller
         $kecamatan = Kecamatan::where('id_kec', $daerah->kode_kecamatan)->select('kecamatan.nama as nama')->first();
         $desa_kelurahan = DesaKelurahan::where('id_kel', $daerah->kode_kelurahan)->select('kelurahan.nama as nama')->first();
 
-        $pdf = PDF::loadView('Gedung/detail_gedung_pdf', compact('detail_gedung', 'nama_kat', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan'));
-        $pdf->setPaper('A4', 'landscape');
+        $pdf = PDF::loadView('Gedung/detail_gedung_pdf', compact('detail_gedung', 'nama_kat', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan','profile'));
+        $pdf->setPaper('A4', 'potrait');
         return $pdf->stream($detail_gedung->nama .''. now()->toDateString() .'.pdf');
     }
 
@@ -309,9 +313,11 @@ class GedungController extends Controller
     }
 
     public function exportPDF() {
-        $gedung = Gedung::all();
-        
-        $pdf = PDF::loadView('Gedung/gedung_pdf', compact('gedung'));
+        $name = Session::get('name');
+        $profile = User::where('name', $name)->first();        
+        $gedung = Gedung::all();                
+
+        $pdf = PDF::loadView('Gedung/gedung_pdf', compact('gedung','profile'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('Rekap Data Gedung '. now()->toDateString() .'.pdf');
     }
