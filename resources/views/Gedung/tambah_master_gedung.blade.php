@@ -154,17 +154,18 @@
       <div class="row">
         <div class="col-lg-6">
           <label>Provinsi:</label>
-            <select class="form-control" id="provinsi" name="kode_provinsi">
+            <select id="provinsi" class="form-control" name="kode_provinsi" required>
               <option value="">Pilih Provinsi</option>
-              <option value=""></option>
-              endforeach
+              @foreach($daerah as $prov)
+                <option value="{{ $prov->id_prov }}">{{ $prov->nama }}</option>
+              @endforeach
             </select>
         </div>
 
         <div class="col-lg-6">
           <label>Kabupaten/Kota:</label>
-            <select class="form-control" id="kab_kota" name="kode_kota">
-              <option value="0">Pilih Kabupaten/Kota</option>
+            <select id="kab_kota" class="form-control" name="kode_kabupaten" required>
+              <option value="">Pilih Kabupaten/Kota</option>
             </select>
         </div>
       </div>
@@ -174,15 +175,15 @@
       <div class="row">
         <div class="col-lg-6">
           <label>Kecamatan:</label>
-            <select class="form-control" id="kecamatan" name="kode_kecamatan">
-              <option value="0">Pilih Kecamatan</option>
+            <select id="kecamatan" class="form-control" name="kode_kecamatan" required>
+              <option value="">Pilih Kecamatan</option>
             </select>
         </div>
 
         <div class="col-lg-6">
-          <label>Desa/Kelurahan:</label>
-            <select class="form-control" id="desa_kelurahan" name="kode_kelurahan">
-              <option value="0">Pilih Desa/Kelurahan</option>
+          <label>Kelurahan:</label>
+            <select id="desa_kelurahan" class="form-control" name="kode_kelurahan" required>
+              <option value="">Pilih Kelurahan</option>
             </select>
         </div>
       </div>
