@@ -27,11 +27,9 @@
             @endcan
           </a>
           <!--<a class="btn btn-secondary btn-icon-split" href="{{ url('export_excel_master_gedung') }}" role="button">
-          
               <span class="icon text-white-100">
                   Export Excel
               </span> 
-          
           </a>-->
           <a class="btn btn-secondary btn-icon-split" href="{{ url('export_pdf_master_gedung') }}" role="button">
               <span class="icon text-white-100">
@@ -96,7 +94,6 @@
   </div>
   <!-- /.container-fluid -->
   
-     
 @include('template/footer')
 
 <!-- Modal -->
