@@ -104,8 +104,8 @@ class GedungController extends Controller
 
     public function input(Request $request) {
         $jenis_gedung = KategoriGedung::get();
-
-        return view('Gedung/tambah_master_gedung', compact('jenis_gedung'));
+        $daerah = Provinsi::get();
+        return view('Gedung/tambah_master_gedung', compact('jenis_gedung', 'daerah'));
     }
 
     public function getKabKota($id) {
@@ -149,6 +149,10 @@ class GedungController extends Controller
         $input->struktur_bawah = $request->struktur_bawah; 
         $input->struktur_bangunan = $request->struktur_bangunan;
         $input->struktur_atap = $request->struktur_atap;
+        $input->kode_provinsi = $request->kode_provinsi;
+        $input->kode_kabupaten = $request->kode_kabupaten;
+        $input->kode_kecamatan = $request->kode_kecamatan;
+        $input->kode_kelurahan = $request->kode_kelurahan;
         $input->kdb = $request->kdb;
         $input->klb = $request->klb;
         $input->kdh = $request->kdh;
