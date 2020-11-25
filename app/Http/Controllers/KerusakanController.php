@@ -406,8 +406,9 @@ class KerusakanController extends Controller
 
         $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
 
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream();
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->stream('Kerusakan '.$gedung->nama_gedung .'.pdf');
+        // return view('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
     }
 
     public function importKerusakan(Request $request){    

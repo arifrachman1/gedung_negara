@@ -43,7 +43,7 @@
         </style>
     <body>
         <div class="header">
-          <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
+          <img src="{{ asset('style/img/header.png') }}"  width="90%" height="100%"/>
         </div>
         
         <div class="footer">    

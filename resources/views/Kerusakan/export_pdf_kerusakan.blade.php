@@ -3,10 +3,11 @@
     <head>
         <title>Daftar Gedung PDF</title>
         <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-        <style type="text/css">
+        <style type="text/css">        
             /* CSS Detail Gedung */
+           
             #detail-gedung {
-                font-size: 12pt;
+                font-size: 8pt;
                 border-collapse: collapse;
                 border-spacing: 25px;
             }
@@ -16,7 +17,7 @@
             }
             /* CSS Detail Kerusakan */
             #detail-kerusakan {
-                font-size: 12pt;
+                font-size: 8pt;
                 border-collapse: collapse;
             }
 
@@ -40,18 +41,18 @@
             /* .header { position: fixed; left: 0px; top: -100px; right: 0px; height: 100px; text-align: center; } */
             .footer {         position: fixed; 
                     bottom: 0cm; 
-                    left: 0cm; 
+                    left: 2cm; 
                     right: 0cm;
                     height: 2cm;
-                    text-align: center;}
+                    text-align: left;}
             .footer .pagenum:before { content: counter(page); }
         </style>
     </head>
     <body>
         <div class="header">
             <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
-        </div>
-        <table id="detail-gedung">
+        </div>        
+        <table id="detail-gedung">        
             <thead>
                 <tr>
                     <td>OPD</td>
@@ -115,7 +116,7 @@
 
             </thead>
         </table>
-        <h3>Detail Kerusakan</h3>    
+        <h4>Detail Kerusakan</h4>    
         <table id="detail-kerusakan">
             <thead>
                 <tr>
@@ -191,9 +192,8 @@
                 </tr>
             </tbody>
         </table>
-    </body>
-    <footer>
-    <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
+        <div class="footer">    
+            <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
             <br>
             Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Tuban
             <br>
@@ -240,5 +240,7 @@
             $date=date('Y-m-d');
             echo "".format_hari_tanggal($date);
             ?> oleh {{ $profile->name}} </p>            
-    </footer>
+        </div>
+    </body>
+    
 </html>

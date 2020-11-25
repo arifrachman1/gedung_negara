@@ -67,10 +67,6 @@
 	</style>
     </head>
     <body>
-
-        <div id="watermark">
-            <img src="{{ asset('style/img/watermark.png') }}" width="100%" height="100%"/>
-        </div>
           <div class="header">
           <img src="{{ asset('style/img/header.png') }}"  width="80%" height="100%"/>
         </div>
