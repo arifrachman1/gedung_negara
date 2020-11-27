@@ -86,6 +86,7 @@ class KerusakanController extends Controller
                 ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
                 ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
                 ->where('id_parent', $parent->id)
+                ->whereNull('kom.deleted_at')
                 ->get();
             $parent->numberOfSub = count($subKomponen);
             $parent->subKomponen = $subKomponen;
@@ -245,6 +246,7 @@ class KerusakanController extends Controller
                 ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
                 ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
                 ->where('id_parent', $parent->id)
+                ->whereNull('kom.deleted_at')
                 ->get();
             foreach ($subKomponen as &$sk) {
                 if($sk->id_satuan == 1){
