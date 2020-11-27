@@ -29,7 +29,7 @@
                                     Jenis Gedung   
                                 </div>
                                 <div class="col-sm-8">
-                                    : {{ $detail_gedung->nama_kat }}
+                                    : {{ ($detail_gedung->nama_kat) ? $detail_gedung->nama_kat : '-' }}
                                 </div>
                                 <div class="col-sm-4">
                                     Nomor Seri Gedung   
