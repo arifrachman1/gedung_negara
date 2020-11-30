@@ -86,6 +86,7 @@ class KerusakanController extends Controller
                 ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
                 ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
                 ->where('id_parent', $parent->id)
+                ->whereNull('kom.deleted_at')
                 ->get();
             $parent->numberOfSub = count($subKomponen);
             $parent->subKomponen = $subKomponen;
@@ -245,6 +246,7 @@ class KerusakanController extends Controller
                 ->select('kom.id', 'kom.id_parent', 'kom.nama', 'kom.bobot', 'sat.id as id_satuan', 'sat.nama as satuan')
                 ->join('satuan as sat', 'sat.id', '=', 'kom.id_satuan')
                 ->where('id_parent', $parent->id)
+                ->whereNull('kom.deleted_at')
                 ->get();
             foreach ($subKomponen as &$sk) {
                 if($sk->id_satuan == 1){
@@ -347,8 +349,22 @@ class KerusakanController extends Controller
     }
 
     public function exportKerusakanPDF($id_kerusakan){
+        $gedung = Gedung::select(
+                'kerusakan.opd', 'kerusakan.nomor_aset', 'kerusakan.petugas_survei1', 'kerusakan.petugas_survei2', 'kerusakan.petugas_survei3', 'kerusakan.perwakilan_opd1', 'kerusakan.perwakilan_opd2',
+                'gedung.nama as nama_gedung', 'gedung.luas_lahan as luas_bangunan', 'gedung.jumlah_lantai',
+                'provinsi.nama as nama_provinsi', 'kota.nama as nama_kota', 'kecamatan.nama as nama_kecamatan', 'kelurahan.nama as nama_kelurahan'
+            )
+            ->join('kerusakan', 'kerusakan.id_gedung' , '=', 'gedung.id')
+            ->leftJoin('provinsi', 'provinsi.id_prov', '=', 'gedung.kode_provinsi')
+            ->leftJoin('kota', 'kota.id_kota', '=', 'gedung.kode_kabupaten')
+            ->leftJoin('kecamatan', 'kecamatan.id_kec' , '=', 'gedung.kode_kecamatan')
+            ->leftJoin('kelurahan', 'kelurahan.id_kel', '=', 'gedung.kode_kelurahan')
+            ->where('kerusakan.id', $id_kerusakan)
+            ->first();
+
         $name = Session::get('name');
-        $profile = User::where('name', $name)->first();  
+        $profile = User::where('name', $name)->first();
+  
         $id_parents = KerusakanDetail::select('id_parent as id')
             ->join('komponen', 'komponen.id', '=', 'kerusakan_detail.id_komponen')
             ->where('id_kerusakan', $id_kerusakan)
@@ -390,9 +406,11 @@ class KerusakanController extends Controller
         }
         $sumAlltingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAlltingkatKerusakan);
 
-        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText','profile'));
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream();
+        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
+
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->stream('Kerusakan '.$gedung->nama_gedung .'.pdf');
+        // return view('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
     }
 
     public function importKerusakan(Request $request){    

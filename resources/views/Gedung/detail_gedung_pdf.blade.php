@@ -43,7 +43,7 @@
         </style>
     <body>
         <div class="header">
-          <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
+          <img src="{{ asset('style/img/header.png') }}"  width="90%" height="100%"/>
         </div>
         
         <div class="footer">    
@@ -110,15 +110,9 @@
                     <td>
                         Jenis Gedung
                     </td>
-                    @if($nama_kat == null)
                     <td>
-                        : <strong> - </strong>
+                        : <strong>{{ $detail_gedung->nama_kategori }}</strong>
                     </td>
-                    @else
-                    <td>
-                        : <strong>{{ $nama_kat->nama_kategori }}</strong>
-                    </td>
-                    @endif
                 </tr>
                 <tr>
                     <td>
