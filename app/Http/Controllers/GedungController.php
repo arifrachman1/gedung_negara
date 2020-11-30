@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use Session;
@@ -20,7 +21,18 @@ use Log;
 class GedungController extends Controller
 {
     public function index() {
-        $gedung = Gedung::get();
+        $gedung = DB::table('gedung')->select(
+            'gedung.id as id',
+            'gedung.nomor_seri as nomor_seri',
+            'gedung.nama as nama',
+            'gedung.legalitas as legalitas',
+            'gedung.kdb as kdb',
+            'kecamatan.nama as nama_kecamatan',
+            'kelurahan.nama as nama_kelurahan',
+        )->leftjoin('kecamatan', 'kecamatan.id_kec', '=', 'gedung.kode_kecamatan')
+        ->leftjoin('kelurahan', 'kelurahan.id_kel', '=', 'gedung.kode_kelurahan')
+        ->whereNull('gedung.deleted_at')
+        ->get();
         return view('Gedung/master_gedung', compact('gedung'));
     }
 
@@ -173,7 +185,7 @@ class GedungController extends Controller
         $daerah = Provinsi::get();
         $kategori = KategoriGedung::get();
         $edit = Gedung::find($id);
-        return view('Gedung/edit_master_gedung', compact('edit', 'kategori', 'daerah'));
+        return view('Gedung/Edit_master_gedung', compact('edit', 'kategori', 'daerah'));
     }
 
     public function edit_post($id, Request $request) {
