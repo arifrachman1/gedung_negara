@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,        
+        Spatie\Permission\PermissionServiceProvider::class,
         // Collective\Html\HtmlServiceProvider::class,
 
         /*
@@ -180,10 +180,6 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
-        App\Providers\EventServiceProvider::class, 
-        App\Providers\RouteServiceProvider::class, 
-        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
     ],
 
     /*
@@ -239,8 +235,6 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
-        
 
     ],
 
