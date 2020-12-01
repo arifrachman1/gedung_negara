@@ -74,7 +74,7 @@
                                     : {{ $detail_gedung->alas_hak }}
                                 </div>
                                 <div class="col-sm-4">
-                                    Luas lahan   
+                                    Luas Lahan   
                                 </div>
                                 <div class="col-sm-8">
                                     : {{ $detail_gedung->luas_lahan }}
