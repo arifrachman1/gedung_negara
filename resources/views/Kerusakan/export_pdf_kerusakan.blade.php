@@ -191,7 +191,28 @@
                     <td>{{ $sumAlltingkatKerusakanText }}</td>
                 </tr>
             </tbody>
+
         </table>
+        <br>
+       
+        <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <td>Sketsa Denah</td>
+                    <td>Bukti</td>
+                </tr>
+                <tr>
+                @foreach($sketsaDenah as $denah)
+                    <td> <img style="width:100%; height:500px; object-fit: cover;"src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}"></td>                    
+                @endforeach
+                </tr>
+                <tr>
+                @foreach($gambarBukti as $bukti)
+                    <td><img style="width:50%; height:00px;  object-fit: cover;" src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}"></td>                    
+                @endforeach
+                </tr>
+                  </thead>                  
+            </table>        
         <div class="footer">    
             <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
             <br>

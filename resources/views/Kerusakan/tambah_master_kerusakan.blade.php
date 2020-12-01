@@ -41,8 +41,12 @@
                       <td>{{ $val->legalitas }}</td>
                       <td>{{ $val->tipe_pemilik }}</td>
                       <td>{{ $val->alas_hak }}</td>
-                      <td>{{ $val->luas_lahan }}</td>
-                      <td><a class="btn btn-success" href="{{url('/formulir_kerusakan_surveyor/'.$val->id)}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a>
+                      <td>{{ $val->luas_lahan }}</td>                      
+                      @if($val->kerusakans->count())
+                      <td>-</td>
+                      @else
+                      <td><a class="btn btn-success"  href="{{url('/formulir_kerusakan_surveyor/'.$val->id)}}"><i class="button"><span class="icon text-white-100"></span>Terjadi Kerusakan</i></a></td>
+                      @endif
                     </tr>
                     @endforeach
                   </tbody>

@@ -23,4 +23,10 @@ class Gedung extends Model
     public function kategoriGedung() {
         return $this->belongsTo('App\KategoriGedung', 'id_gedung_kategori', 'id');
     }
+
+    public function kerusakans()
+    {
+        return $this->hasMany(Kerusakan::class, 'id_gedung');
+    }
+    
 }
