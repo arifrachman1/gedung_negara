@@ -46,6 +46,14 @@
                     height: 2cm;
                     text-align: left;}
             .footer .pagenum:before { content: counter(page); }
+            #sketsa-bangunan tr, #sketsa-bangunan td,{
+                    height: 40%;
+                    width: 100%;
+                    border: 1px solid black;
+                    text-align: center;
+                    font-size: 8pt;
+                    padding: 8px;
+                }            
         </style>
     </head>
     <body>
@@ -191,28 +199,30 @@
                     <td>{{ $sumAlltingkatKerusakanText }}</td>
                 </tr>
             </tbody>
-
-        </table>
-        <br>
-       
-        <table class="table table-bordered" width="100%" cellspacing="0">
+        </table><br/>
+        <table id="sketsa-bangunan">
                 <thead>
-                <tr>
-                    <td>Sketsa Denah</td>
-                    <td>Bukti</td>
-                </tr>
-                <tr>
-                @foreach($sketsaDenah as $denah)
-                    <td> <img style="width:100%; height:500px; object-fit: cover;"src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}"></td>                    
-                @endforeach
-                </tr>
-                <tr>
-                @foreach($gambarBukti as $bukti)
-                    <td><img style="width:50%; height:00px;  object-fit: cover;" src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}"></td>                    
-                @endforeach
-                </tr>
-                  </thead>                  
-            </table>        
+                    @if( count($sketsaDenah) > 0 )
+                    <tr>
+                        <td>@foreach($sketsaDenah as $denah)
+                            <b><u>SKETSA DENAH BANGUNAN</u></b><br/><br/>
+                            <img src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}"  width="600" height="400"/>
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endif
+                    @if( count($gambarBukti) > 0 )
+                    <tr>                    
+                    <td>@foreach($gambarBukti as $bukti)
+                            <b><u>FOTO KERUSAKAN BANGUNAN</u></b><br/><br/>
+                            <img src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}"  width="600" height="400" />
+                        @endforeach
+                        </td>
+                    </tr>
+                    @endif
+                </thead>
+        </table>
+         
         <div class="footer">    
             <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
             <br>

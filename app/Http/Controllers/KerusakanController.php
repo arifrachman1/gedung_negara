@@ -405,11 +405,13 @@ class KerusakanController extends Controller
             $sumAlltingkatKerusakan += $sumTingkatKerusakan;
         }
         $sumAlltingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAlltingkatKerusakan);
+        $sketsaDenah = SketsaDenah::where('id_kerusakan', $id_kerusakan)->get();
+        $gambarBukti = GambarBukti::where('id_kerusakan', $id_kerusakan)->get();
 
-        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
+       $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile','sketsaDenah', 'gambarBukti'));
 
         $pdf->setPaper('A4', 'potrait');
-        return $pdf->stream('Kerusakan '.$gedung->nama_gedung .'.pdf');
+        return $pdf->stream('Kerusakan '.$gedung->nama_gedung .'.pdf'); 
         // return view('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
     }
 
