@@ -132,7 +132,8 @@
                 </tr>
             </thead>
         </table> <br/><br/>
-    <!-- <div class="my-2">
+    <!-- 
+        <div class="my-2">
             <div class="row">
                 Nama Gedung: <strong>{{ $detail_gedung->nama }} </strong>
             </div>

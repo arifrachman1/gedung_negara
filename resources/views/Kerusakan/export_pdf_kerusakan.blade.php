@@ -46,6 +46,15 @@
                     height: 2cm;
                     text-align: left;}
             .footer .pagenum:before { content: counter(page); }
+            #sketsa-bangunan tr, #sketsa-bangunan td,{
+                    height: 40%;
+                    width: 100%;
+                    border: 1px solid black;
+                    text-align: center;
+                    font-size: 8pt;
+                    padding: 8px;
+                }
+            
         </style>
     </head>
     <body>
@@ -191,7 +200,24 @@
                     <td>{{ $sumAlltingkatKerusakanText }}</td>
                 </tr>
             </tbody>
+        </table><br/>
+        <table id="sketsa-bangunan">
+                <thead>
+                    <tr>
+                        <td>
+                            <b><u>SKETSA DENAH BANGUNAN</u></b><br/><br/>
+                            <img src="{{ asset('style/img/1.png') }}"  width="600" height="400"/>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>
+                            <b><u>FOTO KERUSAKAN BANGUNAN</u></b><br/><br/>
+                            <img src="{{ asset('style/img/1.png') }}"  width="600" height="400" />
+                        </td>
+                    </tr>
+                </thead>
         </table>
+         
         <div class="footer">    
             <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
             <br>
