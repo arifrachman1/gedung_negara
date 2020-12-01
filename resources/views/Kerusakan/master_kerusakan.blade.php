@@ -1,6 +1,8 @@
 <!doctype html>
 @include('template/header')
+<script src="{{ asset('js/app.js') }}"></script>
 <body>
+@include('sweet::alert')
         <!-- Begin Page Content -->
         <div class="container-fluid">
         <div>
@@ -83,9 +85,6 @@
   </form>
  </div>
 </body>
-
-
-
 <script>
   $(document).on('click','#delete',function(){
          let id = $(this).attr('data-id');

@@ -34,7 +34,7 @@ class KerusakanController extends Controller
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
                                 ->join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
                                 ->orderBy('kerusakan.id', 'desc')
-                                ->get();
+                                ->get();                                                                
         return view('Kerusakan/master_kerusakan', compact('kerusakan'));
     }
 
