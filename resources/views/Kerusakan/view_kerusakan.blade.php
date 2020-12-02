@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <a class="btn btn-secondary" href="{{ url('exportKerusakanPDF', [ 'id' => $id_kerusakan ]) }}">
+                    <a class="btn btn-secondary" href="{{ url('exportKerusakanPDF', [ 'id' => $id_kerusakan ]) }}" target="_blank">
                         <span class="icon text-white-100">
                             Export PDF
                         </span> 
