@@ -32,10 +32,10 @@ class KerusakanController extends Controller
     public function index() {
         $kerusakan = Kerusakan::select('kerusakan.id as id','gedung.nama as nama_gedung', 'gedung_ketegori.nama as jenis_gd', 'gedung.alamat as alamat')
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
-                                ->join('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
+                                ->leftJoin('gedung_ketegori', 'gedung.id_gedung_kategori', '=', 'gedung_ketegori.id')
                                 ->orderBy('kerusakan.id', 'desc')
                                 ->get();
-        return view('Kerusakan/master_kerusakan', compact('kerusakan'));
+        return view('Kerusakan/master_kerusakan', compact('kerusakan'));       
     }
 
     public function pilihanGedung() {
@@ -405,13 +405,14 @@ class KerusakanController extends Controller
             $sumAlltingkatKerusakan += $sumTingkatKerusakan;
         }
         $sumAlltingkatKerusakanText = $this->mapStatusTingkatKerusakan($sumAlltingkatKerusakan);
+
         $sketsaDenah = SketsaDenah::where('id_kerusakan', $id_kerusakan)->get();
         $gambarBukti = GambarBukti::where('id_kerusakan', $id_kerusakan)->get();
 
-       $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile','sketsaDenah', 'gambarBukti'));
+        $pdf = PDF::loadView('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile','sketsaDenah','gambarBukti'));
 
         $pdf->setPaper('A4', 'potrait');
-        return $pdf->stream('Kerusakan '.$gedung->nama_gedung .'.pdf'); 
+        return $pdf->stream('Kerusakan '.$gedung->nama_gedung .'.pdf');
         // return view('Kerusakan/export_pdf_kerusakan', compact('komponens', 'sumAlltingkatKerusakan', 'sumAlltingkatKerusakanText', 'gedung', 'profile'));
     }
 
@@ -626,31 +627,37 @@ class KerusakanController extends Controller
 
             }
 
-            //File Bukti
-            foreach ($request->gambar_bukti as $index => $gambar_bukti) {
-                $buktiExt       = $gambar_bukti->getClientOriginalExtension();
-                $buktiFileName  = "bukti_".$timeUpload.'_'.$index.'.'.$buktiExt;
-                $gambar_bukti->move('bukti', $buktiFileName);
-
-                $newGambar = new GambarBukti;
-                $newGambar->id_kerusakan = $newKerusakan->id;
-                $newGambar->gambar_bukti = $buktiFileName;
-                $newGambar->created_at   = date('Y-m-d H:i:s');
-                $newGambar->save();
+            if(!empty($request->gambar_bukti)){
+                //File Bukti
+                foreach ($request->gambar_bukti as $index => $gambar_bukti) {
+                    $buktiExt       = $gambar_bukti->getClientOriginalExtension();
+                    $buktiFileName  = "bukti_".$timeUpload.'_'.$index.'.'.$buktiExt;
+                    $gambar_bukti->move('bukti', $buktiFileName);
+    
+                    $newGambar = new GambarBukti;
+                    $newGambar->id_kerusakan = $newKerusakan->id;
+                    $newGambar->gambar_bukti = $buktiFileName;
+                    $newGambar->created_at   = date('Y-m-d H:i:s');
+                    $newGambar->save();
+                }
             }
 
-            //Files Denah
-            foreach ($request->sketsa_denah as $index => $denah) {  
-                $denahExt    = $denah->getClientOriginalExtension();
-                $denahFileName   =   "denah_".$timeUpload.'_'.$index.'.'.$denahExt;
-                $denah->move('denah', $denahFileName);
-
-                $newSketsaDenah = new SketsaDenah;
-                $newSketsaDenah->id_kerusakan = $newKerusakan->id;
-                $newSketsaDenah->sketsa_denah = $denahFileName;
-                $newSketsaDenah->created_at   = date('Y-m-d H:i:s');
-                $newSketsaDenah->save();
+            if(!empty($request->sketsa_denah)){
+                //Files Denah
+                foreach ($request->sketsa_denah as $index => $denah) {  
+                    $denahExt    = $denah->getClientOriginalExtension();
+                    $denahFileName   =   "denah_".$timeUpload.'_'.$index.'.'.$denahExt;
+                    $denah->move('denah', $denahFileName);
+    
+                    $newSketsaDenah = new SketsaDenah;
+                    $newSketsaDenah->id_kerusakan = $newKerusakan->id;
+                    $newSketsaDenah->sketsa_denah = $denahFileName;
+                    $newSketsaDenah->created_at   = date('Y-m-d H:i:s');
+                    $newSketsaDenah->save();
+                }
             }
+            
+            
 
 
             DB::commit();
