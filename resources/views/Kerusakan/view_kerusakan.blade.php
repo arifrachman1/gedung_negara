@@ -1,6 +1,7 @@
 <!doctype html>
+
 @include('template/header')
-  <!-- Begin Page Content -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  <!-- Begin Page Content -->
 <div class="container-fluid">
 
 <div class="row">
@@ -10,7 +11,40 @@
         <h6 class="m-0 font-weight-bold text-white">FORMULIR NILAI KERUSAKAN</h6>
       </div>
       <div class="card-body">
+    @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+          <strong>{{ $message }}</strong>
+      </div>
+    @endif
 
+    @if ($message = Session::get('error'))
+      <div class="alert alert-danger alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+        <strong>{{ $message }}</strong>
+      </div>
+    @endif
+
+    @if ($message = Session::get('warning'))
+      <div class="alert alert-warning alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+        <strong>{{ $message }}</strong>
+    </div>
+    @endif
+
+    @if ($message = Session::get('info'))
+      <div class="alert alert-info alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+        <strong>{{ $message }}</strong>
+      </div>
+    @endif
+
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+        Please check the form below for errors
+    </div>
+    @endif
         <div class="">
           <table class="table table-bordered">
             <thead>
@@ -148,7 +182,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <a class="btn btn-secondary" href="{{ url('exportKerusakanPDF', [ 'id' => $id_kerusakan ]) }}">
+                    <a class="btn btn-secondary" href="{{ url('exportKerusakanPDF', [ 'id' => $id_kerusakan ]) }}" target="_blank">
                         <span class="icon text-white-100">
                             Export PDF
                         </span> 

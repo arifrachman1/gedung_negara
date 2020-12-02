@@ -44,9 +44,9 @@
                 <th>No. Seri</th>
                 <th>Nama Gedung</th>
                 <th>Legalitas</th>
-                <th>Tipe Pemilik</th>
-                <th>Alas Hak</th>
-                <th>Luas lahan</th>
+                <th>Kecamatan</th>
+                <th>Desa/Kelurahan</th>
+                <th>KDB</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -64,20 +64,20 @@
                 @else
                 <td>{{ $val->legalitas }}</td>
                 @endif
-                @if ($val->tipe_pemilik == null)
+                @if ($val->nama_kecamatan == null)
                 <td>-</td>
                 @else
-                <td>{{ $val->tipe_pemilik }}</td>
+                <td>{{ $val->nama_kecamatan }}</td>
                 @endif
-                @if ($val->alas_hak == null)
+                @if ($val->nama_kelurahan == null)
                 <td>-</td>
                 @else
-                <td>{{ $val->alas_hak }}</td>
+                <td>{{ $val->nama_kelurahan }}</td>
                 @endif
-                @if ($val->luas_lahan == null)
+                @if ($val->kdb == null)
                 <td>-</td>
                 @else
-                <td>{{ $val->luas_lahan }}</td>
+                <td>{{ $val->kdb }}</td>
                 @endif
                 <td>
                   <a class="btn btn-primary mr-1" href="{{ url('detail_master_gedung/'.$val->id) }}"><i class="button"><span class="icon text-white-100">Detail</span> </i></a>

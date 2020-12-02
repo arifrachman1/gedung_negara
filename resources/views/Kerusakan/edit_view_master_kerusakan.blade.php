@@ -45,13 +45,13 @@
                         Provinsi   
                     </div>
                     <div class="col-lg-3">
-                        : {{ $provinsi->nama_provinsi }}
+                        : {{ ($provinsi) ? $provinsi->nama_provinsi : '-' }}
                     </div>
                     <div class="col-lg-3">
                         Kabupaten / Kota   
                     </div>
                     <div class="col-lg-3">
-                        : {{ $kab_kota->nama_kota }}
+                        : {{ ($kab_kota) ? $kab_kota->nama_kota : '-' }}
                     </div>
                 </div>
             </div>
@@ -61,13 +61,13 @@
                         Kecamatan   
                     </div>
                     <div class="col-lg-3">
-                        : {{ $kecamatan->nama_kecamatan }}
+                        : {{ ($kecamatan) ? $kecamatan->nama_kecamatan : '-' }}
                     </div>
                     <div class="col-lg-3">
                         Kelurahan   
                     </div>
                     <div class="col-lg-3">
-                        : {{ $desa_kelurahan->nama_kelurahan }}
+                        : {{ ($desa_kelurahan) ? $kecamatan->nama_kecamatan : '-' }}
                     </div>
                 </div>
             </div>

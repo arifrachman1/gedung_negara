@@ -20,7 +20,7 @@
                 font-size: 8pt;
                 border-collapse: collapse;
             }
-
+            .page_break { page-break-before: always; }
             #detail-kerusakan th, #detail-kerusakan td{
                 border: 1px solid black;
             }
@@ -46,12 +46,69 @@
                     height: 2cm;
                     text-align: left;}
             .footer .pagenum:before { content: counter(page); }
+            #sketsa-bangunan tr, #sketsa-bangunan td,{
+                    height: 40%;
+                    width: 100%;
+                    border: 1px solid black;
+                    text-align: center;
+                    font-size: 8pt;
+                    padding: 8px;
+                }            
         </style>
     </head>
     <body>
         <div class="header">
             <img src="{{ asset('style/img/header.png') }}"  width="100%" height="100%"/>
-        </div>        
+        </div>       
+        <div class="footer">    
+            <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
+            <br>
+            Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Tuban
+            <br>
+            Pada <?php
+            function format_hari_tanggal($waktu)
+            {
+                $hari_array = array(
+                    'Minggu',
+                    'Senin',
+                    'Selasa',
+                    'Rabu',
+                    'Kamis',
+                    'Jumat',
+                    'Sabtu'
+                );
+                $hr = date('w', strtotime($waktu));
+                $hari = $hari_array[$hr];
+                $tanggal = date('j', strtotime($waktu));
+                $bulan_array = array(
+                    1 => 'Januari',
+                    2 => 'Februari',
+                    3 => 'Maret',
+                    4 => 'April',
+                    5 => 'Mei',
+                    6 => 'Juni',
+                    7 => 'Juli',
+                    8 => 'Agustus',
+                    9 => 'September',
+                    10 => 'Oktober',
+                    11 => 'November',
+                    12 => 'Desember',
+                );
+                $bl = date('n', strtotime($waktu));
+                $bulan = $bulan_array[$bl];
+                $tahun = date('Y', strtotime($waktu));
+                $jam = date( 'H:i:s', strtotime($waktu));
+                
+                //untuk menampilkan hari, tanggal bulan tahun jam
+                //return "$hari, $tanggal $bulan $tahun $jam";
+            
+                //untuk menampilkan hari, tanggal bulan tahun
+                return "$hari, $tanggal $bulan $tahun";
+            }
+            $date=date('Y-m-d');
+            echo "".format_hari_tanggal($date);
+            ?> oleh {{ $profile->name}} </p>            
+        </div> 
         <table id="detail-gedung">        
             <thead>
                 <tr>
@@ -191,56 +248,47 @@
                     <td>{{ $sumAlltingkatKerusakanText }}</td>
                 </tr>
             </tbody>
-        </table>
-        <div class="footer">    
-            <p style="font-size:12px; " onload="viewjam(); hari();">Diprint melalui aplikasi Sistem Informasi Bangunan Gedung Negara (Si BanGun)
-            <br>
-            Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Tuban
-            <br>
-            Pada <?php
-            function format_hari_tanggal($waktu)
-            {
-                $hari_array = array(
-                    'Minggu',
-                    'Senin',
-                    'Selasa',
-                    'Rabu',
-                    'Kamis',
-                    'Jumat',
-                    'Sabtu'
-                );
-                $hr = date('w', strtotime($waktu));
-                $hari = $hari_array[$hr];
-                $tanggal = date('j', strtotime($waktu));
-                $bulan_array = array(
-                    1 => 'Januari',
-                    2 => 'Februari',
-                    3 => 'Maret',
-                    4 => 'April',
-                    5 => 'Mei',
-                    6 => 'Juni',
-                    7 => 'Juli',
-                    8 => 'Agustus',
-                    9 => 'September',
-                    10 => 'Oktober',
-                    11 => 'November',
-                    12 => 'Desember',
-                );
-                $bl = date('n', strtotime($waktu));
-                $bulan = $bulan_array[$bl];
-                $tahun = date('Y', strtotime($waktu));
-                $jam = date( 'H:i:s', strtotime($waktu));
-                
-                //untuk menampilkan hari, tanggal bulan tahun jam
-                //return "$hari, $tanggal $bulan $tahun $jam";
-            
-                //untuk menampilkan hari, tanggal bulan tahun
-                return "$hari, $tanggal $bulan $tahun";
-            }
-            $date=date('Y-m-d');
-            echo "".format_hari_tanggal($date);
-            ?> oleh {{ $profile->name}} </p>            
-        </div>
+        </table><br/>        
+         <div class="page_break"></div><br>
+        <table id="sketsa-bangunan">
+        @php
+            $index = 0;
+        @endphp
+            <thead>
+                @if( count($sketsaDenah) > 0 )
+                <tr>
+                    <td>@foreach($sketsaDenah as $key=>$denah)
+
+                    @if($index > 0 && $index % 2 == 0)
+                            <div class="page_break"></div><br>
+                        @endif
+                        <b><u>SKETSA DENAH BANGUNAN</u></b><br/><br/>
+                            <img src="{{ asset('denah/'.$denah->sketsa_denah) }}" alt="{{ $denah->sketsa_denah }}"  width="600" height="400"/>
+                        @php
+                            $index++;
+                        @endphp
+                        @endforeach
+                    </td>
+                </tr>
+                @endif
+                @if( count($gambarBukti) > 0 )
+                <tr>                    
+                    <td>@foreach($gambarBukti as $key=>$bukti)
+
+                        @if($index > 0 && $index % 2 == 0)
+                            <div class="page_break"></div>
+                        @endif
+                        <b><u>FOTO KERUSAKAN BANGUNAN</u></b><br/><br/>
+                            <img src="{{ asset('bukti/'.$bukti->gambar_bukti) }}" alt="{{ $bukti->gambar_bukti }}"  width="600" height="400" />
+                        @php
+                            $index++;
+                        @endphp
+                        @endforeach
+                    </td>
+                </tr>
+                @endif
+            </thead>
+        </table>         
     </body>
     
 </html>
