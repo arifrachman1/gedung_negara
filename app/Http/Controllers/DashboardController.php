@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $user = User::count();
         $jenis = KategoriGedung::count();
         $gedung = Gedung::count();
-        $kerusakan = Kerusakan::count();
+        $kerusakan = Kerusakan::whereNull('deleted_at')->count();
         return view('dashboard',compact('gedung','user','jenis','kerusakan'));
     }
 }

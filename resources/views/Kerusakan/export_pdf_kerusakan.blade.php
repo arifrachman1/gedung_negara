@@ -249,7 +249,7 @@
                 </tr>
             </tbody>
         </table><br/>        
-        <div class="page_break"></div><br>
+         <div class="page_break"></div><br>
         <table id="sketsa-bangunan">
         @php
             $index = 0;
