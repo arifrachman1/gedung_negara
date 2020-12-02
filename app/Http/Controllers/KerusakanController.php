@@ -25,6 +25,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PDF;
 use Log;
 use Illuminate\Support\Facades\Validator;
+use Alert;
 
 class KerusakanController extends Controller
 {
@@ -665,7 +666,7 @@ class KerusakanController extends Controller
                 ->action('KerusakanController@viewKerusakan', [$newKerusakan->id])
                 ->with(['success' => 'Kerusakan berhasil ditambahkan.']);
         } catch(Exception $e){
-            DB::rollBack();
+            DB::rollBack();            
             return redirect('master_kerusakan')->with(['error' => 'Error, tambah kerusakan gagal.']);
         }
     }
