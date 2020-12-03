@@ -185,7 +185,7 @@ class GedungController extends Controller
         $daerah = Provinsi::orderBy('nama', 'asc')->get();
         $kategori = KategoriGedung::get();
         $edit = Gedung::find($id);
-        return view('Gedung/Edit_master_gedung', compact('edit', 'kategori', 'daerah'));
+        return view('Gedung/edit_master_gedung', compact('edit', 'kategori', 'daerah'));
     }
 
     public function edit_post($id, Request $request) {
