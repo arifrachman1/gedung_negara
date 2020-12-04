@@ -18,10 +18,10 @@
           <div class="form-group">
               <div class="row">
                   <div class="col-lg-3">
-                      Nama Instansi Bangunan   
+                      OPD   
                   </div>
                   <div class="col-lg-3">
-                      : Dinas Pendidikan
+                      : {{ $gedung->opd }}
                   </div>
                   <div class="col-lg-3">
                       Nama Bangunan
