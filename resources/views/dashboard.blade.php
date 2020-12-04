@@ -10,7 +10,7 @@
   <img style="widht:100%; height:100px;" class="mr-3 ml-5" src="{{ asset('style/img/5.png') }}">
     <h1 class="h3 mb-0 text-gray-800 san-bold">SI BanGuN <br>SISTEM INFORMASI<br>BANGUNAN GEDUNG NEGARA</h1>
   </div>
-  <div class="container mb-4">
+  <div class="container mb-4 ml-4 col-md-6">
     <h5>Dinas Pekerjaan Umum & Penataan Ruang<br>Kabupaten Tuban</h5>
   </div>
 <div class="container-fluid mt-3">  

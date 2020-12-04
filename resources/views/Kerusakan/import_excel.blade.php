@@ -19,7 +19,7 @@
           
           <a class="btn btn-secondary mb-3" href="{{ route('kerusakan.excel.export', ['id_gedung' => $id_gedung]) }}">
             <span class="icon text-white-100">
-                Export Excel
+                Download Template
             </span> 
           </a>
           <span style="font-size: small; color: red;">*note : xlsx | max : 10MB</span>

@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success float-left mt-2 mr-2">Submit</button>
+                <button type="submit" class="btn btn-success float-left mt-2 mr-2">Selanjutnya</button>
                 <a class="btn btn-warning float-left mt-2" href="{{url('/master_kerusakan')}}" role="button">Kembali</a>
             </form>
         </table>
