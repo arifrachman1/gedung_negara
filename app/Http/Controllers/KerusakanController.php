@@ -92,7 +92,16 @@ class KerusakanController extends Controller
             $parent->numberOfSub = count($subKomponen);
             $parent->subKomponen = $subKomponen;
         }
-                    
+
+        $opd = Session::get('opd');
+        $nomor_aset = Session::get('nomor_aset');
+        $petugas_survei1 = Session::get('surveyor1');
+        $petugas_survei2 = Session::get('surveyor2');
+        $petugas_survei3 = Session::get('surveyor3');
+        $perwakilan_opd1 = Session::get('pwopd1');
+        $perwakilan_opd2 = Session::get('pwopd2');
+        $tanggal = Session::get('tanggal');
+        $jam = Session::get('jam');
         $gedung = Gedung::where('id', $id_gedung)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $id_gedung)->first();
         $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
@@ -103,7 +112,7 @@ class KerusakanController extends Controller
         $kerusakan_data = [
             "id_gedung" => $id_gedung,
         ];
-        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user', 'kerusakan_data'));
+        return view('Kerusakan/create_formulir_klasifikasi_kerusakan', compact('komponens', 'gedung', 'daerah', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'id_gedung', 'id_user', 'kerusakan_data', 'opd', 'nomor_aset', 'petugas_survei1', 'petugas_survei2', 'petugas_survei3', 'perwakilan_opd1', 'perwakilan_opd2', 'tanggal', 'jam'));
     }
 
     private function setCellDropdown($sheet, $opsiSheet, $currentRow, $options, $selected = 0){
@@ -981,7 +990,8 @@ class KerusakanController extends Controller
                                 ->join('gedung', 'kerusakan.id_gedung', '=', 'gedung.id')
                                 ->where('kerusakan.id', $id_kerusakan)
                                 ->first();
-        
+
+        $opd = Session::get('opd');
         $gedung = Gedung::select('gedung.id as id_gedung')->join('kerusakan', 'gedung.id', '=', 'kerusakan.id_gedung')->where('kerusakan.id', $id_kerusakan)->first();
         $daerah = Gedung::select('gedung.kode_provinsi', 'gedung.kode_kabupaten', 'gedung.kode_kecamatan', 'gedung.kode_kelurahan')->where('id', $gedung->id_gedung)->first();
         $provinsi = Provinsi::select('provinsi.nama as nama_provinsi')->where('id_prov', $daerah->kode_provinsi)->first();
@@ -989,7 +999,7 @@ class KerusakanController extends Controller
         $kecamatan = Kecamatan::select('kecamatan.nama as nama_kecamatan')->where('id_kec', $daerah->kode_kecamatan)->first();
         $desa_kelurahan = DesaKelurahan::select('kelurahan.nama as nama_kelurahan')->where('id_kel', $daerah->kode_kelurahan)->first();
         
-        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sketsaDenah', 'gambarBukti', 'id_kerusakan'));
+        return view('Kerusakan/edit_view_master_kerusakan', compact('kerusakan', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan', 'komponens', 'sketsaDenah', 'gambarBukti', 'id_kerusakan', 'opd'));
     }
 
     public function submitEditKerusakanForm(Request $request){

@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <!-- <a href="{{url('/view_master_kerusakan')}}" class="btn btn-success float-left mt-2 mr-2">Submit</a> -->
-                <button type="submit" class="btn btn-success float-left mt-2 mr-2">Submit</button>
+                <button type="submit" class="btn btn-success float-left mt-2 mr-2">Selanjutnya</button>
                 <a class="btn btn-warning float-left mt-2" href="{{url('/tambah_master_kerusakan')}}" role="button">Kembali</a>
             </div>        
         </form>

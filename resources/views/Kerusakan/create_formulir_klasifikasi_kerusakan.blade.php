@@ -18,13 +18,13 @@
           <div class="form-group">
               <div class="row">
                   <div class="col-lg-3">
-                      OPD   
+                      OPD  
                   </div>
                   <div class="col-lg-3">
-                      : {{ $gedung->opd }}
+                      : {{ $opd }}
                   </div>
                   <div class="col-lg-3">
-                      Nama Bangunan
+                      Nama bangunan
                   </div>
                   <div class="col-lg-3">
                       : {{ $gedung->nama }}
@@ -34,16 +34,10 @@
           <div class="form-group">
               <div class="row">
                   <div class="col-lg-3">
-                      Bujur Timur   
+                      Nomor Aset   
                   </div>
                   <div class="col-lg-3">
-                      : {{ $gedung->bujur_timur }}
-                  </div>
-                  <div class="col-lg-3">
-                      Lintang Selatan   
-                  </div>
-                  <div class="col-lg-3">
-                      : {{ $gedung->lintang_selatan }}
+                      : {{ $nomor_aset }}
                   </div>
               </div>
           </div>
@@ -52,27 +46,15 @@
                   <div class="col-lg-3">
                       Provinsi   
                   </div>
-                  @if($daerah->kode_provinsi == null)
                   <div class="col-lg-3">
-                      : -
+                      : {{ ($provinsi) ? $provinsi->nama_provinsi : '-' }}
                   </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $provinsi->nama_provinsi }}
-                  </div>
-                  @endif
                   <div class="col-lg-3">
                       Kabupaten / Kota   
                   </div>
-                  @if($daerah->kode_kabupaten == null)
                   <div class="col-lg-3">
-                      : -
+                      : {{ ($kab_kota) ? $kab_kota->nama_kota : '-' }}
                   </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $kab_kota->nama_kota }}
-                  </div>
-                  @endif
               </div>
           </div>
           <div class="form-group">
@@ -80,42 +62,33 @@
                   <div class="col-lg-3">
                       Kecamatan   
                   </div>
-                  @if($daerah->kode_kecamatan == null)
                   <div class="col-lg-3">
-                      : -
+                      : {{ ($kecamatan) ? $kecamatan->nama_kecamatan : '-' }}
                   </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $kecamatan->nama_kecamatan }}
-                  </div>
-                  @endif
                   <div class="col-lg-3">
                       Kelurahan   
                   </div>
-                  @if($daerah->kode_kelurahan == null)
                   <div class="col-lg-3">
-                      : -
+                      : {{ ($desa_kelurahan) ? $desa_kelurahan->nama_kelurahan : '-' }}
                   </div>
-                  @else
-                  <div class="col-lg-3">
-                      : {{ $desa_kelurahan->nama_kelurahan }}
-                  </div>
-                  @endif
               </div>
           </div>
           <div class="form-group">
               <div class="row">
                   <div class="col-lg-3">
-                      Jumlah Lantai   
+                      Petugas Survey   
                   </div>
                   <div class="col-lg-3">
-                      : {{ $gedung->jumlah_lantai }}
+                      : 1. {{ $petugas_survei1 }}<br/> 
+                      <br>&nbsp 2. {{ $petugas_survei2 }} <br/>
+                      <br>&nbsp 3. {{ $petugas_survei3 }} <br/>
                   </div>
                   <div class="col-lg-3">
-                      Luas Bangunan   
+                      Perwakilan OPD
                   </div>
                   <div class="col-lg-3">
-                      : {{ $gedung->luas }} m<sup>2</sup>
+                      : 1. {{ $perwakilan_opd1 }}<br/>
+                      <br>&nbsp 2. {{ $perwakilan_opd2 }}<br/>
                   </div>
               </div>
           </div>
@@ -124,10 +97,34 @@
                   <div class="col-lg-3"> 
                       Tanggal
                   </div>
-                  <div class="col-sm-3">
-                    : {{ date('d-M-Y H:i:s', strtotime("now")) }}
+                  <div class="col-lg-3">
+                      : {{ $tanggal }}
+                  </div>
+                  <div class="col-lg-3">
+                      Jam   
+                  </div>
+                  <div class="col-lg-3">
+                      : {{ $jam }}
                   </div>
               </div>
+          </div>
+          <div class="form-group">
+              <div class="row">
+                  <div class="col-lg-3">
+                      Luas Bangunan   
+                  </div>
+                  <div class="col-lg-3">
+                      : {{ $gedung->luas }} m<sup>2</sup>
+                  </div>
+                  <div class="col-lg-3">
+                      Jumlah Lantai   
+                  </div>
+                  <div class="col-lg-3">
+                      : {{ $gedung->jumlah_lantai }}
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
             <input type="hidden" id="idGedung" name="id_gedung" value="{{ $id_gedung }}">
             <input type="hidden" id="idUser" name="id_user" value="{{ $id_user }}">
           </div>    
@@ -244,12 +241,12 @@
             <div class="form-group">
                 <label >Sketsa Denah</label>
                 <input type="file" id="sketsaDenah" name="sketsa_denah[]" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
-                <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
+                <p style="font-size: 9pt" class="mt-2">*Ukuran file maksimal yang direkomendasikan untuk diupload 5MB | Jumlah file maksimal 3 file</p>
             </div>
             <div class="form-group">
                 <label>Gambar Bukti Kerusakan</label>
                 <input type="file" id="gambarBukti" name="gambar_bukti[]" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
-                <p style="font-size: 9pt" class="mt-2">*Recommended max size upload 5MB</p>
+                <p style="font-size: 9pt" class="mt-2">*Ukuran file maksimal yang direkomendasikan untuk diupload 5MB | Jumlah file maksimal 5 file</p>
             </div>
           </div>
             <button type="button" id="submitKerusakan" class="btn btn-success float-left m-2">Submit</button>
