@@ -42,14 +42,18 @@
                 @php $no = 1; @endphp
                 @forelse ($roles as $val)
                   <tr>
-                    <td>{{ $no++}}</td>
+                    <td>{{ $no++}}</td>                    
                     <td>{{ $val->name }}</td>
                     <td>{{ $val->guard_name }}</td>
                     <td>{{ $val->created_at }}</td>                     
-                    <td>                    
+                    <td>   
+                    @if($val->id == 40 )
+                      <a class="btn btn-info mr-1" @can('role.read') href="{{route('role.detail', ['id' => $val->id])}}" @endcan><i class="button"><span class="icon text-white-100">Detail</span> </i></a>
+                    @else
                       <a class="btn btn-info mr-1" @can('role.read') href="{{route('role.detail', ['id' => $val->id])}}" @endcan><i class="button"><span class="icon text-white-100">Detail</span> </i></a>
                       <a class="btn btn-warning mr-1" @can('role.update') href="{{route('role.update', ['id' => $val->id])}}"@endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a>                                      
-                      <button @can('role.delete') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>                    
+                      <button @can('role.delete') data-toggle="modal" data-target="#deleteModal" @endcan data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
+                    @endif
                     </td>                                       
                   <tr>
                   @empty

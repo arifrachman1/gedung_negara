@@ -36,13 +36,17 @@
                   @php $no = 1; @endphp
                   @foreach($user as $val)
                     <tr>
-                      <td>{{ $no++ }}</td>
+                      <td>{{ $no++ }}</td>                      
                       <td>{{ $val->name }}</td>
                       <td>{{ $val->email }}</td>                      
-                        <td>
-                         <a class="btn btn-warning mr-1" @can('user.update') href="{{ url('edituser/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
-                         <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
-                        </td>
+                      <td>
+                      @if($val->id == 4 )
+                        -
+                      @else
+                        <a class="btn btn-warning mr-1" @can('user.update') href="{{ url('edituser/'.$val->id) }}" @endcan><i class="button"><span class="icon text-white-100">Edit</span> </i></a> 
+                        <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $val->id }}" class="btn btn-danger" id="delete">Hapus</button>
+                      @endif
+                      </td>
                     </tr>
                   @endforeach
                   </tbody>
