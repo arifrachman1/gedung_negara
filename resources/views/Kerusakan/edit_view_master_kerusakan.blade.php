@@ -282,7 +282,7 @@
                         @endforeach
                       </ol>
                       <input type="file" name="gambar_bukti[]" id="gambarBukti" class="form-control-file" accept=".jpg, .jpeg, .png" multiple>
-                      <p style="font-size: 9pt" class="mt-2">*Ukuran file maksimal yang direkomendasikan untuk diupload 5MB | Jumlah file maksimal 3 file</p>
+                      <p style="font-size: 9pt" class="mt-2">*Ukuran file maksimal yang direkomendasikan untuk diupload 5MB | Jumlah file maksimal 5 file</p>
                   </div>
               </div>
                 <button type="button" id="submitKerusakan" class="btn btn-success float-left mt-2 mr-2">Submit</button>

@@ -1004,6 +1004,7 @@ class KerusakanController extends Controller
 
     public function submitEditKerusakanForm(Request $request){
         DB::beginTransaction();
+        $timeUpload = strtotime("now");
         try{
             $kerusakan = Kerusakan::find($request->id_kerusakan);
             if(!$kerusakan){
@@ -1059,7 +1060,7 @@ class KerusakanController extends Controller
             }
 
             //Edit file denah dan bukti
-            if($request->gambar_bukti){
+            if(!empty($request->gambar_bukti)){
                 $_prevGambarBukti = GambarBukti::where('id_kerusakan', $request->id_kerusakan)->get();
                 foreach($_prevGambarBukti as $bukti){
                     if(file_exists('bukti/'.$bukti->gambar_bukti)) unlink('bukti/'.$bukti->gambar_bukti);
@@ -1080,7 +1081,7 @@ class KerusakanController extends Controller
                 }    
             }
 
-            if($request->sketsa_denah){
+            if(!empty($request->sketsa_denah)){
                 $_prevSketsaDenah = SketsaDenah::where('id_kerusakan', $request->id_kerusakan)->get();
                 foreach($_prevSketsaDenah as $denah){
                     if(file_exists('denah/'.$denah->sketsa_denah)) unlink('denah/'.$denah->sketsa_denah);
