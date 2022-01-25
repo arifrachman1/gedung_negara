@@ -118,6 +118,7 @@ class GedungController extends Controller
 
         $pdf = PDF::loadView('Gedung/detail_gedung_pdf', compact('detail_gedung', 'nama_kat', 'provinsi', 'kab_kota', 'kecamatan', 'desa_kelurahan','profile'));
         $pdf->setPaper('A4', 'potrait');
+        set_time_limit(300);
         return $pdf->stream($detail_gedung->nama .''. now()->toDateString() .'.pdf');
     }
 
@@ -368,6 +369,7 @@ class GedungController extends Controller
 
         $pdf = PDF::loadView('Gedung/gedung_pdf', compact('gedung','profile'));
         $pdf->setPaper('A4', 'landscape');
+        set_time_limit(300);
         return $pdf->stream('Rekap Data Gedung '. now()->toDateString() .'.pdf');
     }
 
