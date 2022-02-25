@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2020 at 06:12 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Feb 25, 2022 at 01:18 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,6 +45,7 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `gedung` (
   `id` int(11) NOT NULL,
   `id_gedung_kategori` int(11) DEFAULT NULL,
+  `nomor_seri` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nama` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alamat` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bujur_timur` double DEFAULT NULL,
@@ -82,19 +83,19 @@ CREATE TABLE `gedung` (
 -- Dumping data for table `gedung`
 --
 
-INSERT INTO `gedung` (`id`, `id_gedung_kategori`, `nama`, `alamat`, `bujur_timur`, `lintang_selatan`, `legalitas`, `tipe_pemilik`, `alas_hak`, `luas_lahan`, `jumlah_lantai`, `luas`, `tinggi`, `kompleks`, `kepadatan`, `permanensi`, `tkt_resiko_kebakaran`, `penangkal_petir`, `struktur_bawah`, `struktur_bangunan`, `struktur_atap`, `kode_provinsi`, `kode_kabupaten`, `kode_kecamatan`, `kode_kelurahan`, `kdb`, `klb`, `kdh`, `gsb`, `rth`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(105, 8, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 6, 'Legal', 'Negara', 'Letter C', 100, 5, 90, 10, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', '35', '3523', '3523130', '3523130012', 'A', 'A', 'A', 'A', 'A', '2020-11-01 18:24:44', '2020-11-06 02:55:36', '2020-11-06 02:55:36'),
-(106, 8, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 3.12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', '35', '3578', '3578211', '3578211003', 'A', 'B', 'C', 'D', 'E', '2020-11-06 02:58:02', '2020-11-06 03:42:44', NULL),
-(107, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', NULL, NULL, NULL, NULL, 'A', 'R', 'C', 'D', 'E', '2020-11-06 03:24:50', '2020-11-06 03:41:29', '2020-11-06 03:41:29'),
-(108, NULL, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 8, 'Legal', 'Negara', 'Letter C', 120.231, 2, 20.12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'F', 'C', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'C', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:34', '2020-11-06 03:25:34'),
-(109, NULL, 'SMA Negeri 2 Tuban', 'Jl. DR. Wahidin Sudirohusodo No.867, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 112, 7, 'Legal', 'Negara', 'Letter C', 231, 2, 20.12, 2, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:40', '2020-11-06 03:25:40'),
-(110, NULL, 'Rumah Sakit Dr. R. Koesma', 'Jl. DR. Wahidin Sudirohusodo No.800, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 111, 9, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:29', '2020-11-06 03:25:29'),
-(111, NULL, 'Polres Tuban', 'Jalan Dokter Wahidin SH, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62313', 112, 8, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:27', '2020-11-06 03:25:27'),
-(112, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', NULL, NULL, NULL, NULL, 'A', 'R', 'C', 'D', 'E', '2020-11-06 03:26:17', '2020-11-06 03:41:26', '2020-11-06 03:41:26'),
-(113, 8, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 8, 'Legal', 'Negara', 'Letter C', 120.231, 2, 20.12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'F', 'C', '35', '3523', '3523130', '3523130012', 'A', 'S', 'C', 'C', 'E', '2020-11-06 03:26:17', '2020-11-06 03:44:56', NULL),
-(114, 8, 'SMA Negeri 2 Tuban', 'Jl. DR. Wahidin Sudirohusodo No.867, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 112, 7, 'Legal', 'Negara', 'Letter C', 231, 2, 20.12, 2, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:43:59', NULL),
-(115, 10, 'Rumah Sakit Dr. R. Koesma', 'Jl. DR. Wahidin Sudirohusodo No.800, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 111, 9, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:46:17', NULL),
-(116, 11, 'Polres Tuban', 'Jalan Dokter Wahidin SH, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62313', 112, 8, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:47:32', NULL);
+INSERT INTO `gedung` (`id`, `id_gedung_kategori`, `nomor_seri`, `nama`, `alamat`, `bujur_timur`, `lintang_selatan`, `legalitas`, `tipe_pemilik`, `alas_hak`, `luas_lahan`, `jumlah_lantai`, `luas`, `tinggi`, `kompleks`, `kepadatan`, `permanensi`, `tkt_resiko_kebakaran`, `penangkal_petir`, `struktur_bawah`, `struktur_bangunan`, `struktur_atap`, `kode_provinsi`, `kode_kabupaten`, `kode_kecamatan`, `kode_kelurahan`, `kdb`, `klb`, `kdh`, `gsb`, `rth`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(105, 8, NULL, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 6, 'Legal', 'Negara', 'Letter C', 100, 5, 90, 10, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'A', 'A', '35', '3523', '3523130', '3523130012', 'A', 'A', 'A', 'A', 'A', '2020-11-01 18:24:44', '2020-11-06 02:55:36', '2020-11-06 02:55:36'),
+(106, 8, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 3.12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', '35', '3578', '3578211', '3578211003', 'A', 'B', 'C', 'D', 'E', '2020-11-06 02:58:02', '2020-11-06 03:42:44', NULL),
+(107, NULL, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', NULL, NULL, NULL, NULL, 'A', 'R', 'C', 'D', 'E', '2020-11-06 03:24:50', '2020-11-06 03:41:29', '2020-11-06 03:41:29'),
+(108, NULL, NULL, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 8, 'Legal', 'Negara', 'Letter C', 120.231, 2, 20.12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'F', 'C', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'C', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:34', '2020-11-06 03:25:34'),
+(109, NULL, NULL, 'SMA Negeri 2 Tuban', 'Jl. DR. Wahidin Sudirohusodo No.867, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 112, 7, 'Legal', 'Negara', 'Letter C', 231, 2, 20.12, 2, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:40', '2020-11-06 03:25:40'),
+(110, NULL, NULL, 'Rumah Sakit Dr. R. Koesma', 'Jl. DR. Wahidin Sudirohusodo No.800, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 111, 9, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:29', '2020-11-06 03:25:29'),
+(111, NULL, NULL, 'Polres Tuban', 'Jalan Dokter Wahidin SH, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62313', 112, 8, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', NULL, NULL, NULL, NULL, 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:24:50', '2020-11-06 03:25:27', '2020-11-06 03:25:27'),
+(112, NULL, NULL, 'SMA Negeri 3 Surabaya', 'Jl. Memet Sastrowiryo No.54, Komp. Kenjeran, Kec. Bulak, Kota Surabaya, Jawa Timur 60121', 113, 8, 'Legal', 'Negara', 'Letter C', 210.1, 2, 40.12, 12, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'C', NULL, NULL, NULL, NULL, 'A', 'R', 'C', 'D', 'E', '2020-11-06 03:26:17', '2020-11-06 03:41:26', '2020-11-06 03:41:26'),
+(113, 8, NULL, 'SMA Negeri 1 Tuban', 'Jl. WR Supratman No.2, Sendang Harjo, Sendangharjo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62319', 112, 8, 'Legal', 'Negara', 'Letter C', 120.231, 2, 20.12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'F', 'C', '35', '3523', '3523130', '3523130012', 'A', 'S', 'C', 'C', 'E', '2020-11-06 03:26:17', '2020-11-06 03:44:56', NULL),
+(114, 8, NULL, 'SMA Negeri 2 Tuban', 'Jl. DR. Wahidin Sudirohusodo No.867, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 112, 7, 'Legal', 'Negara', 'Letter C', 231, 2, 20.12, 2, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:43:59', NULL),
+(115, 10, NULL, 'Rumah Sakit Dr. R. Koesma', 'Jl. DR. Wahidin Sudirohusodo No.800, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62315', 111, 9, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:46:17', NULL),
+(116, 11, NULL, 'Polres Tuban', 'Jalan Dokter Wahidin SH, Sidorejo, Kec. Tuban, Kabupaten Tuban, Jawa Timur 62313', 112, 8, 'Legal', 'Negara', 'Letter C', 231, 5, 12, 21, 'Kompleksitas Sedang', 'Lokasi Kepadatan Sedang', 'Permanen', 'Rendah', 'Pasif', 'A', 'B', 'A', '35', '3523', '3523130', '3523130007', 'A', 'S', 'C', 'F', 'E', '2020-11-06 03:26:18', '2020-11-06 03:47:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -82465,8 +82466,7 @@ CREATE TABLE `kerusakan` (
 --
 
 INSERT INTO `kerusakan` (`id`, `id_gedung`, `tanggal`, `detail_json`, `sketsa_denah`, `gambar_bukti`, `opd`, `nomor_aset`, `petugas_survei1`, `petugas_survei2`, `petugas_survei3`, `perwakilan_opd1`, `perwakilan_opd2`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(59, 116, '2020-11-09 00:28:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(60, 106, '2020-11-09 06:59:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(98, 116, '2020-11-11 22:41:30', NULL, NULL, NULL, 'udin', '2', 'a', 'v', 's', 'd', 'e', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82478,27 +82478,22 @@ CREATE TABLE `kerusakan_detail` (
   `id` int(11) NOT NULL,
   `id_kerusakan` int(11) NOT NULL,
   `id_komponen` int(11) NOT NULL,
+  `id_komponen_opsi` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `id_komponen_opsi` int(11) DEFAULT NULL
+  `tingkat_kerusakan` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kerusakan_detail`
 --
 
-INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `id_komponen_opsi`) VALUES
-(130, 59, 385, 0, NULL),
-(131, 59, 384, 0, NULL),
-(132, 59, 378, 0, NULL),
-(133, 59, 381, 0, 38),
-(134, 59, 382, 0, 26),
-(135, 59, 383, 10, NULL),
-(136, 60, 385, 0, NULL),
-(137, 60, 384, 0, NULL),
-(138, 60, 378, 0, NULL),
-(139, 60, 381, 0, 38),
-(140, 60, 382, 0, 25),
-(141, 60, 383, 90, NULL);
+INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `id_komponen_opsi`, `jumlah`, `tingkat_kerusakan`) VALUES
+(284, 98, 385, NULL, 0, 0.004),
+(285, 98, 384, NULL, 0, 0.00064),
+(286, 98, 378, NULL, 0, 0.00024),
+(287, 98, 381, 38, 0, 0.01),
+(288, 98, 382, 27, 0, 0.4),
+(289, 98, 383, NULL, 2, 0.006);
 
 -- --------------------------------------------------------
 
@@ -82509,27 +82504,159 @@ INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `jumlah`, `
 CREATE TABLE `kerusakan_klasifikasi` (
   `id` int(11) NOT NULL,
   `id_kerusakan_detail` int(11) NOT NULL,
-  `nilai_klasifikasi` int(11) NOT NULL DEFAULT 0,
-  `tingkat_kerusakan` double NOT NULL
+  `nilai_input_klasifikasi` int(11) NOT NULL DEFAULT 0,
+  `klasifikasi` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kerusakan_klasifikasi`
 --
 
-INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `nilai_klasifikasi`, `tingkat_kerusakan`) VALUES
-(74, 130, 0, 0.08),
-(75, 131, 0, 0.0064),
-(76, 132, 0, 0.0016),
-(77, 133, 0, 0.01),
-(78, 134, 0, 0.2),
-(79, 135, 10, 0.0012),
-(80, 136, 0, 0.1),
-(81, 137, 0, 0.0096),
-(82, 138, 0, 0.008),
-(83, 139, 0, 0.01),
-(84, 140, 0, 0),
-(85, 141, 90, 0.002);
+INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `nilai_input_klasifikasi`, `klasifikasi`) VALUES
+(554, 284, 0, 0),
+(555, 284, 2, 0.2),
+(556, 284, 0, 0.4),
+(557, 284, 0, 0.6),
+(558, 284, 0, 0.8),
+(559, 284, 0, 1),
+(560, 284, 0, 0),
+(561, 284, 0, 0.2),
+(562, 284, 2, 0.4),
+(563, 284, 0, 0.6),
+(564, 284, 0, 0.8),
+(565, 284, 0, 1),
+(566, 284, 0, 0),
+(567, 284, 0, 0.2),
+(568, 284, 0, 0.4),
+(569, 284, 2, 0.6),
+(570, 284, 0, 0.8),
+(571, 284, 0, 1),
+(572, 284, 0, 0),
+(573, 284, 0, 0.2),
+(574, 284, 0, 0.4),
+(575, 284, 2, 0.6),
+(576, 284, 0, 0.8),
+(577, 284, 0, 1),
+(578, 285, 0, 0),
+(579, 285, 2, 0.2),
+(580, 285, 0, 0.4),
+(581, 285, 0, 0.6),
+(582, 285, 0, 0.8),
+(583, 285, 0, 1),
+(584, 285, 0, 0),
+(585, 285, 0, 0.2),
+(586, 285, 2, 0.4),
+(587, 285, 0, 0.6),
+(588, 285, 0, 0.8),
+(589, 285, 0, 1),
+(590, 285, 0, 0),
+(591, 285, 0, 0.2),
+(592, 285, 0, 0.4),
+(593, 285, 2, 0.6),
+(594, 285, 0, 0.8),
+(595, 285, 0, 1),
+(596, 285, 0, 0),
+(597, 285, 0, 0.2),
+(598, 285, 0, 0.4),
+(599, 285, 2, 0.6),
+(600, 285, 0, 0.8),
+(601, 285, 0, 1),
+(602, 286, 0, 0),
+(603, 286, 2, 0.2),
+(604, 286, 0, 0.4),
+(605, 286, 0, 0.6),
+(606, 286, 0, 0.8),
+(607, 286, 0, 1),
+(608, 286, 0, 0),
+(609, 286, 0, 0.2),
+(610, 286, 2, 0.4),
+(611, 286, 0, 0.6),
+(612, 286, 0, 0.8),
+(613, 286, 0, 1),
+(614, 286, 0, 0),
+(615, 286, 0, 0.2),
+(616, 286, 0, 0.4),
+(617, 286, 2, 0.6),
+(618, 286, 0, 0.8),
+(619, 286, 0, 1),
+(620, 286, 0, 0),
+(621, 286, 0, 0.2),
+(622, 286, 0, 0.4),
+(623, 286, 2, 0.6),
+(624, 286, 0, 0.8),
+(625, 286, 0, 1),
+(626, 287, 0, 0),
+(627, 287, 2, 0.2),
+(628, 287, 0, 0.4),
+(629, 287, 0, 0.6),
+(630, 287, 0, 0.8),
+(631, 287, 0, 1),
+(632, 287, 0, 0),
+(633, 287, 0, 0.2),
+(634, 287, 2, 0.4),
+(635, 287, 0, 0.6),
+(636, 287, 0, 0.8),
+(637, 287, 0, 1),
+(638, 287, 0, 0),
+(639, 287, 0, 0.2),
+(640, 287, 0, 0.4),
+(641, 287, 2, 0.6),
+(642, 287, 0, 0.8),
+(643, 287, 0, 1),
+(644, 287, 0, 0),
+(645, 287, 0, 0.2),
+(646, 287, 0, 0.4),
+(647, 287, 2, 0.6),
+(648, 287, 0, 0.8),
+(649, 287, 0, 1),
+(650, 288, 0, 0),
+(651, 288, 2, 0.2),
+(652, 288, 0, 0.4),
+(653, 288, 0, 0.6),
+(654, 288, 0, 0.8),
+(655, 288, 0, 1),
+(656, 288, 0, 0),
+(657, 288, 0, 0.2),
+(658, 288, 2, 0.4),
+(659, 288, 0, 0.6),
+(660, 288, 0, 0.8),
+(661, 288, 0, 1),
+(662, 288, 0, 0),
+(663, 288, 0, 0.2),
+(664, 288, 0, 0.4),
+(665, 288, 2, 0.6),
+(666, 288, 0, 0.8),
+(667, 288, 0, 1),
+(668, 288, 0, 0),
+(669, 288, 0, 0.2),
+(670, 288, 0, 0.4),
+(671, 288, 2, 0.6),
+(672, 288, 0, 0.8),
+(673, 288, 0, 1),
+(674, 289, 0, 0),
+(675, 289, 2, 0.2),
+(676, 289, 0, 0.4),
+(677, 289, 0, 0.6),
+(678, 289, 0, 0.8),
+(679, 289, 0, 1),
+(680, 289, 0, 0),
+(681, 289, 0, 0.2),
+(682, 289, 2, 0.4),
+(683, 289, 0, 0.6),
+(684, 289, 0, 0.8),
+(685, 289, 0, 1),
+(686, 289, 0, 0),
+(687, 289, 0, 0.2),
+(688, 289, 0, 0.4),
+(689, 289, 2, 0.6),
+(690, 289, 0, 0.8),
+(691, 289, 0, 1),
+(692, 289, 0, 0),
+(693, 289, 0, 0.2),
+(694, 289, 0, 0.4),
+(695, 289, 2, 0.6),
+(696, 289, 0, 0.8),
+(697, 289, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -82542,6 +82669,13 @@ CREATE TABLE `kerusakan_surveyor` (
   `id_kerusakan` int(11) NOT NULL,
   `id_user` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kerusakan_surveyor`
+--
+
+INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
+(101, 98, 4);
 
 -- --------------------------------------------------------
 
@@ -82597,7 +82731,7 @@ CREATE TABLE `komponen_opsi` (
 
 INSERT INTO `komponen_opsi` (`id`, `opsi`, `nilai`, `id_komponen`, `created_at`, `updated_at`, `delete_at`) VALUES
 (25, 'Tidak ada kerusakan', 0, 382, NULL, NULL, NULL),
-(26, 'Kebocoran pipa terbats ditempat yang terlihat atau mudah dicapai, keran-keran kecil rusak, sehingga biaya perbaikan kurang dari 1 % biaya instalasi baru', 20, 382, NULL, NULL, NULL),
+(26, 'Kebocoran pipa terbatas di tempat yang terlihat atau mudah dicapai, keran-keran kecil rusak, sehingga biaya perbaikan kurang dari 1 % biaya instalasi baru', 20, 382, NULL, NULL, NULL),
 (27, 'Bagian-bagian kecil pemipaan bocor, motor pompa terbakar, keran-keran kecil rusak, sehingga biaya perbaikan antara 1-10% dari biaya instalasi baru', 40, 382, NULL, NULL, NULL),
 (28, 'Pompa, motor, pipa, dan keran rusak apabuila diganti atau diperbaiki memerlukan biaya antara 10-25 % dari biaya instalasi baru', 60, 382, NULL, NULL, NULL),
 (29, 'Sebagian besar pompa, sebagian besar motor terbakar, pipa utama bocor namun ditempat terbuka, beberapa keran tidak befungsi, sehingga biaya perbaikan 25- 50 % dari biaya instalasi baru', 80, 382, NULL, NULL, NULL),
@@ -83650,25 +83784,25 @@ ALTER TABLE `gedung_ketegori`
 -- AUTO_INCREMENT for table `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_detail`
 --
 ALTER TABLE `kerusakan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_klasifikasi`
 --
 ALTER TABLE `kerusakan_klasifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=698;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `komponen`
