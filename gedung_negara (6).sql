@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2022 at 01:18 PM
+-- Generation Time: Feb 25, 2022 at 01:55 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -35,6 +35,29 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gambar_bukti`
+--
+
+CREATE TABLE `gambar_bukti` (
+  `id` int(11) NOT NULL,
+  `id_kerusakan` int(11) DEFAULT NULL,
+  `gambar_bukti` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gambar_bukti`
+--
+
+INSERT INTO `gambar_bukti` (`id`, `id_kerusakan`, `gambar_bukti`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 103, 'bukti_1645793428_0.png', '2022-02-25 19:50:28', NULL, NULL),
+(3, 104, 'bukti_1645793561_0.png', '2022-02-25 19:52:41', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82466,7 +82489,9 @@ CREATE TABLE `kerusakan` (
 --
 
 INSERT INTO `kerusakan` (`id`, `id_gedung`, `tanggal`, `detail_json`, `sketsa_denah`, `gambar_bukti`, `opd`, `nomor_aset`, `petugas_survei1`, `petugas_survei2`, `petugas_survei3`, `perwakilan_opd1`, `perwakilan_opd2`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(98, 116, '2020-11-11 22:41:30', NULL, NULL, NULL, 'udin', '2', 'a', 'v', 's', 'd', 'e', NULL, NULL, NULL);
+(98, 116, '2020-11-11 22:41:30', NULL, NULL, NULL, 'udin', '2', 'a', 'v', 's', 'd', 'e', NULL, NULL, NULL),
+(103, 115, '2022-02-25 19:50:28', NULL, NULL, NULL, 'OPD', '1', 'a', 'b', 'c', 'd', 'e', '2022-02-25 19:50:28', NULL, '2022-02-25 19:51:46'),
+(104, 113, '2022-02-25 19:52:41', NULL, NULL, NULL, 'OPD', '2', 'a', 'b', 'c', 'd', 'e', '2022-02-25 19:52:41', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82493,7 +82518,19 @@ INSERT INTO `kerusakan_detail` (`id`, `id_kerusakan`, `id_komponen`, `id_kompone
 (286, 98, 378, NULL, 0, 0.00024),
 (287, 98, 381, 38, 0, 0.01),
 (288, 98, 382, 27, 0, 0.4),
-(289, 98, 383, NULL, 2, 0.006);
+(289, 98, 383, NULL, 2, 0.006),
+(314, 103, 378, NULL, NULL, 0),
+(315, 103, 384, NULL, NULL, 0),
+(316, 103, 385, NULL, NULL, 0),
+(317, 103, 381, 38, NULL, 1),
+(318, 103, 382, 25, NULL, 0),
+(319, 103, 383, NULL, 0, 0),
+(320, 104, 378, NULL, NULL, 0),
+(321, 104, 384, NULL, NULL, 0),
+(322, 104, 385, NULL, NULL, 0),
+(323, 104, 381, 37, NULL, 0),
+(324, 104, 382, 26, NULL, 20),
+(325, 104, 383, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -82656,7 +82693,47 @@ INSERT INTO `kerusakan_klasifikasi` (`id`, `id_kerusakan_detail`, `nilai_input_k
 (694, 289, 0, 0.4),
 (695, 289, 2, 0.6),
 (696, 289, 0, 0.8),
-(697, 289, 0, 1);
+(697, 289, 0, 1),
+(778, 314, 0, 0.2),
+(779, 314, 0, 0.4),
+(780, 314, 0, 0.6),
+(781, 314, 0, 0.8),
+(782, 314, 0, 1),
+(783, 315, 0, 0.2),
+(784, 315, 0, 0.4),
+(785, 315, 0, 0.6),
+(786, 315, 0, 0.8),
+(787, 315, 0, 1),
+(788, 316, 0, 0.2),
+(789, 316, 0, 0.4),
+(790, 316, 0, 0.6),
+(791, 316, 0, 0.8),
+(792, 316, 0, 1),
+(793, 319, 0, 0.2),
+(794, 319, 0, 0.4),
+(795, 319, 0, 0.6),
+(796, 319, 0, 0.8),
+(797, 319, 0, 1),
+(798, 320, 0, 0.2),
+(799, 320, 0, 0.4),
+(800, 320, 0, 0.6),
+(801, 320, 0, 0.8),
+(802, 320, 0, 1),
+(803, 321, 0, 0.2),
+(804, 321, 0, 0.4),
+(805, 321, 0, 0.6),
+(806, 321, 0, 0.8),
+(807, 321, 0, 1),
+(808, 322, 0, 0.2),
+(809, 322, 0, 0.4),
+(810, 322, 0, 0.6),
+(811, 322, 0, 0.8),
+(812, 322, 0, 1),
+(813, 325, 0, 0.2),
+(814, 325, 0, 0.4),
+(815, 325, 0, 0.6),
+(816, 325, 0, 0.8),
+(817, 325, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -82675,7 +82752,9 @@ CREATE TABLE `kerusakan_surveyor` (
 --
 
 INSERT INTO `kerusakan_surveyor` (`id`, `id_kerusakan`, `id_user`) VALUES
-(101, 98, 4);
+(101, 98, 4),
+(106, 103, 4),
+(107, 104, 4);
 
 -- --------------------------------------------------------
 
@@ -83582,6 +83661,29 @@ INSERT INTO `satuan` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sketsa_denah`
+--
+
+CREATE TABLE `sketsa_denah` (
+  `id` int(11) NOT NULL,
+  `id_kerusakan` int(11) DEFAULT NULL,
+  `sketsa_denah` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sketsa_denah`
+--
+
+INSERT INTO `sketsa_denah` (`id`, `id_kerusakan`, `sketsa_denah`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 103, 'denah_1645793428_0.png', '2022-02-25 19:50:28', NULL, NULL),
+(2, 104, 'denah_1645793561_0.png', '2022-02-25 19:52:41', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -83613,6 +83715,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gambar_bukti`
+--
+ALTER TABLE `gambar_bukti`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_kerusakan_gambar_bukti_idx` (`id_kerusakan`);
 
 --
 -- Indexes for table `gedung`
@@ -83752,6 +83861,13 @@ ALTER TABLE `satuan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sketsa_denah`
+--
+ALTER TABLE `sketsa_denah`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_kerusakan_sketsa_denah_idx` (`id_kerusakan`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -83769,6 +83885,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `gambar_bukti`
+--
+ALTER TABLE `gambar_bukti`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `gedung`
 --
 ALTER TABLE `gedung`
@@ -83784,25 +83906,25 @@ ALTER TABLE `gedung_ketegori`
 -- AUTO_INCREMENT for table `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_detail`
 --
 ALTER TABLE `kerusakan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_klasifikasi`
 --
 ALTER TABLE `kerusakan_klasifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=698;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=818;
 
 --
 -- AUTO_INCREMENT for table `kerusakan_surveyor`
 --
 ALTER TABLE `kerusakan_surveyor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `komponen`
@@ -83841,6 +83963,12 @@ ALTER TABLE `satuan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `sketsa_denah`
+--
+ALTER TABLE `sketsa_denah`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -83849,6 +83977,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `gambar_bukti`
+--
+ALTER TABLE `gambar_bukti`
+  ADD CONSTRAINT `fk_kerusakan_gambar_bukti_idx` FOREIGN KEY (`id_kerusakan`) REFERENCES `kerusakan` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `gedung`
@@ -83932,6 +84066,12 @@ ALTER TABLE `model_has_roles`
 ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sketsa_denah`
+--
+ALTER TABLE `sketsa_denah`
+  ADD CONSTRAINT `fk_kerusakan_sketsa_denah_idx` FOREIGN KEY (`id_kerusakan`) REFERENCES `kerusakan` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
